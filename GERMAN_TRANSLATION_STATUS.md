@@ -1,4 +1,4 @@
-# Deutsche Variante
+# Streamy 3.0 – Übersetzungsstatus
 
-Erster Übersetzungslauf: 28 exakte UI-Textvorkommen in 0 Dateien ersetzt.
-Technische IDs, API-Felder, URLs und Codec-Namen wurden absichtlich nicht übersetzt.
+Die deutsche Oberfläche wird fortlaufend vervollständigt. Die zuletzt gemeldeten Lücken in Darstellung und Live-Zurückspulen wurden behoben.
+Technische IDs, API-Felder, Paketnamen, URLs und Codec-Namen bleiben absichtlich unverändert, damit Updates und Kompatibilität erhalten bleiben.
