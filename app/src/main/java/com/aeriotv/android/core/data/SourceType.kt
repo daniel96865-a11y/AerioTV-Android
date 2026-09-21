@@ -27,7 +27,7 @@ package com.aeriotv.android.core.data
  */
 enum class SourceType(val displayName: String, val isImplemented: Boolean) {
     M3uUrl("M3U URL", true),
-    DispatcharrApiKey("Dispatcharr (API Key)", true),
+    DispatcharrApiKey("Dispatcharr (API-Schlüssel)", true),
     DispatcharrUserPass("Dispatcharr (Benutzername & Passwort)", true),
     XtreamCodes("Xtream Codes", true),
     ;
