@@ -194,6 +194,69 @@ class XtreamCodesApi @Inject constructor() {
         }
     }
 
+    /**
+     * Full metadata for one Xtream movie. Many panels intentionally keep
+     * get_vod_streams small and expose synopsis/cast/director only through
+     * get_vod_info, which is why list-row metadata alone is not sufficient.
+     */
+    suspend fun getVodProviderInfo(
+        base: String,
+        username: String,
+        password: String,
+        streamId: Int,
+    ): DispatcharrVODProviderInfo? {
+        val body = fetchText(base, username, password, "get_vod_info", "vod_id" to streamId.toString())
+            ?: return null
+        val root = runCatching { json.parseToJsonElement(body) }.getOrNull() as? JsonObject ?: return null
+        return root.toProviderInfo()
+    }
+
+    /**
+     * Full metadata for one Xtream series. get_series list rows frequently
+     * omit the synopsis even though get_series_info contains it.
+     */
+    suspend fun getSeriesProviderInfo(
+        base: String,
+        username: String,
+        password: String,
+        seriesId: Int,
+    ): DispatcharrVODProviderInfo? {
+        val body = fetchText(base, username, password, "get_series_info", "series_id" to seriesId.toString())
+            ?: return null
+        val root = runCatching { json.parseToJsonElement(body) }.getOrNull() as? JsonObject ?: return null
+        return root.toProviderInfo()
+    }
+
+    private fun JsonObject.toProviderInfo(): DispatcharrVODProviderInfo {
+        val info = (this["info"] as? JsonObject) ?: this
+        return DispatcharrVODProviderInfo(
+            description = info.str("description"),
+            plot = info.str("plot"),
+            overview = info.str("overview"),
+            name = info.str("name"),
+            year = info.str("releasedate")?.let { yearFrom(it) }
+                ?: info.str("releaseDate")?.let { yearFrom(it) }
+                ?: info.str("year")?.let { yearFrom(it) },
+            releaseDate = info.str("releasedate") ?: info.str("releaseDate"),
+            genre = info.str("genre"),
+            director = info["director"],
+            actors = info["actors"],
+            cast = info["cast"],
+            country = info.str("country"),
+            rating = info.str("rating"),
+            tmdbId = info.str("tmdb_id"),
+            imdbId = info.str("imdb_id"),
+            youtubeTrailer = info["youtube_trailer"],
+            durationSecs = info.flexInt("duration_secs"),
+            duration = info["duration"],
+            age = info.str("age"),
+            backdropPath = info["backdrop_path"],
+            cover = info["cover"],
+            coverBig = info.str("cover_big"),
+            movieImage = info.str("movie_image"),
+        )
+    }
+
     /** Series list. [categoryId] behaves exactly like [getVodStreams]. */
     suspend fun getSeries(
         base: String,
