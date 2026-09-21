@@ -9,18 +9,6 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
-// Read the OAuth Web Client ID from local.properties (never checked in) so
-// Drive Sync can do a real Sign-in with Google flow without leaking the
-// project credentials into git. Each contributor pastes their own once.
-val localProps = Properties().apply {
-    val f = rootProject.file("local.properties")
-    if (f.exists()) f.inputStream().use { load(it) }
-}
-val googleDriveWebClientId: String =
-    localProps.getProperty("GOOGLE_DRIVE_WEB_CLIENT_ID")
-        ?: System.getenv("GOOGLE_DRIVE_WEB_CLIENT_ID")
-        ?: ""
-
 // Google Cast receiver application ID (registered in the Cast SDK Developer
 // Console; ties the Cast App ID to this app's package for Cast Connect). Read
 // from local.properties / env like the Drive client id so it's never checked
@@ -257,10 +245,6 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.documentfile)
-    implementation(libs.play.services.auth)
-    implementation(libs.androidx.credentials)
-    implementation(libs.androidx.credentials.playservices)
-    implementation(libs.google.identity.googleid)
     implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.hilt.work)
     ksp(libs.androidx.hilt.compiler)
