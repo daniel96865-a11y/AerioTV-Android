@@ -49,7 +49,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun SettingUpScreen(onSkip: () -> Unit) {
     val stages = remember {
-        listOf("Loading EPG", "Loading VOD", "Loading DVR", "Loading preferences")
+        listOf("EPG wird geladen", "Filme und Serien werden geladen", "Aufnahmen werden geladen", "Einstellungen werden geladen")
     }
     // Index of the stage currently loading; earlier stages render as done.
     var active by remember { mutableIntStateOf(0) }
@@ -74,7 +74,7 @@ fun SettingUpScreen(onSkip: () -> Unit) {
                 .padding(horizontal = 24.dp),
         ) {
             Text(
-                text = "Setting Up",
+                text = "Einrichtung läuft",
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold,
@@ -102,7 +102,7 @@ fun SettingUpScreen(onSkip: () -> Unit) {
             }
             Spacer(Modifier.height(28.dp))
             TextButton(onClick = onSkip) {
-                Text("Skip", color = MaterialTheme.colorScheme.textAccent)
+                Text("Überspringen", color = MaterialTheme.colorScheme.textAccent)
             }
         }
     }
@@ -152,7 +152,7 @@ private fun StageRow(label: String, status: StageStatus, showSynced: Boolean) {
             )
             if (showSynced) {
                 Text(
-                    text = "Synced",
+                    text = "Fertig",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.textAccent,
                 )
