@@ -1,0 +1,79 @@
+name: Extract German UI strings
+
+on:
+  push:
+    branches: [ deutsch ]
+    paths:
+      - .github/workflows/german-ui-extract.yml
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: deutsch
+      - name: Extract likely user-facing English strings
+        shell: python
+        run: |
+          import pathlib, re, collections
+
+          roots = [
+              pathlib.Path("app/src/main/java"),
+              pathlib.Path("app/src/github/java"),
+          ]
+          literal = re.compile(r'"((?:\\.|[^"\\])*)"')
+          skip_tokens = (
+              "http://","https://","content://","android.","com.","application/",
+              "text/","image/","audio/","video/","Bearer ","User-Agent","GET","POST",
+              "PUT","DELETE","PATCH","ws://","wss://","aeriotv://","/api/","uuid",
+              "applicationId","MediaSession","ACTION_","EXTRA_","BuildConfig",
+              ".json",".xml",".m3u",".m3u8",".ts",".mp4",".mkv",".aac",".ac3",
+              "SHA-","UTF-","yyyy","HH:mm","MM-dd","%","Regex","regex","^","\\d",
+          )
+          ui_hints = (
+              "Text(","label","title","subtitle","placeholder","contentDescription",
+              "description","message","button","Snackbar","Toast","Dialog","Sheet",
+              "error","empty","header","caption","displayName","name =","status",
+              "summary","hint","prompt","Action","screen","tab","option","MenuItem",
+          )
+          rows=[]
+          seen=collections.defaultdict(set)
+          for root in roots:
+              if not root.exists(): continue
+              for p in root.rglob("*.kt"):
+                  try: lines=p.read_text(encoding="utf-8").splitlines()
+                  except Exception: continue
+                  for n,line in enumerate(lines,1):
+                      if '"' not in line: continue
+                      for m in literal.finditer(line):
+                          s=m.group(1)
+                          if len(s)<2 or not re.search(r"[A-Za-z]",s): continue
+                          if any(tok in s for tok in skip_tokens): continue
+                          if re.fullmatch(r"[A-Za-z0-9_.:/+-]+",s) and " " not in s and not any(k in line for k in ("Text(","title","label","description","displayName","name =")):
+                              continue
+                          if not any(h in line for h in ui_hints):
+                              # keep sentence-like literals, skip likely protocol/data identifiers
+                              if not (re.search(r"[A-Z][a-z]{2,}",s) and (" " in s or len(s)>14)):
+                                  continue
+                          key=(str(p),n,s)
+                          if key in seen[str(p)]: continue
+                          seen[str(p)].add(key)
+                          rows.append((str(p),n,s,line.strip()))
+          rows.sort()
+          out=["path\tline\tstring\tcontext"]
+          for p,n,s,c in rows:
+              clean=lambda x:x.replace("\t"," ").replace("\n","\\n")
+              out.append(f"{p}\t{n}\t{clean(s)}\t{clean(c)}")
+          pathlib.Path("GERMAN_UI_STRINGS.tsv").write_text("\n".join(out)+"\n",encoding="utf-8")
+          print(f"Extracted {len(rows)} candidate UI strings")
+      - name: Commit report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add GERMAN_UI_STRINGS.tsv
+          git commit -m "Inventory AerioTV user-facing strings for German translation"
+          git push origin HEAD:deutsch
