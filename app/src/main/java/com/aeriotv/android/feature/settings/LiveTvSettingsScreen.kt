@@ -431,13 +431,13 @@ fun LiveTvSettingsScreen(
             title = "Group Selection",
             actions = listOf(
                 TvMenuAction(
-                    label = if (guideGroupSelector != "sidebar") "Top group pills  (current)" else "Gruppen-Schaltflächen oben",
+                    label = if (guideGroupSelector != "sidebar") "Gruppen-Schaltflächen oben  (aktuell)" else "Gruppen-Schaltflächen oben",
                 ) {
                     viewModel.setGuideGroupSelector("pills")
                     editingGroupSelector = false
                 },
                 TvMenuAction(
-                    label = if (guideGroupSelector == "sidebar") "Sidebar menu  (current)" else "Seitenleisten-Menü",
+                    label = if (guideGroupSelector == "sidebar") "Seitenleisten-Menü  (aktuell)" else "Seitenleisten-Menü",
                 ) {
                     viewModel.setGuideGroupSelector("sidebar")
                     editingGroupSelector = false
@@ -482,6 +482,6 @@ private fun GroupSelectionRow(
  *  never writes here. */
 private val DEFAULT_LIVE_TV_VIEW_OPTIONS = listOf(
     "" to "Automatisch",
-    "list" to "List",
+    "list" to "Liste",
     "guide" to "EPG",
 )
