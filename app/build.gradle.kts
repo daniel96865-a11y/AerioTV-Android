@@ -9,10 +9,15 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+// Local-only configuration for optional integrations such as Google Cast.
+val localProps = Properties().apply {
+    val f = rootProject.file("local.properties")
+    if (f.exists()) f.inputStream().use { load(it) }
+}
+
 // Google Cast receiver application ID (registered in the Cast SDK Developer
 // Console; ties the Cast App ID to this app's package for Cast Connect). Read
-// from local.properties / env like the Drive client id so it's never checked
-// in. Left EMPTY by default: the Cast button and CastContext init are gated on
+// from local.properties / env so it is never checked in. Left EMPTY by default: the Cast button and CastContext init are gated on
 // this being non-blank (see AerioCastOptionsProvider + MainActivity), so a
 // build without a registered id simply ships Cast disabled rather than crashing
 // on an invalid application id.
@@ -46,11 +51,6 @@ android {
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
         }
-        buildConfigField(
-            "String",
-            "GOOGLE_DRIVE_WEB_CLIENT_ID",
-            "\"$googleDriveWebClientId\"",
-        )
         buildConfigField(
             "String",
             "CAST_RECEIVER_APP_ID",
