@@ -961,6 +961,15 @@ private fun InfoSection(
                 // keeps the full text reachable.
                 ExpandablePlot(plot = plot, maxWidth = readableCap)
             }
+        } else if (isTv) {
+            Text(
+                text = if (tmdbConfigured)
+                    "Keine Beschreibung verfügbar."
+                else
+                    "Keine Beschreibung vom Anbieter. Hinterlege unter Einstellungen → Filme & Serien einen TMDB-API-Schlüssel, damit Streamy fehlende Beschreibungen ergänzen kann.",
+                style = MaterialTheme.typography.bodyMedium.subtext(),
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
         // Phone: version pill on its own row ABOVE the link pills (iOS
         // versionRow precedes externalLinks, VODDetailView 1289).
