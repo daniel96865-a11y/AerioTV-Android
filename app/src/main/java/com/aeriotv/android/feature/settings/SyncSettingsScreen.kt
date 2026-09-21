@@ -272,15 +272,15 @@ fun SyncSettingsScreen(
 
             item {
                 SettingsSection(
-                    header = "Categories",
+                    header = "Kategorien",
                     // Glitzbr had to ask what triggers a sync, so say it.
                     // Android is NOT Apple's model: no live KVS push, just
                     // DriveSyncWorker every PERIOD_HOURS on an unmetered
                     // connection, plus the manual buttons below.
-                    footer = "Choose what syncs across your devices. Syncing runs " +
-                        "automatically about every 6 hours while you are on Wi-Fi and " +
-                        "the battery is not low. Use Push or Pull below when you want " +
-                        "it to happen right now.",
+                    footer = "Wähle aus, was zwischen deinen Geräten synchronisiert wird. Die Synchronisierung läuft " +
+                        "im WLAN automatisch ungefähr alle 6 Stunden, solange " +
+                        "der Akku nicht niedrig ist. Verwende unten Hochladen oder Herunterladen, wenn " +
+                        "du sofort synchronisieren möchtest.",
                 ) {
                     SyncCategory.entries.forEach { category ->
                         val enabled by viewModel.categoryEnabled(category).collectAsStateWithLifecycle(initialValue = true)
