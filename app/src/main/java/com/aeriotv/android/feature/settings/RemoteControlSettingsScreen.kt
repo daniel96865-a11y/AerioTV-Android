@@ -265,7 +265,7 @@ fun RemoteControlSettingsScreen(
 
                 SettingsSection(
                     header = "Im TV-EPG",
-                    footer = "What each button does while browsing the guide. A Left or Right set to anything other than Move focus still moves between programs, and runs its action once focus reaches the edge of the timeline (Play, Record, Program info and Program menu run on every press). Up, Down and Back always navigate.",
+                    footer = "Legt fest, was jede Taste beim Navigieren im EPG macht. Links und Rechts bewegen weiterhin zwischen Sendungen; zugewiesene Aktionen werden am Rand der Zeitleiste ausgeführt. Wiedergabe, Aufnahme, Sendungsinfo und Sendungsmenü werden bei jedem Tastendruck ausgeführt. Hoch, Runter und Zurück dienen immer der Navigation.",
                 ) {
                     GUIDE_SLOTS.forEach { slot ->
                         SlotRow(
@@ -277,19 +277,19 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "Additional Buttons",
-                    footer = "Applies when your remote has these buttons (many Bluetooth and Shield remotes do; the stock Google TV remote does not).",
+                    header = "Zusätzliche Tasten",
+                    footer = "Gilt, wenn deine Fernbedienung diese Tasten besitzt. Viele Bluetooth- und Shield-Fernbedienungen haben sie; die Standard-Google-TV-Fernbedienung nicht.",
                 ) {
                     PLAYER_EXTENDED_SLOTS.forEach { slot ->
                         SlotRow(
-                            slotName = "${slot.displayName} (watching)",
+                            slotName = "${slot.displayName} (Wiedergabe)",
                             valueName = map.playerAction(slot).displayName,
                             onClick = { editingPlayerSlot = slot },
                         )
                     }
                     GUIDE_EXTENDED_SLOTS.forEach { slot ->
                         SlotRow(
-                            slotName = "${slot.displayName} (guide)",
+                            slotName = "${slot.displayName} (EPG)",
                             valueName = map.guideAction(slot).displayName(groupSelector == "sidebar"),
                             onClick = { editingGuideSlot = slot },
                         )
@@ -297,19 +297,19 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "Tuning",
-                    footer = "Where a channel starts playing when you press OK on it in Live TV. Mini player keeps you browsing with the channel in the corner; press OK on it again (or hold Right) to go fullscreen.",
+                    header = "Senderstart",
+                    footer = "Legt fest, wo ein Sender startet, wenn du in Live-TV OK drückst. Der Mini-Player lässt dich weiter navigieren, während der Sender in der Ecke läuft. Drücke erneut OK oder halte Rechts gedrückt, um ins Vollbild zu wechseln.",
                 ) {
                     SlotRow(
                         slotName = "Sender abspielen in",
-                        valueName = if (tuneInMini) "Mini-Player" else "Full screen",
+                        valueName = if (tuneInMini) "Mini-Player" else "Vollbild",
                         onClick = { editingTuneTarget = true },
                     )
                 }
 
                 SettingsSection(
                     header = "Zurücksetzen",
-                    footer = "Restore every button to the standard AerioTV scheme.",
+                    footer = "Setzt alle Tasten auf die Standardbelegung von AerioTV Deutsch zurück.",
                 ) {
                     SlotRow(
                         slotName = "Auf Standard zurücksetzen",
@@ -326,7 +326,7 @@ fun RemoteControlSettingsScreen(
             title = "Sender abspielen in",
             actions = listOf(
                 TvMenuAction(
-                    label = if (!tuneInMini) "Full screen  (current)" else "Full screen",
+                    label = if (!tuneInMini) "Full screen  (current)" else "Vollbild",
                 ) {
                     viewModel.setGuideTuneInMini(false)
                     editingTuneTarget = false
