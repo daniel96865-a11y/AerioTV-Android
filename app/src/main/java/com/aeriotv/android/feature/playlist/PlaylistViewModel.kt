@@ -625,6 +625,44 @@ class PlaylistViewModel @Inject constructor(
         loadPlaylist()
     }
 
+    /**
+     * Imports one playlist received through Streamy's local six-digit pairing.
+     * The transport already authenticates and encrypts the payload; this method
+     * deliberately reuses the normal validation/save/load path so a paired
+     * playlist behaves exactly like one entered by hand.
+     */
+    fun importPairedPlaylist(
+        sourceTypeName: String,
+        name: String?,
+        url: String,
+        lanUrl: String?,
+        epgUrl: String?,
+        apiKey: String?,
+        username: String?,
+        password: String?,
+        vodEnabled: Boolean,
+        epgRetentionDays: Int,
+    ) {
+        val type = SourceType.entries.firstOrNull { it.name == sourceTypeName } ?: SourceType.M3uUrl
+        _state.update {
+            it.copy(
+                sourceType = type,
+                name = name.orEmpty(),
+                url = url,
+                lanUrl = lanUrl.orEmpty(),
+                epgUrl = epgUrl.orEmpty(),
+                apiKey = apiKey.orEmpty(),
+                username = username.orEmpty(),
+                password = password.orEmpty(),
+                vodEnabled = vodEnabled,
+                epgRetentionDays = sanitizeGuideDays(epgRetentionDays),
+                draftPlaylistId = null,
+                error = null,
+            )
+        }
+        loadPlaylist()
+    }
+
     fun loadPlaylist() {
         val s = _state.value
         if (s.url.trim().isEmpty()) {
