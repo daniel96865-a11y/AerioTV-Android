@@ -422,11 +422,11 @@ fun MediaTabContent(
         if (showProviderPills) add(PageRow("providers") {
             EdgeToEdgePillRow {
                 item(key = "all") {
-                    GenrePill("All Providers", selectedProviderId == null) { viewModel.selectProvider(null, kind == MediaKind.Movies) }
+                    GenrePill("Alle Anbieter", selectedProviderId == null) { viewModel.selectProvider(null, kind == MediaKind.Movies) }
                 }
                 items(providerIds.size, key = { providerIds[it] }) { i ->
                     val pid = providerIds[i]
-                    GenrePill(state.providerNames[pid] ?: "Provider $pid", selectedProviderId == pid) {
+                    GenrePill(state.providerNames[pid] ?: "Anbieter $pid", selectedProviderId == pid) {
                         viewModel.selectProvider(if (selectedProviderId == pid) null else pid, kind == MediaKind.Movies)
                     }
                 }
@@ -542,7 +542,7 @@ fun MediaTabContent(
         query = query,
         onQueryChange = { submitQuery(it) },
         onSearchToggle = { searchActive = !searchActive; if (!searchActive) submitQuery("") },
-        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Search TV shows",
+        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Serien suchen",
         isSearching = isSearching,
         searchExtras = searchExtras,
         pills = genrePills,
