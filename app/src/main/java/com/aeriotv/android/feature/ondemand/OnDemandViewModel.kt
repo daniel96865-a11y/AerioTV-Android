@@ -2519,9 +2519,35 @@ class OnDemandViewModel @Inject constructor(
             current.movieProviderInfoLoading.contains(movieId)) return
         viewModelScope.launch {
             val playlist = playlistRepository.activePlaylist() ?: return@launch
-            if (playlist.apiKey.isNullOrBlank()) return@launch
             val base = playlistRepository.effectiveBaseUrl(playlist)
             _state.update { it.copy(movieProviderInfoLoading = it.movieProviderInfoLoading + movieId) }
+            if (playlist.isXtream()) {
+                val user = playlist.username
+                val pass = playlist.password
+                if (user.isNullOrBlank() || pass == null) {
+                    _state.update { it.copy(movieProviderInfoLoading = it.movieProviderInfoLoading - movieId) }
+                    return@launch
+                }
+                runCatching { xtreamApi.getVodProviderInfo(base, user, pass, movieId) }.fold(
+                    onSuccess = { info ->
+                        _state.update { st ->
+                            st.copy(
+                                movieProviderInfo = if (info != null) st.movieProviderInfo + (movieId to info) else st.movieProviderInfo,
+                                movieProviderInfoLoading = st.movieProviderInfoLoading - movieId,
+                            )
+                        }
+                    },
+                    onFailure = { t ->
+                        warnUnlessCancelled("XC getVodProviderInfo($movieId) failed", t)
+                        _state.update { it.copy(movieProviderInfoLoading = it.movieProviderInfoLoading - movieId) }
+                    },
+                )
+                return@launch
+            }
+            if (playlist.apiKey.isNullOrBlank()) {
+                _state.update { it.copy(movieProviderInfoLoading = it.movieProviderInfoLoading - movieId) }
+                return@launch
+            }
             runCatching {
                 dispatcharrAuth.withApiKeyRetry(playlist.id) { key ->
                     dispatcharrClient.getMovieProviderInfo(base, key, movieId)
@@ -3317,7 +3343,31 @@ class OnDemandViewModel @Inject constructor(
         val pass = playlist.password
         if (user.isNullOrBlank() || pass == null) return
         val base = playlistRepository.effectiveBaseUrl(playlist)
-        _state.update { it.copy(episodesLoadingFor = it.episodesLoadingFor + seriesId) }
+        _state.update {
+            it.copy(
+                episodesLoadingFor = it.episodesLoadingFor + seriesId,
+                seriesProviderInfoLoading = it.seriesProviderInfoLoading + seriesId,
+            )
+        }
+
+        // Xtream panels commonly omit the synopsis from get_series. The same
+        // account still exposes it in get_series_info (the endpoint other IPTV
+        // apps use for their series detail page), so populate provider-info
+        // before rendering the detail metadata.
+        runCatching { xtreamApi.getSeriesProviderInfo(base, user, pass, seriesId) }
+            .onSuccess { info ->
+                _state.update { st ->
+                    st.copy(
+                        seriesProviderInfo = if (info != null) st.seriesProviderInfo + (seriesId to info) else st.seriesProviderInfo,
+                        seriesProviderInfoLoading = st.seriesProviderInfoLoading - seriesId,
+                    )
+                }
+            }
+            .onFailure { t ->
+                warnUnlessCancelled("XC getSeriesProviderInfo($seriesId) failed", t)
+                _state.update { it.copy(seriesProviderInfoLoading = it.seriesProviderInfoLoading - seriesId) }
+            }
+
         runCatching { xtreamApi.getSeriesEpisodes(base, user, pass, seriesId) }.fold(
             onSuccess = { eps ->
                 val mapped = eps.map { e ->
