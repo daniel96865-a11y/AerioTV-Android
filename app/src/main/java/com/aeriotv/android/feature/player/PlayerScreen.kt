@@ -2311,7 +2311,7 @@ private fun PlayerSheets(
                         if (!confirmed) {
                             Toast.makeText(
                                 context,
-                                "Stream switch not confirmed; staying on current feed",
+                                "Streamwechsel nicht bestätigt; aktueller Stream bleibt aktiv",
                                 Toast.LENGTH_SHORT,
                             ).show()
                             return@launch
@@ -2659,7 +2659,7 @@ private fun LiveRewindChromeSection(
         onShowRecord = { target -> recordTarget = target },
         onShowStreamInfo = {
             streamInfo = exoHolder.player?.captureStreamInfo() ?: StreamInfoSnapshot(
-                videoLines = listOf("(player not ready)"),
+                videoLines = listOf("(Player noch nicht bereit)"),
                 audioLines = emptyList(),
                 cacheLines = emptyList(),
                 syncLines = emptyList(),
@@ -2772,7 +2772,7 @@ private fun CatchupUnavailableCard(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Catch-up Unavailable",
+            text = "Catch-up nicht verfügbar",
             style = MaterialTheme.typography.headlineSmall,
             color = Color.White,
         )
@@ -2785,9 +2785,9 @@ private fun CatchupUnavailableCard(
         }
         Text(
             text = if (noArchive) {
-                "Your provider doesn't have an archive for this programme."
+                "Dein Anbieter stellt für diese Sendung kein Archiv bereit."
             } else {
-                "Playback of this programme's archive failed."
+                "Die Wiedergabe des Sendungsarchivs ist fehlgeschlagen."
             },
             style = MaterialTheme.typography.bodyMedium,
             color = Color.White.copy(alpha = 0.72f),
@@ -2858,8 +2858,8 @@ private fun StreamUnavailableCard(
         }
         Text(
             text = when {
-                reconnecting -> "Reconnecting…"
-                retryCountdown > 0 -> "Retrying in ${retryCountdown}s"
+                reconnecting -> "Verbindung wird wiederhergestellt…"
+                retryCountdown > 0 -> "Neuer Versuch in ${retryCountdown} s"
                 else -> " "
             },
             style = MaterialTheme.typography.bodyMedium,
@@ -2879,9 +2879,9 @@ private fun StreamUnavailableCard(
         }
         Text(
             text = if (isTvForm) {
-                "Retry is highlighted below - press Select. Back to exit, or D-pad up/down to change channels."
+                "„Erneut versuchen“ ist unten markiert – drücke OK. Mit Zurück beendest du die Wiedergabe; Hoch/Runter wechselt den Sender."
             } else {
-                "Press Back to exit, or use the D-pad up/down to change channels."
+                "Mit Zurück beendest du die Wiedergabe; Hoch/Runter wechselt den Sender."
             },
             style = MaterialTheme.typography.bodySmall,
             color = Color.White.copy(alpha = 0.6f),
@@ -2910,8 +2910,8 @@ private fun ChannelNotAvailableCard(onClose: () -> Unit) {
         )
         Text(
             text = "Dieser Sender befindet sich nicht in der aktiven Wiedergabeliste. Wenn du gerade " +
-                "switched playlists, go back and pick it again from the " +
-                "refreshed guide.",
+                "die Wiedergabeliste gewechselt hast, gehe zurück und wähle den Sender erneut " +
+                "im aktualisierten EPG aus.",
             style = MaterialTheme.typography.bodyMedium,
             color = Color.White.copy(alpha = 0.72f),
             textAlign = TextAlign.Center,
@@ -2940,8 +2940,8 @@ private fun NoStreamAssignedCard(onClose: () -> Unit) {
             color = Color.White,
         )
         Text(
-            text = "Für diesen Sender ist noch kein Stream hinterlegt. Ereignissender " +
-                "usually get one shortly before air time.",
+            text = "Für diesen Sender ist noch kein Stream hinterlegt. Ereignissender erhalten " +
+                "ihren Stream normalerweise erst kurz vor Sendungsbeginn.",
             style = MaterialTheme.typography.bodyMedium,
             color = Color.White.copy(alpha = 0.72f),
             textAlign = TextAlign.Center,
