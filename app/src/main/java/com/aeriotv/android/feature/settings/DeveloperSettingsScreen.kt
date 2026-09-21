@@ -314,7 +314,7 @@ private fun LogFileSection(
         )
         SettingsActionRow(
             label = "Protokolldatei teilen",
-            subtitle = if (isTv) "QR-Code mit dem Handy scannen" else "E-Mail, Nachrichten, Drive usw.",
+            subtitle = if (isTv) "QR-Code mit dem Handy scannen" else "E-Mail, Nachrichten usw.",
             leadingIcon = Icons.Filled.Share,
             onClick = onShare,
         )
