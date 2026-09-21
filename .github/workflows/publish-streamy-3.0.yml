@@ -5,16 +5,24 @@ on:
     branches: [ main ]
     paths:
       - ".github/workflows/publish-streamy-3.0.yml"
+  workflow_dispatch:
 
 permissions:
   contents: write
-  actions: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check permanent signing secrets
+        env:
+          KEYSTORE_B64: ${{ secrets.AERIOTV_KEYSTORE_B64 }}
+          SIGNING_PASSWORD: ${{ secrets.AERIOTV_SIGNING_PASSWORD }}
+        run: |
+          test -n "$KEYSTORE_B64"
+          test -n "$SIGNING_PASSWORD"
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -27,34 +35,24 @@ jobs:
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleGithubRelease
 
-      - name: Restore Streamy private signing backup
-        uses: actions/download-artifact@v4
-        with:
-          name: Streamy3-PRIVATE-Signing-Backup
-          path: ${{ runner.temp }}/streamy3-signing
-          github-token: ${{ github.token }}
-          repository: ${{ github.repository }}
-          run-id: 35591147466
-
-      - name: Check signing backup
+      - name: Restore permanent Streamy 3.0 signing key
+        env:
+          KEYSTORE_B64: ${{ secrets.AERIOTV_KEYSTORE_B64 }}
         run: |
-          test -n "$(find "$RUNNER_TEMP/streamy3-signing" -type f -name '*.jks' -print -quit)"
-          test -n "$(find "$RUNNER_TEMP/streamy3-signing" -type f -name 'password.txt' -print -quit)"
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/Streamy3-release.jks"
 
       - name: Sign and verify Streamy 3.0.1
+        env:
+          SIGNING_PASSWORD: ${{ secrets.AERIOTV_SIGNING_PASSWORD }}
         run: |
           UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
-          KEYSTORE="$(find "$RUNNER_TEMP/streamy3-signing" -type f -name '*.jks' | head -1)"
-          PASSFILE="$(find "$RUNNER_TEMP/streamy3-signing" -type f -name 'password.txt' | head -1)"
-          PASS="$(cat "$PASSFILE")"
           OUT="$RUNNER_TEMP/Streamy-3.0.1.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
           test -f "$UNSIGNED"
-          test -f "$KEYSTORE"
-          "$APKSIGNER" sign             --ks "$KEYSTORE"             --ks-key-alias streamy3             --ks-pass "pass:$PASS"             --key-pass "pass:$PASS"             --out "$OUT" "$UNSIGNED"
+          "$APKSIGNER" sign --ks "$RUNNER_TEMP/Streamy3-release.jks" --ks-key-alias streamy3 --ks-pass "pass:$SIGNING_PASSWORD" --key-pass "pass:$SIGNING_PASSWORD" --out "$OUT" "$UNSIGNED"
           VERIFY="$("$APKSIGNER" verify --verbose --print-certs "$OUT")"
           printf '%s\n' "$VERIFY"
-          echo "$VERIFY" | grep -qi "7af8b812a548e1a31c90e78c586d2859b2909a57c78d24f942c38288242776dc"
+          echo "$VERIFY" | grep -qi "511d38ccd49511e9fcce1c816d1186ad57aa6d2dd7d9155d6d029e1c7a97e9da"
           sha256sum "$OUT"
           echo "APK=$OUT" >> "$GITHUB_ENV"
 
@@ -65,5 +63,5 @@ jobs:
           if gh release view v3.0.1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             gh release upload v3.0.1 "$APK#Streamy-3.0.1.apk" --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create v3.0.1 "$APK#Streamy-3.0.1.apk"               --repo "$GITHUB_REPOSITORY"               --target "$GITHUB_SHA"               --title "Streamy 3.0.1"               --notes "Streamy 3.0.1: vollständigeres deutsches Branding und weitere Übersetzungen, korrigierter In-App-Updater mit passendem Streamy-Signaturzertifikat. Eine gemeinsame APK für Handy, Tablet und Android TV / Google TV."
+            gh release create v3.0.1 "$APK#Streamy-3.0.1.apk" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Streamy 3.0.1" --notes "Streamy 3.0.1: deutsches Branding und weitere Übersetzungen, fester Streamy-3.0-Signierschlüssel und korrigierter In-App-Updater. Eine gemeinsame APK für Handy, Tablet und Android TV / Google TV."
           fi
