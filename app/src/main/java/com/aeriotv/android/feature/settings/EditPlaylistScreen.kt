@@ -234,7 +234,7 @@ fun EditPlaylistScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
-                Section(header = "Connection") {
+                Section(header = "Verbindung") {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         OutlinedTextField(
                             value = name,
@@ -568,7 +568,7 @@ fun EditPlaylistScreen(
                         "Optional override. When set, AerioTV pulls the guide from this XMLTV URL instead of the server's xmltv.php. Useful when an external provider supplies richer category tags."
                     }
                     Section(
-                        header = "EPG Source",
+                        header = "EPG-Quelle",
                         footer = footerText,
                     ) {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
