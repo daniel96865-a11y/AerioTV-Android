@@ -129,7 +129,7 @@ private fun SplashContent(modifier: Modifier = Modifier) {
             val glowPx = with(LocalDensity.current) { glowRadius.toPx() }
             val logoPx = with(LocalDensity.current) { logoSize.toPx() }
             Image(
-                painter = painterResource(id = R.drawable.aerio_logo),
+                painter = painterResource(id = R.drawable.streamy_logo),
                 contentDescription = null,
                 modifier = Modifier
                     .size(logoSize)
