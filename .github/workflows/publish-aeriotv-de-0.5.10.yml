@@ -1,10 +1,11 @@
-name: Publish AerioTV Deutsch 0.5.10-de1
+name: Publish AerioTV Deutsch
 
 on:
   push:
-    branches: [ deutsch ]
+    branches:
+      - deutsch
     paths:
-      - .github/workflows/publish-aeriotv-de-0.5.10.yml
+      - ".github/workflows/publish-aeriotv-de-0.5.10.yml"
 
 permissions:
   contents: write
@@ -14,75 +15,58 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout German source
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: deutsch
           fetch-depth: 0
 
-      - name: Download verified unsigned build
+      - name: Download unsigned APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          mkdir -p /tmp/aeriotv
-          gh run download 35582130026 --repo "$GITHUB_REPOSITORY" \
-            --name AerioTV-Deutsch-0.5.10-de1-unsigned --dir /tmp/aeriotv
-          test -f /tmp/aeriotv/app-github-release-unsigned.apk
+          mkdir -p /tmp/aerio
+          gh run download 35582130026 --repo "$GITHUB_REPOSITORY" --name "AerioTV-Deutsch-0.5.10-de1-unsigned" --dir /tmp/aerio
+          test -f /tmp/aerio/app-github-release-unsigned.apk
 
-      - name: Reconstruct signed release APK
+      - name: Reconstruct signed APK
         run: |
-          set -euo pipefail
-          git fetch origin publish-0.5.10-de1:refs/remotes/origin/publish-0.5.10-de1
-          for n in $(seq -w 0 20); do
-            git show "origin/publish-0.5.10-de1:.release-0.5.10-de1/patch_${n}.part"
-          done > /tmp/aeriotv/signature.patch.b64
-          base64 -d /tmp/aeriotv/signature.patch.b64 > /tmp/aeriotv/signature.patch.zst
-          zstd -q -d \
-            --patch-from=/tmp/aeriotv/app-github-release-unsigned.apk \
-            /tmp/aeriotv/signature.patch.zst \
-            -o /tmp/aeriotv/AerioTV-Deutsch-0.5.10-de1.apk
-          echo "7031f8f8b5dc47ffb4618a7a3cbbb1cc52a82b6dce6978a3d0eeb22b86c15952  /tmp/aeriotv/AerioTV-Deutsch-0.5.10-de1.apk" | sha256sum -c -
+          set -e
+          git fetch origin publish-0.5.10-de1
+          : > /tmp/aerio/patch.b64
+          for n in 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20; do
+            git show FETCH_HEAD:.release-0.5.10-de1/patch_${n}.part >> /tmp/aerio/patch.b64
+          done
+          base64 -d /tmp/aerio/patch.b64 > /tmp/aerio/patch.zst
+          zstd -q -d --patch-from=/tmp/aerio/app-github-release-unsigned.apk /tmp/aerio/patch.zst -o /tmp/aerio/AerioTV-Deutsch-0.5.10-de1.apk
+          echo "7031f8f8b5dc47ffb4618a7a3cbbb1cc52a82b6dce6978a3d0eeb22b86c15952  /tmp/aerio/AerioTV-Deutsch-0.5.10-de1.apk" | sha256sum -c -
 
-      - name: Verify Android signature
+      - name: Verify signature
         run: |
-          set -euo pipefail
-          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
-          test -x "$APKSIGNER"
-          "$APKSIGNER" verify --verbose --print-certs /tmp/aeriotv/AerioTV-Deutsch-0.5.10-de1.apk | tee /tmp/aeriotv/verify.txt
-          grep -q "Verified using v2 scheme.*true" /tmp/aeriotv/verify.txt
-          grep -q "Verified using v3 scheme.*true" /tmp/aeriotv/verify.txt
-          grep -qi "b1997eb3dc1a65e10c7e2a1f4690d6250d614726d31507755b3cff5764e175b9" /tmp/aeriotv/verify.txt
+          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -type f -name apksigner | sort -V | tail -1)"
+          "$APKSIGNER" verify --verbose --print-certs /tmp/aerio/AerioTV-Deutsch-0.5.10-de1.apk | tee /tmp/aerio/verify.txt
+          grep -q "Verified using v2 scheme.*true" /tmp/aerio/verify.txt
+          grep -q "Verified using v3 scheme.*true" /tmp/aerio/verify.txt
+          grep -qi "b1997eb3dc1a65e10c7e2a1f4690d6250d614726d31507755b3cff5764e175b9" /tmp/aerio/verify.txt
 
-      - name: Publish GitHub release
+      - name: Create public release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          set -euo pipefail
-          TAG="v0.5.10-de1"
-          APK="/tmp/aeriotv/AerioTV-Deutsch-0.5.10-de1.apk"
-          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload "$TAG" "$APK" --repo "$GITHUB_REPOSITORY" --clobber
-          else
-            gh release create "$TAG" "$APK" \
-              --repo "$GITHUB_REPOSITORY" \
-              --target deutsch \
-              --title "AerioTV Deutsch 0.5.10-de1" \
-              --notes "Erste öffentliche deutsche AerioTV-Version für Android-Handy, Tablet und Android TV.
+          cat > /tmp/aerio/notes.md <<'EOF'
+          Erste öffentliche deutsche AerioTV-Version für Android-Handy, Tablet und Android TV.
 
-Eine gemeinsame APK passt sich an Handy und Fernseher an.
+          Eine gemeinsame APK passt sich automatisch an Handy und Fernseher an.
 
-Änderungen:
-- deutsche Oberfläche in Hauptseiten und Untermenüs
-- deutsche Einstellungen, Player-, DVR-, Cast-, EPG- und Update-Texte
-- eigene App-ID de.dgstudios.aeriotvde, parallel zum Original installierbar
-- Update-Prüfung auf diesen öffentlichen Fork umgestellt
-- GPL-3.0-Hinweise und ursprüngliche Urheberhinweise bleiben erhalten
+          Änderungen:
+          - deutsche Oberfläche und Untermenüs
+          - deutsche Einstellungen, Player-, DVR-, Cast-, EPG- und Update-Texte
+          - eigene App-ID de.dgstudios.aeriotvde
+          - parallel zum AerioTV-Original installierbar
+          - Update-Prüfung auf diesen öffentlichen Fork umgestellt
+          - GPL-3.0 und ursprüngliche Urheberhinweise bleiben erhalten
+          EOF
+          gh release create "v0.5.10-de1" /tmp/aerio/AerioTV-Deutsch-0.5.10-de1.apk --repo "$GITHUB_REPOSITORY" --target deutsch --title "AerioTV Deutsch 0.5.10-de1" --notes-file /tmp/aerio/notes.md
 
-Paket: de.dgstudios.aeriotvde
-VersionCode: 3"
-          fi
-
-      - name: Delete temporary patch branch
+      - name: Remove temporary branch
         if: success()
         run: git push origin --delete publish-0.5.10-de1 || true
