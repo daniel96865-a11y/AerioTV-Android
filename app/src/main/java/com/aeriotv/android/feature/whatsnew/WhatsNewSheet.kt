@@ -296,27 +296,27 @@ object WhatsNewContent {
     val CURRENT = listOf(
         WhatsNewItem(
             title = "Deine gesamte Bibliothek",
-            body = "Movies and TV Shows no longer stop at 40,000 titles. The catalog is stored on the device as it loads, resumes where it left off after a restart, and never loads the whole library into memory.",
+            body = "Filme und Serien enden nicht mehr bei 40.000 Titeln. Der Katalog wird während des Ladens auf dem Gerät gespeichert, setzt nach einem Neustart an der letzten Stelle fort und lädt nie die gesamte Bibliothek gleichzeitig in den Speicher.",
         ),
         WhatsNewItem(
             title = "Sender-Spalte im EPG",
-            body = "Channel number, favorite star and catch-up icon sit in a band above the logo, and the logo fills the space below it. Season and episode moved from the guide cells to the program details.",
+            body = "Sendernummer, Favoritenstern und Catch-up-Symbol stehen in einer Leiste über dem Logo; das Logo nutzt den Bereich darunter. Staffel und Episode wurden aus den EPG-Zellen in die Sendungsdetails verschoben.",
         ),
         WhatsNewItem(
             title = "Beim Wechsel der Wiedergabeliste bleiben deine Daten erhalten",
-            body = "Switching playlists no longer clears the previous playlist's guide or library, and permissions refresh the moment you switch. Refresh Everything rebuilds the library from scratch.",
+            body = "Beim Wechsel der Wiedergabeliste werden EPG und Bibliothek der vorherigen Liste nicht mehr gelöscht. Berechtigungen werden sofort nach dem Wechsel aktualisiert. „Alles aktualisieren“ baut die Bibliothek vollständig neu auf.",
         ),
         WhatsNewItem(
-            title = "Rounded corners, two toggles",
+            title = "Abgerundete Ecken, zwei Schalter",
             body = "Abgerundete Ecken für Listen- und EPG-Ansicht können jetzt getrennt unter Einstellungen > Darstellung festgelegt werden; EPG-Bilder folgen der EPG-Einstellung.",
         ),
         WhatsNewItem(
             title = "Android TV: Nur EPG",
-            body = "The List view is retired on TV. Live TV always opens the Guide, and its options live under Guide Presentation in Appearance.",
+            body = "Die Listenansicht wird auf dem Fernseher nicht mehr verwendet. Live-TV öffnet dort immer den EPG; die Optionen findest du unter EPG-Darstellung in den Einstellungen.",
         ),
         WhatsNewItem(
-            title = "Fixes",
-            body = "Switching streams on a slow provider no longer freezes the picture. The interface no longer runs off the screen after a resolution switch on the Google TV Streamer. Crash reports are captured automatically for the log export.",
+            title = "Fehlerbehebungen",
+            body = "Beim Streamwechsel bei langsamen Anbietern friert das Bild nicht mehr ein. Nach einem Auflösungswechsel auf dem Google TV Streamer läuft die Oberfläche nicht mehr aus dem Bildschirm. Absturzberichte werden automatisch für den Protokollexport erfasst.",
         ),
     )
 }
