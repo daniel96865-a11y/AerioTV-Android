@@ -92,7 +92,7 @@ fun TvLogShareDialog(
                     .padding(horizontal = 24.dp, vertical = 20.dp),
             ) {
                 Text(
-                    text = "Share Log File",
+                    text = "Protokolldatei teilen",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground,
@@ -100,7 +100,7 @@ fun TvLogShareDialog(
                 Spacer(Modifier.height(8.dp))
                 Text(
                     text = "Scanne auf deinem Handy den QR-Code oder öffne diese URL. " +
-                        "The .txt file will download. Attach it to a GitHub Issue or email.",
+                        "Die .txt-Datei wird heruntergeladen. Hänge sie an ein GitHub-Issue oder eine E-Mail an.",
                     style = MaterialTheme.typography.bodyMedium.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
@@ -142,7 +142,7 @@ fun TvLogShareDialog(
                     Spacer(Modifier.height(8.dp))
                     Text(
                         text = "Der Server wird beendet, wenn du diese Seite schließt. " +
-                            "The TV and your phone must be on the same Wi-Fi network.",
+                            "Fernseher und Handy müssen sich im selben WLAN befinden.",
                         style = MaterialTheme.typography.labelSmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f),
                         textAlign = TextAlign.Center,
