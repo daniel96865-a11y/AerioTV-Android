@@ -665,17 +665,13 @@ class AppPreferences @Inject constructor(
     }
 
     /**
-     * iOS TMDBPosters parity (Aerio VODService.swift). Opt-in, OFF by default:
-     * when on AND a key is set, missing artwork (VOD posters, and later EPG
-     * program posters) is filled from the user's OWN free TMDB key. The toggle
-     * and key SYNC via Drive (snapshotSyncablePreferences) so they carry across
-     * the user's devices -- the same model the app already uses for playlist
-     * credentials (buildCredentialsSnapshot), stored in the user's own Drive
-     * appData. (Encryption-at-rest for all synced credentials remains the
-     * holistic job of task #53.)
+     * TMDB enrichment for missing VOD metadata and artwork. Enabled by default,
+     * but no TMDB request is made until the user stores their own v3 API key
+     * or v4 read token. The credential is encrypted in the app's private
+     * device storage.
      */
     val programPostersTmdbEnabled: Flow<Boolean> =
-        store.data.map { it[KEY_PROGRAM_POSTERS_TMDB_ENABLED] ?: false }
+        store.data.map { it[KEY_PROGRAM_POSTERS_TMDB_ENABLED] ?: true }
     suspend fun setProgramPostersTmdbEnabled(value: Boolean) {
         store.edit { it[KEY_PROGRAM_POSTERS_TMDB_ENABLED] = value }
     }
