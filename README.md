@@ -1,9 +1,9 @@
-# AerioTV Deutsch
+# Streamy 3.0
 
-**Inoffizielle deutsche Modifikation von AerioTV for Android.**
+**Streamy 3.0 – deutsche IPTV-App für Android-Handys, Tablets und Android TV / Google TV.**
 Ausgangsprojekt: jonzey231/AerioTV-Android. Diese Variante wurde am 21.09.2026 verändert und übersetzt. Sie bleibt gemäß dem Ausgangsprojekt unter GNU GPL v3 oder später; LICENSE, LICENSE-EXCEPTIONS.md und THIRD_PARTY_LICENSES.md bleiben Bestandteil des Projekts.
 
-Die Variante verwendet die eigene Android-App-ID de.dgstudios.aeriotvde und kann dadurch neben dem Original installiert werden.
+Streamy 3.0 basiert auf AerioTV for Android und verwendet weiterhin die eigene Android-App-ID de.dgstudios.aeriotvde, damit bestehende Installationen und In-App-Updates kompatibel bleiben.
 
 ---
 
