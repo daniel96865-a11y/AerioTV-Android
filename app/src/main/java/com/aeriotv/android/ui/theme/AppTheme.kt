@@ -30,7 +30,7 @@ enum class AppTheme(
     val lightAccentPrimary: Color,
 ) {
     Aerio(
-        displayName = "AerioTV",
+        displayName = "Streamy 3.0",
         accentPrimary = Color(0xFF1AC4D8),
         accentSecondary = Color(0xFF1A8FA8),
         appBackground = Color(0xFF0A1628),
@@ -41,7 +41,7 @@ enum class AppTheme(
         lightAccentPrimary = Color(0xFF0E8A9C),
     ),
     Midnight(
-        displayName = "Midnight",
+        displayName = "Mitternacht",
         accentPrimary = Color(0xFF60A5FA),
         accentSecondary = Color(0xFF3B82F6),
         appBackground = Color(0xFF0A0F1A),
@@ -51,7 +51,7 @@ enum class AppTheme(
         lightAccentPrimary = Color(0xFF2563EB),
     ),
     Sunset(
-        displayName = "Sunset",
+        displayName = "Sonnenuntergang",
         accentPrimary = Color(0xFFFB923C),
         accentSecondary = Color(0xFFF97316),
         appBackground = Color(0xFF0F0A07),
@@ -61,7 +61,7 @@ enum class AppTheme(
         lightAccentPrimary = Color(0xFFE0670C),
     ),
     Forest(
-        displayName = "Forest",
+        displayName = "Wald",
         accentPrimary = Color(0xFF4ADE80),
         accentSecondary = Color(0xFF22C55E),
         appBackground = Color(0xFF080F0A),
@@ -71,7 +71,7 @@ enum class AppTheme(
         lightAccentPrimary = Color(0xFF1B9E4B),
     ),
     Lavender(
-        displayName = "Lavender",
+        displayName = "Lavendel",
         accentPrimary = Color(0xFFA78BFA),
         accentSecondary = Color(0xFF8B5CF6),
         appBackground = Color(0xFF0C0A12),
@@ -81,7 +81,7 @@ enum class AppTheme(
         lightAccentPrimary = Color(0xFF7C3AED),
     ),
     Monochrome(
-        displayName = "Monochrome",
+        displayName = "Monochrom",
         accentPrimary = Color(0xFFE2E8F0),
         accentSecondary = Color(0xFF94A3B8),
         appBackground = Color(0xFF0A0A0A),
@@ -99,7 +99,7 @@ enum class AppTheme(
      * when the user's mode is Dark/System-dark.
      */
     Light(
-        displayName = "Light",
+        displayName = "Hell",
         // Dark rendition: a lighter teal reads on the near-black ground.
         accentPrimary = Color(0xFF4FB3C2),
         accentSecondary = Color(0xFF3C8A96),
