@@ -128,9 +128,9 @@ fun ConfigureSourceScreen(
     when (sourceType) {
         SourceType.DispatcharrApiKey, SourceType.DispatcharrUserPass -> {
             cardIcon = Icons.Filled.Key
-            cardTitle = "Dispatcharr Direct Connect"
+            cardTitle = "Dispatcharr-Direktverbindung"
             cardSubtitle = "Verbinde dich mit Dispatcharr über deinen Admin-Zugang oder einen persönlichen API-Schlüssel " +
-                    "(*AerioTV is not officially affiliated with the Dispatcharr project)"
+                    "(*Streamy ist nicht offiziell mit dem Dispatcharr-Projekt verbunden)"
         }
         SourceType.XtreamCodes -> {
             cardIcon = Icons.Filled.Tv
@@ -149,7 +149,7 @@ fun ConfigureSourceScreen(
         TopAppBar(
             title = {
                 Text(
-                    "Configure",
+                    "Konfigurieren",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     // See ChooseSourceTypeScreen: hiding the TV back arrow
@@ -362,7 +362,7 @@ private fun DispatcharrFields(
 
     when (authMode) {
         DispatcharrAuthMode.ApiKey -> {
-            LabeledField(label = "Admin API Key") {
+            LabeledField(label = "Admin-API-Schlüssel") {
                 val apiKeyReveal = rememberSecretRevealState()
                 IconTextField(
                     value = state.apiKey,
@@ -374,7 +374,7 @@ private fun DispatcharrFields(
                         SecretRevealIconButton(
                             state = apiKeyReveal,
                             iconSize = 18.dp,
-                            contentLabel = "API key",
+                            contentLabel = "API-Schlüssel",
                         )
                     },
                     trailingFocused = { apiKeyReveal.controlFocused },
@@ -407,15 +407,14 @@ private fun DispatcharrFields(
             )
             Text(
                 text = "Verwende dein Dispatcharr-Dashboard-Passwort (System -> Benutzer -> Konto), " +
-                        "not your Dispatcharr XC password.",
+                        "nicht dein Dispatcharr-XC-Passwort.",
                 style = MaterialTheme.typography.bodySmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             InfoBanner(
-                text = "Zugangsdaten speichern und automatisch aktualisieren. AerioTV Deutsch meldet sich damit " +
-                        "credentials, then keeps your session alive in the background. If your " +
-                        "Dispatcharr admin rotates your API key, AerioTV silently re-authenticates " +
-                        "without prompting. Credentials are stored in encrypted Android storage.",
+                text = "Streamy verwendet diese Zugangsdaten zur Anmeldung und hält die Sitzung im Hintergrund aktiv. " +
+                        "Wenn dein Dispatcharr-Administrator den API-Schlüssel ändert, meldet sich Streamy automatisch neu an. " +
+                        "Die Zugangsdaten werden verschlüsselt auf deinem Android-Gerät gespeichert.",
             )
         }
     }
@@ -509,7 +508,7 @@ private fun M3uFields(state: PlaylistViewModel.UiState, viewModel: PlaylistViewM
             m3uPicker.launch(arrayOf("*/*"))
         }
     }
-    LabeledField(label = "EPG URL (optional)") {
+    LabeledField(label = "EPG-URL (optional)") {
         IconTextField(
             value = state.epgUrl,
             onValueChange = viewModel::onEpgUrlChange,
@@ -596,7 +595,7 @@ private suspend fun importPickedFile(
  */
 @Composable
 private fun LanUrlField(state: PlaylistViewModel.UiState, viewModel: PlaylistViewModel) {
-    LabeledField(label = "LAN URL (optional)") {
+    LabeledField(label = "LAN-URL (optional)") {
         IconTextField(
             value = state.lanUrl,
             onValueChange = viewModel::onLanUrlChange,
@@ -606,8 +605,8 @@ private fun LanUrlField(state: PlaylistViewModel.UiState, viewModel: PlaylistVie
         )
     }
     Text(
-        text = "AerioTV Deutsch verwendet diese URL automatisch, wenn dein Server erreichbar ist über " +
-                "the local network, and the public one above otherwise. No setup needed.",
+        text = "Streamy verwendet diese URL automatisch, wenn dein Server über das lokale Netzwerk erreichbar ist. " +
+                "Andernfalls wird die oben angegebene öffentliche Server-URL verwendet. Keine weitere Einrichtung nötig.",
         style = MaterialTheme.typography.bodySmall.subtext(),
         color = MaterialTheme.colorScheme.onSurfaceVariant,
     )
@@ -687,7 +686,7 @@ private fun PasswordField(
                 SecretRevealIconButton(
                     state = reveal,
                     iconSize = 18.dp,
-                    contentLabel = "password",
+                    contentLabel = "Passwort",
                 )
             },
             trailingFocused = { reveal.controlFocused },
@@ -723,7 +722,7 @@ private fun SegmentedAuthControl(
             onClick = { onSelect(DispatcharrAuthMode.UsernamePassword) },
         )
         SegmentItem(
-            label = "API Key",
+            label = "API-Schlüssel",
             isSelected = selected == DispatcharrAuthMode.ApiKey,
             enabled = enabled,
             modifier = Modifier.weight(1f),
@@ -781,7 +780,7 @@ private fun validate(
             val hasUserPass = state.username.isNotBlank() && state.password.isNotBlank()
             if (!hasApiKey && !hasUserPass) {
                 if (authMode == DispatcharrAuthMode.ApiKey) {
-                    missing += "API key"
+                    missing += "API-Schlüssel"
                 } else {
                     if (state.username.isBlank()) missing += "Benutzername"
                     if (state.password.isBlank()) missing += "Passwort"
@@ -796,8 +795,8 @@ private fun validate(
     }
     return when {
         missing.isEmpty() -> null
-        missing.size == 1 -> "${missing.first()} is required."
-        else -> "${missing.size} fields need attention."
+        missing.size == 1 -> "${missing.first()} ist erforderlich."
+        else -> "${missing.size} Felder müssen ausgefüllt werden."
     }
 }
 
@@ -924,8 +923,8 @@ private fun GuideHistoryRow(
                 Text(
                     text = when (days) {
                         0 -> "Alles verfügbar"
-                        1 -> "1 Day"
-                        else -> "$days Days"
+                        1 -> "1 Tag"
+                        else -> "$days Tage"
                     },
                     style = MaterialTheme.typography.bodyMedium,
                     color = if (selected) MaterialTheme.colorScheme.onPrimary
