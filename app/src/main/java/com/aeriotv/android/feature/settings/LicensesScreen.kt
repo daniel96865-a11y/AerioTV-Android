@@ -173,13 +173,13 @@ private fun LicenseIndex(
         item("aerio-body") {
             LicenseBlurb(
                 "Copyright (C) 2026 Logan Jones\n\n" +
-                    "AerioTV for Android is free software: you can redistribute it " +
-                    "and/or modify it under the terms of the GNU General Public " +
-                    "License as published by the Free Software Foundation, either " +
-                    "version 3 of the License, or (at your option) any later version.\n\n" +
-                    "This program is distributed in the hope that it will be useful, " +
-                    "but WITHOUT ANY WARRANTY; without even the implied warranty of " +
-                    "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+                    "AerioTV für Android ist freie Software: Du darfst sie unter den Bedingungen " +
+                    "der GNU General Public License, wie von der Free Software Foundation " +
+                    "veröffentlicht, weitergeben und/oder verändern – entweder gemäß Version 3 " +
+                    "der Lizenz oder, nach deiner Wahl, jeder späteren Version.\n\n" +
+                    "Dieses Programm wird in der Hoffnung bereitgestellt, dass es nützlich ist, " +
+                    "jedoch OHNE JEGLICHE GEWÄHRLEISTUNG; auch ohne die stillschweigende Gewährleistung " +
+                    "der MARKTGÄNGIGKEIT oder EIGNUNG FÜR EINEN BESTIMMTEN ZWECK.",
             )
         }
         item("aerio-rows") {
@@ -215,26 +215,24 @@ private fun LicenseIndex(
         item("ffmpeg-header") { SettingsSectionHeader("Wiedergabe") }
         item("ffmpeg-body") {
             LicenseBlurb(
-                "This app includes FFmpeg (release/6.0, libavcodec 60.3.100), used " +
-                    "unmodified as the software audio decoder for AAC, AC-3, E-AC-3, " +
-                    "DTS, TrueHD and MP2 on devices with no hardware decoder for " +
-                    "them.\n\n" +
-                    "FFmpeg is licensed under the GNU Lesser General Public License, " +
-                    "version 2.1 or later. It is built WITHOUT --enable-gpl, enabling " +
-                    "only these decoders: aac, ac3, eac3, dca, truehd, mlp, mp2, mp3, " +
-                    "flac, alac. No GPL-only component is linked in.\n\n" +
-                    "AerioTV includes independent implementations of audio and video " +
-                    "codecs, supplied by FFmpeg, that may be covered by patents in " +
-                    "some countries. AerioTV is free software under GPL-3.0-or-later " +
-                    "and grants no patent license; users are responsible for " +
-                    "compliance where they live.\n\n" +
-                    "Dolby, DTS and other names are trademarks of their respective " +
-                    "owners, used only to identify the audio formats concerned. " +
-                    "AerioTV is not affiliated with or certified by them.\n\n" +
-                    "FFmpeg is loaded as a dynamically linked JNI shared object " +
-                    "(libffmpegJNI.so) and can be replaced with a modified build, as " +
-                    "section 6 of the LGPL requires. Build steps are in app/libs/README.md " +
-                    "in the source repository.",
+                "Diese App enthält FFmpeg (release/6.0, libavcodec 60.3.100), das unverändert " +
+                    "als Software-Audiodecoder für AAC, AC-3, E-AC-3, DTS, TrueHD und MP2 " +
+                    "auf Geräten ohne entsprechenden Hardwaredecoder verwendet wird.\n\n" +
+                    "FFmpeg steht unter der GNU Lesser General Public License, Version 2.1 " +
+                    "oder neuer. Der Build wird OHNE --enable-gpl erstellt und aktiviert nur " +
+                    "folgende Decoder: aac, ac3, eac3, dca, truehd, mlp, mp2, mp3, flac, alac. " +
+                    "Es wird keine ausschließlich GPL-lizenzierte Komponente eingebunden.\n\n" +
+                    "AerioTV enthält unabhängige Implementierungen von Audio- und Videocodecs, " +
+                    "die von FFmpeg bereitgestellt werden und in manchen Ländern durch Patente " +
+                    "geschützt sein können. AerioTV ist freie Software unter GPL-3.0-or-later " +
+                    "und erteilt keine Patentlizenz; Nutzer sind selbst für die Einhaltung der " +
+                    "jeweils geltenden Vorschriften verantwortlich.\n\n" +
+                    "Dolby, DTS und andere Namen sind Marken ihrer jeweiligen Inhaber und werden " +
+                    "nur zur Bezeichnung der betreffenden Audioformate verwendet. AerioTV ist " +
+                    "mit diesen Unternehmen weder verbunden noch von ihnen zertifiziert.\n\n" +
+                    "FFmpeg wird als dynamisch eingebundene JNI-Bibliothek (libffmpegJNI.so) geladen " +
+                    "und kann gemäß Abschnitt 6 der LGPL durch einen veränderten Build ersetzt werden. " +
+                    "Die Build-Schritte stehen in app/libs/README.md im Quellcode-Repository.",
             )
         }
         item("ffmpeg-rows") {
