@@ -339,7 +339,7 @@ private fun BrandLogo() {
             )
         }
         Image(
-            painter = painterResource(id = R.drawable.aerio_logo),
+            painter = painterResource(id = R.drawable.streamy_logo),
             contentDescription = null,
             modifier = Modifier.size(imageSize),
         )
