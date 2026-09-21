@@ -305,19 +305,19 @@ fun SettingsScreen(
                             updatedAt,
                         )
                         val cm = context.getSystemService(android.content.ClipboardManager::class.java)
-                        cm?.setPrimaryClip(android.content.ClipData.newPlainText("AerioTV diagnostics", text))
+                        cm?.setPrimaryClip(android.content.ClipData.newPlainText("AerioTV-Diagnose", text))
                         android.widget.Toast.makeText(
                             context,
-                            "Copied diagnostics to clipboard.",
+                            "Diagnosedaten wurden in die Zwischenablage kopiert.",
                             android.widget.Toast.LENGTH_SHORT,
                         ).show()
                     },
                     onOpenWebsite = {
-                        val url = "https://github.com/jonzey231/AerioTV-Android"
+                        val url = "https://github.com/daniel96865-a11y/AerioTV-Android"
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Entwickler-Webseite",
-                                caption = "Scan with your phone to open this page.",
+                                caption = "Scanne den QR-Code mit deinem Handy, um diese Seite zu öffnen.",
                                 url = url,
                             )
                         } else {
@@ -326,11 +326,11 @@ fun SettingsScreen(
                     },
                     onOpenLicenses = onOpenLicenses,
                     onReportIssue = {
-                        val url = "https://github.com/jonzey231/AerioTV-Android/issues/new"
+                        val url = "https://github.com/daniel96865-a11y/AerioTV-Android/issues/new"
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Problem melden",
-                                caption = "Scan with your phone to open this page.",
+                                caption = "Scanne den QR-Code mit deinem Handy, um diese Seite zu öffnen.",
                                 url = url,
                             )
                         } else {
@@ -674,7 +674,7 @@ private fun AboutSection(
         }
         Spacer(Modifier.height(16.dp))
         Text(
-            text = "In loving memory of Jesse Mann aka EPG Guru",
+            text = "In liebevoller Erinnerung an Jesse Mann alias EPG Guru",
             style = settingsFootnoteStyle().subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontStyle = FontStyle.Italic,
@@ -859,12 +859,12 @@ private fun buildAboutClipboard(
     installedAt: Long,
     updatedAt: Long,
 ): String = buildString {
-    appendLine("AerioTV diagnostics")
-    appendLine("Device: ${deviceDisplayName()}")
+    appendLine("AerioTV-Diagnose")
+    appendLine("Gerät: ${deviceDisplayName()}")
     appendLine("System: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
-    appendLine("App Version: $versionName ($versionCode)")
-    appendLine("First Installed: ${formatInstallTime(installedAt)}")
-    appendLine("Last Updated: ${if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Nie"}")
+    appendLine("App-Version: $versionName ($versionCode)")
+    appendLine("Erstmals installiert: ${formatInstallTime(installedAt)}")
+    appendLine("Zuletzt aktualisiert: ${if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Nie"}")
 }
 
 private fun openUrl(context: android.content.Context, url: String) {
