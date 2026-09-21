@@ -82,16 +82,16 @@ fun LiveRewindPromptGate(currentRoute: String?) {
         text = {
             Column {
                 Text(
-                    "Pause and rewind live TV. While you watch a channel " +
-                        "fullscreen, AerioTV keeps a rolling buffer on this " +
-                        "device so you can skip back, scrub the timeline, or " +
-                        "pause and pick up where you left off.",
+                    "Pausiere Live-TV und spule zurück. Während du einen Sender im Vollbild " +
+                        "ansiehst, hält Streamy 3.0 auf diesem Gerät automatisch einen " +
+                        "laufenden Puffer bereit. So kannst du zurückspringen, durch die " +
+                        "Zeitleiste spulen oder pausieren und später an derselben Stelle fortsetzen.",
                     style = MaterialTheme.typography.bodyMedium,
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    "Buffered video is deleted automatically. You can change " +
-                        "dies jederzeit unter Einstellungen > Live-Zurückspulen ändern.",
+                    "Gepufferte Videodaten werden automatisch gelöscht. Du kannst diese Funktion " +
+                        "jederzeit unter Einstellungen > Live-Zurückspulen ändern.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
