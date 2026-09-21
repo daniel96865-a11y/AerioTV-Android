@@ -28,12 +28,16 @@ jobs:
           ./gradlew --no-daemon :app:assembleGithubRelease
 
       - name: Restore Streamy private signing backup
-        env:
-          GH_TOKEN: ${{ github.token }}
+        uses: actions/download-artifact@v4
+        with:
+          name: Streamy3-PRIVATE-Signing-Backup
+          path: ${{ runner.temp }}/streamy3-signing
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: 35591147466
+
+      - name: Check signing backup
         run: |
-          mkdir -p "$RUNNER_TEMP/streamy3-signing"
-          gh run download 35591147466             --repo "$GITHUB_REPOSITORY"             --name Streamy3-PRIVATE-Signing-Backup             --dir "$RUNNER_TEMP/streamy3-signing"
-          find "$RUNNER_TEMP/streamy3-signing" -maxdepth 3 -type f -print
           test -n "$(find "$RUNNER_TEMP/streamy3-signing" -type f -name '*.jks' -print -quit)"
           test -n "$(find "$RUNNER_TEMP/streamy3-signing" -type f -name 'password.txt' -print -quit)"
 
