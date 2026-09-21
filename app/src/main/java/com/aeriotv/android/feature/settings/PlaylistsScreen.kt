@@ -148,8 +148,8 @@ fun PlaylistsScreen(
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
-                    text = if (isTv) "No saved playlists. Select Add above to add one."
-                    else "No saved playlists. Tap + to add one.",
+                    text = if (isTv) "Keine Wiedergabelisten gespeichert. Wähle oben „Hinzufügen“."
+                    else "Keine Wiedergabelisten gespeichert. Tippe auf +, um eine hinzuzufügen.",
                     style = MaterialTheme.typography.bodyMedium.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -253,10 +253,10 @@ fun PlaylistsScreen(
                 title = pl.name,
                 actions = buildList {
                     if (index > 0) {
-                        add(TvMenuAction("Move Up", Icons.Filled.KeyboardArrowUp) { moveTo(index - 1) })
+                        add(TvMenuAction("Nach oben", Icons.Filled.KeyboardArrowUp) { moveTo(index - 1) })
                     }
                     if (index in 0 until workingOrder.lastIndex) {
-                        add(TvMenuAction("Move Down", Icons.Filled.KeyboardArrowDown) { moveTo(index + 1) })
+                        add(TvMenuAction("Nach unten", Icons.Filled.KeyboardArrowDown) { moveTo(index + 1) })
                     }
                     add(TvMenuAction("Löschen", Icons.Filled.Delete, destructive = true) { pendingDelete = pl })
                     add(TvMenuAction("Abbrechen", Icons.Filled.Close) {})
@@ -274,8 +274,8 @@ fun PlaylistsScreen(
             title = { Text("Wiedergabeliste löschen?") },
             text = {
                 Text(
-                    "This removes \"${pl.name}\" and its credentials from this device. " +
-                        if (pl.id == activeId) "The next playlist on the list will be activated." else "",
+                    "Dadurch werden „${pl.name}“ und die zugehörigen Zugangsdaten von diesem Gerät entfernt. " +
+                        if (pl.id == activeId) "Die nächste Wiedergabeliste in der Liste wird aktiviert." else "",
                 )
             },
             confirmButton = {
@@ -338,7 +338,7 @@ private fun PlaylistRow(
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                text = "${playlist.channelCount} channels • ${playlist.sourceType}",
+                text = "${playlist.channelCount} Sender • ${playlist.sourceType}",
                 style = MaterialTheme.typography.bodySmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 maxLines = 1,
