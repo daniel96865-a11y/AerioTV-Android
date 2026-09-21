@@ -2312,10 +2312,8 @@ private fun SettingsTabContent(
     val inPane = twoPane && route == null
     val updaterEnabled = hiltViewModel<com.aeriotv.android.feature.update.UpdateViewModel>()
         .isEnabled
-    // Sidebar / rail Sync row reads On or Off rather than a description.
-    val syncEnabled by hiltViewModel<com.aeriotv.android.feature.settings.SettingsViewModel>()
-        .syncMasterEnabled
-        .collectAsStateWithLifecycle(initialValue = false)
+    // Google Drive sync was removed; keep the shared host API neutral.
+    val syncEnabled = false
     val addPlaylistStep: AddPlaylistStep = when (val r = route) {
         is SettingsRoute.AddPlaylist -> when (val st = r.step) {
             is AddPlaylistWizardStep.ChooseType -> AddPlaylistStep.ChooseType
@@ -2536,9 +2534,6 @@ private fun SettingsTabContent(
                 )
             SettingsSection.AppUpdates ->
                 com.aeriotv.android.feature.settings.AppUpdatesScreen(onBack = { nav.pop() })
-            SettingsSection.Sync -> com.aeriotv.android.feature.settings.SyncSettingsScreen(
-                onBack = { nav.pop() },
-            )
             SettingsSection.DvrSettings -> DvrSettingsScreen(onBack = { nav.pop() })
             SettingsSection.Developer -> DeveloperSettingsScreen(
                 onBack = { nav.pop() },
