@@ -374,8 +374,8 @@ class GithubUpdateManager @Inject constructor(
         val currentCode = BuildConfig.VERSION_CODE.toLong()
         if (archiveCode <= currentCode) {
             return fail(
-                "The release's version code ($archiveCode) is not newer than the installed " +
-                    "one ($currentCode), so Android would refuse it.",
+                "Der Versionscode des Updates ($archiveCode) ist nicht neuer als der installierte " +
+                    "Versionscode ($currentCode). Android würde die Installation deshalb ablehnen.",
             )
         }
         val archiveSigners = signerSha256(archive)
@@ -436,8 +436,8 @@ class GithubUpdateManager @Inject constructor(
         runCatching { context.startActivity(intent) }
             .onFailure {
                 _state.value = UpdateState.Error(
-                    "Open Settings > Apps > Security and erlaube Streamy 3.0, Apps zu installieren, " +
-                        "then try again.",
+                    "Öffne Einstellungen > Apps > Sicherheit und erlaube Streamy 3.0, Apps zu installieren. " +
+                        "Versuche es anschließend erneut.",
                     (_state.value as? UpdateState.AwaitingInstallPermission)?.info,
                 )
             }
