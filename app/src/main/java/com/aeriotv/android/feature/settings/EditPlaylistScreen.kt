@@ -340,7 +340,7 @@ fun EditPlaylistScreen(
                             val apiKeyReveal = rememberSecretRevealState()
                             SegmentedToggle(
                                 left = "Benutzername & Passwort",
-                                right = "API Key",
+                                right = "API-Schlüssel",
                                 selected = dispatcharrMode,
                                 onSelect = { dispatcharrMode = it },
                             )
@@ -492,7 +492,7 @@ fun EditPlaylistScreen(
                 Section(
                     header = "EPG-Tage",
                     footer = "Wie viele Tage EPG-Daten rückwirkend und im Voraus geladen werden. " +
-                        "Dispatcharr only; other sources show what their guide carries.",
+                        "Nur für Dispatcharr; andere Quellen zeigen die EPG-Daten an, die vom Anbieter geliefert werden.",
                 ) {
                     Column(modifier = Modifier.padding(vertical = 4.dp)) {
                         // 0 = All Available (Logan 2026-09-11); a stored 30
@@ -501,8 +501,8 @@ fun EditPlaylistScreen(
                             ProfileRow(
                                 label = when (days) {
                                     0 -> "Alles verfügbar"
-                                    1 -> "1 Day"
-                                    else -> "$days Days"
+                                    1 -> "1 Tag"
+                                    else -> "$days Tage"
                                 },
                                 detail = if (days == 7) "Standard" else null,
                                 selected = sanitizeGuideDays(epgRetentionDays) == days,
@@ -518,7 +518,7 @@ fun EditPlaylistScreen(
                     Section(
                         header = "Senderprofil",
                         footer = "Beschränkt diese Wiedergabeliste auf die Sender eines Dispatcharr-Profils. " +
-                            "\"All Channels\" shows everything on the server.",
+                            "\"Alle Sender\" zeigt alle auf dem Server verfügbaren Sender.",
                     ) {
                         Column(modifier = Modifier.padding(vertical = 4.dp)) {
                             if (state.profilesLoading && state.availableProfiles.isEmpty()) {
@@ -534,7 +534,7 @@ fun EditPlaylistScreen(
                                     )
                                     Spacer(Modifier.width(12.dp))
                                     Text(
-                                        "Loading profiles...",
+                                        "Profile werden geladen...",
                                         style = MaterialTheme.typography.bodyMedium.subtext(),
                                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
@@ -549,7 +549,7 @@ fun EditPlaylistScreen(
                                 state.availableProfiles.forEach { profile ->
                                     ProfileRow(
                                         label = profile.name,
-                                        detail = "${profile.channelCount} channels",
+                                        detail = "${profile.channelCount} Sender",
                                         selected = selectedProfileId == profile.id,
                                         onClick = { selectedProfileId = profile.id },
                                     )
@@ -568,7 +568,7 @@ fun EditPlaylistScreen(
                         "Optional override. When set, AerioTV pulls the guide from this XMLTV URL instead of the server's xmltv.php. Useful when an external provider supplies richer category tags."
                     }
                     Section(
-                        header = "EPG Source",
+                        header = "EPG-Quelle",
                         footer = footerText,
                     ) {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
