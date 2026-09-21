@@ -99,17 +99,17 @@ data class RecordingFacts(
         val out = ArrayList<Pair<String, String>>()
         val date = java.text.DateFormat.getDateInstance(java.text.DateFormat.MEDIUM)
         val time = java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT)
-        out += "Recorded" to date.format(java.util.Date(recordedOnMillis))
-        out += "Window" to (time.format(java.util.Date(windowStartMillis)) + " to " + time.format(java.util.Date(windowEndMillis)))
+        out += "Aufgenommen" to date.format(java.util.Date(recordedOnMillis))
+        out += "Zeitraum" to (time.format(java.util.Date(windowStartMillis)) + " bis " + time.format(java.util.Date(windowEndMillis)))
         val quality = listOfNotNull(
             resolution?.takeIf { it.isNotBlank() },
             videoCodec?.takeIf { it.isNotBlank() }?.let(::codecName),
             frameRate?.takeIf { it > 0 }?.let { if (it == Math.rint(it)) "%.0f fps".format(it) else "%.2f fps".format(it) },
         )
-        if (quality.isNotEmpty()) out += "Quality" to quality.joinToString(" ")
+        if (quality.isNotEmpty()) out += "Qualität" to quality.joinToString(" ")
         val audio = listOfNotNull(audioCodec?.takeIf { it.isNotBlank() }?.let(::codecName), audioChannels?.takeIf { it.isNotBlank() })
         if (audio.isNotEmpty()) out += "Audio" to audio.joinToString(" ")
-        if (fileSizeBytes > 0) out += "Size" to when {
+        if (fileSizeBytes > 0) out += "Größe" to when {
             fileSizeBytes >= 1_073_741_824L -> "%.2f GB".format(fileSizeBytes / 1_073_741_824.0)
             else -> "%.1f MB".format(fileSizeBytes / 1_048_576.0)
         }
@@ -121,7 +121,7 @@ data class RecordingFacts(
         }
         mbps?.let { out += "Bitrate" to (if (it >= 10) "%.0f Mbps".format(it) else "%.1f Mbps".format(it)) }
         format?.takeIf { it.isNotBlank() }?.let { out += "Format" to it.uppercase() }
-        out += "Location" to location
+        out += "Speicherort" to location
         out += "Status" to status
         return out
     }
