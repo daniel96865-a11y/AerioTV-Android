@@ -105,7 +105,7 @@ fun LicensesScreen(onBack: () -> Unit) {
         if (isTv) {
             qrLink = TvQrLink(
                 title = title,
-                caption = "Scan with your phone to open this page.",
+                caption = "Mit dem Handy scannen, um diese Seite zu öffnen.",
                 url = url,
             )
         } else {
@@ -191,19 +191,19 @@ private fun LicenseIndex(
                     onClick = { onOpenLicense(BundledLicense.Gpl3) },
                 )
                 SettingsNavRow(
-                    title = "Source Code",
+                    title = "Quellcode",
                     subtitle = SOURCE_URL.removePrefix("https://"),
                     icon = Icons.AutoMirrored.Outlined.OpenInNew,
-                    onClick = { onOpenUrl("Source Code", SOURCE_URL) },
+                    onClick = { onOpenUrl("Quellcode", SOURCE_URL) },
                     trailingChevron = false,
                 )
             }
         }
         item("aerio-footer") {
             SettingsSectionFooter(
-                "Linking with the proprietary Google Play services libraries is " +
-                    "permitted by an additional permission under GPL section 7. " +
-                    "See LICENSE-EXCEPTIONS.md in the source repository.",
+                "Die Verknüpfung mit proprietären Google-Play-Diensten ist durch eine zusätzliche " +
+                    "Erlaubnis nach Abschnitt 7 der GPL gestattet. Weitere Informationen stehen " +
+                    "in LICENSE-EXCEPTIONS.md im Quellcode-Repository.",
             )
         }
 
@@ -212,7 +212,7 @@ private fun LicenseIndex(
         // MARK: FFmpeg. The one bundled component with real LGPL obligations,
         // so the build configuration and the relink route are spelled out
         // rather than reduced to a license name.
-        item("ffmpeg-header") { SettingsSectionHeader("Playback") }
+        item("ffmpeg-header") { SettingsSectionHeader("Wiedergabe") }
         item("ffmpeg-body") {
             LicenseBlurb(
                 "This app includes FFmpeg (release/6.0, libavcodec 60.3.100), used " +
@@ -246,10 +246,10 @@ private fun LicenseIndex(
                     onClick = { onOpenLicense(BundledLicense.Lgpl21) },
                 )
                 SettingsNavRow(
-                    title = "FFmpeg Source",
+                    title = "FFmpeg-Quellcode",
                     subtitle = "github.com/FFmpeg/FFmpeg (release/6.0)",
                     icon = Icons.AutoMirrored.Outlined.OpenInNew,
-                    onClick = { onOpenUrl("FFmpeg Source", FFMPEG_SOURCE_URL) },
+                    onClick = { onOpenUrl("FFmpeg-Quellcode", FFMPEG_SOURCE_URL) },
                     trailingChevron = false,
                 )
             }
@@ -258,10 +258,10 @@ private fun LicenseIndex(
         item("gap-2") { Spacer(Modifier.height(18.dp)) }
 
         // MARK: Apache-2.0 bulk
-        item("apache-header") { SettingsSectionHeader("Libraries") }
+        item("apache-header") { SettingsSectionHeader("Bibliotheken") }
         item("apache-body") {
             LicenseBlurb(
-                "The following are used under the Apache License, Version 2.0:\n\n" +
+                "Die folgenden Komponenten werden unter der Apache License, Version 2.0, verwendet:\n\n" +
                     APACHE_COMPONENTS.joinToString("\n") { "- $it" },
             )
         }
@@ -282,13 +282,9 @@ private fun LicenseIndex(
         item("gms-header") { SettingsSectionHeader("Google Play Services") }
         item("gms-body") {
             LicenseBlurb(
-                "Google Cast (sender and receiver), Play services Auth and the Google " +
-                    "Identity library are not open source. They are used under the " +
-                    "Android Software Development Kit License Agreement and the Google " +
-                    "APIs Terms of Service.\n\n" +
-                    "The four-color Google \"G\" on the Sign in with Google button is a " +
-                    "trademark of Google LLC, used per the Google Sign-In branding " +
-                    "guidelines. AerioTV claims no rights in it.",
+                "Google Cast (Sender und Empfänger) ist nicht Open Source. Die Komponente wird " +
+                    "unter dem Android Software Development Kit License Agreement und den " +
+                    "Google APIs Terms of Service verwendet.",
             )
         }
         item("tail") { Spacer(Modifier.height(28.dp)) }
