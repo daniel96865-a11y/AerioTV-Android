@@ -131,7 +131,7 @@ fun AddMoreCategoriesScreen(
         ) {
             item {
                 Text(
-                    text = "Extra buckets",
+                    text = "Weitere Kategorien",
                     style = MaterialTheme.typography.labelMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     fontWeight = FontWeight.SemiBold,
