@@ -19,8 +19,9 @@ jobs:
           fetch-depth: 0
 
       - name: Apply German fork identity and translations
-        shell: python
+        shell: bash
         run: |
+          python3 - <<'PY'
           from pathlib import Path
 
           translations = {
@@ -308,6 +309,7 @@ Die Variante verwendet die eigene Android-App-ID de.dgstudios.aeriotvde und kann
               encoding="utf-8",
           )
           print(f"Translated {replacements} occurrences across {changed} files")
+          PY
 
       - name: Commit German variant
         run: |
