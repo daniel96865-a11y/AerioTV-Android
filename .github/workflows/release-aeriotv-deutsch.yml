@@ -3,7 +3,7 @@ name: Release Streamy 3.0
 on:
   push:
     tags:
-      - "v*"
+      - "manual-v*"
 
 permissions:
   contents: write
