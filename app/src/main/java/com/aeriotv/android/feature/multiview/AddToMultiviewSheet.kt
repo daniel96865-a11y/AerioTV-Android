@@ -540,7 +540,7 @@ fun AddToMultiviewSheet(
                                 val seriesId = series.seriesId ?: 0
                                 VodPickerRow(
                                     title = series.title,
-                                    subtitle = "Series",
+                                    subtitle = "Serien",
                                     posterUrl = series.posterUrl,
                                     selected = false,
                                     resolving = false,
@@ -940,7 +940,7 @@ private fun ChannelPickerRow(
 private enum class PickerSource(val label: String) {
     Channels("Sender"),
     Movies("Filme"),
-    Series("Series"),
+    Series("Serien"),
     Recordings("Recordings"),
 }
 

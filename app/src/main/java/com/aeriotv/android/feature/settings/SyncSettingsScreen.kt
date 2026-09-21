@@ -212,7 +212,7 @@ fun SyncSettingsScreen(
             item {
                 SettingsSection(
                     header = "Drive Sync",
-                    footer = "Playlists, watch progress, reminders, app preferences and credentials sync via your Drive AppData folder. Files are scoped per-app and never appear in your main Drive UI.",
+                    footer = "Wiedergabelisten, Wiedergabefortschritt, Erinnerungen, App-Einstellungen und Zugangsdaten werden über deinen Drive-AppData-Ordner synchronisiert. Die Dateien gehören nur zu dieser App und erscheinen nicht in deiner normalen Drive-Oberfläche.",
                 ) {
                     AccountRow(
                         signedIn = signedIn,
@@ -301,8 +301,8 @@ fun SyncSettingsScreen(
                             SettingsToggleRow(
                                 title = "Fernbedienungstasten",
                                 subtitle = "Teil der App-Einstellungen. Auf einem Gerät ausschalten, dessen " +
-                                    "remote differs from your others. This choice stays on this " +
-                                    "device and is not shared.",
+                                    "Fernbedienung sich von deinen anderen unterscheidet. Diese Auswahl bleibt auf diesem " +
+                                    "Gerät und wird nicht synchronisiert.",
                                 checked = shareRemoteMap,
                                 onCheckedChange = { viewModel.setSyncRemoteControlMap(it) },
                             )
@@ -314,8 +314,8 @@ fun SyncSettingsScreen(
             if (signedIn) {
                 item {
                     SettingsSection(
-                        header = "Actions",
-                        footer = "Push overwrites the Drive backup with this device; Pull overwrites this device with the backup. Last Push: ${formatTimestamp(lastPush)}. Last Pull: ${formatTimestamp(lastPull)}.",
+                        header = "Aktionen",
+                        footer = "„Hochladen“ überschreibt die Drive-Sicherung mit diesem Gerät; „Herunterladen“ überschreibt dieses Gerät mit der Sicherung. Letztes Hochladen: ${formatTimestamp(lastPush)}. Letztes Herunterladen: ${formatTimestamp(lastPull)}.",
                     ) {
                         // Inline spinner + result line replaced the old Toasts,
                         // which never surfaced on Android TV (rows looked dead).

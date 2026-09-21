@@ -165,7 +165,7 @@ fun AppearanceSettingsScreen(
                 // THEME card — six brand presets + Custom Accent override row.
                 settingsCard(
                     header = "Design",
-                    footer = "Choose the palette and the light or dark appearance. Theme sets the color; Appearance sets light vs dark. They are independent, so any theme works in either appearance. Changes apply live; the preset accent kicks in unless Custom Accent is on.",
+                    footer = "Wähle Farbpalette sowie helle oder dunkle Darstellung. Das Design bestimmt die Farben, die Darstellung Hell oder Dunkel. Beides ist unabhängig voneinander. Änderungen werden sofort übernommen; die voreingestellte Akzentfarbe gilt, solange keine eigene Akzentfarbe aktiviert ist.",
                 ) {
                     // Plan B5: "theme swatch grid at doubled density" on
                     // tablet. A theme row is a 36dp swatch plus two short
@@ -246,7 +246,7 @@ fun AppearanceSettingsScreen(
                 // still multiply on top for their own surfaces.
                 settingsCard(
                     header = "Textgröße",
-                    footer = "Scales all text in AerioTV, on top of your device's font size. Changes apply live.",
+                    footer = "Skaliert den gesamten Text in AerioTV Deutsch zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
                         label = "Textgröße",
@@ -259,11 +259,11 @@ fun AppearanceSettingsScreen(
                 // SUBTEXT SIZE card: extra multiplier for secondary copy only
                 // (descriptions, subtitles, metadata), stacking on Text Size.
                 settingsCard(
-                    header = "Subtext Size",
-                    footer = "Scales only secondary text such as descriptions, program details, and captions, on top of Text Size. Titles and buttons stay the same. Changes apply live.",
+                    header = "Größe von Zusatztexten",
+                    footer = "Skaliert nur Zusatztexte wie Beschreibungen, Sendungsdetails und Hinweise zusätzlich zur Textgröße. Titel und Schaltflächen bleiben unverändert. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
-                        label = "Subtext Size",
+                        label = "Größe von Zusatztexten",
                         stops = TEXT_SCALE_STOPS,
                         value = subtextScale,
                         onValueChange = viewModel::setSubtextScale,
@@ -273,11 +273,11 @@ fun AppearanceSettingsScreen(
                 // TEXT CONTRAST card: blends dimmed and accent-tinted text
                 // toward plain white (dark) / black (light).
                 settingsCard(
-                    header = "Text Contrast",
-                    footer = "Makes dimmed and accent-colored text brighter in dark mode and darker in light mode. 0% keeps the theme's look, 100% uses plain white or black text. Changes apply live.",
+                    header = "Textkontrast",
+                    footer = "Macht gedämpften und akzentfarbenen Text im Dunkelmodus heller und im Hellmodus dunkler. 0 % behält das Design bei, 100 % verwendet reines Weiß bzw. Schwarz. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
-                        label = "Text Contrast",
+                        label = "Textkontrast",
                         stops = TEXT_CONTRAST_STOPS,
                         value = textContrast,
                         onValueChange = viewModel::setTextContrast,
@@ -287,8 +287,8 @@ fun AppearanceSettingsScreen(
                 // TIME FORMAT card: every clock in the app (guide header,
                 // cell ranges, program info, DVR) follows this.
                 settingsCard(
-                    header = "Time Format",
-                    footer = "System follows your device's clock setting. Applies to the Guide, program info, and recordings.",
+                    header = "Zeitformat",
+                    footer = "„System“ übernimmt die Uhrzeiteinstellung deines Geräts. Gilt für EPG, Sendungsinformationen und Aufnahmen.",
                 ) {
                     TIME_FORMAT_OPTIONS.forEachIndexed { i, (value, label) ->
                         if (i > 0) DividerRow()

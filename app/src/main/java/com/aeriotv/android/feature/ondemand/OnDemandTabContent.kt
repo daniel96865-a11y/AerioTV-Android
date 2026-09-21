@@ -118,7 +118,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
 
 /**
  * On Demand tab shell. Mirrors iOS OnDemandView (Aerio/Features/VOD/OnDemandView.swift):
- * "Filme" / "Series" pill segment selector above the active sub-view.
+ * "Filme" / "Serien" pill segment selector above the active sub-view.
  *
  * Phase 10b ships Movies fully wired (browse + play). Series is a placeholder
  * until Phase 10c lands the `/api/vod/series/` endpoint, episode picker, and
@@ -526,7 +526,7 @@ private fun MoviesSubScreen(
     if (state.unsupportedSource) {
         EmptyState(
             title = "Filme benötigen Dispatcharr",
-            body = "Switch to a Dispatcharr playlist in Settings to browse movies.",
+            body = "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Filme zu durchsuchen.",
         )
         return
     }
@@ -773,8 +773,8 @@ private fun SeriesSubScreen(
 
     if (state.unsupportedSource) {
         EmptyState(
-            title = "Series needs Dispatcharr",
-            body = "Switch to a Dispatcharr playlist in Settings to browse series.",
+            title = "Serien benötigen Dispatcharr",
+            body = "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Serien zu durchsuchen.",
         )
         return
     }
@@ -1707,7 +1707,7 @@ private enum class OnDemandSection(val label: String, val icon: ImageVector) {
     // in-progress content (movies + episodes). Rendered first, before Movies.
     ContinueWatching(label = "Weiter", icon = Icons.Outlined.History),
     Movies(label = "Filme", icon = Icons.Outlined.Movie),
-    Series(label = "Series", icon = Icons.Outlined.Tv),
+    Series(label = "Serien", icon = Icons.Outlined.Tv),
 }
 
 /**

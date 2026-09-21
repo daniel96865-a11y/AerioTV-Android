@@ -77,7 +77,7 @@ class LocalRecordingService : Service() {
 
     /**
      * Partial wake lock held while a local recording is in flight, gated by
-     * the "Keep device awake during recording" DVR setting (default ON, iOS
+     * the "Gerät während der Aufnahme wach halten" DVR setting (default ON, iOS
      * parity). PARTIAL_WAKE_LOCK keeps the CPU running with the screen off so
      * the download read-loop isn't paused by doze; it does NOT keep the
      * screen on. Released in [releaseWakeLock] from the recording coroutine's
@@ -183,7 +183,7 @@ class LocalRecordingService : Service() {
 
         val recJob = scope.launch {
             // Acquire the wake lock before the read-loop if the user left the
-            // "Keep device awake during recording" toggle on. Bounded to
+            // "Gerät während der Aufnahme wach halten" toggle on. Bounded to
             // duration + 1 min so a hung job can never hold the CPU awake
             // forever; the finally below releases it on the normal path.
             if (runCatching { appPreferences.dvrKeepAwakeOnce() }.getOrDefault(true)) {

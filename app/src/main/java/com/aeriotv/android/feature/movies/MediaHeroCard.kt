@@ -202,7 +202,7 @@ fun MediaHeroCard(
                             }
                             if (onToggleHidden != null) {
                                 DropdownMenuItem(
-                                    text = { Text(if (isHidden) "Unhide" else "Hide") },
+                                    text = { Text(if (isHidden) "Einblenden" else "Ausblenden") },
                                     onClick = { menu = false; onToggleHidden() },
                                 )
                             }

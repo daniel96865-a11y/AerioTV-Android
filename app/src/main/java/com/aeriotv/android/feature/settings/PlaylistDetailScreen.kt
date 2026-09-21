@@ -284,7 +284,7 @@ fun PlaylistDetailScreen(
             }
 
             item {
-                Section(header = "Actions", footer = null) {
+                Section(header = "Aktionen", footer = null) {
                     // Rev 2 canon amendment 1: activation lives here on every
                     // form factor. The rail and sidebar make selection show the
                     // detail, so OK-to-activate cannot survive on those roots;

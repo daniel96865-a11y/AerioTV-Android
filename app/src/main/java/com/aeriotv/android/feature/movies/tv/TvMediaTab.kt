@@ -158,7 +158,7 @@ internal fun TvMediaTab(
         }
         val longPress = buildList {
             if (item != null) add(TvMenuAction(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") { onToggleWatchlist(item) })
-            if (item != null) add(TvMenuAction(if (item.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(item) })
+            if (item != null) add(TvMenuAction(if (item.key in hiddenKeys) "Einblenden" else "Ausblenden") { onToggleHidden(item) })
             if (!watchlist) add(TvMenuAction("Aus „Weiterschauen“ entfernen", destructive = true) { onRemoveProgress(videoId) })
             else if (item != null) add(TvMenuAction("Von Merkliste entfernen", destructive = true) { onRemoveWatchlist(item.key) })
         }
@@ -200,7 +200,7 @@ internal fun TvMediaTab(
             onClick = { item?.let(open) }, modifier = modifier,
             longPressActions = listOfNotNull(
                 item?.let { TvMenuAction("Details") { open(it) } },
-                item?.let { TvMenuAction(if (it.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(it) } },
+                item?.let { TvMenuAction(if (it.key in hiddenKeys) "Einblenden" else "Ausblenden") { onToggleHidden(it) } },
                 item?.let { TvMenuAction("Von Merkliste entfernen", destructive = true) { onRemoveWatchlist(it.key) } },
             ),
         )
@@ -262,7 +262,7 @@ internal fun TvMediaTab(
                 longPressActions = listOf(
                     TvMenuAction("Details") { open(item) },
                     TvMenuAction(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") { onToggleWatchlist(item) },
-                    TvMenuAction(if (item.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(item) },
+                    TvMenuAction(if (item.key in hiddenKeys) "Einblenden" else "Ausblenden") { onToggleHidden(item) },
                 ),
             )
         },

@@ -163,7 +163,7 @@ fun RecordProgramSheet(
                     if (usedMB >= storageCapMB) {
                         Toast.makeText(
                             context,
-                            "Local storage cap reached. Free space or raise the cap in Settings -> DVR.",
+                            "Lokales Speicherlimit erreicht. Gib Speicher frei oder erhöhe das Limit unter Einstellungen -> DVR.",
                             Toast.LENGTH_LONG,
                         ).show()
                         onDismiss()
@@ -415,7 +415,7 @@ fun RecordProgramSheet(
 
                 if (!usingRule) {
                 Spacer(Modifier.height(18.dp))
-                SectionLabel("Start Early")
+                SectionLabel("Früher starten")
                 Spacer(Modifier.height(6.dp))
                 if (isLive) {
                     Text(
@@ -436,7 +436,7 @@ fun RecordProgramSheet(
                 }
 
                 Spacer(Modifier.height(18.dp))
-                SectionLabel("End Late")
+                SectionLabel("Später beenden")
                 Spacer(Modifier.height(6.dp))
                 MinuteRadioFlow(
                     options = ROLL_OPTIONS,
@@ -702,11 +702,11 @@ private fun TvRecordForm(
                 }
 
                 if (!isLive && !usingRule) {
-                    TvSectionTitle("Start Early")
+                    TvSectionTitle("Früher starten")
                     TvMinutePills(options = listOf(0, 5, 10, 15, 30), selected = preRoll, onSelect = onPreRoll, onCustom = onCustomPreRoll)
                 }
                 if (!usingRule) {
-                    TvSectionTitle("End Late")
+                    TvSectionTitle("Später beenden")
                     TvMinutePills(options = ROLL_OPTIONS, selected = postRoll, onSelect = onPostRoll, onCustom = onCustomPostRoll)
                 }
                 if (isDispatcharr && isLive && canRecordToServer && !usingRule) {

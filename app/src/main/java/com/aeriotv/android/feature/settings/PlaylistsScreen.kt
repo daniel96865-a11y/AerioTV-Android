@@ -130,7 +130,7 @@ fun PlaylistsScreen(
                     IconButton(onClick = onAddPlaylist) {
                         Icon(
                             imageVector = Icons.Filled.Add,
-                            contentDescription = "Add playlist",
+                            contentDescription = "Wiedergabeliste hinzufügen",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -348,7 +348,7 @@ private fun PlaylistRow(
         if (isActive) {
             Icon(
                 imageVector = Icons.Filled.CheckCircle,
-                contentDescription = "Active",
+                contentDescription = "Aktiv",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(20.dp),
             )

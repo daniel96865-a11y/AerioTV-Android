@@ -182,7 +182,7 @@ fun DvrTabContent(
         if (state.unsupportedSource && !hasLocalContent) {
             EmptyState(
                 title = "DVR needs Dispatcharr",
-                body = "Switch to a Dispatcharr playlist in Settings to schedule recordings.",
+                body = "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Aufnahmen zu planen.",
             )
             return@Column
         }
@@ -695,7 +695,7 @@ private fun RecordingRow(
         DvrViewModel.Recording.Status.Stopped -> "Completed"
         DvrViewModel.Recording.Status.Failed -> "Failed"
         DvrViewModel.Recording.Status.Scheduled -> "Geplant"
-        DvrViewModel.Recording.Status.Unknown -> "Unknown"
+        DvrViewModel.Recording.Status.Unknown -> "Unbekannt"
     }
     val dateFmt = DateFormat.getDateInstance(DateFormat.MEDIUM)
     val timeFmt = com.aeriotv.android.core.ui.ClockFormat.short()

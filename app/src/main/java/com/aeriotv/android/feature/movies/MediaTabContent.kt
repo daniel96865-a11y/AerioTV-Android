@@ -563,7 +563,7 @@ fun MediaTabContent(
                         onClick = { close(); watchlistVm.toggle(item) },
                     )
                     DropdownMenuItem(
-                        text = { Text(if (item.key in hiddenTitles) "Unhide" else "Hide") },
+                        text = { Text(if (item.key in hiddenTitles) "Einblenden" else "Ausblenden") },
                         onClick = { close(); viewModel.toggleHidden(item.key) },
                     )
                 },

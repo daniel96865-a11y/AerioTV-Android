@@ -70,13 +70,13 @@ fun AppUpdatesScreen(
             ) {
                 SettingsSection(
                     header = "Dieses Gerät",
-                    footer = "Updates on this channel come from the project's GitHub " +
-                        "releases. Installing keeps your channels, settings, and " +
-                        "recordings; AerioTV closes during the install and you reopen " +
-                        "it from your home screen.",
+                    footer = "Updates für diese Variante kommen aus den GitHub-" +
+                        "Releases des Projekts. Beim Installieren bleiben Sender, Einstellungen und " +
+                        "Aufnahmen erhalten; AerioTV Deutsch wird für die Installation geschlossen und danach " +
+                        "über den Startbildschirm wieder geöffnet.",
                 ) {
                     SettingsInfoRow(label = "Version", value = BuildConfig.VERSION_NAME)
-                    SettingsInfoRow(label = "Sender", value = "GitHub releases")
+                    SettingsInfoRow(label = "Sender", value = "GitHub-Releases")
                     SettingsActionRow(
                         label = "Nach Updates suchen",
                         leadingIcon = Icons.Filled.Refresh,
@@ -87,18 +87,18 @@ fun AppUpdatesScreen(
                 when (val s = state) {
                     is UpdateState.UpToDate -> StatusText("Du verwendest die neueste Version.")
                     is UpdateState.Available -> SettingsSection(
-                        header = "Update available",
+                        header = "Update verfügbar",
                         footer = s.info.notes.ifBlank { null },
                     ) {
                         SettingsActionRow(
                             label = "AerioTV Deutsch ${s.info.versionName} herunterladen",
-                            subtitle = "${s.info.apkSizeBytes / (1024 * 1024)} MB from GitHub",
+                            subtitle = "${s.info.apkSizeBytes / (1024 * 1024)} MB von GitHub",
                             leadingIcon = Icons.Filled.Download,
                             onClick = { viewModel.download() },
                         )
                     }
                     is UpdateState.Downloading -> Column {
-                        StatusText("Downloading AerioTV ${s.info.versionName}... ${s.progressPercent}%")
+                        StatusText("AerioTV Deutsch ${s.info.versionName} wird heruntergeladen... ${s.progressPercent}%")
                         Spacer(Modifier.height(8.dp))
                         LinearProgressIndicator(
                             progress = { s.progressPercent / 100f },
@@ -111,9 +111,9 @@ fun AppUpdatesScreen(
                         StatusText("Download wird geprüft...")
                     }
                     is UpdateState.ReadyToInstall -> SettingsSection(
-                        header = "Ready to install",
-                        footer = "Your data is kept. AerioTV will close to install; reopen " +
-                            "it from your home screen.",
+                        header = "Bereit zur Installation",
+                        footer = "Deine Daten bleiben erhalten. AerioTV Deutsch wird für die Installation geschlossen; öffne die App anschließend " +
+                            "über den Startbildschirm wieder geöffnet.",
                     ) {
                         SettingsActionRow(
                             label = "AerioTV Deutsch ${s.info.versionName} installieren",
@@ -122,10 +122,10 @@ fun AppUpdatesScreen(
                         )
                     }
                     is UpdateState.AwaitingInstallPermission -> SettingsSection(
-                        header = "One-time permission needed",
-                        footer = "Allow AerioTV to install updates in the Settings screen, " +
-                            "then come back. If you've already allowed it, Install " +
-                            "continues right away.",
+                        header = "Einmalige Berechtigung erforderlich",
+                        footer = "Erlaube AerioTV Deutsch in den Android-Einstellungen, Updates zu installieren, " +
+                            "und kehre danach zurück. Wenn du es bereits erlaubt hast, wird die Installation " +
+                            "sofort fortgesetzt.",
                     ) {
                         SettingsActionRow(
                             label = "Installieren",
@@ -134,22 +134,22 @@ fun AppUpdatesScreen(
                         )
                     }
                     is UpdateState.Installing -> StatusText(
-                        "Confirm the update in the Android dialog. AerioTV will close to " +
-                            "install.",
+                        "Bestätige das Update im Android-Dialog. AerioTV Deutsch wird für die " +
+                            "Installation geschlossen.",
                     )
                     is UpdateState.Error -> SettingsSection(
-                        header = "Update problem",
+                        header = "Update-Problem",
                         footer = s.message,
                     ) {
                         SettingsActionRow(
-                            label = if (s.info != null) "Try again" else "Check again",
+                            label = if (s.info != null) "Erneut versuchen" else "Erneut prüfen",
                             leadingIcon = Icons.Filled.Refresh,
                             onClick = {
                                 if (s.info != null) viewModel.download() else viewModel.manualCheck()
                             },
                         )
                         SettingsActionRow(
-                            label = "Dismiss",
+                            label = "Schließen",
                             leadingIcon = Icons.Filled.Close,
                             onClick = { viewModel.dismissError() },
                         )

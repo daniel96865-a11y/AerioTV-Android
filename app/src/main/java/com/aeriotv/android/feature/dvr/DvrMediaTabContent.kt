@@ -318,7 +318,7 @@ fun DvrMediaTabContent(
     fun showInfo(rec: Rec) {
         val statusLabel = when (rec.effectiveStatus(now)) {
             DvrViewModel.Recording.Status.Scheduled -> "Geplant"; DvrViewModel.Recording.Status.Recording -> "Aufnahme"; DvrViewModel.Recording.Status.Completed -> "Completed"
-            DvrViewModel.Recording.Status.Stopped -> "Stopped"; DvrViewModel.Recording.Status.Failed -> "Failed"; DvrViewModel.Recording.Status.Unknown -> "Unknown"
+            DvrViewModel.Recording.Status.Stopped -> "Stopped"; DvrViewModel.Recording.Status.Failed -> "Failed"; DvrViewModel.Recording.Status.Unknown -> "Unbekannt"
         }
         val ext = (rec.fileName ?: rec.playbackUrl ?: "").substringAfterLast('.', "").takeIf { it.length in 2..5 && !it.contains('/') }
         infoTarget = ProgramInfoTarget(

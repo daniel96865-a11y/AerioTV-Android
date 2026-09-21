@@ -129,8 +129,8 @@ fun DvrSettingsScreen(
                 val defaultDestination by settingsVm.dvrDefaultDestination
                     .collectAsStateWithLifecycle(initialValue = "server")
                 Card(
-                    header = "Default Destination",
-                    footer = "Where new recordings are saved unless you change it in the record sheet. Accounts without server recording always record to this device.",
+                    header = "Standard-Speicherort",
+                    footer = "Legt fest, wo neue Aufnahmen gespeichert werden, sofern du es beim Aufnehmen nicht änderst. Konten ohne Serveraufnahme speichern immer auf diesem Gerät.",
                 ) {
                     Column {
                         DestinationRow(
@@ -150,19 +150,19 @@ fun DvrSettingsScreen(
 
             item {
                 Card(
-                    header = "Default Recording Buffers",
-                    footer = "Buffers extend new recordings beyond the scheduled window. Existing recordings aren't touched. Useful for sports and live events that run over.",
+                    header = "Standard-Aufnahmepuffer",
+                    footer = "Puffer verlängern neue Aufnahmen über den geplanten Zeitraum hinaus. Bestehende Aufnahmen bleiben unverändert. Nützlich bei Sport und Live-Ereignissen mit Überlänge.",
                 ) {
                     Column {
                         BufferRow(
-                            label = "Start Early",
+                            label = "Früher starten",
                             options = ROLL_OPTIONS,
                             selected = preRoll,
                             onSelect = settingsVm::setDvrDefaultPreRollMins,
                         )
                         HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
                         BufferRow(
-                            label = "End Late",
+                            label = "Später beenden",
                             options = ROLL_OPTIONS,
                             selected = postRoll,
                             onSelect = settingsVm::setDvrDefaultPostRollMins,
@@ -173,8 +173,8 @@ fun DvrSettingsScreen(
 
             item {
                 Card(
-                    header = "Local Storage",
-                    footer = "Cap applies to local recordings on this device only. Server recordings live on Dispatcharr and are tracked there.",
+                    header = "Lokaler Speicher",
+                    footer = "Das Limit gilt nur für lokale Aufnahmen auf diesem Gerät. Serveraufnahmen liegen auf Dispatcharr und werden dort verwaltet.",
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -308,8 +308,8 @@ fun DvrSettingsScreen(
                     footer = "Holds a CPU wake lock while a local recording is downloading so Doze can't stall it. Server-side recordings are unaffected (they run on Dispatcharr). Leave on unless you're debugging battery drain.",
                 ) {
                     SettingsToggleRow(
-                        title = "Keep device awake during recording",
-                        subtitle = "Recommended for long local recordings.",
+                        title = "Gerät während der Aufnahme wach halten",
+                        subtitle = "Für lange lokale Aufnahmen empfohlen.",
                         checked = keepAwake,
                         onCheckedChange = settingsVm::setDvrKeepAwakeDuringRecording,
                     )

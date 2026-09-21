@@ -308,7 +308,7 @@ object WhatsNewContent {
         ),
         WhatsNewItem(
             title = "Rounded corners, two toggles",
-            body = "Rounded corners for List view and Guide view are now separate in Settings > Appearance, and guide artwork follows the Guide toggle.",
+            body = "Abgerundete Ecken für Listen- und EPG-Ansicht können jetzt getrennt unter Einstellungen > Darstellung festgelegt werden; EPG-Bilder folgen der EPG-Einstellung.",
         ),
         WhatsNewItem(
             title = "Android TV: Nur EPG",

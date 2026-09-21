@@ -463,14 +463,14 @@ private fun PlaylistsSection(
                 // Rail/sidebar form factors enter the detail on select, so the
                 // activate verb moved there. The phone strings below are
                 // untouched (frozen canon).
-                SectionFooter("Select a playlist to open it · Set Active lives in its Actions section")
+                SectionFooter("Wähle eine Wiedergabeliste zum Öffnen · „Als aktiv festlegen“ befindet sich im Bereich Aktionen")
                 if (playlists.size > 1) {
-                    SectionFooter("Select Manage Playlists to reorder")
+                    SectionFooter("Wähle „Wiedergabelisten verwalten“, um die Reihenfolge zu ändern")
                 }
             } else {
-                SectionFooter("Tap ○ to set the active playlist · Tap the active playlist to edit or delete it")
+                SectionFooter("Tippe auf ○, um die aktive Wiedergabeliste festzulegen · Tippe auf die aktive Wiedergabeliste, um sie zu bearbeiten oder zu löschen")
                 if (playlists.size > 1) {
-                    SectionFooter("Tap Manage Playlists to reorder")
+                    SectionFooter("Tippe auf „Wiedergabelisten verwalten“, um die Reihenfolge zu ändern")
                 }
             }
         }
@@ -502,7 +502,7 @@ private fun PlaylistRow(
             // SettingsView footer hint "Tap ○ to set the active playlist".
             Icon(
                 imageVector = if (isActive) Icons.Filled.RadioButtonChecked else Icons.Outlined.RadioButtonUnchecked,
-                contentDescription = if (isActive) "Active" else "Set active",
+                contentDescription = if (isActive) "Aktiv" else "Als aktiv festlegen",
                 tint = if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(20.dp),
             )
@@ -515,7 +515,7 @@ private fun PlaylistRow(
                     fontWeight = if (isActive) FontWeight.SemiBold else FontWeight.Normal,
                 )
                 val subtitle = buildString {
-                    append("${playlist.channelCount} channels")
+                    append("${playlist.channelCount} Sender")
                     // Shared pretty-printer (PlaylistEntity.sourceTypeDisplayLabel)
                     // keeps this subtitle in lockstep with the Playlist Detail
                     // Type row.
@@ -634,7 +634,7 @@ private fun AboutSection(
                 .clip(RoundedCornerShape(14.dp))
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.45f)),
         ) {
-            AboutInfoRow("Device", deviceDisplayName())
+            AboutInfoRow("Gerät", deviceDisplayName())
             RowDivider()
             AboutInfoRow("System", "Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
             RowDivider()
@@ -643,14 +643,14 @@ private fun AboutSection(
                 onClick = onShowWhatsNew,
             )
             RowDivider()
-            AboutInfoRow("First Installed", formatInstallTime(installedAt))
+            AboutInfoRow("Erstmals installiert", formatInstallTime(installedAt))
             RowDivider()
             AboutInfoRow(
-                "Last Updated",
-                if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Never",
+                "Zuletzt aktualisiert",
+                if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Nie",
             )
             RowDivider()
-            AboutActionRow("Copy to Clipboard", Icons.Filled.ContentCopy, onClick = onCopy)
+            AboutActionRow("In Zwischenablage kopieren", Icons.Filled.ContentCopy, onClick = onCopy)
             RowDivider()
             AboutActionRow(
                 "Entwickler-Webseite",
@@ -712,7 +712,7 @@ private fun AboutInfoRow(label: String, value: String) {
  * App Version row. Reads as an info row (label + value) but is clickable and,
  * on TV, focusable with the same card highlight as the action rows below it,
  * so the D-pad can reach it and DPAD_CENTER opens the What's New notes for
- * the installed build. The trailing "What's New" hint is the only affordance;
+ * the installed build. The trailing "Was ist neu?" hint is the only affordance;
  * nothing about the launch-time gate changes.
  */
 @Composable
@@ -728,7 +728,7 @@ private fun AboutVersionRow(value: String, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "App Version",
+            text = "App-Version",
             style = settingsRowValueStyle().subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f),
@@ -740,7 +740,7 @@ private fun AboutVersionRow(value: String, onClick: () -> Unit) {
         )
         Spacer(Modifier.size(10.dp))
         Text(
-            text = "What's New",
+            text = "Was ist neu?",
             style = settingsFootnoteStyle(),
             color = MaterialTheme.colorScheme.textAccent,
             fontWeight = FontWeight.Medium,
@@ -849,7 +849,7 @@ private fun deviceDisplayName(): String {
 }
 
 private fun formatInstallTime(ms: Long): String {
-    if (ms <= 0L) return "Unknown"
+    if (ms <= 0L) return "Unbekannt"
     return DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(ms))
 }
 
@@ -864,7 +864,7 @@ private fun buildAboutClipboard(
     appendLine("System: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
     appendLine("App Version: $versionName ($versionCode)")
     appendLine("First Installed: ${formatInstallTime(installedAt)}")
-    appendLine("Last Updated: ${if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Never"}")
+    appendLine("Last Updated: ${if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Nie"}")
 }
 
 private fun openUrl(context: android.content.Context, url: String) {
@@ -874,7 +874,7 @@ private fun openUrl(context: android.content.Context, url: String) {
         .onFailure {
             android.widget.Toast.makeText(
                 context,
-                "No browser available to open $url",
+                "Kein Browser zum Öffnen von $url verfügbar",
                 android.widget.Toast.LENGTH_SHORT,
             ).show()
         }
@@ -896,7 +896,7 @@ enum class SettingsSection(
     ),
     Player(
         title = "Wiedergabe",
-        subtitle = "Info card, rewind, gestures, multiview",
+        subtitle = "Infokarte, Zurückspulen, Gesten, Mehrfachansicht",
         icon = Icons.Outlined.PlayCircle,
     ),
     MoviesAndTvShows(
@@ -911,7 +911,7 @@ enum class SettingsSection(
     ),
     Appearance(
         title = "Darstellung",
-        subtitle = "Theme, text size, time format",
+        subtitle = "Design, Textgröße, Zeitformat",
         icon = Icons.Filled.Palette,
     ),
     General(
@@ -940,7 +940,7 @@ enum class SettingsSection(
     ),
     Developer(
         title = "Entwickler",
-        subtitle = "Debug logging & diagnostics",
+        subtitle = "Debug-Protokollierung & Diagnose",
         icon = Icons.Outlined.BugReport,
     ),
     About(

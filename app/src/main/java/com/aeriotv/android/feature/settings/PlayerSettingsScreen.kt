@@ -163,7 +163,7 @@ fun PlayerSettingsScreen(
                 }
                 if (liveRewindEnabled) {
                     SettingsSection(
-                        header = "Keep Available",
+                        header = "Verfügbar halten",
                         footer = "How far back you can rewind the channel you are " +
                             "watching. Buffered video is released as soon as you " +
                             "leave the channel. " +
@@ -178,7 +178,7 @@ fun PlayerSettingsScreen(
                         )
                     }
                     SettingsSection(
-                        header = "Keep Recent Channels Live",
+                        header = "Letzte Sender live halten",
                         footer = if (keepRecent) {
                             "Channels you flip away from keep buffering so you can flip " +
                                 "back and rewind across the time you were away. Each kept " +
@@ -366,7 +366,7 @@ fun PlayerSettingsScreen(
                 // black screen), deliberate and user-opted.
                 if (isTv) {
                     SettingsSection(
-                        header = "Display",
+                        header = "Anzeige",
                         footer = "Startup Refresh Rate switches the display once at app launch so it is already on your main content rate before the first channel (changes apply on next launch). Match Content Resolution outputs at the stream's resolution so your TV does the upscaling; the screen blinks briefly on each switch.",
                     ) {
                         SettingsToggleRow(

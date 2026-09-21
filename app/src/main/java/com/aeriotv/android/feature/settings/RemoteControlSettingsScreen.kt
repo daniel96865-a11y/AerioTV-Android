@@ -264,7 +264,7 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "In the TV Guide",
+                    header = "Im TV-EPG",
                     footer = "What each button does while browsing the guide. A Left or Right set to anything other than Move focus still moves between programs, and runs its action once focus reaches the edge of the timeline (Play, Record, Program info and Program menu run on every press). Up, Down and Back always navigate.",
                 ) {
                     GUIDE_SLOTS.forEach { slot ->
@@ -302,7 +302,7 @@ fun RemoteControlSettingsScreen(
                 ) {
                     SlotRow(
                         slotName = "Sender abspielen in",
-                        valueName = if (tuneInMini) "Mini player" else "Full screen",
+                        valueName = if (tuneInMini) "Mini-Player" else "Full screen",
                         onClick = { editingTuneTarget = true },
                     )
                 }
@@ -332,7 +332,7 @@ fun RemoteControlSettingsScreen(
                     editingTuneTarget = false
                 },
                 TvMenuAction(
-                    label = if (tuneInMini) "Mini player  (current)" else "Mini player",
+                    label = if (tuneInMini) "Mini-Player  (aktuell)" else "Mini-Player",
                 ) {
                     viewModel.setGuideTuneInMini(true)
                     editingTuneTarget = false

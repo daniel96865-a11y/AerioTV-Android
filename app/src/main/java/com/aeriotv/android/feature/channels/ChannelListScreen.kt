@@ -1052,7 +1052,7 @@ internal fun ChannelRow(
         val target = nowProgramme?.toInfoTarget(channel.name, channel.dispatcharrChannelId)
             ?: ProgramInfoTarget(
                 channelName = channel.name,
-                title = "${channel.name} live recording",
+                title = "${channel.name} Live-Aufnahme",
                 startMillis = now,
                 endMillis = now + 3_600_000L,
                 description = "",

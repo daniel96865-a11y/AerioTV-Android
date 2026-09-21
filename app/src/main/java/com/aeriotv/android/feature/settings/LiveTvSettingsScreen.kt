@@ -113,7 +113,7 @@ fun LiveTvSettingsScreen(
                 // MARK: Guide Presentation
                 item("guide-presentation") {
                     SettingsSection(
-                        header = "Guide Presentation",
+                        header = "EPG-Darstellung",
                         footer = (
                             if (listViewShown) {
                                 "Turn logos or numbers off to give long channel names more row width. Applies to the Live TV list and the Guide."
@@ -197,7 +197,7 @@ fun LiveTvSettingsScreen(
 
                 // MARK: Guide Layout (TV)
                 if (isTv) item("guide-layout") {
-                    SettingsSection(header = "Guide Layout") {
+                    SettingsSection(header = "EPG-Layout") {
                         SettingsSelectionRow(
                             label = "Basic",
                             subtitle = "Vollständige Sendungsdetails in jeder EPG-Zelle",
@@ -311,7 +311,7 @@ fun LiveTvSettingsScreen(
 
                 // MARK: Display Scale
                 settingsCard(
-                    header = "Display Scale",
+                    header = "Darstellungsgröße",
                     footer = if (listViewShown) {
                         "Independent scale for the Live TV List. 100% matches the default; 85-175% lets you trade density for readability (150%+ shows fewer, larger items - handy on a TV across the room). Changes apply live."
                     } else {
@@ -328,7 +328,7 @@ fun LiveTvSettingsScreen(
                 // MARK: Colors
                 settingsCard(
                     header = "Colors",
-                    footer = "Tint EPG cells and channel cards by program category. Select a category below to override its hex.",
+                    footer = "EPG-Zellen und Senderkarten nach Sendungskategorie einfärben. Wähle unten eine Kategorie, um ihren Hex-Farbwert anzupassen.",
                 ) {
                     ToggleRow(
                         title = "Sendungen nach Kategorie einfärben",

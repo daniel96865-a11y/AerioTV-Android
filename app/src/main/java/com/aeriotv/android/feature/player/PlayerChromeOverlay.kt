@@ -406,7 +406,7 @@ fun PlayerChromeOverlay(
             // Without one they stay in the row, greyed and inert, and say why
             // when focused, rather than vanishing and reflowing the row.
             val seekEnabled = tvTransport
-            val seekDisabledCaption = "Enable Live Rewind in Settings"
+            val seekDisabledCaption = "Aktiviere Live-Zurückspulen in den Einstellungen"
             val centerPill: @Composable () -> Unit = {
                 PlayerControlCircle(
                     icon = if (isPlayerPaused) Icons.Filled.PlayArrow else Icons.Filled.Pause,
@@ -1009,7 +1009,7 @@ private fun PlayerControlCircle(
     }
     // The cell IS the 30 dp circle. Its caption is drawn below it as an
     // OVERLAY (Logan 2026-09-11): centered on this circle, measured with an
-    // unbounded width so a long caption ("Enable Live Rewind in Settings")
+    // unbounded width so a long caption ("Aktiviere Live-Zurückspulen in den Einstellungen")
     // stays one line and simply extends over its neighbors' empty caption
     // space, and never affecting this cell's width or the row's layout. Only
     // the focused control draws one, and tvFocusScale's zIndex bump means the
@@ -1156,7 +1156,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Video Scale: $scaleLabel") },
+            text = { Text("Videogröße: $scaleLabel") },
             onClick = onCycleScale,
         )
         if (canRecord) {
