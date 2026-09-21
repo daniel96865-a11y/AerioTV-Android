@@ -211,7 +211,7 @@ fun SyncSettingsScreen(
             }
             item {
                 SettingsSection(
-                    header = "Drive Sync",
+                    header = "Drive-Synchronisierung",
                     footer = "Wiedergabelisten, Wiedergabefortschritt, Erinnerungen, App-Einstellungen und Zugangsdaten werden über deinen Drive-AppData-Ordner synchronisiert. Die Dateien gehören nur zu dieser App und erscheinen nicht in deiner normalen Drive-Oberfläche.",
                 ) {
                     AccountRow(
@@ -221,7 +221,7 @@ fun SyncSettingsScreen(
                     SettingsToggleRow(
                         title = "Synchronisierung aktiviert",
                         subtitle = if (signedIn)
-                            "Auto-syncing the categories you've toggled below."
+                            "Die unten aktivierten Kategorien werden automatisch synchronisiert."
                         else
                             "Sign in below, then enable sync to push and pull data.",
                         checked = masterEnabled,
