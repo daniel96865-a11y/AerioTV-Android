@@ -313,7 +313,7 @@ fun SettingsScreen(
                         ).show()
                     },
                     onOpenWebsite = {
-                        val url = "https://github.com/daniel96865-a11y/AerioTV-Android"
+                        val url = "https://github.com/daniel96865-a11y/Streamy-3.0"
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Entwickler-Webseite",
@@ -326,7 +326,7 @@ fun SettingsScreen(
                     },
                     onOpenLicenses = onOpenLicenses,
                     onReportIssue = {
-                        val url = "https://github.com/daniel96865-a11y/AerioTV-Android/issues/new"
+                        val url = "https://github.com/daniel96865-a11y/Streamy-3.0/issues/new"
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Problem melden",
