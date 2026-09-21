@@ -30,6 +30,12 @@ jobs:
           git commit -m "Create German AerioTV variant" || true
           git push origin HEAD:deutsch
 
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
       - name: Build German GitHub release APK
         run: |
           chmod +x gradlew
