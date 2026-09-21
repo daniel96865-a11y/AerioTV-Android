@@ -130,9 +130,9 @@ fun ChooseSourceTypeScreen(
 
                 SourceTypeCard(
                     icon = Icons.Filled.Key,
-                    title = "Dispatcharr Direct Connect",
+                    title = "Dispatcharr-Direktverbindung",
                     subtitle = "Verbinde dich mit Dispatcharr über deinen Admin-Zugang oder einen persönlichen API-Schlüssel " +
-                            "(*AerioTV is not officially affiliated with the Dispatcharr project)",
+                            "(*Streamy ist nicht offiziell mit dem Dispatcharr-Projekt verbunden)",
                     modifier = Modifier.tappable { onChoose(SourceType.DispatcharrUserPass) },
                 )
                 SourceTypeCard(
