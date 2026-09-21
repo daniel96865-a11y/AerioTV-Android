@@ -73,7 +73,7 @@ internal fun ExpandablePlot(plot: String, maxWidth: Dp) {
         )
         if (overflows || expanded) {
             Text(
-                text = if (expanded) "Less" else "More",
+                text = if (expanded) "Weniger" else "Mehr",
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.textAccent,
                 fontWeight = FontWeight.SemiBold,
@@ -285,7 +285,7 @@ internal fun EpisodeProgressChrome(progress: WatchProgressEntity) {
             modifier = Modifier.size(10.dp),
         )
         Text(
-            text = if (finished) "Watched" else "Currently Watching",
+            text = if (finished) "Angesehen" else "Wird gerade angesehen",
             fontSize = 11.sp,
             fontWeight = FontWeight.SemiBold,
             color = fg,
