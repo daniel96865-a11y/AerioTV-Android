@@ -607,14 +607,14 @@ private fun MoviesSubScreen(
         if (visibleFiltered.isEmpty()) {
             EmptyState(
                 title = when {
-                    state.searchQuery.isNotBlank() -> "No matches"
-                    hiddenMovieGroups.isNotEmpty() -> "Everything's hidden"
-                    else -> "No movies"
+                    state.searchQuery.isNotBlank() -> "Keine Treffer"
+                    hiddenMovieGroups.isNotEmpty() -> "Alles ist ausgeblendet"
+                    else -> "Keine Filme"
                 },
                 body = when {
-                    state.searchQuery.isNotBlank() -> "Try a different search term."
+                    state.searchQuery.isNotBlank() -> "Versuche einen anderen Suchbegriff."
                     hiddenMovieGroups.isNotEmpty() -> "All ${hiddenMovieGroups.size} group${if (hiddenMovieGroups.size == 1) "" else "s"} you chose to hide accounts for every movie in this library. Use the filter button to show some again."
-                    else -> "Dispatcharr returned an empty Movies library. Confirm VOD is enabled on the server."
+                    else -> "Dispatcharr hat eine leere Filmbibliothek geliefert. Prüfe, ob VOD auf dem Server aktiviert ist."
                 },
             )
             return@Column
@@ -840,12 +840,12 @@ private fun SeriesSubScreen(
         if (visibleSeriesFiltered.isEmpty()) {
             EmptyState(
                 title = when {
-                    state.seriesSearchQuery.isNotBlank() -> "No matches"
-                    hiddenSeriesGroups.isNotEmpty() -> "Everything's hidden"
+                    state.seriesSearchQuery.isNotBlank() -> "Keine Treffer"
+                    hiddenSeriesGroups.isNotEmpty() -> "Alles ist ausgeblendet"
                     else -> "No series"
                 },
                 body = when {
-                    state.seriesSearchQuery.isNotBlank() -> "Try a different search term."
+                    state.seriesSearchQuery.isNotBlank() -> "Versuche einen anderen Suchbegriff."
                     hiddenSeriesGroups.isNotEmpty() -> "All ${hiddenSeriesGroups.size} group${if (hiddenSeriesGroups.size == 1) "" else "s"} you chose to hide accounts for every series in this library. Use the filter button to show some again."
                     else -> "Dispatcharr returned an empty Series library. Confirm VOD is enabled on the server."
                 },
