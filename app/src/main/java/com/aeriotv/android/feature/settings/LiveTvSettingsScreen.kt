@@ -286,7 +286,7 @@ fun LiveTvSettingsScreen(
                             "WIEDERHOLUNG sowie Staffel-/Episodenmarkierungen im EPG und in der Sender" +
                             "liste. Die Einstellung wird getrennt gespeichert für " +
                             (if (isTv) "Fernseher" else "Handys und Tablets") +
-                            " and synced across your " +
+                            " und zwischen deinen " +
                             (if (isTv) "Fernseher" else "Mobilgeräte") + ".",
                     ) {
                         SettingsToggleRow(
@@ -313,9 +313,9 @@ fun LiveTvSettingsScreen(
                 settingsCard(
                     header = "Darstellungsgröße",
                     footer = if (listViewShown) {
-                        "Independent scale for the Live TV List. 100% matches the default; 85-175% lets you trade density for readability (150%+ shows fewer, larger items - handy on a TV across the room). Changes apply live."
+                        "Eigene Darstellungsgröße für die Live-TV-Liste. 100 % entspricht dem Standard; 85–175 % bietet mehr Inhalt oder bessere Lesbarkeit. Ab 150 % werden weniger, dafür größere Elemente angezeigt. Änderungen werden sofort übernommen."
                     } else {
-                        "Independent scale for Live TV. 100% matches the default; 85-175% lets you trade density for readability (150%+ shows fewer, larger items - handy on a TV across the room). Changes apply live."
+                        "Eigene Darstellungsgröße für Live-TV. 100 % entspricht dem Standard; 85–175 % bietet mehr Inhalt oder bessere Lesbarkeit. Ab 150 % werden weniger, dafür größere Elemente angezeigt. Änderungen werden sofort übernommen."
                     },
                 ) {
                     ScaleSliderRow(
@@ -327,7 +327,7 @@ fun LiveTvSettingsScreen(
 
                 // MARK: Colors
                 settingsCard(
-                    header = "Colors",
+                    header = "Farben",
                     footer = "EPG-Zellen und Senderkarten nach Sendungskategorie einfärben. Wähle unten eine Kategorie, um ihren Hex-Farbwert anzupassen.",
                 ) {
                     ToggleRow(
