@@ -114,12 +114,12 @@ fun MoviesAndTvShowsSettingsScreen(
                     // MARK: Posters
                     item("posters") {
                         SettingsSection(
-                            header = "Poster",
-                            footer = "Zeigt Poster in den Sendungsinformationen und ergänzt fehlende Bilder in den Detailseiten der Mediathek über TMDB mit deinem eigenen kostenlosen API-Schlüssel (themoviedb.org). Standardmäßig ausgeschaltet. Der Schlüssel kann über Google Drive zwischen deinen Geräten synchronisiert werden und bleibt in den privaten App-Daten.",
+                            header = "TMDB-Daten",
+                            footer = "Ergänzt fehlende Beschreibungen, Poster und weitere Film-/Seriendetails über TMDB. Dafür wird dein eigener kostenloser TMDB-API-Schlüssel (v3) oder Lesetoken (v4) benötigt. Der Schlüssel wird verschlüsselt in den privaten App-Daten dieses Geräts gespeichert.",
                         ) {
                             SettingsToggleRow(
-                                title = "TMDB-Poster als Ersatz",
-                                subtitle = "Wenn ein Poster fehlt, wird es bei TMDB gesucht. Dafür wird der kostenlose API-Schlüssel unten benötigt.",
+                                title = "TMDB-Beschreibungen & Poster",
+                                subtitle = "Ergänzt fehlende Beschreibungen, Bilder, Besetzung und weitere Details von TMDB.",
                                 checked = programPostersTmdb,
                                 onCheckedChange = viewModel::setProgramPostersTmdbEnabled,
                             )
