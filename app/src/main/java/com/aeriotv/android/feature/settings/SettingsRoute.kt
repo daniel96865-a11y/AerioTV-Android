@@ -120,8 +120,7 @@ fun visibleSettingsSections(
             add(SettingsSection.Appearance)
             add(SettingsSection.General)
             // Remote Control initiative: TV form factors only.
-            if (isTv) add(SettingsSection.RemoteControl)
-            if (updaterEnabled) add(SettingsSection.AppUpdates)
+            if (isTv) add(SettingsSection.RemoteControl)\n            add(SettingsSection.DevicePairing)\n            if (updaterEnabled) add(SettingsSection.AppUpdates)
         },
     ),
     SettingsSectionGroupSpec(
@@ -153,8 +152,7 @@ fun settingsRouteForDeepLinkPage(
     "dvr" -> SettingsRoute.Section(SettingsSection.DvrSettings)
     "appearance" -> SettingsRoute.Section(SettingsSection.Appearance)
     "general" -> SettingsRoute.Section(SettingsSection.General)
-    "remote" -> SettingsRoute.Section(SettingsSection.RemoteControl)
-    "updates" -> SettingsRoute.Section(SettingsSection.AppUpdates)
+    "remote" -> SettingsRoute.Section(SettingsSection.RemoteControl)\n    "pairing", "sync" -> SettingsRoute.Section(SettingsSection.DevicePairing)\n    "updates" -> SettingsRoute.Section(SettingsSection.AppUpdates)
     "developer" -> SettingsRoute.Section(SettingsSection.Developer)
     "about" -> SettingsRoute.About
     "playlist-detail" -> activePlaylistId?.let { SettingsRoute.PlaylistDetail(it) }
