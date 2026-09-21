@@ -278,7 +278,7 @@ fun CastRouteChooserDialog(
                             onValueChange = { v ->
                                 if (v.length <= 6 && v.all { it.isDigit() }) pairCode = v
                             },
-                            label = { Text("6-digit code") },
+                            label = { Text("6-stelliger Code") },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                             singleLine = true,
                         )
@@ -287,7 +287,7 @@ fun CastRouteChooserDialog(
                             TextButton(
                                 onClick = { companionRemote?.submitPairingCode(pairCode) },
                                 enabled = pairCode.length == 6,
-                            ) { Text("Pair") }
+                            ) { Text("Koppeln") }
                         }
                     }
                     is CompanionRemoteController.Conn.Connecting ->
