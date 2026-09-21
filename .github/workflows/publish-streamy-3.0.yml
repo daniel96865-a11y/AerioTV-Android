@@ -1,5 +1,5 @@
-name: Publish Streamy 3.0.3 German UI fixes
-# Rebuild after final Streamy branding cleanup
+name: Publish Streamy 3.0.4 German UI fixes
+# Streamy 3.0.4 German UI cleanup
 
 on:
   push:
@@ -40,17 +40,17 @@ jobs:
           test -f "$RUNNER_TEMP/streamy3-signing/fingerprint.txt"
           test "$(cat "$RUNNER_TEMP/streamy3-signing/fingerprint.txt")" = "1719ef5261a5520899a8fcbed1898a52f4775abfc87a62d6df4ace93baa1ef05"
 
-      - name: Build Streamy 3.0.3
+      - name: Build Streamy 3.0.4
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleGithubRelease
 
-      - name: Sign and verify Streamy 3.0.3
+      - name: Sign and verify Streamy 3.0.4
         run: |
           set -euo pipefail
           UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
           PASS="$(cat "$RUNNER_TEMP/streamy3-signing/password.txt")"
-          OUT="$RUNNER_TEMP/Streamy-3.0.3.apk"
+          OUT="$RUNNER_TEMP/Streamy-3.0.4.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
           "$APKSIGNER" sign \
             --ks "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
@@ -63,20 +63,20 @@ jobs:
           sha256sum "$OUT"
           echo "APK=$OUT" >> "$GITHUB_ENV"
 
-      - name: Create v3.0.3 release
+      - name: Create v3.0.4 release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if ! gh release view v3.0.3 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release create v3.0.3 \
+          if ! gh release view v3.0.4 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create v3.0.4 \
               --repo "$GITHUB_REPOSITORY" \
-              --title "Streamy 3.0.3" \
-              --notes "Streamy 3.0.3: weitere deutsche Übersetzungen im Wiedergabelisten- und Xtream-Codes-Bereich. Configure, EPG-Tage, LAN-Hinweise, Dispatcharr-Texte, Validierung und XMLTV-Hinweise vollständig auf Deutsch. Streamy-Branding und In-App-Updater bleiben erhalten."
+              --title "Streamy 3.0.4" \
+              --notes "Streamy 3.0.4: vollständige deutsche Übersetzungen für den Neuigkeiten-Bildschirm, die Drive-Synchronisierung und Update-Meldungen. GitHub-Verweise wurden auf das neue Streamy-3.0-Repository umgestellt."
           fi
 
-      - name: Upload Streamy 3.0.3 APK
+      - name: Upload Streamy 3.0.4 APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release upload v3.0.3 "$APK#Streamy-3.0.3.apk" \
+          gh release upload v3.0.4 "$APK#Streamy-3.0.4.apk" \
             --repo "$GITHUB_REPOSITORY" --clobber
