@@ -58,7 +58,7 @@ fun vodGridDpadFallback(
         runCatching { gridState.scrollToItem(target) }
         repeat(6) {
             withFrameNanos { }
-            if (runCatching { requesterAt(target).requestFocus() }.isSuccess) return@launch
+            if (runCatching { requesterAt(target).requestFocus() }.getOrNull() == true) return@launch
         }
     }
     return true
