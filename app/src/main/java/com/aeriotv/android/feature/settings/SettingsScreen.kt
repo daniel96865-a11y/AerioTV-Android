@@ -303,7 +303,7 @@ fun SettingsScreen(
                         cm?.setPrimaryClip(android.content.ClipData.newPlainText("Streamy 3.0 Diagnose", text))
                         android.widget.Toast.makeText(
                             context,
-                            "Copied diagnostics to clipboard.",
+                            "Diagnosedaten in die Zwischenablage kopiert.",
                             android.widget.Toast.LENGTH_SHORT,
                         ).show()
                     },
@@ -312,7 +312,7 @@ fun SettingsScreen(
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Entwickler-Webseite",
-                                caption = "Scan with your phone to open this page.",
+                                caption = "Mit dem Handy scannen, um diese Seite zu öffnen.",
                                 url = url,
                             )
                         } else {
@@ -325,7 +325,7 @@ fun SettingsScreen(
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Problem melden",
-                                caption = "Scan with your phone to open this page.",
+                                caption = "Mit dem Handy scannen, um diese Seite zu öffnen.",
                                 url = url,
                             )
                         } else {
@@ -855,7 +855,7 @@ private fun buildAboutClipboard(
     updatedAt: Long,
 ): String = buildString {
     appendLine("Streamy 3.0 Diagnose")
-    appendLine("Device: ${deviceDisplayName()}")
+    appendLine("Gerät: ${deviceDisplayName()}")
     appendLine("System: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
     appendLine("App Version: $versionName ($versionCode)")
     appendLine("First Installed: ${formatInstallTime(installedAt)}")
