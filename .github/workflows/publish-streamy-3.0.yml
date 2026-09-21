@@ -1,5 +1,5 @@
 name: Publish Streamy 3.0.5 code pairing
-# Streamy 3.0.5: secure code pairing, Google Drive fully removed
+# Streamy 3.0.5: secure code pairing with fixed crypto dependency
 
 on:
   push:
