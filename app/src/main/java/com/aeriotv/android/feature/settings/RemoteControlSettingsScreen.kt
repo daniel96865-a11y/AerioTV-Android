@@ -239,8 +239,8 @@ fun RemoteControlSettingsScreen(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 SettingsSection(
-                    header = "Hints",
-                    footer = "The one-line key reminder under the tab bar on Live TV and at the bottom of the player controls. Turn it off once the buttons are second nature.",
+                    header = "Hinweise",
+                    footer = "Zeigt einen kurzen Tastenhinweis unter der Live-TV-Leiste und unten in den Player-Steuerelementen. Schalte ihn aus, sobald dir die Tastenbelegung vertraut ist.",
                 ) {
                     SettingsToggleRow(
                         title = "Fernbedienungshinweise anzeigen",
@@ -251,8 +251,8 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "While Watching",
-                    footer = "What each button does while a channel is playing fullscreen. Changes apply immediately. Back always navigates and cannot be reassigned.",
+                    header = "Während der Wiedergabe",
+                    footer = "Legt fest, was jede Taste während der Vollbildwiedergabe eines Senders macht. Änderungen gelten sofort. Zurück dient immer der Navigation und kann nicht neu belegt werden.",
                 ) {
                     PLAYER_SLOTS.forEach { slot ->
                         SlotRow(
@@ -326,7 +326,7 @@ fun RemoteControlSettingsScreen(
             title = "Sender abspielen in",
             actions = listOf(
                 TvMenuAction(
-                    label = if (!tuneInMini) "Full screen  (current)" else "Vollbild",
+                    label = if (!tuneInMini) "Vollbild  (aktuell)" else "Vollbild",
                 ) {
                     viewModel.setGuideTuneInMini(false)
                     editingTuneTarget = false
@@ -349,7 +349,7 @@ fun RemoteControlSettingsScreen(
             actions = PLAYER_ACTION_CHOICES.map { action ->
                 val current = map.playerAction(slot) == action
                 TvMenuAction(
-                    label = if (current) "${action.displayName}  (current)" else action.displayName,
+                    label = if (current) "${action.displayName}  (aktuell)" else action.displayName,
                 ) {
                     saveEdited(map.copy(player = map.player + (slot to action)))
                     editingPlayerSlot = null
