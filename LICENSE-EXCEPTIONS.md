@@ -6,8 +6,8 @@ by the copyright holder under section 7 of that license.
 
 ## Google Play services linking exception
 
-AerioTV links the Google Play services client libraries (Google Cast sender and
-receiver, Play services Auth, and the Google Identity library). Those libraries
+The current Streamy fork links the Google Play services client libraries for
+Google Cast sender and receiver. Those libraries
 are proprietary and are distributed under the Android Software Development Kit
 License Agreement and the Google APIs Terms of Service, not under a
 GPL-compatible license. Without the permission below, the GPL would forbid
