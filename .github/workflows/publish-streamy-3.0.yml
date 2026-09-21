@@ -1,4 +1,5 @@
 name: Publish Streamy 3.0.3 German UI fixes
+# Rebuild after final Streamy branding cleanup
 
 on:
   push:
