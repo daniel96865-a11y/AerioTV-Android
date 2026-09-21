@@ -1,5 +1,5 @@
 name: Publish Streamy 3.0.5 code pairing
-# Streamy 3.0.5: secure local code pairing, no Google Drive account
+# Streamy 3.0.5: secure local code pairing, Google Drive removed
 
 on:
   push:
