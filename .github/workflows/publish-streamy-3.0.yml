@@ -1,5 +1,5 @@
-name: Publish Streamy 3.0.8 German UI and code pairing
-# Streamy 3.0.8: TV D-pad navigation, TMDB metadata and German UI
+name: Publish Streamy 3.0.9 German UI and code pairing
+# Streamy 3.0.9: Xtream descriptions, TV D-pad navigation and German UI
 
 on:
   push:
@@ -40,17 +40,17 @@ jobs:
           test -f "$RUNNER_TEMP/streamy3-signing/fingerprint.txt"
           test "$(cat "$RUNNER_TEMP/streamy3-signing/fingerprint.txt")" = "1719ef5261a5520899a8fcbed1898a52f4775abfc87a62d6df4ace93baa1ef05"
 
-      - name: Build Streamy 3.0.8
+      - name: Build Streamy 3.0.9
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleGithubRelease
 
-      - name: Sign and verify Streamy 3.0.8
+      - name: Sign and verify Streamy 3.0.9
         run: |
           set -euo pipefail
           UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
           PASS="$(cat "$RUNNER_TEMP/streamy3-signing/password.txt")"
-          OUT="$RUNNER_TEMP/Streamy-3.0.8.apk"
+          OUT="$RUNNER_TEMP/Streamy-3.0.9.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
           "$APKSIGNER" sign \
             --ks "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
@@ -63,20 +63,20 @@ jobs:
           sha256sum "$OUT"
           echo "APK=$OUT" >> "$GITHUB_ENV"
 
-      - name: Create v3.0.8 release
+      - name: Create v3.0.9 release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if ! gh release view v3.0.8 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release create v3.0.8 \
+          if ! gh release view v3.0.9 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create v3.0.9 \
               --repo "$GITHUB_REPOSITORY" \
-              --title "Streamy 3.0.8" \
-              --notes "Streamy 3.0.8: TV-Fokusnavigation für Filme und Serien korrigiert. Mit Hoch sind Kategorien wie Doku wieder zuverlässig erreichbar. TMDB-Einstellungen erklären jetzt Beschreibungen und Poster; fehlende Beschreibungen werden bei vorhandenem eigenen TMDB-Schlüssel ergänzt. Deutsche TV-Oberfläche und sichere Geräte-Kopplung bleiben enthalten."
+              --title "Streamy 3.0.9" \
+              --notes "Streamy 3.0.9: Filme und Serien laden fehlende Beschreibungen jetzt direkt aus den Xtream-Detailendpunkten get_vod_info und get_series_info. TMDB ist nur noch Ergänzung, wenn der Anbieter keine Metadaten liefert. Die TV-Fokuskorrektur für Kategorien wie Doku und die deutsche Oberfläche sind ebenfalls enthalten."
           fi
 
-      - name: Upload Streamy 3.0.8 APK
+      - name: Upload Streamy 3.0.9 APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release upload v3.0.8 "$APK#Streamy-3.0.8.apk" \
+          gh release upload v3.0.9 "$APK#Streamy-3.0.9.apk" \
             --repo "$GITHUB_REPOSITORY" --clobber
