@@ -12,8 +12,8 @@ enum class MediaKind(val title: String, val libraryTitle: String, val emptyTitle
 
 /** Library sort (Apple parity: MoviesSortOrder). Recently Added is deliberately absent. */
 enum class MediaSortOrder(val wire: String, val label: String) {
-    TitleAZ("titleAZ", "Title · A to Z"),
-    TitleZA("titleZA", "Title · Z to A"),
+    TitleAZ("titleAZ", "Titel · A–Z"),
+    TitleZA("titleZA", "Titel · Z–A"),
     YearNewest("yearNewest", "Jahr · Neueste zuerst"),
     YearOldest("yearOldest", "Jahr · Älteste zuerst"),
     RatingHighest("ratingHighest", "Bewertung · Höchste zuerst");
