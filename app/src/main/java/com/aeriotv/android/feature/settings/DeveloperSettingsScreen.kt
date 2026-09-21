@@ -271,15 +271,15 @@ private fun LoggingSection(
     onRequestDisable: () -> Unit,
 ) {
     SettingsSection(
-        header = "Logging",
-        footer = "When enabled, detailed logs are written to a file in the app's private " +
-            "storage. Logs include network requests, playback events, EPG activity, errors, " +
-            "and app lifecycle events. No personally identifiable information is collected.",
+        header = "Protokollierung",
+        footer = "Wenn aktiviert, werden detaillierte Protokolle in einer Datei im privaten " +
+            "App-Speicher abgelegt. Die Protokolle enthalten Netzwerkanfragen, Wiedergabeereignisse, EPG-Aktivität, Fehler " +
+            "und App-Lebenszyklusereignisse. Es werden keine personenbezogenen Daten erfasst.",
     ) {
         SettingsToggleRow(
-            title = "Debug Logging",
+            title = "Debug-Protokollierung",
             subtitle = if (enabled) "Aktiv, schreibt in aerio_debug_logs.txt"
-            else "Off, no data is collected",
+            else "Aus, es werden keine Daten erfasst",
             leadingIcon = Icons.Filled.BugReport,
             checked = enabled,
             // Route through the confirm dialogs instead of flipping directly.
@@ -297,23 +297,23 @@ private fun LogFileSection(
     onClear: () -> Unit,
 ) {
     SettingsSection(
-        header = "Log File",
-        footer = "Logs rotate automatically when the file exceeds 10 MB. The previous log is " +
-            "preserved as aerio_debug_logs_archive.txt.",
+        header = "Protokolldatei",
+        footer = "Protokolle werden automatisch rotiert, sobald die Datei größer als 10 MB wird. Das vorherige Protokoll wird " +
+            "als aerio_debug_logs_archive.txt aufbewahrt.",
     ) {
         SettingsInfoRow(
-            label = "Total Log Size",
+            label = "Gesamtgröße der Protokolle",
             value = formatBytes(sizeBytes),
             leadingIcon = Icons.Outlined.Description,
         )
         SettingsActionRow(
-            label = "View Log File",
+            label = "Protokolldatei anzeigen",
             subtitle = "Einträge direkt in der App ansehen",
             leadingIcon = Icons.Outlined.Article,
             onClick = onView,
         )
         SettingsActionRow(
-            label = "Share Log File",
+            label = "Protokolldatei teilen",
             subtitle = if (isTv) "QR-Code mit dem Handy scannen" else "E-Mail, Nachrichten, Drive usw.",
             leadingIcon = Icons.Filled.Share,
             onClick = onShare,
@@ -331,68 +331,68 @@ private fun LogFileSection(
 @Composable
 private fun WhatsCapturedSection() {
     DevSectionGroup(
-        header = "What's Captured",
-        footer = "Logs include only diagnostic context. AerioTV never logs your Dispatcharr " +
-            "credentials, watch progress identifiers, or any payload that would identify you.",
+        header = "Was wird erfasst?",
+        footer = "Die Protokolle enthalten nur Diagnoseinformationen. AerioTV Deutsch protokolliert niemals deine Dispatcharr-" +
+            "Zugangsdaten, Wiedergabefortschritts-IDs oder andere Daten, die dich identifizieren könnten.",
     ) {
         CategoryRow(
             icon = Icons.Outlined.NetworkCheck,
             title = "Netzwerk",
-            detail = "All API requests: URL, method, status code, duration, payload size",
+            detail = "Alle API-Anfragen: URL, Methode, Statuscode, Dauer und Datenmenge",
         )
         DevRowDivider()
         CategoryRow(
             icon = Icons.Filled.PlayArrow,
-            title = "Playback",
-            detail = "Stream URLs loaded, player state transitions, DVR mode, failover attempts",
+            title = "Wiedergabe",
+            detail = "Geladene Stream-URLs, Player-Statuswechsel, DVR-Modus und Ausweichversuche",
         )
         DevRowDivider()
         CategoryRow(
             icon = Icons.Filled.CalendarMonth,
             title = "EPG",
-            detail = "Current program fetches, upcoming program loads, decode errors",
+            detail = "Abrufe der aktuellen Sendung, Laden kommender Sendungen und Decodierfehler",
         )
         DevRowDivider()
         CategoryRow(
             icon = Icons.Outlined.LiveTv,
             title = "Sender",
-            detail = "Channel list loads, source type, item counts, timing",
+            detail = "Laden der Senderliste, Quellentyp, Anzahl der Einträge und Zeitmessungen",
         )
         DevRowDivider()
         CategoryRow(
             icon = Icons.Outlined.OpenInNew,
-            title = "Lifecycle",
-            detail = "App foreground/background, launch, scene transitions",
+            title = "App-Lebenszyklus",
+            detail = "Vorder-/Hintergrund, App-Start und Ansichtswechsel",
         )
         DevRowDivider()
         CategoryRow(
             icon = Icons.Outlined.WarningAmber,
-            title = "Errors",
-            detail = "Caught exceptions with full context, source file and line number",
+            title = "Fehler",
+            detail = "Erfasste Ausnahmen mit Kontext, Quelldatei und Zeilennummer",
         )
         DevRowDivider()
         CategoryRow(
             icon = Icons.Outlined.Speed,
-            title = "Performance",
-            detail = "Timed operations: parse time, load time, memory at session start",
+            title = "Leistung",
+            detail = "Zeitmessungen: Verarbeitung, Ladezeit und Speicher beim Sitzungsstart",
         )
     }
 }
 
 @Composable
 private fun BuildInfoSection() {
-    DevSectionGroup(header = "Build") {
-        InfoRow(icon = Icons.Outlined.Build, label = "Application ID", value = BuildConfig.APPLICATION_ID)
+    DevSectionGroup(header = "Build-Informationen") {
+        InfoRow(icon = Icons.Outlined.Build, label = "Anwendungs-ID", value = BuildConfig.APPLICATION_ID)
         DevRowDivider()
         InfoRow(icon = null, label = "Version", value = BuildConfig.VERSION_NAME)
         DevRowDivider()
-        InfoRow(icon = null, label = "Version Code", value = BuildConfig.VERSION_CODE.toString())
+        InfoRow(icon = null, label = "Versionscode", value = BuildConfig.VERSION_CODE.toString())
         DevRowDivider()
-        InfoRow(icon = null, label = "Build Type", value = BuildConfig.BUILD_TYPE)
+        InfoRow(icon = null, label = "Build-Typ", value = BuildConfig.BUILD_TYPE)
         DevRowDivider()
-        InfoRow(icon = null, label = "Manufacturer", value = android.os.Build.MANUFACTURER)
+        InfoRow(icon = null, label = "Hersteller", value = android.os.Build.MANUFACTURER)
         DevRowDivider()
-        InfoRow(icon = null, label = "Model", value = android.os.Build.MODEL)
+        InfoRow(icon = null, label = "Modell", value = android.os.Build.MODEL)
         DevRowDivider()
         InfoRow(
             icon = null,
