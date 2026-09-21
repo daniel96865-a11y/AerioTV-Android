@@ -246,7 +246,7 @@ fun DvrSettingsScreen(
             item {
                 Card(
                     header = "Speicherort",
-                    footer = "Lokale Aufnahmen werden standardmäßig im Download-Ordner in einem AerioTV-Unterordner gespeichert und sind so in jedem Dateimanager auffindbar. Mit „Ordner auswählen“ kannst du einen eigenen Speicherort festlegen, der auch nach einem Neustart erhalten bleibt.",
+                    footer = "Lokale Aufnahmen werden standardmäßig im Download-Ordner in einem Streamy-Unterordner gespeichert und sind so in jedem Dateimanager auffindbar. Mit „Ordner auswählen“ kannst du einen eigenen Speicherort festlegen, der auch nach einem Neustart erhalten bleibt.",
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         Text(
