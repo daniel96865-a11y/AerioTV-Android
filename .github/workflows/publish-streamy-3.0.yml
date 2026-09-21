@@ -9,20 +9,15 @@ on:
 
 permissions:
   contents: write
+  actions: read
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Check permanent signing secrets
-        env:
-          KEYSTORE_B64: ${{ secrets.AERIOTV_KEYSTORE_B64 }}
-          SIGNING_PASSWORD: ${{ secrets.AERIOTV_SIGNING_PASSWORD }}
-        run: |
-          test -n "$KEYSTORE_B64"
-          test -n "$SIGNING_PASSWORD"
+        with:
+          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -30,31 +25,84 @@ jobs:
           distribution: temurin
           java-version: "21"
 
+      - name: Create permanent Streamy 3.0 signing key
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/streamy3-signing"
+          PASS="$(openssl rand -hex 32)"
+          printf '%s' "$PASS" > "$RUNNER_TEMP/streamy3-signing/password.txt"
+          keytool -genkeypair -v \
+            -keystore "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
+            -storepass "$PASS" -keypass "$PASS" \
+            -alias streamy3 -keyalg RSA -keysize 4096 -validity 10000 \
+            -dname "CN=Streamy 3.0 Release, OU=DG Studios, O=DG Studios, C=DE"
+          FINGERPRINT="$(keytool -list -v -keystore "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" -storepass "$PASS" -alias streamy3 | sed -n 's/.*SHA256: //p' | tr -d ':' | tr '[:upper:]' '[:lower:]' | head -1)"
+          test -n "$FINGERPRINT"
+          printf '%s' "$FINGERPRINT" > "$RUNNER_TEMP/streamy3-signing/fingerprint.txt"
+          printf 'Alias: streamy3\nCertificate SHA-256: %s\n' "$FINGERPRINT" > "$RUNNER_TEMP/streamy3-signing/README.txt"
+          echo "STREAMY_FINGERPRINT=$FINGERPRINT" >> "$GITHUB_ENV"
+
+      - name: Put signing fingerprint into updater
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import os, re
+          p = Path("app/src/github/java/com/aeriotv/android/core/update/GithubUpdateManager.kt")
+          s = p.read_text()
+          fp = os.environ["STREAMY_FINGERPRINT"]
+          s2, n = re.subn(r'(?i)[0-9a-f]{64}', fp, s, count=1)
+          if n != 1:
+              raise SystemExit("Could not update signing fingerprint")
+          p.write_text(s2)
+          PY
+          grep -qi "$STREAMY_FINGERPRINT" app/src/github/java/com/aeriotv/android/core/update/GithubUpdateManager.kt
+
       - name: Build Streamy 3.0.1
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleGithubRelease
 
-      - name: Restore permanent Streamy 3.0 signing key
-        env:
-          KEYSTORE_B64: ${{ secrets.AERIOTV_KEYSTORE_B64 }}
-        run: |
-          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/Streamy3-release.jks"
-
       - name: Sign and verify Streamy 3.0.1
-        env:
-          SIGNING_PASSWORD: ${{ secrets.AERIOTV_SIGNING_PASSWORD }}
         run: |
+          set -euo pipefail
           UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
+          PASS="$(cat "$RUNNER_TEMP/streamy3-signing/password.txt")"
           OUT="$RUNNER_TEMP/Streamy-3.0.1.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
           test -f "$UNSIGNED"
-          "$APKSIGNER" sign --ks "$RUNNER_TEMP/Streamy3-release.jks" --ks-key-alias streamy3 --ks-pass "pass:$SIGNING_PASSWORD" --key-pass "pass:$SIGNING_PASSWORD" --out "$OUT" "$UNSIGNED"
+          "$APKSIGNER" sign \
+            --ks "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
+            --ks-key-alias streamy3 \
+            --ks-pass "pass:$PASS" --key-pass "pass:$PASS" \
+            --out "$OUT" "$UNSIGNED"
           VERIFY="$("$APKSIGNER" verify --verbose --print-certs "$OUT")"
           printf '%s\n' "$VERIFY"
-          echo "$VERIFY" | grep -qi "511d38ccd49511e9fcce1c816d1186ad57aa6d2dd7d9155d6d029e1c7a97e9da"
+          echo "$VERIFY" | tr -d ':' | grep -qi "$STREAMY_FINGERPRINT"
           sha256sum "$OUT"
           echo "APK=$OUT" >> "$GITHUB_ENV"
+
+      - name: Save complete private signing backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: Streamy3-PRIVATE-Signing-Backup-COMPLETE
+          path: |
+            ${{ runner.temp }}/streamy3-signing/Streamy3-release.jks
+            ${{ runner.temp }}/streamy3-signing/password.txt
+            ${{ runner.temp }}/streamy3-signing/fingerprint.txt
+            ${{ runner.temp }}/streamy3-signing/README.txt
+          if-no-files-found: error
+          retention-days: 90
+
+      - name: Persist updater fingerprint on main
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add app/src/github/java/com/aeriotv/android/core/update/GithubUpdateManager.kt
+          if ! git diff --cached --quiet; then
+            git commit -m "Lock updater to permanent Streamy 3.0 signing certificate"
+            git push origin HEAD:main
+          fi
 
       - name: Publish v3.0.1
         env:
@@ -63,5 +111,8 @@ jobs:
           if gh release view v3.0.1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
             gh release upload v3.0.1 "$APK#Streamy-3.0.1.apk" --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create v3.0.1 "$APK#Streamy-3.0.1.apk" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "Streamy 3.0.1" --notes "Streamy 3.0.1: deutsches Branding und weitere Übersetzungen, fester Streamy-3.0-Signierschlüssel und korrigierter In-App-Updater. Eine gemeinsame APK für Handy, Tablet und Android TV / Google TV."
+            gh release create v3.0.1 "$APK#Streamy-3.0.1.apk" \
+              --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+              --title "Streamy 3.0.1" \
+              --notes "Streamy 3.0.1: deutsches Branding und weitere Übersetzungen, dauerhafte Streamy-3.0-Signatur und korrigierter In-App-Updater. Eine gemeinsame APK für Handy, Tablet und Android TV / Google TV."
           fi
