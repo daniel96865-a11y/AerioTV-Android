@@ -52,8 +52,8 @@ android {
         applicationId = "de.dgstudios.aeriotvde"
         minSdk = 26
         targetSdk = 36
-        versionCode = 302
-        versionName = "3.0.2"
+        versionCode = 303
+        versionName = "3.0.3"
         vectorDrawables { useSupportLibrary = true }
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")
