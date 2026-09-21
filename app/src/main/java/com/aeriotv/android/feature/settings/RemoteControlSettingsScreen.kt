@@ -128,76 +128,76 @@ private fun guideActionChoices(slot: RemoteSlot): List<GuideRemoteAction> = buil
 
 private val RemoteSlot.displayName: String
     get() = when (this) {
-        RemoteSlot.OK_SHORT -> "Select"
-        RemoteSlot.OK_LONG -> "Select (Hold)"
-        RemoteSlot.UP_SHORT -> "Up"
-        RemoteSlot.UP_LONG -> "Up (hold)"
-        RemoteSlot.DOWN_SHORT -> "Down"
-        RemoteSlot.DOWN_LONG -> "Down (hold)"
-        RemoteSlot.LEFT_SHORT -> "Left"
-        RemoteSlot.LEFT_LONG -> "Left (Hold)"
-        RemoteSlot.RIGHT_SHORT -> "Right"
-        RemoteSlot.RIGHT_LONG -> "Right (Hold)"
-        RemoteSlot.PLAY_PAUSE -> "Play/Pause"
-        RemoteSlot.FFWD -> "Fast Forward"
-        RemoteSlot.REWIND -> "Rewind"
-        RemoteSlot.CHANNEL_UP -> "Channel Up"
-        RemoteSlot.CHANNEL_DOWN -> "Channel Down"
+        RemoteSlot.OK_SHORT -> "OK"
+        RemoteSlot.OK_LONG -> "OK (halten)"
+        RemoteSlot.UP_SHORT -> "Hoch"
+        RemoteSlot.UP_LONG -> "Hoch (halten)"
+        RemoteSlot.DOWN_SHORT -> "Runter"
+        RemoteSlot.DOWN_LONG -> "Runter (halten)"
+        RemoteSlot.LEFT_SHORT -> "Links"
+        RemoteSlot.LEFT_LONG -> "Links (halten)"
+        RemoteSlot.RIGHT_SHORT -> "Rechts"
+        RemoteSlot.RIGHT_LONG -> "Rechts (halten)"
+        RemoteSlot.PLAY_PAUSE -> "Abspielen/Pause"
+        RemoteSlot.FFWD -> "Vorspulen"
+        RemoteSlot.REWIND -> "Zurückspulen"
+        RemoteSlot.CHANNEL_UP -> "Sender hoch"
+        RemoteSlot.CHANNEL_DOWN -> "Sender runter"
     }
 
 private val PlayerRemoteAction.displayName: String
     get() = when (this) {
-        PlayerRemoteAction.CHANNEL_UP -> "Channel up"
-        PlayerRemoteAction.CHANNEL_DOWN -> "Channel down"
-        PlayerRemoteAction.LAST_CHANNEL -> "Previous channel"
-        PlayerRemoteAction.RECENT_CHANNELS -> "Recently watched"
+        PlayerRemoteAction.CHANNEL_UP -> "Nächster Sender"
+        PlayerRemoteAction.CHANNEL_DOWN -> "Vorheriger Sender"
+        PlayerRemoteAction.LAST_CHANNEL -> "Letzter Sender"
+        PlayerRemoteAction.RECENT_CHANNELS -> "Zuletzt angesehen"
         // Fixed hold-Back behavior; named here for completeness but never
         // offered in the choice lists (Back semantics stay hardcoded).
-        PlayerRemoteAction.STOP_PLAYBACK -> "Stop playback"
-        PlayerRemoteAction.TOGGLE_CONTROLS -> "Show/hide controls"
-        PlayerRemoteAction.SHOW_PROGRAM_INFO -> "Show program info"
-        PlayerRemoteAction.OPTIONS_MENU -> "Options menu"
-        PlayerRemoteAction.PLAY_PAUSE -> "Play/Pause"
-        PlayerRemoteAction.SEEK_FORWARD -> "Seek forward"
-        PlayerRemoteAction.SEEK_BACKWARD -> "Seek back"
-        PlayerRemoteAction.RESTART_PROGRAM -> "Restart program"
-        PlayerRemoteAction.JUMP_TO_LIVE -> "Jump to live"
-        PlayerRemoteAction.MINIMIZE_TO_GUIDE -> "Return to TV Guide"
-        PlayerRemoteAction.CHANNEL_LIST -> "Channel list"
+        PlayerRemoteAction.STOP_PLAYBACK -> "Wiedergabe stoppen"
+        PlayerRemoteAction.TOGGLE_CONTROLS -> "Steuerung ein-/ausblenden"
+        PlayerRemoteAction.SHOW_PROGRAM_INFO -> "Sendungsinfo anzeigen"
+        PlayerRemoteAction.OPTIONS_MENU -> "Optionsmenü"
+        PlayerRemoteAction.PLAY_PAUSE -> "Abspielen/Pause"
+        PlayerRemoteAction.SEEK_FORWARD -> "Vorspulen"
+        PlayerRemoteAction.SEEK_BACKWARD -> "Zurückspulen"
+        PlayerRemoteAction.RESTART_PROGRAM -> "Sendung neu starten"
+        PlayerRemoteAction.JUMP_TO_LIVE -> "Zu Live springen"
+        PlayerRemoteAction.MINIMIZE_TO_GUIDE -> "Zum EPG zurück"
+        PlayerRemoteAction.CHANNEL_LIST -> "Senderliste"
         PlayerRemoteAction.SUBTITLES -> "Untertitel"
-        PlayerRemoteAction.AUDIO_TRACKS -> "Audio tracks"
-        PlayerRemoteAction.ASPECT_RATIO -> "Aspect ratio"
+        PlayerRemoteAction.AUDIO_TRACKS -> "Audiospuren"
+        PlayerRemoteAction.ASPECT_RATIO -> "Seitenverhältnis"
         PlayerRemoteAction.RECORD -> "Aufnehmen"
-        PlayerRemoteAction.SLEEP_TIMER -> "Sleep timer"
+        PlayerRemoteAction.SLEEP_TIMER -> "Schlaftimer"
         PlayerRemoteAction.OPEN_SEARCH -> "Suche"
-        PlayerRemoteAction.NONE -> "Do nothing"
+        PlayerRemoteAction.NONE -> "Nichts tun"
     }
 
 /** Guide action name; the group menu is named for the selector it opens. */
 private fun GuideRemoteAction.displayName(sidebarGroups: Boolean): String = when (this) {
-    GuideRemoteAction.FOCUS_GROUP_PILLS -> if (sidebarGroups) "Open sidebar" else "Go to group pills"
+    GuideRemoteAction.FOCUS_GROUP_PILLS -> if (sidebarGroups) "Seitenleiste öffnen" else "Zu den Gruppen-Schaltflächen"
     else -> displayName
 }
 
 private val GuideRemoteAction.displayName: String
     get() = when (this) {
-        GuideRemoteAction.PAGE_UP -> "Page channels up"
-        GuideRemoteAction.PAGE_DOWN -> "Page channels down"
-        GuideRemoteAction.TIMELINE_BACK -> "Browse earlier programs"
-        GuideRemoteAction.TIMELINE_FORWARD -> "Browse later programs"
-        GuideRemoteAction.JUMP_TO_NOW -> "Jump to now"
-        GuideRemoteAction.JUMP_TO_DAY -> "Jump to a day and time"
-        GuideRemoteAction.JUMP_TO_TOP -> "Jump to top channel"
-        GuideRemoteAction.FOCUS_GROUP_PILLS -> "Go to group pills"
+        GuideRemoteAction.PAGE_UP -> "Senderseite hoch"
+        GuideRemoteAction.PAGE_DOWN -> "Senderseite runter"
+        GuideRemoteAction.TIMELINE_BACK -> "Frühere Sendungen"
+        GuideRemoteAction.TIMELINE_FORWARD -> "Spätere Sendungen"
+        GuideRemoteAction.JUMP_TO_NOW -> "Zu Jetzt springen"
+        GuideRemoteAction.JUMP_TO_DAY -> "Zu Tag und Uhrzeit springen"
+        GuideRemoteAction.JUMP_TO_TOP -> "Zum ersten Sender"
+        GuideRemoteAction.FOCUS_GROUP_PILLS -> "Zu den Gruppen-Schaltflächen"
         GuideRemoteAction.RESUME_PLAYER -> "Zurück zum Player"
-        GuideRemoteAction.CLOSE_MINI_PLAYER -> "Close mini player"
-        GuideRemoteAction.PROGRAM_INFO -> "Program info"
-        GuideRemoteAction.PROGRAM_MENU -> "Program menu"
+        GuideRemoteAction.CLOSE_MINI_PLAYER -> "Mini-Player schließen"
+        GuideRemoteAction.PROGRAM_INFO -> "Sendungsinfo"
+        GuideRemoteAction.PROGRAM_MENU -> "Sendungsmenü"
         GuideRemoteAction.RECORD -> "Aufnehmen"
         GuideRemoteAction.PLAY -> "Abspielen"
-        GuideRemoteAction.NAVIGATE -> "Move focus"
+        GuideRemoteAction.NAVIGATE -> "Auswahl bewegen"
         GuideRemoteAction.OPEN_SEARCH -> "Suche"
-        GuideRemoteAction.NONE -> "Do nothing"
+        GuideRemoteAction.NONE -> "Nichts tun"
     }
 
 @Composable
@@ -239,8 +239,8 @@ fun RemoteControlSettingsScreen(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 SettingsSection(
-                    header = "Hints",
-                    footer = "The one-line key reminder under the tab bar on Live TV and at the bottom of the player controls. Turn it off once the buttons are second nature.",
+                    header = "Tastenhinweise",
+                    footer = "Zeigt unter der Live-TV-Navigation und unten in der Player-Steuerung eine kurze Erinnerung an die Fernbedienungstasten. Du kannst sie ausschalten, sobald du die Tasten kennst.",
                 ) {
                     SettingsToggleRow(
                         title = "Fernbedienungshinweise anzeigen",
@@ -251,8 +251,8 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "While Watching",
-                    footer = "What each button does while a channel is playing fullscreen. Changes apply immediately. Back always navigates and cannot be reassigned.",
+                    header = "Während der Wiedergabe",
+                    footer = "Legt fest, was jede Taste während der Vollbild-Wiedergabe eines Senders macht. Änderungen gelten sofort. Zurück bleibt immer für die Navigation reserviert und kann nicht neu belegt werden.",
                 ) {
                     PLAYER_SLOTS.forEach { slot ->
                         SlotRow(
@@ -309,7 +309,7 @@ fun RemoteControlSettingsScreen(
 
                 SettingsSection(
                     header = "Zurücksetzen",
-                    footer = "Setzt alle Tasten auf die Standardbelegung von AerioTV Deutsch zurück.",
+                    footer = "Setzt alle Tasten auf die Standardbelegung von Streamy zurück.",
                 ) {
                     SlotRow(
                         slotName = "Auf Standard zurücksetzen",
@@ -326,7 +326,7 @@ fun RemoteControlSettingsScreen(
             title = "Sender abspielen in",
             actions = listOf(
                 TvMenuAction(
-                    label = if (!tuneInMini) "Full screen  (current)" else "Vollbild",
+                    label = if (!tuneInMini) "Vollbild  (aktuell)" else "Vollbild",
                 ) {
                     viewModel.setGuideTuneInMini(false)
                     editingTuneTarget = false
@@ -349,7 +349,7 @@ fun RemoteControlSettingsScreen(
             actions = PLAYER_ACTION_CHOICES.map { action ->
                 val current = map.playerAction(slot) == action
                 TvMenuAction(
-                    label = if (current) "${action.displayName}  (current)" else action.displayName,
+                    label = if (current) "${action.displayName}  (aktuell)" else action.displayName,
                 ) {
                     saveEdited(map.copy(player = map.player + (slot to action)))
                     editingPlayerSlot = null
