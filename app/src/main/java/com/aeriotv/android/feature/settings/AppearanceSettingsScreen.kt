@@ -246,7 +246,7 @@ fun AppearanceSettingsScreen(
                 // still multiply on top for their own surfaces.
                 settingsCard(
                     header = "Textgröße",
-                    footer = "Skaliert den gesamten Text in AerioTV Deutsch zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
+                    footer = "Skaliert den gesamten Text in Streamy 3.0 zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
                         label = "Textgröße",
@@ -371,8 +371,8 @@ internal fun LazyListScope.settingsCard(
 
 private val TIME_FORMAT_OPTIONS = listOf(
     "system" to "System",
-    "12" to "12-hour",
-    "24" to "24-hour",
+    "12" to "12 Stunden",
+    "24" to "24 Stunden",
 )
 
 @Composable
@@ -445,17 +445,17 @@ private fun themeSubtitle(theme: AppTheme): String = when (theme) {
     AppTheme.Aerio -> "Cyan on deep navy (default)"
     AppTheme.Midnight -> "Cool blue on near-black"
     AppTheme.Sunset -> "Warm orange on near-black"
-    AppTheme.Forest -> "Green on near-black"
-    AppTheme.Lavender -> "Purple on near-black"
-    AppTheme.Monochrome -> "Greyscale on near-black"
-    AppTheme.Light -> "Neutral teal-grey on white"
+    AppTheme.Forest -> "Grün auf fast schwarzem Hintergrund"
+    AppTheme.Lavender -> "Lila auf fast schwarzem Hintergrund"
+    AppTheme.Monochrome -> "Graustufen auf fast schwarzem Hintergrund"
+    AppTheme.Light -> "Neutrales Türkisgrau auf Weiß"
 }
 
 /** Inline sub-header for the appearance-mode group inside the Theme card. */
 @Composable
 private fun AppearanceModeHeaderRow() {
     Text(
-        text = "APPEARANCE",
+        text = "DARSTELLUNG",
         style = MaterialTheme.typography.labelMedium,
         color = MaterialTheme.colorScheme.onSurfaceVariant,
         fontWeight = FontWeight.SemiBold,
@@ -472,9 +472,9 @@ private fun appearanceModeLabel(mode: AppearanceMode): String = when (mode) {
 }
 
 private fun appearanceModeSubtitle(mode: AppearanceMode): String = when (mode) {
-    AppearanceMode.Dark -> "Dark surfaces everywhere (default)"
-    AppearanceMode.Light -> "Light surfaces everywhere"
-    AppearanceMode.System -> "Follow the device light or dark setting"
+    AppearanceMode.Dark -> "Dunkle Oberflächen überall (Standard)"
+    AppearanceMode.Light -> "Helle Oberflächen überall"
+    AppearanceMode.System -> "Helle oder dunkle Darstellung des Geräts übernehmen"
 }
 
 /**
@@ -549,7 +549,7 @@ private fun CustomAccentRow(
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = "Custom Accent Color",
+                text = "Eigene Akzentfarbe",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Medium,
@@ -593,7 +593,7 @@ private fun PreviewCard(theme: AppTheme, customAccentHex: String?) {
     else theme.accentPrimary
     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
         Text(
-            text = "PREVIEW",
+            text = "VORSCHAU",
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontWeight = FontWeight.SemiBold,
@@ -634,7 +634,7 @@ private fun PreviewCard(theme: AppTheme, customAccentHex: String?) {
                 )
             }
             Text(
-                text = "AerioTV Sample Program",
+                text = "Streamy 3.0 Beispielsendung",
                 style = MaterialTheme.typography.bodyLarge,
                 color = Color.White,
                 fontWeight = FontWeight.SemiBold,
@@ -945,8 +945,8 @@ internal fun AddMoreCategoriesRow(
     onClick: () -> Unit,
 ) {
     val subtitle = when {
-        extraOn == 0 && customCount == 0 -> "Documentary, Drama, Comedy, Reality, + 3 more, plus custom."
-        else -> "$extraOn extra on · $customCount custom"
+        extraOn == 0 && customCount == 0 -> "Dokumentation, Drama, Komödie, Reality, + 3 weitere sowie eigene Kategorien."
+        else -> "$extraOn weitere aktiv · $customCount eigene"
     }
     Row(
         modifier = Modifier
@@ -1005,7 +1005,7 @@ private fun AccentPickerDialog(
                 SettingsDialogTextButton(label = "Abbrechen", onClick = onDismiss)
             }
         },
-        title = { Text("Custom Accent") },
+        title = { Text("Eigene Akzentfarbe") },
         text = {
             Column {
                 Row(verticalAlignment = Alignment.CenterVertically) {
@@ -1022,7 +1022,7 @@ private fun AccentPickerDialog(
                     )
                     Spacer(Modifier.size(12.dp))
                     Text(
-                        text = if (isValid) "Preview $sanitized" else "Enter 6-char hex",
+                        text = if (isValid) "Vorschau $sanitized" else "6-stelligen Hex-Wert eingeben",
                         style = MaterialTheme.typography.bodySmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -1033,7 +1033,7 @@ private fun AccentPickerDialog(
                     onValueChange = { raw ->
                         input = raw.removePrefix("#").uppercase().filter { it in HEX_CHARS_ACCENT }.take(6)
                     },
-                    label = { Text("Hex color (e.g. 1AC4D8)") },
+                    label = { Text("Hex-Farbe (z. B. 1AC4D8)") },
                     singleLine = true,
                     keyboardOptions = com.aeriotv.android.ui.textfield.aerioTextFieldKeyboardOptions(
                         keyboardType = androidx.compose.ui.text.input.KeyboardType.Ascii,
