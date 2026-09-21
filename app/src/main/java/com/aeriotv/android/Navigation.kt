@@ -771,17 +771,16 @@ fun AerioTVNavHost(
                         title = { androidx.compose.material3.Text("Drive-Synchronisierung ist noch nicht eingerichtet") },
                         text = {
                             androidx.compose.material3.Text(
-                                "This AerioTV build doesn't have a Google Cloud OAuth Web " +
-                                    "Client ID baked in. Add GOOGLE_DRIVE_WEB_CLIENT_ID to " +
-                                    "local.properties (and register this APK's signing-cert " +
-                                    "SHA-1 in the same Cloud project) before Sign in with " +
-                                    "Google can load.",
+                                "In diesem Streamy-3.0-Build ist keine Google-Cloud-OAuth-Web-Client-ID hinterlegt. " +
+                                    "Trage GOOGLE_DRIVE_WEB_CLIENT_ID in local.properties ein und registriere " +
+                                    "die SHA-1 des Signaturzertifikats dieser APK im selben Cloud-Projekt, " +
+                                    "damit die Google-Anmeldung geladen werden kann.",
                             )
                         },
                         confirmButton = {
                             androidx.compose.material3.TextButton(
                                 onClick = { welcomeNotConfiguredDialog = false },
-                            ) { androidx.compose.material3.Text("Got it") }
+                            ) { androidx.compose.material3.Text("Verstanden") }
                         },
                         containerColor = MaterialTheme.colorScheme.surface,
                     )
