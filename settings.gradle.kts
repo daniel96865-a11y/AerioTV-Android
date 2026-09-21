@@ -23,5 +23,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AerioTV-Deutsch"
+rootProject.name = "Streamy-3.0"
 include(":app")
