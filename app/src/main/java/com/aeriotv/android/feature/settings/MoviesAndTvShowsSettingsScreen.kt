@@ -90,11 +90,11 @@ fun MoviesAndTvShowsSettingsScreen(
                     // read by the shared OnDemandViewModel, so it always applied
                     // everywhere even while the rows were TV-only.
                     item("refresh-library") {
-                        SettingsSection(header = "Refresh library") {
+                        SettingsSection(header = "Bibliothek aktualisieren") {
                             listOf(
-                                0 to "Every Launch",
-                                24 to "Daily",
-                                168 to "Weekly",
+                                0 to "Bei jedem Start",
+                                24 to "Täglich",
+                                168 to "Wöchentlich",
                             ).forEach { (hours, label) ->
                                 SettingsSelectionRow(
                                     label = label,
@@ -103,7 +103,7 @@ fun MoviesAndTvShowsSettingsScreen(
                                 )
                             }
                             Text(
-                                text = "Live TV channels refresh on every launch. Movies and TV Shows open from the saved library and re-sweep the provider on this schedule. Pull down on either tab to refresh right away.",
+                                text = "Live-TV-Sender werden bei jedem Start aktualisiert. Filme und Serien werden aus der gespeicherten Bibliothek geöffnet und nach diesem Zeitplan beim Anbieter neu eingelesen. Ziehe in einem der Bereiche nach unten, um sofort zu aktualisieren.",
                                 style = MaterialTheme.typography.bodySmall.subtext(),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
@@ -114,12 +114,12 @@ fun MoviesAndTvShowsSettingsScreen(
                     // MARK: Posters
                     item("posters") {
                         SettingsSection(
-                            header = "Posters",
-                            footer = "Show posters in the Program Info panel and fill in missing artwork on On Demand detail screens, looked up on TMDB with your own free API key (themoviedb.org). Off by default. The key syncs across your devices via Google Drive (kept in your private app data).",
+                            header = "Poster",
+                            footer = "Zeigt Poster in den Sendungsinformationen und ergänzt fehlende Bilder in den Detailseiten der Mediathek über TMDB mit deinem eigenen kostenlosen API-Schlüssel (themoviedb.org). Standardmäßig ausgeschaltet. Der Schlüssel kann über Google Drive zwischen deinen Geräten synchronisiert werden und bleibt in den privaten App-Daten.",
                         ) {
                             SettingsToggleRow(
-                                title = "TMDB poster fallback",
-                                subtitle = "When a poster is missing, look it up on TMDB. Needs the free API key below.",
+                                title = "TMDB-Poster als Ersatz",
+                                subtitle = "Wenn ein Poster fehlt, wird es bei TMDB gesucht. Dafür wird der kostenlose API-Schlüssel unten benötigt.",
                                 checked = programPostersTmdb,
                                 onCheckedChange = viewModel::setProgramPostersTmdbEnabled,
                             )
@@ -137,11 +137,11 @@ fun MoviesAndTvShowsSettingsScreen(
                                         keyDraft = it
                                         viewModel.resetTmdbKeyTestState()
                                     },
-                                    label = { Text("TMDB API key (v3) or read token (v4)") },
+                                    label = { Text("TMDB-API-Schlüssel (v3) oder Lesetoken (v4)") },
                                     singleLine = true,
                                     visualTransformation = keyReveal.transformation,
                                     trailingIcon = {
-                                        SecretRevealIconButton(state = keyReveal, contentLabel = "key")
+                                        SecretRevealIconButton(state = keyReveal, contentLabel = "Schlüssel")
                                     },
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -172,13 +172,13 @@ fun MoviesAndTvShowsSettingsScreen(
                                     Spacer(Modifier.weight(1f))
                                     val (statusText, statusColor) = when (tmdbKeyState) {
                                         SettingsViewModel.TmdbKeyTestState.Testing ->
-                                            "Checking..." to MaterialTheme.colorScheme.onSurfaceVariant
+                                            "Wird geprüft..." to MaterialTheme.colorScheme.onSurfaceVariant
                                         SettingsViewModel.TmdbKeyTestState.Valid ->
-                                            "Valid key" to androidx.compose.ui.graphics.Color(0xFF4CAF50)
+                                            "Gültiger Schlüssel" to androidx.compose.ui.graphics.Color(0xFF4CAF50)
                                         SettingsViewModel.TmdbKeyTestState.Invalid ->
-                                            "Invalid key" to MaterialTheme.colorScheme.error
+                                            "Ungültiger Schlüssel" to MaterialTheme.colorScheme.error
                                         SettingsViewModel.TmdbKeyTestState.Saved ->
-                                            "Saved" to androidx.compose.ui.graphics.Color(0xFF4CAF50)
+                                            "Gespeichert" to androidx.compose.ui.graphics.Color(0xFF4CAF50)
                                         SettingsViewModel.TmdbKeyTestState.Idle ->
                                             "" to MaterialTheme.colorScheme.onSurfaceVariant
                                     }
@@ -196,8 +196,8 @@ fun MoviesAndTvShowsSettingsScreen(
 
                     // MARK: Display Scale
                     settingsCard(
-                        header = "Display Scale",
-                        footer = "Independent scale for Movies & Series. 100% matches the default; 85-175% lets you trade density for readability (150%+ shows fewer, larger items - handy on a TV across the room). Changes apply live.",
+                        header = "Darstellungsgröße",
+                        footer = "Eigene Darstellungsgröße für Filme & Serien. 100 % entspricht dem Standard; mit 85–175 % kannst du zwischen mehr Inhalt und besserer Lesbarkeit wählen. Ab 150 % werden weniger, dafür größere Elemente angezeigt – praktisch auf dem Fernseher. Änderungen werden sofort übernommen.",
                     ) {
                         ScaleSliderRow(
                             label = "Filme & Serien",
