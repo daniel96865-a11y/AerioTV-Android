@@ -1,0 +1,27 @@
+name: Build AerioTV Deutsch 0.5.11-de1
+on:
+  push:
+    branches:
+      - deutsch
+    paths:
+      - ".github/workflows/build-aeriotv-de-0.5.11.yml"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: deutsch
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Build APK
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :app:assembleGithubRelease
+      - uses: actions/upload-artifact@v4
+        with:
+          name: AerioTV-Deutsch-0.5.11-de1-unsigned
+          path: app/build/outputs/apk/github/release/*.apk
+          if-no-files-found: error
