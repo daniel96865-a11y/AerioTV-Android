@@ -456,7 +456,7 @@ fun SyncSettingsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Got it",
+                    label = "Verstanden",
                     onClick = {
                         credsSyncDisclosureOpen = false
                         viewModel.markCredentialsSyncDisclosed()
@@ -485,7 +485,7 @@ fun SyncSettingsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Got it",
+                    label = "Verstanden",
                     onClick = { notConfiguredDialogOpen = false },
                 )
             },
