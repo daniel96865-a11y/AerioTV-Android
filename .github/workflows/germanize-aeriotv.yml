@@ -44,6 +44,6 @@ jobs:
       - name: Upload unsigned German APK
         uses: actions/upload-artifact@v4
         with:
-          name: AerioTV-Deutsch-0.5.9-de2-unsigned
+          name: AerioTV-Deutsch-0.5.10-de1-unsigned
           path: app/build/outputs/apk/github/release/*.apk
           if-no-files-found: error
