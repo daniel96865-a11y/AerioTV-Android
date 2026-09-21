@@ -718,3 +718,123 @@ for p in extra_candidates:
         p.write_text(dst, encoding="utf-8")
         second_changed += 1
 print(f"Second pass: {second_replacements} occurrences across {second_changed} files")
+
+# Third pass: screenshot-driven and full UI audit translations
+third_pass = {
+  "Enter the code shown on ${companionConn.name ?: \"the TV\"}": "Gib den Code ein, der auf ${companionConn.name ?: \"dem Fernseher\"} angezeigt wird",
+  "Connecting to ${companionConn.name ?: \"TV\"}...": "Verbindung zu ${companionConn.name ?: \"TV\"} wird hergestellt...",
+  "${channel.name} live recording": "${channel.name} Live-Aufnahme",
+  "Switch to a Dispatcharr playlist in Settings to schedule recordings.": "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Aufnahmen zu planen.",
+  "Local storage cap reached. Free space or raise the cap in Settings -> DVR.": "Lokales Speicherlimit erreicht. Gib Speicher frei oder erhöhe das Limit unter Einstellungen -> DVR.",
+  "Unhide": "Einblenden",
+  "Hide": "Ausblenden",
+  "Series": "Serien",
+  "Switch to a Dispatcharr playlist in Settings to browse movies.": "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Filme zu durchsuchen.",
+  "Series needs Dispatcharr": "Serien benötigen Dispatcharr",
+  "Switch to a Dispatcharr playlist in Settings to browse series.": "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Serien zu durchsuchen.",
+  "Enable Live Rewind in Settings": "Aktiviere Live-Zurückspulen in den Einstellungen",
+  "Video Scale: $scaleLabel": "Videogröße: $scaleLabel",
+  "Updates on this channel come from the project's GitHub ": "Updates für diese Variante kommen aus den GitHub-",
+  "releases. Installing keeps your channels, settings, and ": "Releases des Projekts. Beim Installieren bleiben Sender, Einstellungen und ",
+  "recordings; AerioTV closes during the install and you reopen ": "Aufnahmen erhalten; AerioTV Deutsch wird für die Installation geschlossen und danach ",
+  "it from your home screen.": "über den Startbildschirm wieder geöffnet.",
+  "GitHub releases": "GitHub-Releases",
+  "Update available": "Update verfügbar",
+  "${s.info.apkSizeBytes / (1024 * 1024)} MB from GitHub": "${s.info.apkSizeBytes / (1024 * 1024)} MB von GitHub",
+  "Downloading AerioTV ${s.info.versionName}... ${s.progressPercent}%": "AerioTV Deutsch ${s.info.versionName} wird heruntergeladen... ${s.progressPercent}%",
+  "Ready to install": "Bereit zur Installation",
+  "Your data is kept. AerioTV will close to install; reopen ": "Deine Daten bleiben erhalten. AerioTV Deutsch wird für die Installation geschlossen; öffne die App anschließend ",
+  "One-time permission needed": "Einmalige Berechtigung erforderlich",
+  "Allow AerioTV to install updates in the Settings screen, ": "Erlaube AerioTV Deutsch in den Android-Einstellungen, Updates zu installieren, ",
+  "then come back. If you've already allowed it, Install ": "und kehre danach zurück. Wenn du es bereits erlaubt hast, wird die Installation ",
+  "continues right away.": "sofort fortgesetzt.",
+  "Confirm the update in the Android dialog. AerioTV will close to ": "Bestätige das Update im Android-Dialog. AerioTV Deutsch wird für die ",
+  "install.": "Installation geschlossen.",
+  "Update problem": "Update-Problem",
+  "Try again": "Erneut versuchen",
+  "Check again": "Erneut prüfen",
+  "Dismiss": "Schließen",
+  "Choose the palette and the light or dark appearance. Theme sets the color; Appearance sets light vs dark. They are independent, so any theme works in either appearance. Changes apply live; the preset accent kicks in unless Custom Accent is on.": "Wähle Farbpalette sowie helle oder dunkle Darstellung. Das Design bestimmt die Farben, die Darstellung Hell oder Dunkel. Beides ist unabhängig voneinander. Änderungen werden sofort übernommen; die voreingestellte Akzentfarbe gilt, solange keine eigene Akzentfarbe aktiviert ist.",
+  "Scales all text in AerioTV, on top of your device's font size. Changes apply live.": "Skaliert den gesamten Text in AerioTV Deutsch zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
+  "Subtext Size": "Größe von Zusatztexten",
+  "Scales only secondary text such as descriptions, program details, and captions, on top of Text Size. Titles and buttons stay the same. Changes apply live.": "Skaliert nur Zusatztexte wie Beschreibungen, Sendungsdetails und Hinweise zusätzlich zur Textgröße. Titel und Schaltflächen bleiben unverändert. Änderungen werden sofort übernommen.",
+  "Text Contrast": "Textkontrast",
+  "Makes dimmed and accent-colored text brighter in dark mode and darker in light mode. 0% keeps the theme's look, 100% uses plain white or black text. Changes apply live.": "Macht gedämpften und akzentfarbenen Text im Dunkelmodus heller und im Hellmodus dunkler. 0 % behält das Design bei, 100 % verwendet reines Weiß bzw. Schwarz. Änderungen werden sofort übernommen.",
+  "Time Format": "Zeitformat",
+  "System follows your device's clock setting. Applies to the Guide, program info, and recordings.": "„System“ übernimmt die Uhrzeiteinstellung deines Geräts. Gilt für EPG, Sendungsinformationen und Aufnahmen.",
+  "Default Destination": "Standard-Speicherort",
+  "Where new recordings are saved unless you change it in the record sheet. Accounts without server recording always record to this device.": "Legt fest, wo neue Aufnahmen gespeichert werden, sofern du es beim Aufnehmen nicht änderst. Konten ohne Serveraufnahme speichern immer auf diesem Gerät.",
+  "Server (Dispatcharr)": "Server (Dispatcharr)",
+  "Default Recording Buffers": "Standard-Aufnahmepuffer",
+  "Buffers extend new recordings beyond the scheduled window. Existing recordings aren't touched. Useful for sports and live events that run over.": "Puffer verlängern neue Aufnahmen über den geplanten Zeitraum hinaus. Bestehende Aufnahmen bleiben unverändert. Nützlich bei Sport und Live-Ereignissen mit Überlänge.",
+  "Start Early": "Früher starten",
+  "End Late": "Später beenden",
+  "Local Storage": "Lokaler Speicher",
+  "Cap applies to local recordings on this device only. Server recordings live on Dispatcharr and are tracked there.": "Das Limit gilt nur für lokale Aufnahmen auf diesem Gerät. Serveraufnahmen liegen auf Dispatcharr und werden dort verwaltet.",
+  "Maximum": "Maximum",
+  "Keep device awake during recording": "Gerät während der Aufnahme wach halten",
+  "Recommended for long local recordings.": "Für lange lokale Aufnahmen empfohlen.",
+  "Guide Presentation": "EPG-Darstellung",
+  "Guide Layout": "EPG-Layout",
+  "Display Scale": "Darstellungsgröße",
+  "Tint EPG cells and channel cards by program category. Select a category below to override its hex.": "EPG-Zellen und Senderkarten nach Sendungskategorie einfärben. Wähle unten eine Kategorie, um ihren Hex-Farbwert anzupassen.",
+  "Keep Available": "Verfügbar halten",
+  "Keep Recent Channels Live": "Letzte Sender live halten",
+  "Display": "Anzeige",
+  "In the TV Guide": "Im TV-EPG",
+  "Mini player": "Mini-Player",
+  "Mini player  (current)": "Mini-Player  (aktuell)",
+  "Device": "Gerät",
+  "Active": "Aktiv",
+  "Set active": "Als aktiv festlegen",
+  "${playlist.channelCount} channels": "${playlist.channelCount} Sender",
+  "Tap ○ to set the active playlist · Tap the active playlist to edit or delete it": "Tippe auf ○, um die aktive Wiedergabeliste festzulegen · Tippe auf die aktive Wiedergabeliste, um sie zu bearbeiten oder zu löschen",
+  "Tap Manage Playlists to reorder": "Tippe auf „Wiedergabelisten verwalten“, um die Reihenfolge zu ändern",
+  "Select a playlist to open it · Set Active lives in its Actions section": "Wähle eine Wiedergabeliste zum Öffnen · „Als aktiv festlegen“ befindet sich im Bereich Aktionen",
+  "Select Manage Playlists to reorder": "Wähle „Wiedergabelisten verwalten“, um die Reihenfolge zu ändern",
+  "First Installed": "Erstmals installiert",
+  "Last Updated": "Zuletzt aktualisiert",
+  "Never": "Nie",
+  "Copy to Clipboard": "In Zwischenablage kopieren",
+  "App Version": "App-Version",
+  "What's New": "Was ist neu?",
+  "Unknown": "Unbekannt",
+  "No browser available to open $url": "Kein Browser zum Öffnen von $url verfügbar",
+  "Info card, rewind, gestures, multiview": "Infokarte, Zurückspulen, Gesten, Mehrfachansicht",
+  "Theme, text size, time format": "Design, Textgröße, Zeitformat",
+  "Debug logging & diagnostics": "Debug-Protokollierung & Diagnose",
+  "Playlists, watch progress, reminders, app preferences and credentials sync via your Drive AppData folder. Files are scoped per-app and never appear in your main Drive UI.": "Wiedergabelisten, Wiedergabefortschritt, Erinnerungen, App-Einstellungen und Zugangsdaten werden über deinen Drive-AppData-Ordner synchronisiert. Die Dateien gehören nur zu dieser App und erscheinen nicht in deiner normalen Drive-Oberfläche.",
+  "Actions": "Aktionen",
+  "Push overwrites the Drive backup with this device; Pull overwrites this device with the backup. Last Push: ${formatTimestamp(lastPush)}. Last Pull: ${formatTimestamp(lastPull)}.": "„Hochladen“ überschreibt die Drive-Sicherung mit diesem Gerät; „Herunterladen“ überschreibt dieses Gerät mit der Sicherung. Letztes Hochladen: ${formatTimestamp(lastPush)}. Letztes Herunterladen: ${formatTimestamp(lastPull)}.",
+  "remote differs from your others. This choice stays on this ": "Fernbedienung sich von deinen anderen unterscheidet. Diese Auswahl bleibt auf diesem ",
+  "device and is not shared.": "Gerät und wird nicht synchronisiert.",
+  "Add playlist": "Wiedergabeliste hinzufügen",
+  "Rounded corners for List view and Guide view are now separate in Settings > Appearance, and guide artwork follows the Guide toggle.": "Abgerundete Ecken für Listen- und EPG-Ansicht können jetzt getrennt unter Einstellungen > Darstellung festgelegt werden; EPG-Bilder folgen der EPG-Einstellung.",
+  "this anytime in Settings > App Behaviors > Live Rewind.": "dies jederzeit unter Einstellungen > Live-Zurückspulen ändern.",
+  "\"Allow from this source\" in the Settings screen, come back, and tap ": "„Aus dieser Quelle zulassen“ in den Android-Einstellungen, kehre zurück und tippe auf "
+}
+
+third_candidates = list(Path("app/src/main/java/com/aeriotv/android/feature").rglob("*.kt"))
+third_candidates += list(Path("app/src/main/java/com/aeriotv/android/ui").rglob("*.kt"))
+third_candidates += [
+    Path("app/src/main/java/com/aeriotv/android/Navigation.kt"),
+    Path("app/src/main/java/com/aeriotv/android/MainActivity.kt"),
+]
+third_changed = 0
+third_replacements = 0
+for p in third_candidates:
+    if not p.exists():
+        continue
+    src = p.read_text(encoding="utf-8")
+    dst = src
+    for en, de in third_pass.items():
+        old = '"' + en.replace('"', '\\"') + '"'
+        new = '"' + de.replace('"', '\\"') + '"'
+        count = dst.count(old)
+        if count:
+            dst = dst.replace(old, new)
+            third_replacements += count
+    if dst != src:
+        p.write_text(dst, encoding="utf-8")
+        third_changed += 1
+print(f"Third pass: {third_replacements} occurrences across {third_changed} files")
