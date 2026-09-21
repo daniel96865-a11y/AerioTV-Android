@@ -195,13 +195,13 @@ fun PlaylistDetailScreen(
         ) {
             item {
                 Section(
-                    header = "Connection Details",
+                    header = "Verbindungsdetails",
                     // Only worth explaining when there are two URLs to
                     // choose between.
                     footer = if (!playlist.lanUrlString.isNullOrBlank()) {
-                        "A checkmark marks the connection in use right now. The local URL is used " +
-                            "automatically whenever the server answers on your home network; run " +
-                            "Refresh LAN Detection below after a network change."
+                        "Ein Häkchen markiert die aktuell verwendete Verbindung. Die lokale URL wird " +
+                            "automatisch verwendet, wenn der Server in deinem Heimnetz erreichbar ist. Führe " +
+                            "nach einem Netzwerkwechsel unten die LAN-Erkennung erneut aus."
                     } else {
                         null
                     },
@@ -231,7 +231,7 @@ fun PlaylistDetailScreen(
                             )
                             .padding(horizontal = 16.dp, vertical = 12.dp),
                     ) {
-                        DetailRow("Type", playlist.sourceTypeDisplayLabel())
+                        DetailRow("Typ", playlist.sourceTypeDisplayLabel())
                         // Checkmark marks whichever URL is currently in effect
                         // per PlaylistRepository.effectiveBaseUrl's decision.
                         val activeRoute = state.activeRoute
@@ -243,7 +243,7 @@ fun PlaylistDetailScreen(
                         )
                         playlist.lanUrlString?.takeIf { it.isNotBlank() }?.let { lan ->
                             DetailRow(
-                                label = "Local URL",
+                                label = "Lokale URL",
                                 value = lan,
                                 icon = Icons.Filled.CheckCircle.takeIf { activeRoute?.isLan == true },
                                 iconTint = MaterialTheme.colorScheme.primary,
@@ -260,7 +260,7 @@ fun PlaylistDetailScreen(
                         val hasConnected = playlist.channelCount > 0
                         DetailRow(
                             label = "Status",
-                            value = if (hasConnected) "Connected" else "Not connected yet",
+                            value = if (hasConnected) "Verbunden" else "Noch nicht verbunden",
                             valueColor = if (hasConnected) {
                                 MaterialTheme.colorScheme.primary
                             } else {
@@ -270,7 +270,7 @@ fun PlaylistDetailScreen(
                         )
                         playlist.lastRefreshedAt?.let { ts ->
                             DetailRow(
-                                "Last Connected",
+                                "Zuletzt verbunden",
                                 DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT)
                                     .format(Date(ts)),
                             )
@@ -398,8 +398,8 @@ fun PlaylistDetailScreen(
             title = { Text("Wiedergabeliste löschen?") },
             text = {
                 Text(
-                    "This removes \"${playlist.name}\" and its credentials from this " +
-                        "device. If another playlist is saved, it becomes active.",
+                    "Dadurch werden „${playlist.name}“ und die zugehörigen Zugangsdaten von diesem " +
+                        "Gerät entfernt. Falls eine weitere Wiedergabeliste gespeichert ist, wird sie aktiv.",
                 )
             },
             confirmButton = {
@@ -425,10 +425,10 @@ fun PlaylistDetailScreen(
             title = { Text("Alles aktualisieren?") },
             text = {
                 Text(
-                    "Clears all cached channels, guide data, and On Demand, then " +
-                        "reloads \"${playlist.name}\" from scratch. Use this if " +
-                        "channels or guide data are missing or stale. May take a " +
-                        "few minutes on large playlists.",
+                    "Löscht alle zwischengespeicherten Sender, EPG-Daten und Mediathekinhalte und " +
+                        "lädt „${playlist.name}“ anschließend vollständig neu. Verwende dies, wenn " +
+                        "Sender oder EPG-Daten fehlen oder veraltet sind. Bei großen Wiedergabelisten " +
+                        "kann dies einige Minuten dauern.",
                 )
             },
             confirmButton = {
