@@ -157,7 +157,7 @@ fun TvLogShareDialog(
                 }
 
                 Spacer(Modifier.height(14.dp))
-                SettingsDialogTextButton(label = "Close", onClick = onDismiss)
+                SettingsDialogTextButton(label = "Schließen", onClick = onDismiss)
             }
         }
     }

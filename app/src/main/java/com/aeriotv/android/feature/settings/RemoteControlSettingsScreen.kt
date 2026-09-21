@@ -164,12 +164,12 @@ private val PlayerRemoteAction.displayName: String
         PlayerRemoteAction.JUMP_TO_LIVE -> "Jump to live"
         PlayerRemoteAction.MINIMIZE_TO_GUIDE -> "Return to TV Guide"
         PlayerRemoteAction.CHANNEL_LIST -> "Channel list"
-        PlayerRemoteAction.SUBTITLES -> "Subtitles"
+        PlayerRemoteAction.SUBTITLES -> "Untertitel"
         PlayerRemoteAction.AUDIO_TRACKS -> "Audio tracks"
         PlayerRemoteAction.ASPECT_RATIO -> "Aspect ratio"
-        PlayerRemoteAction.RECORD -> "Record"
+        PlayerRemoteAction.RECORD -> "Aufnehmen"
         PlayerRemoteAction.SLEEP_TIMER -> "Sleep timer"
-        PlayerRemoteAction.OPEN_SEARCH -> "Search"
+        PlayerRemoteAction.OPEN_SEARCH -> "Suche"
         PlayerRemoteAction.NONE -> "Do nothing"
     }
 
@@ -193,10 +193,10 @@ private val GuideRemoteAction.displayName: String
         GuideRemoteAction.CLOSE_MINI_PLAYER -> "Close mini player"
         GuideRemoteAction.PROGRAM_INFO -> "Program info"
         GuideRemoteAction.PROGRAM_MENU -> "Program menu"
-        GuideRemoteAction.RECORD -> "Record"
-        GuideRemoteAction.PLAY -> "Play"
+        GuideRemoteAction.RECORD -> "Aufnehmen"
+        GuideRemoteAction.PLAY -> "Abspielen"
         GuideRemoteAction.NAVIGATE -> "Move focus"
-        GuideRemoteAction.OPEN_SEARCH -> "Search"
+        GuideRemoteAction.OPEN_SEARCH -> "Suche"
         GuideRemoteAction.NONE -> "Do nothing"
     }
 
@@ -228,7 +228,7 @@ fun RemoteControlSettingsScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Remote Control", onBack = onBack)
+        SettingsDetailTopBar(title = "Fernbedienung", onBack = onBack)
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             Column(
                 modifier = Modifier
@@ -308,7 +308,7 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "Reset",
+                    header = "Zurücksetzen",
                     footer = "Restore every button to the standard AerioTV scheme.",
                 ) {
                     SlotRow(
@@ -386,7 +386,7 @@ fun RemoteControlSettingsScreen(
                     viewModel.setRemoteControlMap(RemoteControlMap.DEFAULT)
                     showResetConfirm = false
                 },
-                TvMenuAction(label = "Cancel") { showResetConfirm = false },
+                TvMenuAction(label = "Abbrechen") { showResetConfirm = false },
             ),
             onDismiss = { showResetConfirm = false },
             guard = menuGuard,

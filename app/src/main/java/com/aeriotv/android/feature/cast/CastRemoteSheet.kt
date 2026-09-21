@@ -285,7 +285,7 @@ fun CastRemoteSheet(
                 }
                 RemoteButton(
                     icon = if (isPlaying) Icons.Filled.Pause else Icons.Filled.PlayArrow,
-                    desc = if (isPlaying) "Pause" else "Play",
+                    desc = if (isPlaying) "Pause" else "Abspielen",
                     onClick = onTogglePlayPause,
                     emphasized = true,
                 )
@@ -301,7 +301,7 @@ fun CastRemoteSheet(
                     RemoteButton(Icons.Filled.KeyboardArrowUp, "Channel up", onChannelUp)
                 }
                 Spacer(Modifier.width(6.dp))
-                RemoteButton(Icons.Filled.Tune, "Options", {
+                RemoteButton(Icons.Filled.Tune, "Optionen", {
                     onRefreshState()
                     optionsOpen = true
                 })
@@ -319,34 +319,34 @@ fun CastRemoteSheet(
                     .verticalScroll(rememberScrollState()),
             ) {
                 Text(
-                    text = "Options",
+                    text = "Optionen",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 8.dp),
                 )
                 if (canSwitchStream) {
-                    OptionRow(Icons.Filled.SwapHoriz, "Switch Stream", null) {
+                    OptionRow(Icons.Filled.SwapHoriz, "Stream wechseln", null) {
                         optionsOpen = false
                         onSwitchStream()
                     }
                 }
-                OptionRow(Icons.Outlined.MusicNote, "Audio Track", remoteState.audio.firstOrNull { it.selected }?.label) {
+                OptionRow(Icons.Outlined.MusicNote, "Audiospur", remoteState.audio.firstOrNull { it.selected }?.label) {
                     optionsOpen = false
                     audioOpen = true
                 }
-                OptionRow(Icons.Filled.Subtitles, "Subtitles", if (remoteState.textOff) "Off" else remoteState.text.firstOrNull { it.selected }?.label ?: "On") {
+                OptionRow(Icons.Filled.Subtitles, "Untertitel", if (remoteState.textOff) "Aus" else remoteState.text.firstOrNull { it.selected }?.label ?: "Ein") {
                     optionsOpen = false
                     subsOpen = true
                 }
-                OptionRow(Icons.Filled.Speed, "Playback Speed", speedLabel(remoteState.speed)) {
+                OptionRow(Icons.Filled.Speed, "Wiedergabegeschwindigkeit", speedLabel(remoteState.speed)) {
                     optionsOpen = false
                     speedOpen = true
                 }
                 OptionRow(Icons.Outlined.AspectRatio, "Video Scale", remoteState.aspect.label) {
                     onSetAspect(remoteState.aspect.next())
                 }
-                OptionRow(Icons.Filled.Timer, "Sleep Timer", null) {
+                OptionRow(Icons.Filled.Timer, "Sleep-Timer", null) {
                     optionsOpen = false
                     sleepOpen = true
                 }
@@ -354,7 +354,7 @@ fun CastRemoteSheet(
                     optionsOpen = false
                     infoOpen = true
                 }
-                OptionRow(Icons.Filled.VideocamOff, "Audio Only", if (remoteState.audioOnly) "On" else "Off") {
+                OptionRow(Icons.Filled.VideocamOff, "Audio Only", if (remoteState.audioOnly) "Ein" else "Aus") {
                     onSetAudioOnly(!remoteState.audioOnly)
                 }
                 // Companion only: the X above stops the TV, this one just lets go
@@ -373,13 +373,13 @@ fun CastRemoteSheet(
         com.aeriotv.android.ui.FormFactorModal(onDismiss = { sleepOpen = false }) {
             Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
                 Text(
-                    text = "Sleep Timer",
+                    text = "Sleep-Timer",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Spacer(Modifier.height(12.dp))
-                listOf(0 to "Off", 30 to "30 minutes", 60 to "1 hour", 90 to "1.5 hours", 120 to "2 hours")
+                listOf(0 to "Aus", 30 to "30 minutes", 60 to "1 hour", 90 to "1.5 hours", 120 to "2 hours")
                     .forEach { (minutes, label) ->
                         Text(
                             text = label,

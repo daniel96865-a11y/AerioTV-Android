@@ -62,7 +62,7 @@ fun GeneralSettingsScreen(
     val maxRetries by viewModel.maxRetries.collectAsStateWithLifecycle(initialValue = 3)
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "General", onBack = onBack)
+        SettingsDetailTopBar(title = "Allgemein", onBack = onBack)
 
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             Column(
@@ -135,7 +135,7 @@ fun GeneralSettingsScreen(
 
                 // MARK: Refresh
                 SettingsSection(
-                    header = "Refresh",
+                    header = "Aktualisieren",
                     footer = "Refresh channels + the EPG in the background on Wi-Fi while the battery isn't low, so the guide is current the moment you open the app. " +
                         if (isTv) {
                             "Off here means data refreshes only when you launch AerioTV or refresh from the playlist menu."

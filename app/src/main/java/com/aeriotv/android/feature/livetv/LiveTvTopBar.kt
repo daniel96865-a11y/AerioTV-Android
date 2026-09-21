@@ -154,7 +154,7 @@ internal fun TvRetainedChannelsCircle(
 }
 
 /**
- * Centered "Live TV" title bar whose trailing actions SHRINK on narrow
+ * Centered "Live-TV" title bar whose trailing actions SHRINK on narrow
  * screens so the title stays truly screen-centered (user report: on the
  * Fold's cover display the title sat left of center). Material's
  * CenterAlignedTopAppBar cannot do this: with an empty leading slot and
@@ -192,7 +192,7 @@ fun LiveTvTopBar(
             fun tryFit(style: TextStyle): Pair<TextStyle, Dp>? {
                 val titleWidth = with(density) {
                     textMeasurer.measure(
-                        text = "Live TV",
+                        text = "Live-TV",
                         style = style.copy(fontWeight = FontWeight.Bold),
                     ).size.width.toDp()
                 }
@@ -212,7 +212,7 @@ fun LiveTvTopBar(
         val (titleStyle, buttonSize) = fit
         val iconSize = (buttonSize - 14.dp).coerceIn(18.dp, 24.dp)
         Text(
-            text = "Live TV",
+            text = "Live-TV",
             style = titleStyle,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onBackground,
@@ -446,7 +446,7 @@ fun LiveTvPhoneHeaderRow(
                 onClick = onOpenGroups,
             )
             // Name takes all the leftover width (a sibling spacer used to
-            // split it in half and ellipsised "All Channels" at "All Cha").
+            // split it in half and ellipsised "Alle Sender" at "All Cha").
             Row(
                 modifier = Modifier.weight(1f),
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -555,7 +555,7 @@ private fun LiveTvHeaderActions(
     var sortOpen by remember { mutableStateOf(false) }
     LiveTvPhoneCircle(
         icon = Icons.Outlined.Search,
-        contentDescription = if (searchActive) "Close search" else "Search",
+        contentDescription = if (searchActive) "Close search" else "Suche",
         onClick = { onActionTaken(); onToggleSearch() },
         active = searchActive,
     )

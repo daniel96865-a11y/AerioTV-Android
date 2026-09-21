@@ -122,7 +122,7 @@ fun LicensesScreen(onBack: () -> Unit) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         SettingsDetailTopBar(
-            title = viewing?.title ?: "Open Source Licenses",
+            title = viewing?.title ?: "Open-Source-Lizenzen",
             onBack = { if (viewing != null) viewing = null else onBack() },
         )
 

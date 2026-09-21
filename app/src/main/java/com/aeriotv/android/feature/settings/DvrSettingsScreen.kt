@@ -104,7 +104,7 @@ fun DvrSettingsScreen(
     val usedFraction = if (capMB > 0) (usedMB.toFloat() / capMB.toFloat()).coerceIn(0f, 1f) else 0f
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "DVR Settings", onBack = onBack)
+        SettingsDetailTopBar(title = "DVR-Einstellungen", onBack = onBack)
 
         androidx.compose.foundation.layout.Box(
             modifier = Modifier.fillMaxSize(),
@@ -439,7 +439,7 @@ private fun BufferRow(
     }
 }
 
-private fun formatRoll(mins: Int): String = if (mins == 0) "None" else "$mins min"
+private fun formatRoll(mins: Int): String = if (mins == 0) "Keine" else "$mins min"
 
 private fun formatStorage(mb: Int): String {
     if (mb >= 1024) {

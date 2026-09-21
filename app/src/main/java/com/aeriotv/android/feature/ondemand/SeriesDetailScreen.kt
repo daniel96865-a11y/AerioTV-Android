@@ -531,7 +531,7 @@ fun SeriesDetailScreen(
                             TvHeroActionButton(
                                 title = when {
                                     isLoading && episodes.isEmpty() -> "Loading…"
-                                    else -> target?.label ?: "Play"
+                                    else -> target?.label ?: "Abspielen"
                                 },
                                 icon = Icons.Filled.PlayArrow,
                                 primary = true,
@@ -542,14 +542,14 @@ fun SeriesDetailScreen(
                             )
                             if (target?.resuming == true) {
                                 TvHeroActionButton(
-                                    title = "Play from Beginning",
+                                    title = "Von Anfang abspielen",
                                     icon = Icons.Filled.Replay,
                                     onClick = { playEpisode(target.episode, true) },
                                 )
                             }
                             if (versionOptions.size > 1) {
                                 TvHeroActionButton(
-                                    title = "Version: ${selectedVersion?.label ?: "Auto"}",
+                                    title = "Version: ${selectedVersion?.label ?: "Automatisch"}",
                                     icon = Icons.Outlined.Tune,
                                     onClick = { showVersionPicker = true },
                                 )
@@ -592,7 +592,7 @@ fun SeriesDetailScreen(
                             // Only offered when there is an actual choice (> 1
                             // provider copy on a Dispatcharr Direct Connect source).
                             versionLabel = if (versionOptions.size > 1) {
-                                selectedVersion?.label ?: "Auto"
+                                selectedVersion?.label ?: "Automatisch"
                             } else {
                                 null
                             },
@@ -1555,7 +1555,7 @@ private fun FloatingBackButton(onClick: () -> Unit) {
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back",
+                contentDescription = "Zurück",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }

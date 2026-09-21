@@ -42,7 +42,7 @@ import com.aeriotv.android.ui.settings.dpadFocusRing
 import com.aeriotv.android.ui.settings.rememberIsTvDevice
 
 /**
- * Mirrors iOS App Store screenshot IMG_1077: "Add Playlist" back stack frame
+ * Mirrors iOS App Store screenshot IMG_1077: "Wiedergabeliste hinzufügen" back stack frame
  * with "Choose Source Type" header and three rounded cards (Dispatcharr,
  * Xtream Codes, M3U + EPG). Tapping a card pushes to the Configure form.
  *
@@ -60,7 +60,7 @@ fun ChooseSourceTypeScreen(
         TopAppBar(
             title = {
                 Text(
-                    "Add Playlist",
+                    "Wiedergabeliste hinzufügen",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     // TV hides the back arrow below, which collapses the
@@ -81,7 +81,7 @@ fun ChooseSourceTypeScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }

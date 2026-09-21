@@ -61,7 +61,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
 
 /**
  * Edit Playlist sub-screen. Mirrors iOS Edit Playlist modal: Cancel header
- * left, "Edit Playlist" title, Save header right. Three sections — Connection,
+ * left, "Wiedergabeliste bearbeiten" title, Save header right. Three sections — Connection,
  * Authentication (with segmented control for Dispatcharr User+Pass vs API Key),
  * EPG Source (M3U only). Save calls [PlaylistViewModel.saveEdits] which reuses
  * the bootstrap load path with `existingId` so the row's UUID stays stable.
@@ -167,7 +167,7 @@ fun EditPlaylistScreen(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "Edit Playlist",
+                    text = "Wiedergabeliste bearbeiten",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -177,7 +177,7 @@ fun EditPlaylistScreen(
                 // discards and pops the screen. Phones/tablets keep Cancel.
                 if (!isTv) {
                     TextButton(onClick = onBack) {
-                        Text("Cancel", color = MaterialTheme.colorScheme.textAccent)
+                        Text("Abbrechen", color = MaterialTheme.colorScheme.textAccent)
                     }
                 }
             },
@@ -186,7 +186,7 @@ fun EditPlaylistScreen(
                 // action is off the natural D-pad path through the fields).
                 if (!isTv) {
                     SettingsHeaderTextButton(
-                        label = "Save",
+                        label = "Speichern",
                         enabled = canSave,
                         onClick = performSave,
                     )
@@ -448,7 +448,7 @@ fun EditPlaylistScreen(
             if (sourceType.supportsVOD) {
                 item {
                     Section(
-                        header = "On Demand",
+                        header = "Mediathek",
                         footer = "When off, this playlist's movies and TV shows aren't loaded into On Demand. Useful if you only want Live TV from this server, or if you have a second playlist that already provides On Demand.",
                     ) {
                         // Whole row is the focus/toggle target so D-pad focus is
@@ -500,11 +500,11 @@ fun EditPlaylistScreen(
                         listOf(1, 3, 7, 14, 0).forEach { days ->
                             ProfileRow(
                                 label = when (days) {
-                                    0 -> "All Available"
+                                    0 -> "Alles verfügbar"
                                     1 -> "1 Day"
                                     else -> "$days Days"
                                 },
-                                detail = if (days == 7) "Default" else null,
+                                detail = if (days == 7) "Standard" else null,
                                 selected = sanitizeGuideDays(epgRetentionDays) == days,
                                 onClick = { epgRetentionDays = days },
                             )
@@ -541,7 +541,7 @@ fun EditPlaylistScreen(
                                 }
                             } else {
                                 ProfileRow(
-                                    label = "All Channels",
+                                    label = "Alle Sender",
                                     detail = null,
                                     selected = selectedProfileId == null,
                                     onClick = { selectedProfileId = null },

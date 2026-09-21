@@ -46,7 +46,7 @@ class SearchViewModel @Inject constructor(
     private val dispatcharrAuth: DispatcharrAuthBroker,
 ) : ViewModel() {
 
-    enum class Scope(val label: String) { All("All"), Movies("Movies"), Series("TV Shows"), Epg("EPG") }
+    enum class Scope(val label: String) { All("Alle"), Movies("Filme"), Series("Serien"), Epg("EPG") }
 
     sealed interface Result {
         val key: String

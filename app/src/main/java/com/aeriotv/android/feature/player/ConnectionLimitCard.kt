@@ -68,7 +68,7 @@ fun ConnectionLimitCard(
             onClick = onRetry,
             modifier = Modifier.focusRequester(retryFocus),
         ) {
-            Text("Retry")
+            Text("Erneut versuchen")
         }
         if (!compact && notice.kind != DispatcharrConnectionLimit.Kind.STREAM_ENDED) {
             Text(

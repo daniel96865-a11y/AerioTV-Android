@@ -175,7 +175,7 @@ internal fun GroupSidebarPanel(
     // `focusProperties { up = <top nav pills> }` on an ancestor (audit task
     // #57 escape hatch) and that ancestor wins over an override placed on the
     // sidebar's list, so a plain D-pad Up from a group row sailed past the
-    // header button and landed on "Live TV" - the button rendered, took no
+    // header button and landed on "Live-TV" - the button rendered, took no
     // focus, and OK went to the nav bar. Intercept Up here instead, BEFORE the
     // focus engine sees it, and hand it to the button; once the button holds
     // focus, Up falls through to the inherited escape so the nav bar is still
@@ -616,7 +616,7 @@ internal fun PhoneGroupDrawer(
             ) {
                 Icon(
                     imageVector = Icons.Outlined.Tune,
-                    contentDescription = if (hiddenGroupCount == 0) "Manage Groups"
+                    contentDescription = if (hiddenGroupCount == 0) "Gruppen verwalten"
                     else "Manage Groups ($hiddenGroupCount hidden)",
                     tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.size(16.dp),

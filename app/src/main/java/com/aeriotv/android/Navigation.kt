@@ -125,7 +125,7 @@ object Routes {
     ) = "player/${Uri.encode(channelId)}" +
         "?csUrl=${Uri.encode(playbackUrl)}&csTitle=${Uri.encode(title)}" +
         "&csStart=$csStart&csEnd=$csEnd&csTz=${Uri.encode(csTz)}&csUuid=${Uri.encode(csUuid)}"
-    // fromStart (tvOS MoviesView "Play from Beginning"): start at 0 and
+    // fromStart (tvOS MoviesView "Von Anfang abspielen"): start at 0 and
     // LEAVE the WatchProgress row alone, so Continue Watching survives.
     fun vodPlayer(movieUuid: String, fromStart: Boolean = false) =
         "vod_player/${Uri.encode(movieUuid)}?fromStart=$fromStart"
@@ -320,7 +320,7 @@ fun AerioTVNavHost(
                     navController.navigate(
                         Routes.recordingPlayer(
                             target.playbackUrl,
-                            target.title.ifBlank { "Recording" },
+                            target.title.ifBlank { "Aufnahme" },
                         ),
                     ) { launchSingleTop = true }
                     onDeepLinkConsumed()
@@ -716,7 +716,7 @@ fun AerioTVNavHost(
                     )
                 } else WelcomeScreen(
                     onConnectServer = { navController.navigate(Routes.CHOOSE_TYPE) },
-                    // "Skip for now" is iOS parity. With no playlist saved the channel
+                    // "Vorerst überspringen" is iOS parity. With no playlist saved the channel
                     // list is empty; user can reach Settings -> Change playlist later.
                     // The flag stops MAIN's NeedsUrl guard from bouncing right back.
                     onSkip = {
@@ -944,7 +944,7 @@ fun AerioTVNavHost(
                         ) {
                             android.widget.Toast.makeText(
                                 navHostContext,
-                                "Playing on $castDevice",
+                                "Wiedergabe auf $castDevice",
                                 android.widget.Toast.LENGTH_SHORT,
                             ).show()
                             return@MainScaffold
@@ -1057,7 +1057,7 @@ fun AerioTVNavHost(
                             navController.navigate(Routes.vodEpisodePlayer(videoId))
                         }
                     },
-                    // Hero "Play from Beginning": start at 0 without deleting
+                    // Hero "Von Anfang abspielen": start at 0 without deleting
                     // the Continue Watching row. The companion-TV branch has no
                     // start-at flag on the wire and plays as usual.
                     onEpisodeResumeFromStart = { videoId ->
@@ -1414,7 +1414,7 @@ fun AerioTVNavHost(
                 tearDownLiveForVod(navController)
 
                 val episodeUuid = Uri.decode(entry.arguments?.getString("episodeUuid").orEmpty())
-                // Hero "Play from Beginning": skip the resume seek, keep the
+                // Hero "Von Anfang abspielen": skip the resume seek, keep the
                 // saved WatchProgress row (tvOS MoviesView:1507-1511).
                 val epFromStart = entry.arguments?.getBoolean("fromStart") ?: false
 
@@ -1616,7 +1616,7 @@ fun AerioTVNavHost(
                     },
                     httpHeaders = headers,
                     // Pass the PLAYLIST_GRAPH-scoped VM so the re-entrant
-                    // "Add streams" picker reuses this single instance.
+                    // "Streams hinzufügen" picker reuses this single instance.
                     playlistVm = playlistVm,
                 )
             }
@@ -1700,7 +1700,7 @@ fun AerioTVNavHost(
                 val movie = onDemandVm.movieByUuid(movieUuid)
 
                 // Version switching: make sure the provider copies are loaded
-                // for the in-player "Switch Version" sheet (idempotent; the
+                // for the in-player "Version wechseln" sheet (idempotent; the
                 // detail screen usually primed this already).
                 LaunchedEffect(movie?.id) {
                     movie?.id?.let { onDemandVm.loadMovieProviders(it) }
@@ -1761,7 +1761,7 @@ fun AerioTVNavHost(
                         com.aeriotv.android.feature.player.PhoneVodMini.Info(
                             key = url,
                             videoId = movieUuid,
-                            title = movie?.displayName ?: "On Demand",
+                            title = movie?.displayName ?: "Mediathek",
                             posterUrl = movie?.posterUrl,
                             meta = null,
                             isDvr = false,
@@ -1773,7 +1773,7 @@ fun AerioTVNavHost(
                 )
                 VODPlayerScreen(
                     streamUrl = resolved?.url.orEmpty(),
-                    title = movie?.displayName ?: "On Demand",
+                    title = movie?.displayName ?: "Mediathek",
                     startFromBeginning = movieFromStart,
                     // Audit #53/#38: never replay the API key to a session URL
                     // that resolved OFF the server's origin.
@@ -1913,7 +1913,7 @@ fun AerioTVNavHost(
                         com.aeriotv.android.feature.player.PhoneVodMini.Info(
                             key = playbackUrl,
                             videoId = recordingProgressId(playbackUrl, recId),
-                            title = title.ifBlank { "Recording" },
+                            title = title.ifBlank { "Aufnahme" },
                             posterUrl = null,
                             meta = recProgressMeta,
                             isDvr = isDvr,
@@ -1929,7 +1929,7 @@ fun AerioTVNavHost(
                 )
                 VODPlayerScreen(
                     streamUrl = playbackUrl,
-                    title = title.ifBlank { "Recording" },
+                    title = title.ifBlank { "Aufnahme" },
                     httpHeaders = headers,
                     catchupStartMillis = csStart,
                     catchupEndMillis = csEnd,

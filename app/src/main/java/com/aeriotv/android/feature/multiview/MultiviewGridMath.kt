@@ -16,7 +16,7 @@ import kotlin.math.sqrt
  */
 enum class MultiviewLayoutMode(val key: String, val displayName: String) {
     /** The built-in default layout for the current count (layout1..layout9). */
-    Auto("auto", "Default"),
+    Auto("auto", "Standard"),
 
     /** Balanced equal-size grid, landscape-preferred, last partial row centered. */
     EvenGrid("evenGrid", "Even Grid"),

@@ -49,11 +49,11 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.aeriotv.android"
+        applicationId = "de.dgstudios.aeriotvde"
         minSdk = 26
         targetSdk = 36
-        versionCode = 65
-        versionName = "0.5.9"
+        versionCode = 1
+        versionName = "0.5.9-de1"
         vectorDrawables { useSupportLibrary = true }
         ndk {
             abiFilters += listOf("arm64-v8a", "armeabi-v7a", "x86_64")

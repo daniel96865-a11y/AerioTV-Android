@@ -351,7 +351,7 @@ fun MovieDetailScreen(
                             plot = heroPlot,
                         ) {
                             TvHeroActionButton(
-                                title = if (hasResume) "Resume" else "Play",
+                                title = if (hasResume) "Fortsetzen" else "Abspielen",
                                 icon = Icons.Filled.PlayArrow,
                                 primary = true,
                                 modifier = Modifier
@@ -367,14 +367,14 @@ fun MovieDetailScreen(
                             )
                             if (hasResume) {
                                 TvHeroActionButton(
-                                    title = "Play from Beginning",
+                                    title = "Von Anfang abspielen",
                                     icon = Icons.Filled.Replay,
                                     onClick = { onPlay(true) },
                                 )
                             }
                             if (versionOptions.size > 1) {
                                 TvHeroActionButton(
-                                    title = "Version: ${selectedVersion?.label ?: "Auto"}",
+                                    title = "Version: ${selectedVersion?.label ?: "Automatisch"}",
                                     icon = Icons.Outlined.Tune,
                                     onClick = { showVersionPicker = true },
                                 )
@@ -435,7 +435,7 @@ fun MovieDetailScreen(
                         // Only offered when there is an actual choice (> 1
                         // provider copy on a Dispatcharr Direct Connect source).
                         versionLabel = if (versionOptions.size > 1) {
-                            selectedVersion?.label ?: "Auto"
+                            selectedVersion?.label ?: "Automatisch"
                         } else {
                             null
                         },
@@ -884,7 +884,7 @@ private fun PlayCta(
             tint = MaterialTheme.colorScheme.onPrimary,
         )
         Text(
-            text = if (hasResume) "Resume" else "Play",
+            text = if (hasResume) "Fortsetzen" else "Abspielen",
             style = MaterialTheme.typography.titleSmall,
             color = MaterialTheme.colorScheme.onPrimary,
             fontWeight = FontWeight.Bold,
@@ -1225,7 +1225,7 @@ private fun FloatingBackButton(onClick: () -> Unit) {
         ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Back",
+                contentDescription = "Zurück",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }

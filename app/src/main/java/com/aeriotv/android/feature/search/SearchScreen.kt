@@ -112,7 +112,7 @@ fun SearchScreen(
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = "Zurück",
                         tint = MaterialTheme.colorScheme.onBackground,
                     )
                 }
@@ -139,7 +139,7 @@ fun SearchScreen(
                     },
                 singleLine = true,
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-                placeholder = { Text("Search movies, shows, programs…") },
+                placeholder = { Text("Filme, Serien und Sendungen suchen…") },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             )
         }

@@ -66,7 +66,7 @@ fun MoviesAndTvShowsSettingsScreen(
 
     TvKeyboardOnOkHost {
         Column(modifier = Modifier.fillMaxSize()) {
-            SettingsDetailTopBar(title = "Movies & TV Shows", onBack = onBack)
+            SettingsDetailTopBar(title = "Filme & Serien", onBack = onBack)
 
             val vp = rememberViewport()
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
@@ -163,12 +163,12 @@ fun MoviesAndTvShowsSettingsScreen(
                                         enabled = keyDraft.isNotBlank() &&
                                             tmdbKeyState != SettingsViewModel.TmdbKeyTestState.Testing,
                                         modifier = Modifier.dpadFocusRing(RoundedCornerShape(50)),
-                                    ) { Text("Test") }
+                                    ) { Text("Testen") }
                                     TextButton(
                                         onClick = { viewModel.saveTmdbKey(keyDraft) },
                                         enabled = keyDraft.isNotBlank() || savedTmdbKey.isNotBlank(),
                                         modifier = Modifier.dpadFocusRing(RoundedCornerShape(50)),
-                                    ) { Text("Save") }
+                                    ) { Text("Speichern") }
                                     Spacer(Modifier.weight(1f))
                                     val (statusText, statusColor) = when (tmdbKeyState) {
                                         SettingsViewModel.TmdbKeyTestState.Testing ->

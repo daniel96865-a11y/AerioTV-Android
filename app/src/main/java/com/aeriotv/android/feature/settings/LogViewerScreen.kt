@@ -93,7 +93,7 @@ fun LogViewerScreen(onBack: () -> Unit) {
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -103,12 +103,12 @@ fun LogViewerScreen(onBack: () -> Unit) {
                 if (rememberIsTvDevice()) {
                     // Edge IconButton has no visible D-pad focus; pill insets
                     // to the 48dp overscan margin and rings under focus.
-                    SettingsHeaderTextButton(label = "Refresh", onClick = { refreshTick++ })
+                    SettingsHeaderTextButton(label = "Aktualisieren", onClick = { refreshTick++ })
                 } else {
                     IconButton(onClick = { refreshTick++ }) {
                         Icon(
                             imageVector = Icons.Filled.Refresh,
-                            contentDescription = "Refresh",
+                            contentDescription = "Aktualisieren",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }

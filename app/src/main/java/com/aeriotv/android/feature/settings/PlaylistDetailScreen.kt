@@ -134,7 +134,7 @@ fun PlaylistDetailScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -145,7 +145,7 @@ fun PlaylistDetailScreen(
                 // a corner action sits off the natural D-pad path.
                 if (!rememberIsTvDevice()) {
                     SettingsHeaderTextButton(
-                        label = "Edit",
+                        label = "Bearbeiten",
                         // Active-only, same rule as the refresh actions below:
                         // saveEdits writes through repository.activePlaylist(),
                         // so editing a NON-active playlist would silently
@@ -275,7 +275,7 @@ fun PlaylistDetailScreen(
                                     .format(Date(ts)),
                             )
                         }
-                        DetailRow("Channels", playlist.channelCount.toString())
+                        DetailRow("Sender", playlist.channelCount.toString())
                         if (!playlist.epgUrl.isNullOrBlank()) {
                             DetailRow("EPG", playlist.epgUrl!!)
                         }
@@ -301,7 +301,7 @@ fun PlaylistDetailScreen(
                     if (isTv && isActivePlaylist) {
                         ActionRow(
                             icon = Icons.Outlined.Edit,
-                            label = "Edit Playlist",
+                            label = "Wiedergabeliste bearbeiten",
                             onClick = onEdit,
                         )
                         HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
@@ -343,7 +343,7 @@ fun PlaylistDetailScreen(
                 ) {
                     ActionRow(
                         icon = Icons.Filled.Refresh,
-                        label = "Refresh EPG Data",
+                        label = "EPG-Daten aktualisieren",
                         onClick = { viewModel.refreshEpg() },
                         running = state.epgRefreshStatus is PlaylistViewModel.ActionStatus.Running,
                         status = state.epgRefreshStatus,
@@ -366,7 +366,7 @@ fun PlaylistDetailScreen(
                 ) {
                     ActionRow(
                         icon = Icons.Filled.Refresh,
-                        label = "Refresh Everything",
+                        label = "Alles aktualisieren",
                         destructive = true,
                         onClick = { confirmRefreshAll = true },
                         running = state.refreshAllStatus is PlaylistViewModel.ActionStatus.Running,
@@ -404,7 +404,7 @@ fun PlaylistDetailScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Delete",
+                    label = "Löschen",
                     destructive = true,
                     onClick = {
                         confirmDelete = false
@@ -414,7 +414,7 @@ fun PlaylistDetailScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { confirmDelete = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { confirmDelete = false })
             },
         )
     }
@@ -433,7 +433,7 @@ fun PlaylistDetailScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Refresh",
+                    label = "Aktualisieren",
                     destructive = true,
                     onClick = {
                         confirmRefreshAll = false
@@ -442,7 +442,7 @@ fun PlaylistDetailScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { confirmRefreshAll = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { confirmRefreshAll = false })
             },
         )
     }

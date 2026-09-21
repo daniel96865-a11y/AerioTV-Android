@@ -127,7 +127,7 @@ fun DeveloperSettingsScreen(
     val logFileExists = sizeBytes > 0L || debugLogger.logFile().exists()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Developer", onBack = onBack)
+        SettingsDetailTopBar(title = "Entwickler", onBack = onBack)
 
         androidx.compose.foundation.layout.Box(
             modifier = Modifier.fillMaxSize(),
@@ -202,7 +202,7 @@ fun DeveloperSettingsScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { pendingEnable = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { pendingEnable = false })
             },
         )
     }
@@ -216,7 +216,7 @@ fun DeveloperSettingsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Disable",
+                    label = "Deaktivieren",
                     onClick = {
                         pendingDisable = false
                         settingsVm.setDebugLoggingEnabled(false)
@@ -251,7 +251,7 @@ fun DeveloperSettingsScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { pendingClear = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { pendingClear = false })
             },
         )
     }
@@ -355,7 +355,7 @@ private fun WhatsCapturedSection() {
         DevRowDivider()
         CategoryRow(
             icon = Icons.Outlined.LiveTv,
-            title = "Channels",
+            title = "Sender",
             detail = "Channel list loads, source type, item counts, timing",
         )
         DevRowDivider()

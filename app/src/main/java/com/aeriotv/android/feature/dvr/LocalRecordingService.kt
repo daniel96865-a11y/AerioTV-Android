@@ -125,7 +125,7 @@ class LocalRecordingService : Service() {
                     reaffirmForeground()
                 } else {
                     val streamUrl = intent.getStringExtra(EXTRA_STREAM_URL).orEmpty()
-                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Recording"
+                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Aufnahme"
                     val channelName = intent.getStringExtra(EXTRA_CHANNEL_NAME) ?: title
                     val apiKey = intent.getStringExtra(EXTRA_API_KEY).orEmpty()
                     val durationMs = intent.getLongExtra(EXTRA_DURATION_MS, 60 * 60 * 1000L)
@@ -141,7 +141,7 @@ class LocalRecordingService : Service() {
                     reaffirmForeground()
                 } else {
                     val fileUrl = intent.getStringExtra(EXTRA_STREAM_URL).orEmpty()
-                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Recording"
+                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Aufnahme"
                     val channelName = intent.getStringExtra(EXTRA_CHANNEL_NAME) ?: title
                     val apiKey = intent.getStringExtra(EXTRA_API_KEY).orEmpty()
                     startDownload(fileUrl, title, channelName, apiKey)
@@ -589,7 +589,7 @@ class LocalRecordingService : Service() {
      */
     private fun reaffirmForeground() {
         ensureNotificationChannel()
-        startForegroundCompat(buildNotification(activeTitle.ifBlank { "Recording" }, "Recording…"))
+        startForegroundCompat(buildNotification(activeTitle.ifBlank { "Aufnahme" }, "Recording…"))
     }
 
     private fun stopForegroundCompat() {

@@ -150,7 +150,7 @@ fun MultiviewScreen(
     watchVm: com.aeriotv.android.feature.watchprogress.WatchProgressViewModel = hiltViewModel(),
     // The PLAYLIST_GRAPH-scoped PlaylistViewModel (Navigation.kt hoists the same
     // instance via hiltViewModel(parent)). Forwarded to the re-entrant
-    // AddToMultiviewSheet below so the "Add streams" picker reuses the single
+    // AddToMultiviewSheet below so the "Streams hinzufügen" picker reuses the single
     // graph-attached VM instead of spinning up a 2nd, graph-detached one.
     playlistVm: com.aeriotv.android.feature.playlist.PlaylistViewModel = hiltViewModel(),
 ) {
@@ -270,14 +270,14 @@ fun MultiviewScreen(
     // Dialog window while it is up (same pattern as the guide exit dialog).
     var exitDialogOpen by remember { mutableStateOf(false) }
     val exitGuard = rememberTvMenuGuard()
-    // "Add streams" reopens the Add-to-Multiview picker OVER the live grid.
+    // "Streams hinzufügen" reopens the Add-to-Multiview picker OVER the live grid.
     // The picker writes through the same @Singleton MultiviewStore the grid
     // reads (toggle / addTile APPEND, never clear), so newly picked tiles grow
     // the existing grid and BACK out of the picker keeps everything.
     var addPickerOpen by remember { mutableStateOf(false) }
     // Swap Stream: the tile the picker should RE-POINT rather than append to.
     // Null = the picker's normal add behaviour. Cleared whenever it closes so a
-    // later "Add streams" can never inherit a stale target.
+    // later "Streams hinzufügen" can never inherit a stale target.
     var swapTargetTileId by remember { mutableStateOf<String?>(null) }
     BackHandler(enabled = !exitDialogOpen) {
         when {
@@ -541,7 +541,7 @@ fun MultiviewScreen(
                     .statusBarsPadding()
                     .padding(end = 18.dp, top = 18.dp),
             )
-            // Item #7 phone parity: TV reaches "Add streams" through the BACK
+            // Item #7 phone parity: TV reaches "Streams hinzufügen" through the BACK
             // exit dialog, but on phone BACK exits outright (no dialog), so the
             // re-entrant picker was unreachable. Surface a small touch "+" in
             // the chrome (phone only) when not mid-relocate/fullscreen and below
@@ -591,7 +591,7 @@ fun MultiviewScreen(
                     IconButton(onClick = { addPickerOpen = true }) {
                         Icon(
                             imageVector = Icons.Filled.Add,
-                            contentDescription = "Add streams",
+                            contentDescription = "Streams hinzufügen",
                             tint = Color.White,
                         )
                     }
@@ -605,7 +605,7 @@ fun MultiviewScreen(
             title = "Leave Multiview?",
             actions = listOf(
                 TvMenuAction(
-                    label = "Add streams",
+                    label = "Streams hinzufügen",
                     icon = Icons.Filled.Add,
                     // Reopen the picker over the running grid. Existing tiles
                     // stay in the store and keep playing; the picker APPENDS.
@@ -635,7 +635,7 @@ fun MultiviewScreen(
         )
     }
 
-    // Re-entrant Add-to-Multiview picker (from the menu's "Add streams").
+    // Re-entrant Add-to-Multiview picker (from the menu's "Streams hinzufügen").
     // currentChannel = null: there is no single "now playing" stream to seed
     // or pin here, and nothing must be excluded -- the grid already holds the
     // tiles. All dismissal paths just close the picker; the store keeps the
@@ -681,7 +681,7 @@ fun MultiviewScreen(
         TvActionMenuDialog(
             title = menuTile.displayName,
             actions = buildList {
-                // Select (long-OK) opens this menu, so "Add streams" must live
+                // Select (long-OK) opens this menu, so "Streams hinzufügen" must live
                 // here too -- it previously existed ONLY behind the Back exit
                 // dialog. Same re-entrant picker; the store APPENDS.
                 if (selected.size < storeHandle.maxTiles) {
@@ -694,7 +694,7 @@ fun MultiviewScreen(
                     )
                 }
                 // Swap Stream: re-point THIS tile at something else through
-                // the very same picker as "Add streams". No cap check here -
+                // the very same picker as "Streams hinzufügen". No cap check here -
                 // the grid does not grow, so the tile count is unchanged.
                 // Playback submenu (iOS parity): RW 60s / Pause / FF 60s /
                 // conditional Return to Live for THIS tile's player.
@@ -781,7 +781,7 @@ fun MultiviewScreen(
                 if (menuAudioTracks.size > 1) {
                     add(
                         TvMenuAction(
-                            label = "Audio Track",
+                            label = "Audiospur",
                             icon = Icons.Filled.Audiotrack,
                             onClick = { audioTrackTileIndex = menuIdx },
                         ),
@@ -790,7 +790,7 @@ fun MultiviewScreen(
                 if (menuSubtitleTracks.isNotEmpty()) {
                     add(
                         TvMenuAction(
-                            label = "Subtitle Track",
+                            label = "Untertitelspur",
                             icon = Icons.Filled.Subtitles,
                             onClick = { subtitleTileIndex = menuIdx },
                         ),
@@ -825,7 +825,7 @@ fun MultiviewScreen(
                 )
                 add(
                     TvMenuAction(
-                        label = "Remove",
+                        label = "Entfernen",
                         icon = Icons.Outlined.Close,
                         destructive = true,
                         onClick = {
@@ -868,7 +868,7 @@ fun MultiviewScreen(
                 )
                 add(
                     TvMenuAction(
-                        label = if (pbPlayer?.playWhenReady == false) "Play" else "Pause",
+                        label = if (pbPlayer?.playWhenReady == false) "Abspielen" else "Pause",
                         icon = if (pbPlayer?.playWhenReady == false) Icons.Filled.PlayArrow else Icons.Filled.Pause,
                         onClick = {
                             pbPlayer?.let { it.playWhenReady = !it.playWhenReady }
@@ -1404,7 +1404,7 @@ private fun BoxScope.TileFinishedOverlay(
                     .padding(horizontal = 14.dp, vertical = 8.dp),
             ) {
                 Text(
-                    text = "Remove",
+                    text = "Entfernen",
                     style = MaterialTheme.typography.labelMedium,
                     color = Color.White,
                     fontWeight = FontWeight.SemiBold,
@@ -2146,7 +2146,7 @@ private fun ExoTile(
                 tileRetrySerial.intValue += 1
                 tileRetryRef.value?.invoke()
             }) {
-                Text("Retry")
+                Text("Erneut versuchen")
             }
         }
     }

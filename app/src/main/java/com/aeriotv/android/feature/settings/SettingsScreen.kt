@@ -117,9 +117,9 @@ import java.util.Date
  * behavior are literally the phone's.
  */
 enum class SettingsRootContent(val title: String) {
-    Full("Settings"),
-    PlaylistsOnly("Playlists"),
-    AboutOnly("About"),
+    Full("Einstellungen"),
+    PlaylistsOnly("Wiedergabelisten"),
+    AboutOnly("Über"),
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -193,7 +193,7 @@ fun SettingsScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -236,7 +236,7 @@ fun SettingsScreen(
                 PlaylistsSection(
                     playlists = playlists,
                     activeId = activeId,
-                    // In a pane the top bar already reads "Playlists".
+                    // In a pane the top bar already reads "Wiedergabelisten".
                     showHeader = fullRoot,
                     paneHost = content == SettingsRootContent.PlaylistsOnly || isTv,
                     onTap = { pl ->
@@ -371,7 +371,7 @@ private fun PlaylistsSection(
 ) {
     Column {
         if (showHeader) {
-            SectionHeader("Playlists")
+            SectionHeader("Wiedergabelisten")
             Spacer(Modifier.height(6.dp))
         }
         Column(
@@ -424,7 +424,7 @@ private fun PlaylistsSection(
                 )
                 Spacer(Modifier.size(10.dp))
                 Text(
-                    text = "Add Playlist",
+                    text = "Wiedergabeliste hinzufügen",
                     style = settingsRowValueStyle(),
                     color = MaterialTheme.colorScheme.textAccent,
                     fontWeight = FontWeight.Medium,
@@ -625,7 +625,7 @@ private fun AboutSection(
 ) {
     Column {
         if (showHeader) {
-            SectionHeader("About")
+            SectionHeader("Über")
             Spacer(Modifier.height(6.dp))
         }
         Column(
@@ -667,7 +667,7 @@ private fun AboutSection(
             )
             RowDivider()
             AboutActionRow(
-                "Open Source Licenses",
+                "Open-Source-Lizenzen",
                 Icons.Outlined.Description,
                 onClick = onOpenLicenses,
             )
@@ -890,17 +890,17 @@ enum class SettingsSection(
     val icon: ImageVector,
 ) {
     LiveTV(
-        title = "Live TV",
+        title = "Live-TV",
         subtitle = "Guide, groups, badges, colors",
         icon = Icons.Filled.LiveTv,
     ),
     Player(
-        title = "Player",
+        title = "Wiedergabe",
         subtitle = "Info card, rewind, gestures, multiview",
         icon = Icons.Outlined.PlayCircle,
     ),
     MoviesAndTvShows(
-        title = "Movies & TV Shows",
+        title = "Filme & Serien",
         subtitle = "Library refresh, posters",
         icon = Icons.Filled.Movie,
     ),
@@ -910,17 +910,17 @@ enum class SettingsSection(
         icon = Icons.Filled.FiberManualRecord,
     ),
     Appearance(
-        title = "Appearance",
+        title = "Darstellung",
         subtitle = "Theme, text size, time format",
         icon = Icons.Filled.Palette,
     ),
     General(
-        title = "General",
+        title = "Allgemein",
         subtitle = "Startup, refresh, network",
         icon = Icons.Filled.Tune,
     ),
     RemoteControl(
-        title = "Remote Control",
+        title = "Fernbedienung",
         subtitle = "Customize remote buttons",
         icon = Icons.Filled.SettingsRemote,
     ),
@@ -929,7 +929,7 @@ enum class SettingsSection(
         // On / Off state instead of a description. Apple does the same, and the
         // long string truncated on the Android TV rail. The description lives on
         // the Sync page's own Drive Sync footer.
-        title = "Sync",
+        title = "Synchronisierung",
         subtitle = null,
         icon = Icons.Filled.Cloud,
     ),
@@ -939,12 +939,12 @@ enum class SettingsSection(
         icon = Icons.Filled.SystemUpdate,
     ),
     Developer(
-        title = "Developer",
+        title = "Entwickler",
         subtitle = "Debug logging & diagnostics",
         icon = Icons.Outlined.BugReport,
     ),
     About(
-        title = "About",
+        title = "Über",
         subtitle = null,
         icon = Icons.Outlined.Info,
     ),
@@ -957,7 +957,7 @@ enum class SettingsSection(
  */
 fun settingsSectionSubtitle(section: SettingsSection, syncEnabled: Boolean): String? =
     if (section == SettingsSection.Sync) {
-        if (syncEnabled) "On" else "Off"
+        if (syncEnabled) "Ein" else "Aus"
     } else {
         section.subtitle
     }

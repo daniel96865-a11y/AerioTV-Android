@@ -44,13 +44,13 @@ enum class AppTab(
 ) {
     LiveTV(
         id = "livetv",
-        label = "Live TV",
+        label = "Live-TV",
         iconSelected = Icons.Filled.LiveTv,
         iconUnselected = Icons.Outlined.LiveTv,
     ),
     Favorites(
         id = "favorites",
-        label = "Favorites",
+        label = "Favoriten",
         iconSelected = Icons.Filled.Favorite,
         iconUnselected = Icons.Outlined.Favorite,
     ),
@@ -64,7 +64,7 @@ enum class AppTab(
     ),
     OnDemand(
         id = "ondemand",
-        label = "On Demand",
+        label = "Mediathek",
         iconSelected = Icons.Filled.OndemandVideo,
         iconUnselected = Icons.Outlined.OndemandVideo,
     ),
@@ -76,19 +76,19 @@ enum class AppTab(
      */
     Movies(
         id = "movies",
-        label = "Movies",
+        label = "Filme",
         iconSelected = Icons.Filled.Movie,
         iconUnselected = Icons.Outlined.Movie,
     ),
     TVShows(
         id = "tvshows",
-        label = "TV Shows",
+        label = "Serien",
         iconSelected = Icons.Filled.Tv,
         iconUnselected = Icons.Outlined.Tv,
     ),
     Settings(
         id = "settings",
-        label = "Settings",
+        label = "Einstellungen",
         iconSelected = Icons.Filled.Settings,
         iconUnselected = Icons.Outlined.Settings,
     ),
@@ -104,7 +104,7 @@ enum class AppTab(
      */
     Search(
         id = "search",
-        label = "Search",
+        label = "Suche",
         iconSelected = Icons.Filled.Search,
         iconUnselected = Icons.Outlined.Search,
     ),

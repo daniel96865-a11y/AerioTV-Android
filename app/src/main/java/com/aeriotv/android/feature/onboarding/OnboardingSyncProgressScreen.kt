@@ -147,10 +147,10 @@ fun OnboardingSyncProgressScreen(
  * the Settings toggles, e.g. "Playlists & Servers"). */
 private val SyncCategory.lineLabel: String
     get() = when (this) {
-        SyncCategory.Playlists -> "Playlists"
+        SyncCategory.Playlists -> "Wiedergabelisten"
         SyncCategory.WatchProgress -> "Watch progress"
         SyncCategory.Reminders -> "Reminders"
-        SyncCategory.Favorites -> "Favorites"
+        SyncCategory.Favorites -> "Favoriten"
         SyncCategory.Watchlist -> "Watchlist"
         SyncCategory.Preferences -> "Preferences"
         SyncCategory.Credentials -> "Credentials"

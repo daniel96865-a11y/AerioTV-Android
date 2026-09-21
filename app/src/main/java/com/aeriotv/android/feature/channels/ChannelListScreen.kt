@@ -185,7 +185,7 @@ fun ChannelListScreen(
     val hiddenGroups by settingsVm.hiddenGroups.collectAsStateWithLifecycle(initialValue = emptySet())
     val showChannelLogos by settingsVm.showChannelLogos.collectAsStateWithLifecycle(initialValue = true)
     val showChannelNumbers by settingsVm.showChannelNumbers.collectAsStateWithLifecycle(initialValue = true)
-    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Default")
+    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Standard")
     val groupOrder by settingsVm.groupOrder.collectAsStateWithLifecycle(initialValue = emptyList())
     val groupSortMode = com.aeriotv.android.feature.livetv.GroupSortMode.from(groupSortModeRaw)
     // Logan 2026-09-14: Recently Watched is a synthetic group, unchecked in
@@ -289,7 +289,7 @@ fun ChannelListScreen(
 
     val groups by remember(allGroupsRaw, effectiveHidden) {
         derivedStateOf {
-            // Drop any provider group literally named "All" -- it collides with
+            // Drop any provider group literally named "Alle" -- it collides with
             // the ALL_GROUPS sentinel and crashes the pill LazyRow on a
             // duplicate key (#45 review).
             val visible = allGroupsRaw.filterNot { it in effectiveHidden }
@@ -393,7 +393,7 @@ fun ChannelListScreen(
             hiddenGroupsCount = hiddenGroups.size,
             onManageGroups = { manageGroupsOpen = true },
             // Also show the pill strip when collections exist even if there is
-            // only the "All" group, else a collection filter is inescapable on
+            // only the "Alle" group, else a collection filter is inescapable on
             // a groupless playlist (#45 review). Mirrors GuideScreen.
             showPills = groups.size > 1 || collections.isNotEmpty() || hiddenGroups.isNotEmpty(),
             groups = groups,
@@ -431,7 +431,7 @@ fun ChannelListScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 4.dp),
             singleLine = true,
-            placeholder = { Text("Search channels") },
+            placeholder = { Text("Sender suchen") },
             leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
             // Trailing X clears the query in one tap. iOS UISearchBar has
             // this for free; Compose's OutlinedTextField doesn't, so we
@@ -1069,7 +1069,7 @@ internal fun ChannelRow(
     //
     // Dispatcharr's bulk EPG grid drops `<category>` so nowProgramme.category
     // is typically blank for Dispatcharr-sourced playlists; the channel's
-    // groupTitle ("Sports", "Movies HD", "Kids", "News" etc.) is passed as a
+    // groupTitle ("Sport", "Movies HD", "Kinder", "Nachrichten" etc.) is passed as a
     // fallback so the row still tints when the program-level category isn't
     // available. The per-program lazy fetch in ProgramInfoSheet still wins
     // when the user opens the detail sheet.
@@ -1408,7 +1408,7 @@ internal fun ChannelRow(
                             }
                             if (nowProgramme != null) {
                                 add(
-                                    TvMenuAction("Program Info", Icons.Outlined.Info) {
+                                    TvMenuAction("Sendungsinfo", Icons.Outlined.Info) {
                                         onShowProgramInfo(nowProgramme.toInfoTarget(channel.name, channel.dispatcharrChannelId))
                                     },
                                 )
@@ -1428,7 +1428,7 @@ internal fun ChannelRow(
                             if (channel.url.isNotBlank()) {
                                 add(
                                     TvMenuAction(
-                                        if (nowProgramme != null) "Record from Now" else "Record",
+                                        if (nowProgramme != null) "Record from Now" else "Aufnehmen",
                                         Icons.Outlined.FiberManualRecord,
                                     ) { recordFromMenu() },
                                 )
@@ -1467,12 +1467,12 @@ internal fun ChannelRow(
                             }
                         }
                         if (nowProgramme != null) {
-                            add(TvMenuAction("Program Info", Icons.Outlined.Info) {
+                            add(TvMenuAction("Sendungsinfo", Icons.Outlined.Info) {
                                 onShowProgramInfo(nowProgramme.toInfoTarget(channel.name, channel.dispatcharrChannelId))
                             })
                         }
                         if (channel.url.isNotBlank()) {
-                            add(TvMenuAction(if (nowProgramme != null) "Record from Now" else "Record", Icons.Outlined.FiberManualRecord) { recordFromMenu() })
+                            add(TvMenuAction(if (nowProgramme != null) "Record from Now" else "Aufnehmen", Icons.Outlined.FiberManualRecord) { recordFromMenu() })
                         }
                     },
                     onDismiss = { menuOpen = false },
@@ -1793,10 +1793,10 @@ private fun UpcomingProgrammeRow(
             onWatch?.let { watch ->
                 add(TvMenuAction("Watch", Icons.Outlined.Replay) { watch() })
             }
-            add(TvMenuAction("Program Info", Icons.Outlined.Info) { onTap() })
+            add(TvMenuAction("Sendungsinfo", Icons.Outlined.Info) { onTap() })
             if (!isPast) add(
                 TvMenuAction(
-                    if (isReminderSet) "Cancel Reminder" else "Set Reminder",
+                    if (isReminderSet) "Cancel Reminder" else "Erinnerung setzen",
                     Icons.Outlined.Notifications,
                 ) {
                     if (isReminderSet) {
@@ -1814,7 +1814,7 @@ private fun UpcomingProgrammeRow(
                     }
                 },
             )
-            if (!isPast) add(TvMenuAction("Record", Icons.Outlined.FiberManualRecord) { onShowRecord() })
+            if (!isPast) add(TvMenuAction("Aufnehmen", Icons.Outlined.FiberManualRecord) { onShowRecord() })
         }
         if (isTv) {
             if (menuOpen) {

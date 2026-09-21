@@ -241,7 +241,7 @@ fun PlayerChromeOverlay(
     // panel up as long as it is open.
     LaunchedEffect(moreOpen, sleepOpen) { onInteractingChange(moreOpen || sleepOpen) }
 
-    // Initial focus target when chrome appears -- the leftmost "Options"
+    // Initial focus target when chrome appears -- the leftmost "Optionen"
     // pill on the bottom row. Without this, focus stays on PlayerScreen's
     // tap-target Box (which has clickable from gesture handling), so D-pad
     // presses don't traverse to the pills. Fired by the LaunchedEffect
@@ -410,7 +410,7 @@ fun PlayerChromeOverlay(
             val centerPill: @Composable () -> Unit = {
                 PlayerControlCircle(
                     icon = if (isPlayerPaused) Icons.Filled.PlayArrow else Icons.Filled.Pause,
-                    title = if (isPlayerPaused) "Play" else "Pause",
+                    title = if (isPlayerPaused) "Abspielen" else "Pause",
                     onClick = onRewindTogglePause,
                     modifier = Modifier.focusRequester(pauseFocus),
                     onInteraction = onInteraction,
@@ -423,7 +423,7 @@ fun PlayerChromeOverlay(
                 if (connectionIssue) {
                     PlayerControlCircle(
                         icon = Icons.Filled.Refresh,
-                        title = "Retry",
+                        title = "Erneut versuchen",
                         onClick = onRetry,
                             modifier = Modifier.focusRequester(retryFocus),
                         onInteraction = onInteraction,
@@ -434,7 +434,7 @@ fun PlayerChromeOverlay(
                 if (canRecord && !catchupMode) {
                     PlayerControlCircle(
                         icon = Icons.Filled.FiberManualRecord,
-                        title = "Record",
+                        title = "Aufnehmen",
                         iconTint = Color(0xFFFF4757),
                         onClick = { recordCurrent() },
                         onInteraction = onInteraction,
@@ -480,7 +480,7 @@ fun PlayerChromeOverlay(
                 if (!catchupMode) {
                     PlayerControlCircle(
                         icon = Icons.Outlined.GridView,
-                        title = "Multiview",
+                        title = "Mehrfachansicht",
                         contentDescription = "Add a multiview tile",
                         onClick = onAddToMultiview,
                             onInteraction = onInteraction,
@@ -489,7 +489,7 @@ fun PlayerChromeOverlay(
                 Box {
                     PlayerControlCircle(
                         icon = Icons.Filled.Tune,
-                        title = "Options",
+                        title = "Optionen",
                         onClick = { moreOpen = true },
                             modifier = Modifier.focusRequester(optionsFocus),
                         onInteraction = onInteraction,
@@ -596,7 +596,7 @@ fun PlayerChromeOverlay(
             ) {
                 CircleIconButton(
                     icon = Icons.Filled.Close,
-                    contentDescription = "Close",
+                    contentDescription = "Schließen",
                     onClick = onClose,
                     modifier = Modifier.focusRequester(closeFocus),
                 )
@@ -621,7 +621,7 @@ fun PlayerChromeOverlay(
                 Spacer(Modifier.weight(1f))
                 CircleIconButton(
                     icon = if (forcedLandscape) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
-                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Fullscreen",
+                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Vollbild",
                     onClick = {
                         forcedLandscape = !forcedLandscape
                         context.findActivity()?.requestedOrientation = if (forcedLandscape) {
@@ -1121,7 +1121,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Subtitles") },
+            text = { Text("Untertitel") },
             onClick = onSubtitles,
         )
         DropdownMenuItem(
@@ -1132,7 +1132,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Audio Track") },
+            text = { Text("Audiospur") },
             onClick = onAudioTracks,
         )
         DropdownMenuItem(
@@ -1143,7 +1143,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Playback Speed") },
+            text = { Text("Wiedergabegeschwindigkeit") },
             onClick = onPlaybackSpeed,
         )
         // Video Scale: cycle Fit <-> Fill. Stays open so repeated presses
@@ -1187,7 +1187,7 @@ private fun PlayerMoreMenu(
                 )
             },
             text = {
-                Text(if (sleepActive) "Sleep Timer (active)" else "Sleep Timer")
+                Text(if (sleepActive) "Sleep Timer (active)" else "Sleep-Timer")
             },
             onClick = onSleepTimer,
         )
@@ -1211,7 +1211,7 @@ private fun PlayerMoreMenu(
                         tint = MaterialTheme.colorScheme.onSurface,
                     )
                 },
-                text = { Text("Switch Stream") },
+                text = { Text("Stream wechseln") },
                 onClick = onSwitchStream,
             )
         }
@@ -1523,7 +1523,7 @@ private fun RewindTransportBar(
                 )
                 CircleIconButton(
                     icon = if (paused) Icons.Filled.PlayArrow else Icons.Filled.Pause,
-                    contentDescription = if (paused) "Play" else "Pause",
+                    contentDescription = if (paused) "Abspielen" else "Pause",
                     onClick = onTogglePause,
                 )
                 CircleIconButton(
@@ -1851,14 +1851,14 @@ private fun SleepTimerSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Sleep Timer",
+                text = "Sleep-Timer",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
             )
             Spacer(Modifier.height(12.dp))
             SLEEP_OPTIONS.forEach { mins ->
-                val label = if (mins == 0) "Off" else "$mins minutes"
+                val label = if (mins == 0) "Aus" else "$mins minutes"
                 val isActive = (mins == 0 && current == null) ||
                         (mins != 0 && current != null && ((current / 60_000L).toInt() in (mins - 1)..mins))
                 Row(
@@ -1954,13 +1954,13 @@ fun SubtitlesSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Subtitles",
+                text = "Untertitel",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
             )
             Spacer(Modifier.height(12.dp))
-            SubtitleRow(label = "Off", selected = currentTrackId == null, onClick = { onSelect(null) })
+            SubtitleRow(label = "Aus", selected = currentTrackId == null, onClick = { onSelect(null) })
             if (tracks.isEmpty()) {
                 Text(
                     text = "No subtitle tracks reported by the stream.",
@@ -1988,7 +1988,7 @@ fun SubtitlesSheet(
 
 /**
  * Sister sheet to [SubtitlesSheet] for picking the active audio track. Same
- * RadioButton-row layout so it reads identically; difference is no "Off" row
+ * RadioButton-row layout so it reads identically; difference is no "Aus" row
  * (every live stream needs an audio track to play sound; mute lives in the
  * Audio Only / system volume affordance, not here).
  */
@@ -2003,7 +2003,7 @@ fun AudioTracksSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Audio Track",
+                text = "Audiospur",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
@@ -2078,7 +2078,7 @@ fun AudioTracksSheet(
                 TextButton(onClick = { applySync(syncMs + 100L) }) { Text("+100 ms") }
                 Spacer(Modifier.weight(1f))
                 if (syncMs != 0L) {
-                    TextButton(onClick = { applySync(0L) }) { Text("Reset") }
+                    TextButton(onClick = { applySync(0L) }) { Text("Zurücksetzen") }
                 }
             }
             Text(
@@ -2092,7 +2092,7 @@ fun AudioTracksSheet(
 }
 
 /**
- * Player "Switch Stream" picker (Dispatcharr Direct Connect). Lists the
+ * Player "Stream wechseln" picker (Dispatcharr Direct Connect). Lists the
  * channel's member streams with their probed quality (resolution / fps /
  * bitrate / codec); selecting one POSTs change_stream + re-primes playback.
  * Clones [AudioTracksSheet]'s RadioButton-row layout. Streams Dispatcharr has
@@ -2117,7 +2117,7 @@ fun SwitchStreamSheet(
                 .verticalScroll(rememberScrollState()),
         ) {
             Text(
-                text = "Switch Stream",
+                text = "Stream wechseln",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
@@ -2161,7 +2161,7 @@ fun PlaybackSpeedSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Playback Speed",
+                text = "Wiedergabegeschwindigkeit",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,

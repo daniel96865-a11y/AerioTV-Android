@@ -125,11 +125,11 @@ class GithubUpdateManager @Inject constructor(
             // time so the next foreground retries soon.
             UpdateChecker.Outcome.NotReady -> if (manual) {
                 _state.value = UpdateState.Error(
-                    "A new release is being published. Try again in a minute.", null,
+                    "Eine neue Version wird gerade veröffentlicht. Versuche es in einer Minute erneut.", null,
                 )
             }
             is UpdateChecker.Outcome.Failed -> if (manual) {
-                _state.value = UpdateState.Error("Update check failed: ${outcome.message}", null)
+                _state.value = UpdateState.Error("Update-Prüfung fehlgeschlagen: ${outcome.message}", null)
             } else {
                 Log.i(TAG, "auto-check failed silently: ${outcome.message}")
             }
@@ -147,7 +147,7 @@ class GithubUpdateManager @Inject constructor(
                 val target = File(dir, "AerioTV-${info.versionName}.apk")
                 if (dir.usableSpace < info.apkSizeBytes + FREE_SPACE_HEADROOM_BYTES) {
                     _state.value = UpdateState.Error(
-                        "Not enough free space to download the update.", info,
+                        "Nicht genügend freier Speicher zum Herunterladen des Updates.", info,
                     )
                     return@launch
                 }
@@ -163,7 +163,7 @@ class GithubUpdateManager @Inject constructor(
             } catch (t: Throwable) {
                 Log.w(TAG, "download failed", t)
                 _state.value = UpdateState.Error(
-                    "Download failed: ${t.message ?: t::class.simpleName}", info,
+                    "Download fehlgeschlagen: ${t.message ?: t::class.simpleName}", info,
                 )
             }
         }
@@ -182,7 +182,7 @@ class GithubUpdateManager @Inject constructor(
             // reaped). Hard-refuse rather than risk a silent recording loss.
             if (LocalRecordingService.isActive) {
                 _state.value = UpdateState.Error(
-                    "A recording is in progress. Finish or stop it, then install the update.",
+                    "Eine Aufnahme läuft. Beende oder stoppe sie und installiere danach das Update.",
                     info,
                 )
                 return@launch
@@ -191,7 +191,7 @@ class GithubUpdateManager @Inject constructor(
             val staged = pending?.let { File(it.apkPath) }
             if (pending == null || staged == null || !staged.isFile) {
                 _state.value = UpdateState.Error(
-                    "The downloaded update is missing. Download it again.", info,
+                    "Das heruntergeladene Update fehlt. Lade es erneut herunter.", info,
                 )
                 appPreferences.setUpdatePendingJson("")
                 return@launch
@@ -209,7 +209,7 @@ class GithubUpdateManager @Inject constructor(
             } catch (t: Throwable) {
                 Log.w(TAG, "install commit failed", t)
                 _state.value = UpdateState.Error(
-                    "Install failed: ${t.message ?: t::class.simpleName}", info,
+                    "Installation fehlgeschlagen: ${t.message ?: t::class.simpleName}", info,
                 )
             }
         }
@@ -288,7 +288,7 @@ class GithubUpdateManager @Inject constructor(
                 info?.let { _state.value = UpdateState.ReadyToInstall(it) }
             }
             else -> _state.value = UpdateState.Error(
-                message ?: "Install failed (status $status)", info,
+                message ?: "Installation fehlgeschlagen (Status $status)", info,
             )
         }
     }
@@ -358,7 +358,7 @@ class GithubUpdateManager @Inject constructor(
             return null
         }
         if (expectedSize != null && file.length() != expectedSize) {
-            return fail("The download is incomplete (size mismatch). Try again.")
+            return fail("Der Download ist unvollständig. Versuche es erneut.")
         }
         val flags = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             PackageManager.GET_SIGNING_CERTIFICATES
@@ -366,9 +366,9 @@ class GithubUpdateManager @Inject constructor(
             @Suppress("DEPRECATION") PackageManager.GET_SIGNATURES
         }
         val archive = context.packageManager.getPackageArchiveInfo(file.absolutePath, flags)
-            ?: return fail("The downloaded file is not a readable APK.")
+            ?: return fail("Die heruntergeladene Datei ist keine lesbare APK.")
         if (archive.packageName != context.packageName) {
-            return fail("The downloaded APK is not AerioTV (${archive.packageName}).")
+            return fail("Die heruntergeladene APK gehört nicht zu AerioTV Deutsch (${archive.packageName}).")
         }
         val archiveCode = PackageInfoCompat.getLongVersionCode(archive)
         val currentCode = BuildConfig.VERSION_CODE.toLong()
@@ -380,10 +380,10 @@ class GithubUpdateManager @Inject constructor(
         }
         val archiveSigners = signerSha256(archive)
         if (archiveSigners.isEmpty()) {
-            return fail("Could not read the APK's signing certificate.")
+            return fail("Das Signaturzertifikat der APK konnte nicht gelesen werden.")
         }
         if (archiveSigners != ownSignerSha256()) {
-            return fail("The APK's signing certificate does not match this app. Refusing to install.")
+            return fail("Das Signaturzertifikat der APK passt nicht zu dieser App. Installation abgebrochen.")
         }
         return PendingUpdate(
             versionName = archive.versionName ?: "",

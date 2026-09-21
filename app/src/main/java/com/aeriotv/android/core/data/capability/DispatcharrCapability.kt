@@ -279,33 +279,33 @@ object CapabilityNotices {
 /** User-facing copy for a denied capability. Kept here so every surface agrees. */
 fun Capability.deniedMessage(): String = when (this) {
     Capability.CanManageDvr ->
-        "Your Dispatcharr account can view recordings but not manage them. " +
-            "Ask your server administrator for DVR manage access."
+        "Dein Dispatcharr-Konto kann Aufnahmen ansehen, aber nicht verwalten. " +
+            "Bitte deinen Serveradministrator um Berechtigung zur DVR-Verwaltung."
     Capability.CanViewDvr ->
-        "Your Dispatcharr account does not have DVR access. " +
-            "Ask your server administrator to enable it."
+        "Dein Dispatcharr-Konto hat keinen DVR-Zugriff. " +
+            "Bitte deinen Serveradministrator, den Zugriff zu aktivieren."
     Capability.CanViewVod ->
-        "Your Dispatcharr account does not have access to movies. " +
-            "Ask your server administrator to enable it."
+        "Dein Dispatcharr-Konto hat keinen Zugriff auf Filme. " +
+            "Bitte deinen Serveradministrator, den Zugriff zu aktivieren."
     Capability.CanViewSeries ->
-        "Your Dispatcharr account does not have access to TV shows. " +
-            "Ask your server administrator to enable it."
+        "Dein Dispatcharr-Konto hat keinen Zugriff auf Serien. " +
+            "Bitte deinen Serveradministrator, den Zugriff zu aktivieren."
     Capability.CanUseCatchup ->
-        "Catch-up is not enabled for your Dispatcharr account. " +
-            "Ask your server administrator to enable it."
+        "Catch-up ist für dein Dispatcharr-Konto nicht aktiviert. " +
+            "Bitte deinen Serveradministrator, den Zugriff zu aktivieren."
     Capability.CanSwitchStream ->
-        "Switching streams needs a Dispatcharr administrator account. " +
-            "Ask your server administrator for access."
+        "Zum Wechseln von Streams ist ein Dispatcharr-Administratorkonto erforderlich. " +
+            "Bitte deinen Serveradministrator um Zugriff."
     Capability.CanManagePlaylists ->
-        "Your Dispatcharr account cannot change server playlists. " +
-            "Ask your server administrator for access."
+        "Dein Dispatcharr-Konto darf Server-Wiedergabelisten nicht ändern. " +
+            "Bitte deinen Serveradministrator um Zugriff."
     Capability.CanReadServerSettings ->
-        "Your Dispatcharr account cannot read server settings. " +
-            "Ask your server administrator for access."
+        "Dein Dispatcharr-Konto darf Servereinstellungen nicht lesen. " +
+            "Bitte deinen Serveradministrator um Zugriff."
 }
 
 /** Copy for a 403 on something the account's permissions say it SHOULD be able to do. */
 fun Capability.networkRestrictionMessage(): String =
-    "The server refused this even though your Dispatcharr account has permission. " +
-        "This usually means a network restriction on the account (allowed networks). " +
-        "Ask your server administrator to allow this device's network."
+    "Der Server hat die Anfrage abgelehnt, obwohl dein Dispatcharr-Konto die Berechtigung besitzt. " +
+        "Das deutet meist auf eine Netzwerkbeschränkung des Kontos hin. " +
+        "Bitte deinen Serveradministrator, das Netzwerk dieses Geräts freizugeben."

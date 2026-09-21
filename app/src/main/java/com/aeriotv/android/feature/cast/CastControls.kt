@@ -223,7 +223,7 @@ fun CastRouteChooserDialog(
                 if (routes.isEmpty() && tvs.isEmpty() &&
                     companionConn !is CompanionRemoteController.Conn.NeedsPairing
                 ) {
-                    Text("Searching for devices...")
+                    Text("Geräte werden gesucht...")
                 }
                 @Composable
                 fun routeRow(route: MediaRouter.RouteInfo) {
@@ -283,7 +283,7 @@ fun CastRouteChooserDialog(
                             singleLine = true,
                         )
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            TextButton(onClick = { companionRemote?.disconnect() }) { Text("Cancel") }
+                            TextButton(onClick = { companionRemote?.disconnect() }) { Text("Abbrechen") }
                             TextButton(
                                 onClick = { companionRemote?.submitPairingCode(pairCode) },
                                 enabled = pairCode.length == 6,
@@ -331,11 +331,11 @@ fun CastRouteChooserDialog(
                     companionRemote?.disconnect()
                     onDismiss()
                 }) { Text("Disconnect TV") }
-                else -> TextButton(onClick = onDismiss) { Text("Close") }
+                else -> TextButton(onClick = onDismiss) { Text("Schließen") }
             }
         },
         dismissButton = if (connected || companionConn is CompanionRemoteController.Conn.Connected) {
-            { TextButton(onClick = onDismiss) { Text("Close") } }
+            { TextButton(onClick = onDismiss) { Text("Schließen") } }
         } else {
             null
         },

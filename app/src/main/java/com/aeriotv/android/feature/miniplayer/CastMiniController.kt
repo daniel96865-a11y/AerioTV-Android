@@ -132,7 +132,7 @@ fun CastMiniController(
             IconButton(onClick = onTogglePlayPause) {
                 Icon(
                     imageVector = if (isPlaying) Icons.Filled.Pause else Icons.Filled.PlayArrow,
-                    contentDescription = if (isPlaying) "Pause" else "Play",
+                    contentDescription = if (isPlaying) "Pause" else "Abspielen",
                     tint = MaterialTheme.colorScheme.primary,
                 )
             }

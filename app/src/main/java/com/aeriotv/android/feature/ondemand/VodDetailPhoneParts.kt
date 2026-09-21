@@ -119,7 +119,7 @@ internal fun PhoneVersionPill(
     onSelect: (VodProviderOption?) -> Unit,
 ) {
     var menu by remember { mutableStateOf(false) }
-    val currentLabel = selected?.label ?: "Auto"
+    val currentLabel = selected?.label ?: "Automatisch"
     Box {
         Row(
             modifier = Modifier

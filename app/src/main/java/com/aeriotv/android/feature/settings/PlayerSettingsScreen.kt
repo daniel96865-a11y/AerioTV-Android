@@ -93,7 +93,7 @@ fun PlayerSettingsScreen(
     val matchContentResolution by viewModel.matchContentResolution.collectAsStateWithLifecycle(initialValue = false)
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Player", onBack = onBack)
+        SettingsDetailTopBar(title = "Wiedergabe", onBack = onBack)
 
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             Column(
@@ -331,7 +331,7 @@ fun PlayerSettingsScreen(
                 // share one section. tvOS presents corners as a Square /
                 // Rounded selection (s_09); same underlying Boolean.
                 SettingsSection(
-                    header = "Multiview",
+                    header = "Mehrfachansicht",
                     footer = "How the grid shows which tile is unmuted. Center Icon fades with the chrome, Gray Outline stays visible, Accent Outline appears on switch and fades after 5 seconds. Padding inserts a small gap between tiles so each stream stands on its own.",
                 ) {
                     AUDIO_FOCUS_OPTIONS.forEach { opt ->
@@ -427,7 +427,7 @@ data class BufferOption(val id: String, val label: String, val detail: String, v
  * claimed.
  */
 internal val BUFFER_OPTIONS: List<BufferOption> = listOf(
-    BufferOption("default", "Default", "4 seconds - recommended", 4_000),
+    BufferOption("default", "Standard", "4 seconds - recommended", 4_000),
     BufferOption("large", "Large", "8 seconds - unstable connections", 8_000),
     BufferOption("xlarge", "Extra Large", "16 seconds - very poor networks", 16_000),
 )

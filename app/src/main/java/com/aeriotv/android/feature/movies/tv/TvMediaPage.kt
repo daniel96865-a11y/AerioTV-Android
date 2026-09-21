@@ -141,7 +141,7 @@ import kotlinx.coroutines.launch
 /**
  * WHICH focusable on a TV page opened the detail (or player) now on top of
  * it. Restored verbatim on the way back: a hero button by its STABLE id (the
- * primary button's LABEL changes, "Play" / "Resume" / "Play S1 E1"), a shelf
+ * primary button's LABEL changes, "Abspielen" / "Fortsetzen" / "Play S1 E1"), a shelf
  * card by shelf and index, a grid cell by row and column.
  */
 sealed interface TvReturnSource {
@@ -241,7 +241,7 @@ data class TvHeroButton(
     val label: String,
     val icon: ImageVector,
     val primary: Boolean = false,
-    /** STABLE across label changes ("Play" / "Resume" / "Play S1 E1" are all
+    /** STABLE across label changes ("Abspielen" / "Fortsetzen" / "Play S1 E1" are all
      *  the primary button): the return-focus source records this, not the
      *  label. Defaults to the label for buttons whose copy never moves. */
     val id: String = label,
@@ -255,10 +255,10 @@ data class TvHeroPage(
     val artUrl: String?,
     val buttons: List<TvHeroButton>,
     val subtitle: String? = null,
-    /** "Recording now" / "Continue watching" line above the title. */
+    /** "Aufnahme läuft" / "Continue watching" line above the title. */
     val eyebrow: String? = null,
     val eyebrowColor: Color = Color.Unspecified,
-    /** tvOS: only "Recording now" carries the dot; "Continue watching" is plain text. */
+    /** tvOS: only "Aufnahme läuft" carries the dot; "Continue watching" is plain text. */
     val eyebrowDot: Boolean = false,
     /** Channel logo shown at the trailing side when there is no art. */
     val logoUrl: String? = null,
@@ -303,7 +303,7 @@ fun <T> TvMediaPage(
     onQueryChange: (String) -> Unit = {},
     onSearchToggle: () -> Unit = {},
     onClearSearch: () -> Unit = {},
-    searchPlaceholder: String = "Search",
+    searchPlaceholder: String = "Suche",
     isSearching: Boolean = false,
     searchExtras: List<@Composable () -> Unit> = emptyList(),
     pills: List<String> = emptyList(),
@@ -349,10 +349,10 @@ fun <T> TvMediaPage(
      *  Filter circle (tvOS fullScreenCover never tore the tab's focus state
      *  down, MoviesView.swift:3503). */
     filterOpen: Boolean = false,
-    /** Stable per-tab id ("Movies", "TVShows", "dvr"): the key this page
+    /** Stable per-tab id ("Filme", "TVShows", "dvr"): the key this page
      *  records its focused source under in [TvReturnMemory]. */
     pageId: String = "",
-    /** Section title over the hero banner ("Continue Watching"), drawn in the
+    /** Section title over the hero banner ("Weiterschauen"), drawn in the
      *  shelf-title style at the hero copy column's leading inset and NOT
      *  focusable (Logan 2026-09-11). It lives inside the hero's own grid row,
      *  so the row's measured height carries it and every rest top below the
@@ -980,7 +980,7 @@ fun <T> TvMediaPage(
     // the hero (the guide's ladder); at the top the handlers stand down so
     // BACK reaches the shell.
     androidx.activity.compose.BackHandler(enabled = LocalTabIsActive.current && searchEnabled && searchActive) {
-        TvFocusTrace.key("Back", true, "page-close-search")
+        TvFocusTrace.key("Zurück", true, "page-close-search")
         closeOrToggleSearch()
     }
     // Back from the page's own content (hero, header, pills, grid, rail) with
@@ -1001,11 +1001,11 @@ fun <T> TvMediaPage(
         topNavHasFocus = topNavHasFocus,
     ) {
         val landed = requestTabPill?.invoke() == true
-        TvFocusTrace.key("Back", landed, "page-to-tab-pill")
+        TvFocusTrace.key("Zurück", landed, "page-to-tab-pill")
         if (!landed) runCatching { topNav?.requestFocus() }
     }
     androidx.activity.compose.BackHandler(enabled = LocalTabIsActive.current && scrolled && !(searchEnabled && searchActive)) {
-        TvFocusTrace.key("Back", true, "page-snap-to-top")
+        TvFocusTrace.key("Zurück", true, "page-snap-to-top")
         scope.launch {
             // Through the owner like every other move; 40 frames because
             // the snap from deep in the library runs 600 ms.
@@ -1270,7 +1270,7 @@ fun <T> TvMediaPage(
                 fullSpan("hero", trimBottom = gridRowSpacing + 10.dp, onMeasured = recordLeadingHeight) {
                   // The hero is always the first row when it exists.
                   Column(modifier = Modifier.onPreviewKeyEvent { upToTabPill(it, "hero") }) {
-                    // "Continue Watching" over the banner, in the shelf-title
+                    // "Weiterschauen" over the banner, in the shelf-title
                     // style (12 sp SemiBold onBackground) at the same leading
                     // inset as the hero's copy column: overscan 40 + content
                     // inset 30 = 70 dp = overscan 40 + heroInset 8 + the card's
@@ -1362,7 +1362,7 @@ fun <T> TvMediaPage(
                         }
                         if (searchEnabled) {
                             TvActionCircle(
-                                icon = Icons.Filled.Search, contentDescription = if (searchActive) "Close search" else "Search",
+                                icon = Icons.Filled.Search, contentDescription = if (searchActive) "Close search" else "Suche",
                                 selected = searchActive, onClick = closeOrToggleSearch,
                                 modifier = Modifier
                                     .focusRequester(searchCircle)
@@ -1377,7 +1377,7 @@ fun <T> TvMediaPage(
                         }
                         if (sortActions.isNotEmpty()) {
                             TvActionCircle(
-                                icon = Icons.Filled.SwapVert, contentDescription = "Sort", onClick = { sortOpen = true },
+                                icon = Icons.Filled.SwapVert, contentDescription = "Sortieren", onClick = { sortOpen = true },
                                 modifier = Modifier.onFocusChanged { if (it.isFocused) TvFocusTrace.focus("header:Sort") },
                             )
                         }
@@ -1456,7 +1456,7 @@ fun <T> TvMediaPage(
                     ) {
                         item(key = "all") {
                             TvPill(
-                                "All", selectedPill == null, onClick = { onPill(null) },
+                                "Alle", selectedPill == null, onClick = { onPill(null) },
                                 modifier = Modifier
                                     .focusRequester(allPill)
                                     .onFocusChanged { if (it.isFocused) TvFocusTrace.focus("pill:All") },
@@ -1609,7 +1609,7 @@ fun <T> TvMediaPage(
     }
 
     if (sortOpen) {
-        TvActionMenuDialog(title = "Sort", actions = sortActions, guard = menuGuard, onDismiss = { sortOpen = false })
+        TvActionMenuDialog(title = "Sortieren", actions = sortActions, guard = menuGuard, onDismiss = { sortOpen = false })
     }
 }
 
@@ -2004,7 +2004,7 @@ fun TvHeroButtonView(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = if (button.label.isEmpty()) Arrangement.Center else Arrangement.spacedBy(4.dp),
     ) {
-        Icon(button.icon, contentDescription = if (button.label.isEmpty()) "Options" else null, tint = ink, modifier = Modifier.size(if (button.label.isEmpty()) 12.dp else 11.dp))
+        Icon(button.icon, contentDescription = if (button.label.isEmpty()) "Optionen" else null, tint = ink, modifier = Modifier.size(if (button.label.isEmpty()) 12.dp else 11.dp))
         if (button.label.isNotEmpty()) Text(button.label, fontSize = 11.sp, fontWeight = FontWeight.SemiBold, color = ink, maxLines = 1)
     }
 }

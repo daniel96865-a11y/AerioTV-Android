@@ -169,7 +169,7 @@ fun ConfigureSourceScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -923,7 +923,7 @@ private fun GuideHistoryRow(
                 val selected = days == sanitizeGuideDays(selectedDays)
                 Text(
                     text = when (days) {
-                        0 -> "All Available"
+                        0 -> "Alles verfügbar"
                         1 -> "1 Day"
                         else -> "$days Days"
                     },

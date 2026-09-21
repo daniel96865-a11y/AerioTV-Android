@@ -510,7 +510,7 @@ private fun ProgramInfoBody(
     HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
     Spacer(Modifier.height(sectionGap))
 
-    SectionLabel("Description")
+    SectionLabel("Beschreibung")
     Spacer(Modifier.height(8.dp))
     if (target.description.isBlank()) {
         Text(
@@ -555,7 +555,7 @@ private fun InfoColumnsRow(target: ProgramInfoTarget, rowPadding: Dp) {
     val duration = formatDuration(target.endMillis - target.startMillis)
 
     Column(modifier = Modifier.fillMaxWidth()) {
-        InfoRow(label = "Channel", value = target.channelName, verticalPadding = rowPadding)
+        InfoRow(label = "Sender", value = target.channelName, verticalPadding = rowPadding)
         InfoRow(label = "Airs", value = airs, verticalPadding = rowPadding)
         InfoRow(label = "Date", value = date, verticalPadding = rowPadding)
         InfoRow(label = "Duration", value = duration, verticalPadding = rowPadding)

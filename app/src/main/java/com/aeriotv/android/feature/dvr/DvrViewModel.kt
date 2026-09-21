@@ -986,7 +986,7 @@ class DvrViewModel @Inject constructor(
     /**
      * Stop an in-progress server recording early. The partial file stays on
      * disk — caller pairs with deleteRecording when the partial isn't wanted.
-     * Mirrors iOS contextMenu "Stop Recording" (MyRecordingsView line 332-336).
+     * Mirrors iOS contextMenu "Aufnahme stoppen" (MyRecordingsView line 332-336).
      */
     suspend fun stopRecording(recording: Recording): Result<Unit> {
         if (recording.source != Source.Server) {

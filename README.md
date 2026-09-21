@@ -1,3 +1,12 @@
+# AerioTV Deutsch
+
+**Inoffizielle deutsche Modifikation von AerioTV for Android.**
+Ausgangsprojekt: jonzey231/AerioTV-Android. Diese Variante wurde am 21.09.2026 verändert und übersetzt. Sie bleibt gemäß dem Ausgangsprojekt unter GNU GPL v3 oder später; LICENSE, LICENSE-EXCEPTIONS.md und THIRD_PARTY_LICENSES.md bleiben Bestandteil des Projekts.
+
+Die Variante verwendet die eigene Android-App-ID de.dgstudios.aeriotvde und kann dadurch neben dem Original installiert werden.
+
+---
+
 # AerioTV for Android
 
 AerioTV for Android is a native IPTV streaming app for Android phones, tablets, and Google TV / Android TV, built from a single Jetpack Compose codebase. It connects to Dispatcharr (admin login or API key), Xtream Codes, and M3U playlist servers to deliver live TV, movies, and series with a full electronic program guide (EPG) when supplied by the user.

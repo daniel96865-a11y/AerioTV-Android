@@ -92,7 +92,7 @@ fun LiveTvSettingsScreen(
     val menuGuard = rememberTvMenuGuard()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Live TV", onBack = onBack)
+        SettingsDetailTopBar(title = "Live-TV", onBack = onBack)
 
         val vp = rememberViewport()
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
@@ -319,7 +319,7 @@ fun LiveTvSettingsScreen(
                     },
                 ) {
                     ScaleSliderRow(
-                        label = if (listViewShown) "Live TV List" else "Live TV",
+                        label = if (listViewShown) "Live TV List" else "Live-TV",
                         value = scaleLiveTV,
                         onValueChange = viewModel::setDisplayScaleLiveTV,
                     )

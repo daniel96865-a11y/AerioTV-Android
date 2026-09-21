@@ -757,7 +757,7 @@ fun PlayerScreen(
     // Same visible-group derivation as the guide pills (source order ->
     // Manage Groups sort -> hidden filter), so both surfaces always agree.
     val hiddenGroups by settingsVm.hiddenGroups.collectAsStateWithLifecycle(initialValue = emptySet())
-    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Default")
+    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Standard")
     val groupOrderPref by settingsVm.groupOrder.collectAsStateWithLifecycle(initialValue = emptyList())
     val overlayGroups = remember(channels, hiddenGroups, groupSortModeRaw, groupOrderPref) {
         val source = channels.asSequence()
@@ -2218,7 +2218,7 @@ private fun PlayerSheets(
                 multiviewStore.restore(mvSnapshot, mvSnapshotFocus)
             },
             // BACK / scrim / swipe KEEPS whatever the user just toggled (mirrors
-            // MultiviewScreen's re-entrant picker). Only the explicit "Cancel"
+            // MultiviewScreen's re-entrant picker). Only the explicit "Abbrechen"
             // text button (onCancel) reverts to the pre-open snapshot. Without
             // this, onDismiss defaulted to onCancel and BACK silently discarded
             // the picks the user added while watching.

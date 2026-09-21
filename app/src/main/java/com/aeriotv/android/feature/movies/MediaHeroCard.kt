@@ -184,14 +184,14 @@ fun MediaHeroCard(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
                     Icon(Icons.Filled.PlayArrow, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(18.dp))
-                    Text(if (page.hasProgress) "Resume" else "Play", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(if (page.hasProgress) "Fortsetzen" else "Abspielen", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onPrimary)
                 }
-                if (page.hasProgress) HeroIconButton(Icons.Filled.Replay, "Play from Beginning", onPlayFromStart)
+                if (page.hasProgress) HeroIconButton(Icons.Filled.Replay, "Von Anfang abspielen", onPlayFromStart)
                 HeroIconButton(Icons.Outlined.Info, "Details", onDetails)
                 // The hero menu is the right-most options circle, not a long
                 // press on Resume (Logan 2026-09-10, all platforms).
                 if (onRemove != null || onToggleWatchlist != null || onToggleHidden != null) Box {
-                    HeroIconButton(Icons.Filled.MoreHoriz, "Options") { menu = true }
+                    HeroIconButton(Icons.Filled.MoreHoriz, "Optionen") { menu = true }
                     run {
                         DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                             if (onToggleWatchlist != null) {

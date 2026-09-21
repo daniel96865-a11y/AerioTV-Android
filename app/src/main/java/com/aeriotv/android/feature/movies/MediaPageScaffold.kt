@@ -93,7 +93,7 @@ fun <T> MediaPageScaffold(
     query: String = "",
     onQueryChange: (String) -> Unit = {},
     onSearchToggle: () -> Unit = {},
-    searchPlaceholder: String = "Search",
+    searchPlaceholder: String = "Suche",
     isSearching: Boolean = false,
     searchExtras: List<PageRow> = emptyList(),
     pills: List<String> = emptyList(),
@@ -219,7 +219,7 @@ fun <T> MediaPageScaffold(
                 if (!isSearching && pills.isNotEmpty()) {
                     item(key = "pills", span = { GridItemSpan(maxLineSpan) }) {
                         EdgeToEdgePillRow {
-                            item(key = "all") { GenrePill("All", selectedPill == null) { onPill(null) } }
+                            item(key = "all") { GenrePill("Alle", selectedPill == null) { onPill(null) } }
                             items(pills.size, key = { pills[it] }) { i ->
                                 GenrePill(pills[i], selectedPill == pills[i]) { onPill(if (selectedPill == pills[i]) null else pills[i]) }
                             }
@@ -309,8 +309,8 @@ private fun LibraryHeader(
         }
         Spacer(Modifier.weight(1f))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            if (onSearch != null) HeaderCircle(Icons.Filled.Search, "Search", onSearch)
-            Box { HeaderCircle(Icons.Filled.SwapVert, "Sort", onSort); sortMenu() }
+            if (onSearch != null) HeaderCircle(Icons.Filled.Search, "Suche", onSearch)
+            Box { HeaderCircle(Icons.Filled.SwapVert, "Sortieren", onSort); sortMenu() }
             if (onFilter != null) HeaderCircle(Icons.Filled.FilterList, "Filter", onFilter)
         }
     }

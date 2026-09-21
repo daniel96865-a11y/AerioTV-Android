@@ -90,7 +90,7 @@ internal fun TvMediaTab(
     onRemoveWatchlist: (String) -> Unit,
     onRemoveProgress: (String) -> Unit,
     onPlay: (videoId: String, title: String) -> Unit,
-    /** "Play from Beginning": start at 0 and KEEP the Continue Watching row. */
+    /** "Von Anfang abspielen": start at 0 and KEEP the Continue Watching row. */
     onPlayFromStart: (videoId: String, title: String) -> Unit,
     onOpen: (MediaItem) -> Unit,
     /** Hero label for a SERIES whose target episode is known ("Play S1 E1" /
@@ -141,18 +141,18 @@ internal fun TvMediaTab(
         val buttons = buildList {
             // A series hero always carries the season / episode of the
             // target ("Resume S1 E1"), on the Continue Watching hero as well
-            // as the watchlist one; bare "Resume" hid which episode would
+            // as the watchlist one; bare "Fortsetzen" hid which episode would
             // play (Logan 2026-09-11). Movies keep Play / Resume.
             val primaryLabel = when {
                 seriesLabel != null -> seriesLabel
-                page.hasProgress -> "Resume"
-                else -> "Play"
+                page.hasProgress -> "Fortsetzen"
+                else -> "Abspielen"
             }
             add(TvHeroButton(primaryLabel, Icons.Filled.PlayArrow, primary = true, id = "Primary", onClick = play))
             // tvOS plays at 0 and LEAVES WatchProgress intact
             // (MoviesView.swift:1507-1511): the row must survive.
             if (page.hasProgress) {
-                add(TvHeroButton("Play from Beginning", Icons.Filled.Replay, id = "FromStart") { armHero(); onPlayFromStart(videoId, page.title) })
+                add(TvHeroButton("Von Anfang abspielen", Icons.Filled.Replay, id = "FromStart") { armHero(); onPlayFromStart(videoId, page.title) })
             }
             add(TvHeroButton("Details", Icons.Outlined.Info, id = "Details", onClick = details))
         }
@@ -230,9 +230,9 @@ internal fun TvMediaTab(
         gridState = gridState,
         heroPages = tvHero,
         // The hero is always the Continue Watching carousel.
-        heroSectionTitle = if (tvHero.isNotEmpty()) "Continue Watching" else null,
+        heroSectionTitle = if (tvHero.isNotEmpty()) "Weiterschauen" else null,
         shelves = listOf(watchlistShelf),
-        headerTitle = if (isSearching) "Results" else kind.libraryTitle,
+        headerTitle = if (isSearching) "Ergebnisse" else kind.libraryTitle,
         headerCount = gridItems.size,
         columns = 7,
         gridRowSpacing = 24.dp,
@@ -268,7 +268,7 @@ internal fun TvMediaTab(
         },
         emptyContent = {
             if (isLoading || (!isSearching && libraryPending) || (isSearching && isSearchBusy)) CircularProgressIndicator()
-            else Text(if (isSearching) "No results" else kind.emptyTitle, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            else Text(if (isSearching) "Keine Ergebnisse" else kind.emptyTitle, color = MaterialTheme.colorScheme.onSurfaceVariant)
         },
         isLoading = isLoading,
         railLetters = available,

@@ -68,12 +68,12 @@ class UpdateChecker @Inject constructor() {
                 header("X-GitHub-Api-Version", "2022-11-28")
             }
         } catch (t: Throwable) {
-            return Outcome.Failed(t.message ?: "network error")
+            return Outcome.Failed(t.message ?: "Netzwerkfehler")
         }
         if (response.status == HttpStatusCode.Forbidden ||
             response.status.value == 429
         ) {
-            return Outcome.Failed("rate limited")
+            return Outcome.Failed("Zu viele Anfragen")
         }
         if (response.status != HttpStatusCode.OK) {
             return Outcome.Failed("HTTP ${response.status.value}")
@@ -81,7 +81,7 @@ class UpdateChecker @Inject constructor() {
         val release: GithubRelease = try {
             response.body()
         } catch (t: Throwable) {
-            return Outcome.Failed("bad response: ${t.message}")
+            return Outcome.Failed("Ungültige Serverantwort: ${t.message}")
         }
         if (release.prerelease) return Outcome.UpToDate
         val remote = release.tagName.removePrefix("v").removePrefix("V")
@@ -142,7 +142,7 @@ class UpdateChecker @Inject constructor() {
 
     companion object {
         private const val LATEST_RELEASE_URL =
-            "https://api.github.com/repos/jonzey231/AerioTV-Android/releases/latest"
+            "https://api.github.com/repos/daniel96865-a11y/AerioTV-Android/releases/latest"
 
         /**
          * Semver-ish compare for our vX.Y.Z tags. Numeric triple compare; a

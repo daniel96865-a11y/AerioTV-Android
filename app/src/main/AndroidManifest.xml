@@ -99,7 +99,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="aeriotv" />
+                <data android:scheme="aeriotvde" />
                 <data android:host="channel" />
                 <data android:host="vod" />
                 <!-- Audit #47 Watch Next: resume VOD playback directly. -->

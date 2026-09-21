@@ -408,7 +408,7 @@ fun AddToCollectionFlow(
                 },
                 confirmButton = {},
                 dismissButton = {
-                    TextButton(onClick = onClose) { Text("Cancel") }
+                    TextButton(onClick = onClose) { Text("Abbrechen") }
                 },
             )
         }
@@ -449,7 +449,7 @@ fun AddToCollectionFlow(
                 ) { Text("Add at End") }
             },
             dismissButton = {
-                TextButton(onClick = onClose) { Text("Cancel") }
+                TextButton(onClick = onClose) { Text("Abbrechen") }
             },
         )
     }

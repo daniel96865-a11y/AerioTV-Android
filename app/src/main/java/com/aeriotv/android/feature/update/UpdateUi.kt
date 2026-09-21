@@ -194,7 +194,7 @@ private fun UpdatePromptBody(
             val mb = state.info.apkSizeBytes / (1024 * 1024)
             bodyText = "AerioTV ${state.info.versionName} is ready to download (${mb} MB)."
             notes = state.info.notes
-            primaryLabel = "Download"
+            primaryLabel = "Herunterladen"
         }
         is UpdateState.Downloading -> {
             titleText = "Downloading update"
@@ -213,7 +213,7 @@ private fun UpdatePromptBody(
             bodyText = "AerioTV ${state.info.versionName} is verified and ready. Your " +
                 "channels, settings, and recordings are kept. AerioTV will close to " +
                 "install; reopen it from your home screen."
-            primaryLabel = "Install"
+            primaryLabel = "Installieren"
         }
         is UpdateState.AwaitingInstallPermission -> {
             titleText = "One-time permission needed"
@@ -222,7 +222,7 @@ private fun UpdatePromptBody(
                 "Install. If you've already allowed it, Install continues right away."
             // Routes through install(): proceeds if the grant is in place,
             // reopens the Settings toggle otherwise.
-            primaryLabel = "Install"
+            primaryLabel = "Installieren"
         }
         is UpdateState.Installing -> {
             titleText = "Installing"
@@ -235,7 +235,7 @@ private fun UpdatePromptBody(
             titleText = "Update problem"
             bodyText = state.message
             primaryLabel = "Try again"
-            laterLabel = "Close"
+            laterLabel = "Schließen"
         }
         else -> return
     }

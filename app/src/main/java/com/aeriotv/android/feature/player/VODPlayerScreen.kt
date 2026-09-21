@@ -271,7 +271,7 @@ fun VODPlayerScreen(
      *  (VerifyError on the Streamer, 2026-09-11). */
     progressMeta: VodProgressMeta? = null,
     posterUrl: String? = null,
-    /** Hero "Play from Beginning" (tvOS MoviesView:1507-1511): ignore the
+    /** Hero "Von Anfang abspielen" (tvOS MoviesView:1507-1511): ignore the
      *  saved position and start at 0. The WatchProgress row is left alone,
      *  so Continue Watching keeps the title, and saving continues as usual. */
     startFromBeginning: Boolean = false,
@@ -318,10 +318,10 @@ fun VODPlayerScreen(
     onReportCatchupPosition: suspend (playbackUrl: String, positionSecs: Double, paused: Boolean) -> Boolean =
         { _, _, _ -> true },
     /** VOD version switching (Dispatcharr Direct Connect): the provider
-     *  copies of the playing item. The Options sheet offers "Switch Version"
+     *  copies of the playing item. The Options sheet offers "Version wechseln"
      *  only when there is more than one. */
     versionOptions: List<VodProviderOption> = emptyList(),
-    /** The pinned version, or null for "Auto" (server priority + failover). */
+    /** The pinned version, or null for "Automatisch" (server priority + failover). */
     selectedVersion: VodProviderOption? = null,
     /** Records the selection in the VM and re-resolves the playback URL for
      *  it (null option = back to Auto). Returns the new session URL, or null
@@ -1060,7 +1060,7 @@ fun VODPlayerScreen(
                         IconButton(onClick = onClose) {
                             Icon(
                                 imageVector = Icons.Filled.Close,
-                                contentDescription = "Close",
+                                contentDescription = "Schließen",
                                 tint = Color.White,
                             )
                         }
@@ -1731,7 +1731,7 @@ fun VODPlayerScreen(
                             IconButton(onClick = onClose) {
                                 Icon(
                                     imageVector = Icons.Filled.Close,
-                                    contentDescription = "Close",
+                                    contentDescription = "Schließen",
                                     tint = Color.White,
                                 )
                             }
@@ -1769,7 +1769,7 @@ fun VODPlayerScreen(
                                     } else {
                                         Icons.Filled.Fullscreen
                                     },
-                                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Fullscreen",
+                                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Vollbild",
                                     tint = Color.White,
                                 )
                             }
@@ -2095,7 +2095,7 @@ fun VODPlayerScreen(
                         Text("Retry Now")
                     }
                     Button(onClick = onClose) {
-                        Text("Close")
+                        Text("Schließen")
                     }
                 }
             }
@@ -2109,23 +2109,23 @@ fun VODPlayerScreen(
             com.aeriotv.android.ui.FormFactorModal(onDismiss = { showOptionsSheet = false }) {
                 Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
                     Text(
-                        text = "Options",
+                        text = "Optionen",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.SemiBold,
                     )
                     Spacer(Modifier.height(8.dp))
                     if (versionOptions.size > 1) {
-                        PlayerOptionRow("Switch Version") {
+                        PlayerOptionRow("Version wechseln") {
                             showOptionsSheet = false
                             showVersionSheet = true
                         }
                     }
-                    PlayerOptionRow("Audio Track") {
+                    PlayerOptionRow("Audiospur") {
                         showOptionsSheet = false
                         showAudioSheet = true
                     }
-                    PlayerOptionRow("Subtitles") {
+                    PlayerOptionRow("Untertitel") {
                         showOptionsSheet = false
                         showSubtitlesSheet = true
                     }
@@ -2321,7 +2321,7 @@ private fun BottomChrome(
             ) {
                 Icon(
                     imageVector = if (isPaused) Icons.Filled.PlayArrow else Icons.Filled.Pause,
-                    contentDescription = if (isPaused) "Play" else "Pause",
+                    contentDescription = if (isPaused) "Abspielen" else "Pause",
                     tint = if (ppFocused) Color.Black else Color.White,
                     modifier = Modifier.size(if (isTvForm) 18.dp else 34.dp),
                 )

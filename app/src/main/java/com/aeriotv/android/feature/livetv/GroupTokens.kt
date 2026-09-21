@@ -3,7 +3,7 @@ package com.aeriotv.android.feature.livetv
 import com.aeriotv.android.feature.playlist.PlaylistViewModel
 
 /**
- * GH #80: the "All Channels" pill can be hidden like any group. The hidden
+ * GH #80: the "Alle Sender" pill can be hidden like any group. The hidden
  * set carries the [PlaylistViewModel.ALL_GROUPS] sentinel for it. It is kept
  * whenever nothing else would be left to pick, so the guide never empties.
  */
@@ -67,7 +67,7 @@ fun restoredGroupToken(saved: String?, knownGroupNames: Collection<String>): Str
  * GH #81: the human label for a group token. The tokens are storage values,
  * not copy: [PlaylistViewModel.FAVORITES_GROUP] is the literal "__favorites__"
  * and it leaked into the Manage Groups sheet (screenshot 2026-09-13), while
- * [PlaylistViewModel.ALL_GROUPS] is the bare "All". Every site that renders a
+ * [PlaylistViewModel.ALL_GROUPS] is the bare "Alle". Every site that renders a
  * token as text routes through here so there is exactly one mapping.
  *
  * Collection tokens ("collection:<id>") resolve to the collection's own name
@@ -79,8 +79,8 @@ fun groupDisplayName(
     token: String,
     collections: List<com.aeriotv.android.core.data.ChannelCollection> = emptyList(),
 ): String = when {
-    token == PlaylistViewModel.ALL_GROUPS -> "All Channels"
-    token == PlaylistViewModel.FAVORITES_GROUP -> "Favorites"
+    token == PlaylistViewModel.ALL_GROUPS -> "Alle Sender"
+    token == PlaylistViewModel.FAVORITES_GROUP -> "Favoriten"
     token == PlaylistViewModel.RECENT_GROUP -> "Recently Watched"
     token.startsWith(com.aeriotv.android.core.data.ChannelCollection.TOKEN_PREFIX) -> {
         val id = com.aeriotv.android.core.data.ChannelCollection.idFromToken(token)

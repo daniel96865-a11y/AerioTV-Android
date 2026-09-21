@@ -129,9 +129,9 @@ fun OnboardingSyncCategoryChooser(
                     modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
                     horizontalArrangement = Arrangement.End,
                 ) {
-                    TextButton(onClick = onDismiss) { Text("Not now") }
+                    TextButton(onClick = onDismiss) { Text("Nicht jetzt") }
                     TextButton(onClick = { onConfirm(selection.toMap()) }) {
-                        Text("Continue")
+                        Text("Weiter")
                     }
                 }
             }

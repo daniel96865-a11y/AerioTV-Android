@@ -58,7 +58,7 @@ fun AppUpdatesScreen(
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "App Updates", onBack = onBack)
+        SettingsDetailTopBar(title = "App-Updates", onBack = onBack)
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             Column(
                 modifier = Modifier
@@ -76,7 +76,7 @@ fun AppUpdatesScreen(
                         "it from your home screen.",
                 ) {
                     SettingsInfoRow(label = "Version", value = BuildConfig.VERSION_NAME)
-                    SettingsInfoRow(label = "Channel", value = "GitHub releases")
+                    SettingsInfoRow(label = "Sender", value = "GitHub releases")
                     SettingsActionRow(
                         label = "Check for updates",
                         leadingIcon = Icons.Filled.Refresh,
@@ -128,7 +128,7 @@ fun AppUpdatesScreen(
                             "continues right away.",
                     ) {
                         SettingsActionRow(
-                            label = "Install",
+                            label = "Installieren",
                             leadingIcon = Icons.Filled.SystemUpdate,
                             onClick = { viewModel.install() },
                         )

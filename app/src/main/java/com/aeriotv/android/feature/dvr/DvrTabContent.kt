@@ -118,7 +118,7 @@ fun DvrTabContent(
     // first call, and the poll only runs while this tab is composed - so
     // returning from the player (the exact path in the report: watch an
     // in-progress recording, it finishes, come back to DVR) showed the stale
-    // "Recording" bucket for up to half a minute with no fetch in flight.
+    // "Aufnahme" bucket for up to half a minute with no fetch in flight.
     // The reporter concluded he had to restart the app for it to move to
     // Completed. Entering the tab now always kicks a fetch.
     LaunchedEffect(Unit) {
@@ -482,7 +482,7 @@ fun DvrTabContent(
     pendingDelete?.let { rec ->
         AlertDialog(
             onDismissRequest = { pendingDelete = null },
-            title = { Text("Delete recording?") },
+            title = { Text("Aufnahme löschen?") },
             text = {
                 Text(
                     "This removes \"${rec.title}\" " +
@@ -509,10 +509,10 @@ fun DvrTabContent(
                             },
                         )
                     }
-                }) { Text("Delete", color = MaterialTheme.colorScheme.error) }
+                }) { Text("Löschen", color = MaterialTheme.colorScheme.error) }
             },
             dismissButton = {
-                TextButton(onClick = { pendingDelete = null }) { Text("Cancel") }
+                TextButton(onClick = { pendingDelete = null }) { Text("Abbrechen") }
             },
         )
     }
@@ -565,7 +565,7 @@ fun DvrTabContent(
                 }
             },
             dismissButton = {
-                TextButton(onClick = { pendingClearAll = false }) { Text("Cancel") }
+                TextButton(onClick = { pendingClearAll = false }) { Text("Abbrechen") }
             },
         )
     }
@@ -689,12 +689,12 @@ private fun RecordingRow(
         DvrViewModel.Recording.Status.Unknown -> MaterialTheme.colorScheme.onSurfaceVariant
     }
     val statusLabel = when (rec.status) {
-        DvrViewModel.Recording.Status.Recording -> "Recording"
+        DvrViewModel.Recording.Status.Recording -> "Aufnahme"
         DvrViewModel.Recording.Status.Completed -> "Completed"
         // Stopped-but-saved reads as Completed, matching Dispatcharr (see color).
         DvrViewModel.Recording.Status.Stopped -> "Completed"
         DvrViewModel.Recording.Status.Failed -> "Failed"
-        DvrViewModel.Recording.Status.Scheduled -> "Scheduled"
+        DvrViewModel.Recording.Status.Scheduled -> "Geplant"
         DvrViewModel.Recording.Status.Unknown -> "Unknown"
     }
     val dateFmt = DateFormat.getDateInstance(DateFormat.MEDIUM)
@@ -776,7 +776,7 @@ private fun RecordingRow(
                 }
                 // Tokenize the resolved category on XMLTV separators. When the
                 // value has no separators (a single un-splittable genre like
-                // "Sports") the tokenizer already returns it as one token, so
+                // "Sport") the tokenizer already returns it as one token, so
                 // the ifEmpty fallback only fires when the raw string itself is
                 // blank -- which it no longer is for completed recordings now
                 // that DvrViewModel hydrates them from the programme list
@@ -934,13 +934,13 @@ private fun RecordingActionMenu(
                 add(TvMenuAction("Watch from Beginning", Icons.Outlined.SkipPrevious) { onWatchFromBeginning() })
             }
             // Dispatcharr 0.30 dvr_access "view": list and play only.
-            if (canManage) add(TvMenuAction("Stop Recording", Icons.Outlined.Stop) { onStopRecording() })
+            if (canManage) add(TvMenuAction("Aufnahme stoppen", Icons.Outlined.Stop) { onStopRecording() })
         }
         if (isScheduled && isServer && canManage) {
-            add(TvMenuAction("Edit", Icons.Outlined.Edit) { onEdit() })
+            add(TvMenuAction("Bearbeiten", Icons.Outlined.Edit) { onEdit() })
         }
         val deleteLabel = when {
-            isServer && isScheduled -> "Cancel"
+            isServer && isScheduled -> "Abbrechen"
             isServer -> "Delete from Server"
             // Unambiguous local label (Logan 2026-09-15): the bytes live on
             // this device, and this never touches the server.

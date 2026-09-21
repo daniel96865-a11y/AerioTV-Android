@@ -74,7 +74,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
 
 /**
  * Appearance sub-screen. Mirrors iOS Settings -> Appearance
- * (project_aeriotv_ios_canon.md "Appearance" section).
+ * (project_aeriotv_ios_canon.md "Darstellung" section).
  *
  * Theme card -> 6 brand presets + Custom Accent override + a live Preview
  * tile so the user can see how their accent reads on a card without leaving
@@ -135,7 +135,7 @@ fun AppearanceSettingsScreen(
     var accentPickerOpen by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Appearance", onBack = onBack)
+        SettingsDetailTopBar(title = "Darstellung", onBack = onBack)
 
         val vp = rememberViewport()
         Box(
@@ -164,7 +164,7 @@ fun AppearanceSettingsScreen(
             ) {
                 // THEME card — six brand presets + Custom Accent override row.
                 settingsCard(
-                    header = "Theme",
+                    header = "Design",
                     footer = "Choose the palette and the light or dark appearance. Theme sets the color; Appearance sets light vs dark. They are independent, so any theme works in either appearance. Changes apply live; the preset accent kicks in unless Custom Accent is on.",
                 ) {
                     // Plan B5: "theme swatch grid at doubled density" on
@@ -245,11 +245,11 @@ fun AppearanceSettingsScreen(
                 // at the composition root). The Display Scale sliders below
                 // still multiply on top for their own surfaces.
                 settingsCard(
-                    header = "Text Size",
+                    header = "Textgröße",
                     footer = "Scales all text in AerioTV, on top of your device's font size. Changes apply live.",
                 ) {
                     TextSizeSliderRow(
-                        label = "Text Size",
+                        label = "Textgröße",
                         stops = TEXT_SCALE_STOPS,
                         value = textScale,
                         onValueChange = viewModel::setTextScale,
@@ -466,8 +466,8 @@ private fun AppearanceModeHeaderRow() {
 }
 
 private fun appearanceModeLabel(mode: AppearanceMode): String = when (mode) {
-    AppearanceMode.Dark -> "Dark"
-    AppearanceMode.Light -> "Light"
+    AppearanceMode.Dark -> "Dunkel"
+    AppearanceMode.Light -> "Hell"
     AppearanceMode.System -> "System"
 }
 
@@ -994,15 +994,15 @@ private fun AccentPickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             SettingsDialogTextButton(
-                label = "Save",
+                label = "Speichern",
                 onClick = { if (isValid) onSave(sanitized) },
                 enabled = isValid,
             )
         },
         dismissButton = {
             Row {
-                SettingsDialogTextButton(label = "Reset", onClick = onReset)
-                SettingsDialogTextButton(label = "Cancel", onClick = onDismiss)
+                SettingsDialogTextButton(label = "Zurücksetzen", onClick = onReset)
+                SettingsDialogTextButton(label = "Abbrechen", onClick = onDismiss)
             }
         },
         title = { Text("Custom Accent") },

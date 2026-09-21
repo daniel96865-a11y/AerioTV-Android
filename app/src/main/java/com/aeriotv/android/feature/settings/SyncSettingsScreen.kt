@@ -147,7 +147,7 @@ fun SyncSettingsScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Sync", onBack = onBack)
+        SettingsDetailTopBar(title = "Synchronisierung", onBack = onBack)
 
         androidx.compose.foundation.layout.Box(
             modifier = Modifier.fillMaxSize(),
@@ -404,7 +404,7 @@ fun SyncSettingsScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { pushConfirmOpen = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { pushConfirmOpen = false })
             },
         )
     }
@@ -431,7 +431,7 @@ fun SyncSettingsScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { pullConfirmOpen = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { pullConfirmOpen = false })
             },
         )
     }
@@ -653,9 +653,9 @@ private fun SignInWithGoogleButton(enabled: Boolean, onClick: () -> Unit) {
     // against AerioTV's navy app surface than the white pill the previous
     // cut used, while staying compliant with Google's brand guidelines.
     // Tokens:
-    //  - background #131314 (Google's "Dark" button surface)
-    //  - 1dp outline #8E918F (Google's "Dark" 1dp stroke)
-    //  - text #E3E3E3 (Google's "Dark" foreground)
+    //  - background #131314 (Google's "Dunkel" button surface)
+    //  - 1dp outline #8E918F (Google's "Dunkel" 1dp stroke)
+    //  - text #E3E3E3 (Google's "Dunkel" foreground)
     val bg = if (enabled) Color(0xFF131314) else Color(0xFF131314).copy(alpha = 0.55f)
     val stroke = Color(0xFF8E918F).copy(alpha = if (enabled) 1f else 0.55f)
     val fg = if (enabled) Color(0xFFE3E3E3) else Color(0xFFE3E3E3).copy(alpha = 0.55f)

@@ -72,7 +72,7 @@ import kotlinx.serialization.json.JsonPrimitive
 /**
  * On Demand tab state. Phase 10a is Movies first-page only; Phase 10b adds
  * Series + the detail / episode picker; Phase 10c wires WatchProgress + the
- * "Continue Watching" CTA.
+ * "Weiterschauen" CTA.
  *
  * Pagination via Dispatcharr's `next` cursor is wired but not consumed by the
  * UI yet — the first 100 movies render immediately, full library walk lands
@@ -211,7 +211,7 @@ class OnDemandViewModel @Inject constructor(
         // account rather than a file, so its id describes nothing playable and
         // the two id spaces would collide.
         val movieLearnedStreams: Map<Int, VodLearnedStream> = emptyMap(),
-        // The user's pinned version per item. ABSENT = "Auto" (server priority
+        // The user's pinned version per item. ABSENT = "Automatisch" (server priority
         // + failover), which is the default and never stored explicitly.
         // Persisted by VodVersionSelectionStore (playlist + type + item) and
         // restored as each item's provider list lands, so reopening a title
@@ -1013,7 +1013,7 @@ class OnDemandViewModel @Inject constructor(
                     }
                 }
         }
-        // "Refresh Everything" (PlaylistViewModel.refreshEverything): the active
+        // "Alles aktualisieren" (PlaylistViewModel.refreshEverything): the active
         // id is UNCHANGED, so the observeActiveId().drop(1) collector above never
         // fires. The VodResetBus bridges that gap and runs the same nuclear reset.
         //

@@ -107,7 +107,7 @@ fun LiveRewindPromptGate(currentRoute: String?) {
                     }
                 },
                 modifier = Modifier.focusRequester(enableFocus),
-            ) { Text("Enable") }
+            ) { Text("Aktivieren") }
         },
         dismissButton = {
             TextButton(

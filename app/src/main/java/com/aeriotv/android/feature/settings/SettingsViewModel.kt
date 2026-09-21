@@ -176,7 +176,7 @@ class SettingsViewModel @Inject constructor(
         viewModelScope.launch { prefs.setGroupOrder(order) }
     }
     val groupSortMode: StateFlow<String> = prefs.groupSortMode
-        .stateIn(viewModelScope, SharingStarted.Eagerly, "Default")
+        .stateIn(viewModelScope, SharingStarted.Eagerly, "Standard")
     fun setGroupSortMode(mode: String) {
         viewModelScope.launch { prefs.setGroupSortMode(mode) }
     }

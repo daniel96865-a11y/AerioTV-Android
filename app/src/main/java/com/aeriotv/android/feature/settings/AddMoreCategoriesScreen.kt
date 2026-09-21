@@ -100,7 +100,7 @@ fun AddMoreCategoriesScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -351,7 +351,7 @@ private fun CustomEntryRow(
         ) {
             Icon(
                 imageVector = Icons.Filled.Delete,
-                contentDescription = "Delete",
+                contentDescription = "Löschen",
                 tint = MaterialTheme.colorScheme.error,
             )
         }
@@ -418,13 +418,13 @@ private fun CustomEntryDialog(
         },
         confirmButton = {
             SettingsDialogTextButton(
-                label = "Save",
+                label = "Speichern",
                 onClick = { if (canSave) onSave(match.trim(), sanitizedHex) },
                 enabled = canSave,
             )
         },
         dismissButton = {
-            SettingsDialogTextButton(label = "Cancel", onClick = onDismiss)
+            SettingsDialogTextButton(label = "Abbrechen", onClick = onDismiss)
         },
         containerColor = MaterialTheme.colorScheme.surface,
         titleContentColor = MaterialTheme.colorScheme.onBackground,

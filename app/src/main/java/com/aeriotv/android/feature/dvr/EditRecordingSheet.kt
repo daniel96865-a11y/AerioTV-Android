@@ -87,7 +87,7 @@ fun EditRecordingSheet(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("Title") },
+                label = { Text("Titel") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = com.aeriotv.android.ui.textfield.aerioTextFieldKeyboardOptions(
@@ -98,7 +98,7 @@ fun EditRecordingSheet(
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("Description") },
+                label = { Text("Beschreibung") },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = com.aeriotv.android.ui.textfield.aerioTextFieldKeyboardOptions(),
             )
@@ -138,14 +138,14 @@ fun EditRecordingSheet(
                 horizontalArrangement = Arrangement.End,
             ) {
                 TextButton(onClick = onDismiss) {
-                    Text("Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Abbrechen", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 TextButton(
                     onClick = { if (canSave) onSave(newStart, newEnd, title.trim(), description.trim()) },
                     enabled = canSave,
                 ) {
                     Text(
-                        text = "Save",
+                        text = "Speichern",
                         color = if (canSave) MaterialTheme.colorScheme.textAccent
                         else MaterialTheme.colorScheme.onSurfaceVariant,
                     )

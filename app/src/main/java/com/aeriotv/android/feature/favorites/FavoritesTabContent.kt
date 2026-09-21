@@ -144,7 +144,7 @@ fun FavoritesTabContent(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "Favorites",
+                    text = "Favoriten",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )

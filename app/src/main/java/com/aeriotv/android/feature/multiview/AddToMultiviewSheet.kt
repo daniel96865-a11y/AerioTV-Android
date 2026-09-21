@@ -80,8 +80,8 @@ import kotlinx.coroutines.launch
 /**
  * Bottom sheet to pick channels for the multiview tile grid. Mirrors iOS
  * AddToMultiviewSheet (project_aeriotv_ios_canon.md "+ Add to Multiview"):
- * header with "Done" + title, group filter chips, a "Recent" section, a search
- * field, and the full "All Channels" list. Each row shows logo / number / name
+ * header with "Fertig" + title, group filter chips, a "Recent" section, a search
+ * field, and the full "Alle Sender" list. Each row shows logo / number / name
  * / now-playing metadata, with a cyan + when not selected and a green check
  * when already in the multiview set. Footer counter ("N / 9 max") lives in the
  * header.
@@ -95,10 +95,10 @@ import kotlinx.coroutines.launch
  * stream the user is watching. It is implicitly Tile 1 (seeded into the store
  * + audio-focused by the host), so it is EXCLUDED from the selectable list and
  * shown as a pinned, non-interactive "Now playing" row at the top. The user
- * picks ADDITIONAL channels; [onLaunch] (the "Play" button, enabled only once
+ * picks ADDITIONAL channels; [onLaunch] (the "Abspielen" button, enabled only once
  * there are >= 2 tiles) transitions to the multiview grid, while [onCancel]
- * (Back / swipe / "Cancel") closes the sheet and keeps single-stream playback.
- * Search is a toggle button left of the "All" pill (no resting text field, so
+ * (Back / swipe / "Abbrechen") closes the sheet and keeps single-stream playback.
+ * Search is a toggle button left of the "Alle" pill (no resting text field, so
  * the IME never auto-opens on a scroll).
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -109,9 +109,9 @@ fun AddToMultiviewSheet(
     onCancel: () -> Unit,
     // BACK / swipe / tap-scrim: close the picker but KEEP whatever is in the
     // store (the tiles the user just toggled/added stay). Distinct from
-    // [onCancel], which the explicit "Cancel" text button uses to REVERT to the
+    // [onCancel], which the explicit "Abbrechen" text button uses to REVERT to the
     // pre-open snapshot (player flow only). Hosts that have no snapshot to
-    // revert to (the multiview grid's "Add streams") pass the same close lambda
+    // revert to (the multiview grid's "Streams hinzufügen") pass the same close lambda
     // for both. Defaults to onCancel so existing call sites keep compiling.
     onDismiss: () -> Unit = onCancel,
     // Swap Stream: when non-null this same picker RE-POINTS the tile with this
@@ -166,7 +166,7 @@ fun AddToMultiviewSheet(
 
     var selectedGroup by remember { mutableStateOf(PlaylistViewModel.ALL_GROUPS) }
     var query by remember { mutableStateOf("") }
-    // Search is a toggle (button left of the "All" pill) so the IME never
+    // Search is a toggle (button left of the "Alle" pill) so the IME never
     // auto-opens: there is no resting text field for the ModalBottomSheet to
     // land focus on. The field only exists while searchActive (no autofocus;
     // the user taps/clicks the field to bring up the keyboard).
@@ -184,16 +184,16 @@ fun AddToMultiviewSheet(
     }
     val byId = remember(playable) { playable.associateBy { it.id } }
 
-    // Group filter chips: "All" + the groups the guide/list shows, in the
+    // Group filter chips: "Alle" + the groups the guide/list shows, in the
     // SAME order. GH #71 (kmac... reported by a Z Fold user): these chips were
     // raw first-occurrence order and ignored both the user's Manage Groups
     // sort (Default / A-Z / Manual) and the hidden-groups filter, so the
     // picker disagreed with every other channel surface. Same pattern as
     // PlayerScreen's overlayGroups and iOS AddToMultiviewSheet (orderedGroups
     // minus hidden). Hidden groups drop from the chips only - their channels
-    // still play from "All", exactly like the guide.
+    // still play from "Alle", exactly like the guide.
     val hiddenGroups by settingsVm.hiddenGroups.collectAsStateWithLifecycle(initialValue = emptySet())
-    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Default")
+    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Standard")
     val groupOrderPref by settingsVm.groupOrder.collectAsStateWithLifecycle(initialValue = emptyList())
     val groups = remember(playable, hiddenGroups, groupSortModeRaw, groupOrderPref) {
         val source = playable.asSequence()
@@ -213,7 +213,7 @@ fun AddToMultiviewSheet(
 
     // Recent rows: resolve LRU ids against the current playlist, capped to a
     // short list. Hidden while searching or when a specific group is selected
-    // (matches iOS, where Recent is a top-of-list convenience for the "All"
+    // (matches iOS, where Recent is a top-of-list convenience for the "Alle"
     // view only).
     val recentChannels = remember(recentIds, byId) {
         recentIds.mapNotNull { byId[it] }.take(8)
@@ -232,7 +232,7 @@ fun AddToMultiviewSheet(
     // instruct me to drag down, but I am not on a touchscreen." The default
     // ModalBottomSheet renders a drag handle (a grab bar that reads as
     // "drag") which is meaningless on a remote. On TV drop the handle and
-    // rely on the "Done" button + BACK to dismiss; BackHandler guarantees the
+    // rely on the "Fertig" button + BACK to dismiss; BackHandler guarantees the
     // remote BACK button closes the picker.
     val isTvDevice = (
         androidx.compose.ui.platform.LocalConfiguration.current.uiMode and
@@ -291,7 +291,7 @@ fun AddToMultiviewSheet(
     // bottom sheet's drag / nested-scroll dismiss is a touch idiom that misfires
     // on a D-pad (scrolling the list up past the top "fades it downward and
     // closes"). The header + search + list BODY is shared; only the wrapper and
-    // the list's height strategy differ. Only the "Play" button launches
+    // the list's height strategy differ. Only the "Abspielen" button launches
     // multiview; every other dismissal path keeps single-stream playback.
     val body: @Composable ColumnScope.() -> Unit = {
             Row(
@@ -301,7 +301,7 @@ fun AddToMultiviewSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 TextButton(onClick = onCancel) {
-                    Text("Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Abbrechen", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Spacer(Modifier.weight(1f))
                 Text(
@@ -366,7 +366,7 @@ fun AddToMultiviewSheet(
             }
 
             // Control row (Channels only): a search TOGGLE button to the LEFT of
-            // the "All" pill (Guide-chrome parity). Tapping it swaps the
+            // the "Alle" pill (Guide-chrome parity). Tapping it swaps the
             // group-pill row for the search field IN PLACE; tapping it again (or
             // its close) restores the pills and clears the query. No resting text
             // field = the IME never auto-opens while the user scrolls the list.
@@ -385,7 +385,7 @@ fun AddToMultiviewSheet(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Search,
-                            contentDescription = if (searchActive) "Close search" else "Search channels",
+                            contentDescription = if (searchActive) "Close search" else "Sender suchen",
                         )
                     }
                     Spacer(Modifier.width(8.dp))
@@ -395,7 +395,7 @@ fun AddToMultiviewSheet(
                         OutlinedTextField(
                             value = query,
                             onValueChange = { query = it },
-                            placeholder = { Text("Search channels") },
+                            placeholder = { Text("Sender suchen") },
                             singleLine = true,
                             trailingIcon = {
                                 if (query.isNotEmpty()) {
@@ -475,7 +475,7 @@ fun AddToMultiviewSheet(
                                     onToggle = { commitChannel(channel, isSel) },
                                 )
                             }
-                            item(key = "hdr_all") { SectionHeader("All Channels") }
+                            item(key = "hdr_all") { SectionHeader("Alle Sender") }
                         }
                         items(items = filtered, key = { "all_${it.url}" }) { channel ->
                             val isSel = channel.id in selectedIds
@@ -649,7 +649,7 @@ fun AddToMultiviewSheet(
                                 playUrl.startsWith("https://", ignoreCase = true)
                             VodPickerRow(
                                 title = rec.title,
-                                subtitle = "Recording",
+                                subtitle = "Aufnahme",
                                 posterUrl = null,
                                 selected = isSel,
                                 resolving = false,
@@ -677,14 +677,14 @@ fun AddToMultiviewSheet(
     }
 
     // BACK keeps the user's picks: the now-staged tiles stay in the store and
-    // (for the grid "Add streams" path) keep playing; the player flow then
+    // (for the grid "Streams hinzufügen" path) keep playing; the player flow then
     // relies on its Play button, not BACK, to commit. This is the BackHandler
     // the header comment ("BACK to dismiss") always promised but never wired.
     BackHandler(onBack = onDismiss)
     if (isTvDevice) {
         // Android TV: a centered Dialog panel. No drag/swipe semantics, so the
         // D-pad can scroll the list freely; Back / Cancel / Play dismiss it.
-        // onDismissRequest KEEPS selections (onDismiss); the "Cancel" text
+        // onDismissRequest KEEPS selections (onDismiss); the "Abbrechen" text
         // button is the only revert path (onCancel).
         Dialog(
             onDismissRequest = onDismiss,
@@ -702,7 +702,7 @@ fun AddToMultiviewSheet(
         }
     } else {
         // Phone / tablet: native bottom sheet. Swipe-to-dismiss KEEPS selections
-        // (onDismiss); the "Cancel" text button reverts (onCancel).
+        // (onDismiss); the "Abbrechen" text button reverts (onCancel).
         ModalBottomSheet(
             onDismissRequest = onDismiss,
             sheetState = sheetState,
@@ -732,7 +732,7 @@ fun AddToMultiviewSheet(
                         pendingWarnedAdd = null
                         commit()
                     },
-                ) { Text("Continue", color = MaterialTheme.colorScheme.error) }
+                ) { Text("Weiter", color = MaterialTheme.colorScheme.error) }
             },
             dismissButton = {
                 TextButton(
@@ -742,7 +742,7 @@ fun AddToMultiviewSheet(
                         commit()
                     },
                 ) { Text("Don't Show Again") }
-                TextButton(onClick = { pendingWarnedAdd = null }) { Text("Cancel") }
+                TextButton(onClick = { pendingWarnedAdd = null }) { Text("Abbrechen") }
             },
         )
     }
@@ -925,7 +925,7 @@ private fun ChannelPickerRow(
             } else {
                 Icon(
                     imageVector = Icons.Filled.Add,
-                    contentDescription = "Add",
+                    contentDescription = "Hinzufügen",
                     tint = if (atCap)
                         MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
                     else
@@ -938,8 +938,8 @@ private fun ChannelPickerRow(
 
 /** Multiview picker content source. Mirrors iOS PickerSource. */
 private enum class PickerSource(val label: String) {
-    Channels("Channels"),
-    Movies("Movies"),
+    Channels("Sender"),
+    Movies("Filme"),
     Series("Series"),
     Recordings("Recordings"),
 }
@@ -1039,7 +1039,7 @@ private fun VodPickerRow(
                 )
                 else -> Icon(
                     imageVector = Icons.Filled.Add,
-                    contentDescription = "Add",
+                    contentDescription = "Hinzufügen",
                     tint = if (atCap)
                         MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
                     else
@@ -1063,7 +1063,7 @@ private fun BackRow(onClick: () -> Unit) {
     ) {
         Icon(
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-            contentDescription = "Back",
+            contentDescription = "Zurück",
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(20.dp),
         )

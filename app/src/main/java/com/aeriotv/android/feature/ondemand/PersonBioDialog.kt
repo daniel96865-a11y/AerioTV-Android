@@ -286,7 +286,7 @@ fun PersonBioDialog(
                         )
                         Spacer(Modifier.width(8.dp))
                     }
-                    SettingsDialogTextButton(label = "Close", onClick = onDismiss)
+                    SettingsDialogTextButton(label = "Schließen", onClick = onDismiss)
                 }
             }
         }

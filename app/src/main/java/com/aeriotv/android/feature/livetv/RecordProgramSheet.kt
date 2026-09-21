@@ -75,7 +75,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
  * (project_aeriotv_ios_canon.md:191).
  *
  * UI is complete; the actual schedule call is a Phase 9 (DVR) deliverable.
- * Tapping "Record" emits a Toast informing the user that DVR is en route,
+ * Tapping "Aufnehmen" emits a Toast informing the user that DVR is en route,
  * matching the established stub pattern for not-yet-wired backends.
  */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
@@ -295,7 +295,7 @@ fun RecordProgramSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 TextButton(onClick = onDismiss) {
-                    Text("Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Abbrechen", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 Spacer(Modifier.weight(1f))
                 Text(
@@ -313,7 +313,7 @@ fun RecordProgramSheet(
                         text = when {
                             submitting -> "Scheduling…"
                             usingRule -> "Save Rule"
-                            else -> "Record"
+                            else -> "Aufnehmen"
                         },
                         color = LIVE_RED,
                         fontWeight = FontWeight.Bold,
@@ -326,12 +326,12 @@ fun RecordProgramSheet(
 
             Column(modifier = Modifier.padding(horizontal = 20.dp)) {
                 LabeledValue("Program", target.title.ifBlank { "Untitled" })
-                LabeledValue("Channel", target.channelName)
+                LabeledValue("Sender", target.channelName)
                 LabeledValue("Time", formatTimeRange(target))
 
                 if (canOfferSeriesRule) {
                     Spacer(Modifier.height(18.dp))
-                    SectionLabel("Record")
+                    SectionLabel("Aufnehmen")
                     Spacer(Modifier.height(6.dp))
                     Column {
                         RuleMode.entries.forEach { mode ->
@@ -360,7 +360,7 @@ fun RecordProgramSheet(
                         Spacer(Modifier.height(6.dp))
                         Text("Title match", style = MaterialTheme.typography.bodySmall.subtext(), color = MaterialTheme.colorScheme.onSurfaceVariant)
                         SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                            val modes = listOf("exact" to "Exact", "contains" to "Contains", "search" to "Search", "regex" to "Regex")
+                            val modes = listOf("exact" to "Exact", "contains" to "Contains", "search" to "Suche", "regex" to "Regex")
                             modes.forEachIndexed { i, (wire, label) ->
                                 SegmentedButton(
                                     selected = ruleTitleMode == wire,
@@ -380,7 +380,7 @@ fun RecordProgramSheet(
                         if (ruleDescription.isNotBlank()) {
                             Spacer(Modifier.height(6.dp))
                             SingleChoiceSegmentedButtonRow(modifier = Modifier.fillMaxWidth()) {
-                                val modes = listOf("contains" to "Contains", "search" to "Search", "regex" to "Regex")
+                                val modes = listOf("contains" to "Contains", "search" to "Suche", "regex" to "Regex")
                                 modes.forEachIndexed { i, (wire, label) ->
                                     SegmentedButton(
                                         selected = ruleDescriptionMode == wire,
@@ -603,7 +603,7 @@ fun RecordProgramSheet(
                 }) { Text("Set") }
             },
             dismissButton = {
-                TextButton(onClick = { customBufferTarget = null }) { Text("Cancel") }
+                TextButton(onClick = { customBufferTarget = null }) { Text("Abbrechen") }
             },
         )
     }
@@ -676,7 +676,7 @@ private fun TvRecordForm(
                 }
 
                 if (canOfferSeriesRule) {
-                    TvSectionTitle("Record")
+                    TvSectionTitle("Aufnehmen")
                     TvPillRow {
                         listOf(RuleMode.Once, RuleMode.All, RuleMode.NewOnly).forEach { m ->
                             SheetPill(m.label, selected = ruleMode == m, onClick = { onRuleMode(m) })
@@ -688,7 +688,7 @@ private fun TvRecordForm(
                     if (ruleMode != RuleMode.Once && showCustomRule) {
                         Text("Title Match", fontSize = 10.sp, fontWeight = FontWeight.SemiBold, color = colors.onSurfaceVariant, modifier = Modifier.padding(start = 2.dp))
                         TvPillRow {
-                            listOf("exact" to "Exact", "contains" to "Contains", "search" to "Search", "regex" to "Regex").forEach { (wire, label) ->
+                            listOf("exact" to "Exact", "contains" to "Contains", "search" to "Suche", "regex" to "Regex").forEach { (wire, label) ->
                                 SheetPill(label, selected = ruleTitleMode == wire, onClick = { onRuleTitleMode(wire) })
                             }
                         }
@@ -722,8 +722,8 @@ private fun TvRecordForm(
                         TvSectionTitle("Remove Commercials (Comskip)", dim = disabled)
                         Spacer(Modifier.height(3.dp))
                         TvPillRow(alpha = if (disabled) 0.45f else 1f) {
-                            SheetPill("Off", selected = !removeCommercials, onClick = { if (!disabled) onRemoveCommercials(false) })
-                            SheetPill("On", selected = removeCommercials, onClick = { if (!disabled) onRemoveCommercials(true) })
+                            SheetPill("Aus", selected = !removeCommercials, onClick = { if (!disabled) onRemoveCommercials(false) })
+                            SheetPill("Ein", selected = removeCommercials, onClick = { if (!disabled) onRemoveCommercials(true) })
                         }
                         Text(
                             if (disabled) "Comskip runs server-side. Switch the destination to Dispatcharr server to enable."
@@ -746,7 +746,7 @@ private fun TvRecordForm(
                             fontSize = 11.sp.subtext(), color = colors.onSurfaceVariant, textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                         )
                         TvRecordPill(
-                            label = when { submitting -> "Scheduling…"; usingRule -> "Save Rule"; else -> "Record" },
+                            label = when { submitting -> "Scheduling…"; usingRule -> "Save Rule"; else -> "Aufnehmen" },
                             enabled = !submitting, onClick = onSubmit,
                         )
                     }
@@ -797,7 +797,7 @@ private fun TvPillRow(alpha: Float = 1f, content: @Composable () -> Unit) {
 private fun TvMinutePills(options: List<Int>, selected: Int, onSelect: (Int) -> Unit, onCustom: () -> Unit) {
     val custom = selected !in options
     TvPillRow {
-        options.forEach { m -> SheetPill(if (m == 0) "None" else "$m min", selected = selected == m, onClick = { onSelect(m) }) }
+        options.forEach { m -> SheetPill(if (m == 0) "Keine" else "$m min", selected = selected == m, onClick = { onSelect(m) }) }
         SheetPill(
             when {
                 custom && selected < 0 -> "Custom (${-selected} min after start)"
@@ -910,7 +910,7 @@ private fun MinuteRadioFlow(
         modifier = Modifier.fillMaxWidth(),
     ) {
         options.forEach { mins ->
-            val label = if (mins == 0) "None" else "$mins min"
+            val label = if (mins == 0) "Keine" else "$mins min"
             Row(
                 modifier = Modifier
                     .selectable(

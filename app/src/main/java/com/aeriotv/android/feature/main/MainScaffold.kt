@@ -231,7 +231,7 @@ fun MainScaffold(
     onResumeMovie: (String) -> Unit = {},
     /** Media center hero: play a movie directly (resumes from saved progress). */
     onPlayMovie: (String) -> Unit = {},
-    /** Media center hero "Play from Beginning": start at 0 and KEEP the
+    /** Media center hero "Von Anfang abspielen": start at 0 and KEEP the
      *  Continue Watching row (tvOS MoviesView:1507-1511). */
     onPlayMovieFromStart: (String) -> Unit = onPlayMovie,
     onEpisodeResumeFromStart: (String) -> Unit = onEpisodeResume,
