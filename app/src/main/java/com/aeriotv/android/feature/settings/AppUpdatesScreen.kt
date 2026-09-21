@@ -72,7 +72,7 @@ fun AppUpdatesScreen(
                     header = "Dieses Gerät",
                     footer = "Updates für diese Variante kommen aus den GitHub-" +
                         "Releases des Projekts. Beim Installieren bleiben Sender, Einstellungen und " +
-                        "Aufnahmen erhalten; AerioTV Deutsch wird für die Installation geschlossen und danach " +
+                        "Aufnahmen erhalten; Streamy 3.0 wird für die Installation geschlossen und danach " +
                         "über den Startbildschirm wieder geöffnet.",
                 ) {
                     SettingsInfoRow(label = "Version", value = BuildConfig.VERSION_NAME)
@@ -91,14 +91,14 @@ fun AppUpdatesScreen(
                         footer = s.info.notes.ifBlank { null },
                     ) {
                         SettingsActionRow(
-                            label = "AerioTV Deutsch ${s.info.versionName} herunterladen",
+                            label = "Streamy 3.0 ${s.info.versionName} herunterladen",
                             subtitle = "${s.info.apkSizeBytes / (1024 * 1024)} MB von GitHub",
                             leadingIcon = Icons.Filled.Download,
                             onClick = { viewModel.download() },
                         )
                     }
                     is UpdateState.Downloading -> Column {
-                        StatusText("AerioTV Deutsch ${s.info.versionName} wird heruntergeladen... ${s.progressPercent}%")
+                        StatusText("Streamy 3.0 ${s.info.versionName} wird heruntergeladen... ${s.progressPercent}%")
                         Spacer(Modifier.height(8.dp))
                         LinearProgressIndicator(
                             progress = { s.progressPercent / 100f },
@@ -112,18 +112,18 @@ fun AppUpdatesScreen(
                     }
                     is UpdateState.ReadyToInstall -> SettingsSection(
                         header = "Bereit zur Installation",
-                        footer = "Deine Daten bleiben erhalten. AerioTV Deutsch wird für die Installation geschlossen; öffne die App anschließend " +
+                        footer = "Deine Daten bleiben erhalten. Streamy 3.0 wird für die Installation geschlossen; öffne die App anschließend " +
                             "über den Startbildschirm wieder geöffnet.",
                     ) {
                         SettingsActionRow(
-                            label = "AerioTV Deutsch ${s.info.versionName} installieren",
+                            label = "Streamy 3.0 ${s.info.versionName} installieren",
                             leadingIcon = Icons.Filled.SystemUpdate,
                             onClick = { viewModel.install() },
                         )
                     }
                     is UpdateState.AwaitingInstallPermission -> SettingsSection(
                         header = "Einmalige Berechtigung erforderlich",
-                        footer = "Erlaube AerioTV Deutsch in den Android-Einstellungen, Updates zu installieren, " +
+                        footer = "Erlaube Streamy 3.0 in den Android-Einstellungen, Updates zu installieren, " +
                             "und kehre danach zurück. Wenn du es bereits erlaubt hast, wird die Installation " +
                             "sofort fortgesetzt.",
                     ) {
@@ -134,7 +134,7 @@ fun AppUpdatesScreen(
                         )
                     }
                     is UpdateState.Installing -> StatusText(
-                        "Bestätige das Update im Android-Dialog. AerioTV Deutsch wird für die " +
+                        "Bestätige das Update im Android-Dialog. Streamy 3.0 wird für die " +
                             "Installation geschlossen.",
                     )
                     is UpdateState.Error -> SettingsSection(
