@@ -249,19 +249,19 @@ fun CastRouteChooserDialog(
                 }
                 if (nativeRoutes.isNotEmpty()) {
                     Text(
-                        "AerioTV on TV",
+                        "AerioTV auf dem TV",
                         style = androidx.compose.material3.MaterialTheme.typography.labelLarge,
                         color = androidx.compose.material3.MaterialTheme.colorScheme.textAccent,
                     )
                     Text(
-                        "Plays in the AerioTV app on the TV: no phone processing, full quality.",
+                        "Wiedergabe direkt in der AerioTV-App auf dem Fernseher: keine Verarbeitung über das Handy, volle Qualität.",
                         style = androidx.compose.material3.MaterialTheme.typography.bodySmall.subtext(),
                         color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant,
                     )
                     nativeRoutes.forEach { routeRow(it) }
                     if (otherRoutes.isNotEmpty()) {
                         Text(
-                            "Other devices",
+                            "Andere Geräte",
                             style = androidx.compose.material3.MaterialTheme.typography.labelLarge,
                             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -311,7 +311,7 @@ fun CastRouteChooserDialog(
                             Column {
                                 Text(tv.name)
                                 Text(
-                                    "AerioTV Remote",
+                                    "AerioTV-Fernbedienung",
                                     style = androidx.compose.material3.MaterialTheme.typography.bodySmall,
                                     color = androidx.compose.material3.MaterialTheme.colorScheme.textAccent,
                                 )
