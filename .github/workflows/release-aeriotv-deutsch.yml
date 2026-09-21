@@ -1,0 +1,62 @@
+name: Release AerioTV Deutsch
+
+on:
+  push:
+    tags:
+      - "de-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Build release APK
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon :app:assembleGithubRelease
+
+      - name: Restore private signing key
+        env:
+          KEYSTORE_B64: ${{ secrets.AERIOTV_KEYSTORE_B64 }}
+        run: |
+          test -n "$KEYSTORE_B64" || { echo "Missing AERIOTV_KEYSTORE_B64"; exit 1; }
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/aeriotv-deutsch-release.jks"
+
+      - name: Sign APK
+        env:
+          SIGNING_PASSWORD: ${{ secrets.AERIOTV_SIGNING_PASSWORD }}
+        run: |
+          test -n "$SIGNING_PASSWORD" || { echo "Missing AERIOTV_SIGNING_PASSWORD"; exit 1; }
+          UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
+          test -f "$UNSIGNED"
+          VERSION="${GITHUB_REF_NAME#de-v}"
+          OUT="$RUNNER_TEMP/AerioTV-Deutsch-$VERSION.apk"
+          APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
+          "$APKSIGNER" sign \
+            --ks "$RUNNER_TEMP/aeriotv-deutsch-release.jks" \
+            --ks-key-alias aeriotvde \
+            --ks-pass "pass:$SIGNING_PASSWORD" \
+            --key-pass "pass:$SIGNING_PASSWORD" \
+            --out "$OUT" "$UNSIGNED"
+          "$APKSIGNER" verify --verbose --print-certs "$OUT"
+          sha256sum "$OUT"
+          echo "APK=$OUT" >> "$GITHUB_ENV"
+          echo "VERSION=$VERSION" >> "$GITHUB_ENV"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" "$APK" \
+            --title "AerioTV Deutsch $VERSION" \
+            --notes "Deutsche AerioTV-Variante. Android TV, Handy und Tablet. Eigene App-ID: de.dgstudios.aeriotvde."
