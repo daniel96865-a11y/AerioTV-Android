@@ -346,7 +346,7 @@ private fun DispatcharrFields(
         IconTextField(
             value = state.url,
             onValueChange = viewModel::onUrlChange,
-            placeholder = "http://your-dispatcharr-server:9191",
+            placeholder = "http://dein-dispatcharr-server:9191",
             leading = Icons.Outlined.Link,
             enabled = !state.isLoading,
         )
@@ -435,7 +435,7 @@ private fun XtreamFields(state: PlaylistViewModel.UiState, viewModel: PlaylistVi
         IconTextField(
             value = state.url,
             onValueChange = viewModel::onUrlChange,
-            placeholder = "http://your-server.com:8080",
+            placeholder = "http://dein-server.de:8080",
             leading = Icons.Outlined.Link,
             enabled = !state.isLoading,
         )
@@ -479,7 +479,7 @@ private fun M3uFields(state: PlaylistViewModel.UiState, viewModel: PlaylistViewM
         IconTextField(
             value = state.url,
             onValueChange = viewModel::onUrlChange,
-            placeholder = "https://example.com/playlist.m3u",
+            placeholder = "https://beispiel.de/playlist.m3u",
             leading = Icons.Outlined.Link,
             enabled = !state.isLoading,
         )
@@ -533,7 +533,7 @@ private fun M3uFields(state: PlaylistViewModel.UiState, viewModel: PlaylistViewM
     }
     InfoBanner(
         text = "Füge die URL deiner M3U-Wiedergabeliste ein. Funktioniert mit Dispatcharr /output/m3u und IPTV-" +
-                "provider, or a direct .m3u file link.",
+                "Anbietern sowie mit einem direkten Link zu einer .m3u-Datei.",
     )
 }
 
