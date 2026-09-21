@@ -85,6 +85,7 @@ private enum class BundledLicense(val title: String, val res: Int) {
 
 private const val SOURCE_URL = "https://github.com/jonzey231/AerioTV-Android"
 private const val FFMPEG_SOURCE_URL = "https://github.com/FFmpeg/FFmpeg/tree/release/6.0"
+private const val BOUNCY_CASTLE_LICENSE_URL = "https://www.bouncycastle.org/licence.html"
 
 @Composable
 fun LicensesScreen(onBack: () -> Unit) {
@@ -270,6 +271,30 @@ private fun LicenseIndex(
                     subtitle = "Lizenz, unter der die oben genannten Komponenten veröffentlicht werden",
                     icon = Icons.Outlined.Description,
                     onClick = { onOpenLicense(BundledLicense.Apache2) },
+                )
+            }
+        }
+
+        item("gap-bc") { Spacer(Modifier.height(18.dp)) }
+
+        item("bc-header") { SettingsSectionHeader("Geräte-Kopplung") }
+        item("bc-body") {
+            LicenseBlurb(
+                "Für die sichere Kopplung per sechsstelliger PIN verwendet Streamy " +
+                    "Bouncy Castle 1.85 für J-PAKE und HKDF. Bouncy Castle wird unter " +
+                    "der regulären Bouncy-Castle-Lizenz veröffentlicht, die vom Projekt " +
+                    "als MIT-Lizenz beschrieben wird. Copyright (c) 2000–2026 The Legion " +
+                    "of the Bouncy Castle Inc.",
+            )
+        }
+        item("bc-row") {
+            LicenseCard {
+                SettingsNavRow(
+                    title = "Bouncy-Castle-Lizenz",
+                    subtitle = "bouncycastle.org/licence.html",
+                    icon = Icons.AutoMirrored.Outlined.OpenInNew,
+                    onClick = { onOpenUrl("Bouncy-Castle-Lizenz", BOUNCY_CASTLE_LICENSE_URL) },
+                    trailingChevron = false,
                 )
             }
         }
