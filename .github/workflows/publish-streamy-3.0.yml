@@ -1,4 +1,4 @@
-name: Publish Streamy 3.0.1 one-shot
+name: Publish Streamy 3.0.2 corrected branding
 
 on:
   push:
@@ -39,17 +39,17 @@ jobs:
           test -f "$RUNNER_TEMP/streamy3-signing/fingerprint.txt"
           test "$(cat "$RUNNER_TEMP/streamy3-signing/fingerprint.txt")" = "1719ef5261a5520899a8fcbed1898a52f4775abfc87a62d6df4ace93baa1ef05"
 
-      - name: Build Streamy 3.0.1
+      - name: Build Streamy 3.0.2
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleGithubRelease
 
-      - name: Sign and verify Streamy 3.0.1
+      - name: Sign and verify Streamy 3.0.2
         run: |
           set -euo pipefail
           UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
           PASS="$(cat "$RUNNER_TEMP/streamy3-signing/password.txt")"
-          OUT="$RUNNER_TEMP/Streamy-3.0.1.apk"
+          OUT="$RUNNER_TEMP/Streamy-3.0.2.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
           "$APKSIGNER" sign \
             --ks "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
@@ -62,15 +62,15 @@ jobs:
           sha256sum "$OUT"
           echo "APK=$OUT" >> "$GITHUB_ENV"
 
-      - name: Publish v3.0.1
+      - name: Publish v3.0.2
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view v3.0.1 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release upload v3.0.1 "$APK#Streamy-3.0.1.apk" --repo "$GITHUB_REPOSITORY" --clobber
+          if gh release view v3.0.2 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload v3.0.2 "$APK#Streamy-3.0.2.apk" --repo "$GITHUB_REPOSITORY" --clobber
           else
-            gh release create v3.0.1 "$APK#Streamy-3.0.1.apk" \
+            gh release create v3.0.2 "$APK#Streamy-3.0.2.apk" \
               --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
-              --title "Streamy 3.0.1" \
-              --notes "Streamy 3.0.1: deutsches Branding und weitere Übersetzungen, dauerhafte Streamy-3.0-Signatur und korrigierter In-App-Updater. Eine gemeinsame APK für Handy, Tablet und Android TV / Google TV."
+              --title "Streamy 3.0.2" \
+              --notes "Streamy 3.0.2: deutsches Branding und weitere Übersetzungen, dauerhafte Streamy-3.0-Signatur und korrigierter In-App-Updater. Eine gemeinsame APK für Handy, Tablet und Android TV / Google TV."
           fi
