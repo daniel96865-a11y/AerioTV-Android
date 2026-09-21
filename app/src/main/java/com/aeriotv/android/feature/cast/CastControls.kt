@@ -272,7 +272,7 @@ fun CastRouteChooserDialog(
                 // over the section with the code entry.
                 when (companionConn) {
                     is CompanionRemoteController.Conn.NeedsPairing -> {
-                        Text("Enter the code shown on ${companionConn.name ?: "the TV"}")
+                        Text("Gib den Code ein, der auf ${companionConn.name ?: "dem Fernseher"} angezeigt wird")
                         OutlinedTextField(
                             value = pairCode,
                             onValueChange = { v ->
@@ -291,7 +291,7 @@ fun CastRouteChooserDialog(
                         }
                     }
                     is CompanionRemoteController.Conn.Connecting ->
-                        Text("Connecting to ${companionConn.name ?: "TV"}...")
+                        Text("Verbindung zu ${companionConn.name ?: "TV"} wird hergestellt...")
                     else -> tvs.forEach { tv ->
                         Row(
                             modifier = Modifier
