@@ -305,9 +305,9 @@ private fun TvProgramInfoCard(
             val timeFormat = remember(clockMode) { ClockFormat.short(clockMode) }
             val dateFormat = remember { DateFormat.getDateInstance(DateFormat.MEDIUM) }
             Row(horizontalArrangement = Arrangement.spacedBy(18.dp), modifier = Modifier.padding(top = 3.dp)) {
-                TvInfoColumn("Airs", "${timeFormat.format(Date(target.startMillis))} \u2013 ${timeFormat.format(Date(target.endMillis))}")
-                TvInfoColumn("Date", dateFormat.format(Date(target.startMillis)))
-                TvInfoColumn("Duration", formatDuration(target.endMillis - target.startMillis))
+                TvInfoColumn("Sendezeit", "${timeFormat.format(Date(target.startMillis))} \u2013 ${timeFormat.format(Date(target.endMillis))}")
+                TvInfoColumn("Datum", dateFormat.format(Date(target.startMillis)))
+                TvInfoColumn("Dauer", formatDuration(target.endMillis - target.startMillis))
                 target.seasonEpisodeLabel()?.let { TvInfoColumn("Episode", it) }
             }
             target.recording?.let { facts ->
@@ -319,7 +319,7 @@ private fun TvProgramInfoCard(
                     modifier = Modifier.padding(top = 5.dp),
                 ) {
                     facts.rows().forEach { (label, value) ->
-                        TvInfoColumn(label, if (label == "Window") value.replace(" to ", " to\n") else value)
+                        TvInfoColumn(label, if (label == "Zeitraum") value.replace(" bis ", " bis\n") else value)
                     }
                 }
             }
