@@ -389,7 +389,7 @@ fun MovieDetailScreen(
                                         } else {
                                             qrLink = TvQrLink(
                                                 title = "Trailer",
-                                                caption = "Scan with your phone to watch the trailer on YouTube.",
+                                                caption = "Mit dem Handy scannen, um den Trailer auf YouTube anzusehen.",
                                                 url = url,
                                             )
                                         }
@@ -403,7 +403,7 @@ fun MovieDetailScreen(
                                     onClick = {
                                         qrLink = TvQrLink(
                                             title = "Auf TMDB ansehen",
-                                            caption = "Scan with your phone to view this title on TMDB.",
+                                            caption = "Mit dem Handy scannen, um diesen Titel auf TMDB anzusehen.",
                                             url = url,
                                         )
                                     },
@@ -457,8 +457,8 @@ fun MovieDetailScreen(
                                     qrLink = TvQrLink(
                                         title = label,
                                         caption = when (label) {
-                                            "Trailer" -> "Scan with your phone to watch the trailer on YouTube."
-                                            else -> "Scan with your phone to view this title on TMDB."
+                                            "Trailer" -> "Mit dem Handy scannen, um den Trailer auf YouTube anzusehen."
+                                            else -> "Mit dem Handy scannen, um diesen Titel auf TMDB anzusehen."
                                         },
                                         url = url,
                                     )
@@ -500,11 +500,11 @@ fun MovieDetailScreen(
                         val facts = buildList {
                             genre?.let { add("Genre" to joinGenres(it)) }
                             info?.effectiveReleaseDate?.takeIf { it.length > 4 }
-                                ?.let { add("Released" to it) }
-                            runtimeSecs?.let { add("Runtime" to formatDuration(it)) }
-                            director?.let { add("Director" to it) }
+                                ?.let { add("Veröffentlicht" to it) }
+                            runtimeSecs?.let { add("Laufzeit" to formatDuration(it)) }
+                            director?.let { add("Regie" to it) }
                             if (castCrewPeople.isEmpty()) cast?.let { add("Übertragen" to it) }
-                            info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Country" to it) }
+                            info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Land" to it) }
                         }
                         TvDetailsBlock(facts = facts) {
                             TmdbSourceNote(
@@ -591,7 +591,7 @@ fun MovieDetailScreen(
                         onClick = {
                             qrLink = TvQrLink(
                                 title = "Trailer",
-                                caption = "Scan with your phone to watch the trailer on YouTube.",
+                                caption = "Mit dem Handy scannen, um den Trailer auf YouTube anzusehen.",
                                 url = url,
                             )
                         },
@@ -1004,12 +1004,12 @@ private fun InfoSection(
         // v0.26.0 reliably populates release_date. The hero already shows the
         // year, so only surface the full date here when it carries more than a
         // bare year (month/day). Mirrors iOS VODDetailView (count > 4).
-        info?.releaseDate?.takeIf { it.length > 4 }?.let { row("Released", it) }
+        info?.releaseDate?.takeIf { it.length > 4 }?.let { row("Veröffentlicht", it) }
         // The text rows duplicate the Cast & Crew photo strip when it
         // renders; they stay as the fallback when TMDB enrichment is off
         // or returned nothing for this title.
         if (!cast.isNullOrBlank() && !castPhotosVisible) row("Übertragen", cast)
-        if (!director.isNullOrBlank() && !castPhotosVisible) row("Director", director)
+        if (!director.isNullOrBlank() && !castPhotosVisible) row("Regie", director)
         if (!country.isNullOrBlank()) row("Country", country)
         if (isTv) {
             TmdbAttribution(modifier = Modifier.padding(top = 12.dp), long = true, isTv = true)
