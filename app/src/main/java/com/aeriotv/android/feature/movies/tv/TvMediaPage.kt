@@ -1521,10 +1521,25 @@ fun <T> TvMediaPage(
                         // the ordinary search finds the pill row, the header
                         // circles, and above them the tab bar.
                         if (ev.type == KeyEventType.KeyDown && ev.key == Key.DirectionUp && index < columns) {
-                            val landed = pillRow &&
-                                runCatching { allPill.requestFocus() }.getOrNull() == true
-                            TvFocusTrace.key("Up", landed, "grid-top-row")
-                            return@onPreviewKeyEvent landed
+                            if (!pillRow) return@onPreviewKeyEvent false
+                            val landed = runCatching { allPill.requestFocus() }.getOrNull() == true
+                            if (!landed) {
+                                // The category row can be outside LazyVerticalGrid's composed
+                                // window after browsing deep into a large library. Reveal it
+                                // first, then retry focus until the "Alle" pill is attached.
+                                // This makes repeated D-pad Up deterministic on Android/Google TV.
+                                scope.launch {
+                                    runCatching { gridState.scrollToItem(headerIndex + 1) }
+                                    repeat(16) {
+                                        withFrameNanos { }
+                                        if (runCatching { allPill.requestFocus() }.getOrNull() == true) {
+                                            return@launch
+                                        }
+                                    }
+                                }
+                            }
+                            TvFocusTrace.key("Up", true, if (landed) "grid-top-row" else "grid-top-row-reveal-pills")
+                            return@onPreviewKeyEvent true
                         }
                         // Left off the first column reaches the rail's '#'
                         // deterministically instead of relying on the
