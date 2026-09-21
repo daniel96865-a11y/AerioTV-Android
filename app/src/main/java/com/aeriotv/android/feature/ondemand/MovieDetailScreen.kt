@@ -503,7 +503,7 @@ fun MovieDetailScreen(
                                 ?.let { add("Veröffentlicht" to it) }
                             runtimeSecs?.let { add("Laufzeit" to formatDuration(it)) }
                             director?.let { add("Regie" to it) }
-                            if (castCrewPeople.isEmpty()) cast?.let { add("Übertragen" to it) }
+                            if (castCrewPeople.isEmpty()) cast?.let { add("Besetzung" to it) }
                             info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Land" to it) }
                         }
                         TvDetailsBlock(facts = facts) {
@@ -1008,9 +1008,9 @@ private fun InfoSection(
         // The text rows duplicate the Cast & Crew photo strip when it
         // renders; they stay as the fallback when TMDB enrichment is off
         // or returned nothing for this title.
-        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Übertragen", cast)
+        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Besetzung", cast)
         if (!director.isNullOrBlank() && !castPhotosVisible) row("Regie", director)
-        if (!country.isNullOrBlank()) row("Country", country)
+        if (!country.isNullOrBlank()) row("Land", country)
         if (isTv) {
             TmdbAttribution(modifier = Modifier.padding(top = 12.dp), long = true, isTv = true)
         } else {
