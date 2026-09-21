@@ -442,9 +442,9 @@ internal fun ThemeRow(
 }
 
 private fun themeSubtitle(theme: AppTheme): String = when (theme) {
-    AppTheme.Aerio -> "Cyan on deep navy (default)"
-    AppTheme.Midnight -> "Cool blue on near-black"
-    AppTheme.Sunset -> "Warm orange on near-black"
+    AppTheme.Aerio -> "Cyan auf tiefem Dunkelblau (Standard)"
+    AppTheme.Midnight -> "Kühles Blau auf fast schwarzem Hintergrund"
+    AppTheme.Sunset -> "Warmes Orange auf fast schwarzem Hintergrund"
     AppTheme.Forest -> "Grün auf fast schwarzem Hintergrund"
     AppTheme.Lavender -> "Lila auf fast schwarzem Hintergrund"
     AppTheme.Monochrome -> "Graustufen auf fast schwarzem Hintergrund"
@@ -555,8 +555,8 @@ private fun CustomAccentRow(
                 fontWeight = FontWeight.Medium,
             )
             Text(
-                text = if (enabled && hex.isNotBlank()) "Override active: #${hex.uppercase()}"
-                else "Override the preset accent with your own hex.",
+                text = if (enabled && hex.isNotBlank()) "Eigene Farbe aktiv: #${hex.uppercase()}"
+                else "Ersetze die voreingestellte Akzentfarbe durch einen eigenen Hex-Wert.",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -628,7 +628,7 @@ private fun PreviewCard(theme: AppTheme, customAccentHex: String?) {
                 )
                 Spacer(Modifier.size(10.dp))
                 Text(
-                    text = "Channel 042",
+                    text = "Sender 042",
                     style = MaterialTheme.typography.labelSmall,
                     color = accent.copy(alpha = 0.65f),
                 )
@@ -640,7 +640,7 @@ private fun PreviewCard(theme: AppTheme, customAccentHex: String?) {
                 fontWeight = FontWeight.SemiBold,
             )
             Text(
-                text = "8:00 PM - 9:00 PM  ·  30m remaining",
+                text = "20:00–21:00 Uhr  ·  noch 30 Min.",
                 style = MaterialTheme.typography.bodySmall,
                 color = accent.copy(alpha = 0.65f),
             )
