@@ -460,7 +460,7 @@ private val ROLL_OPTIONS: List<Int> = listOf(0, 5, 10, 15, 30, 60)
  */
 private fun formatCustomFolderLabel(uriString: String): String {
     if (uriString.isBlank()) {
-        return "Device Downloads (AerioTV folder)"
+        return "Geräte-Downloads (Streamy-Ordner)"
     }
     return runCatching {
         val uri = Uri.parse(uriString)
