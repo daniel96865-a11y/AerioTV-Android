@@ -838,3 +838,20 @@ for p in third_candidates:
         p.write_text(dst, encoding="utf-8")
         third_changed += 1
 print(f"Third pass: {third_replacements} occurrences across {third_changed} files")
+
+
+# Streamy 3.0 final branding pass.
+# Keep original GPL attribution in README/LICENSE, but use the new product name in the app UI.
+for root in [
+    Path("app/src/main/java/com/aeriotv/android/feature"),
+    Path("app/src/main/java/com/aeriotv/android/ui"),
+    Path("app/src/github/java/com/aeriotv/android/core/update"),
+]:
+    if not root.exists():
+        continue
+    paths = [root] if root.is_file() else list(root.rglob("*.kt"))
+    for p in paths:
+        src = p.read_text(encoding="utf-8")
+        dst = src.replace("AerioTV Deutsch", "Streamy 3.0")
+        if dst != src:
+            p.write_text(dst, encoding="utf-8")
