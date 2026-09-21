@@ -83,12 +83,12 @@ fun GeneralSettingsScreen(
                 // Apple phase 1 parity: Default Tab, the two launch toggles and
                 // Auto-rotate are ONE section with one combined footer.
                 SettingsSection(
-                    header = "Startup",
-                    footer = "The tab shown when the app first launches. Skip loading screen may cause brief stutter while data hydrates. Resume last channel re-opens the player on launch if the saved channel still exists in your playlist." +
+                    header = "Start",
+                    footer = "Legt fest, welcher Bereich beim App-Start angezeigt wird. Das Überspringen des Ladebildschirms kann beim Nachladen kurz ruckeln. „Letzten Sender fortsetzen“ öffnet beim Start den Player wieder, sofern der Sender noch in deiner Wiedergabeliste vorhanden ist." +
                         if (isTv) {
                             ""
                         } else {
-                            " The player's fullscreen button can still rotate into landscape whatever Auto-rotate says."
+                            " Die Vollbild-Schaltfläche des Players kann weiterhin ins Querformat wechseln, unabhängig von der Einstellung für automatische Drehung."
                         },
                 ) {
                     // Search is a TV-only nav tab and not a sensible launch tab;
@@ -124,9 +124,9 @@ fun GeneralSettingsScreen(
                         val autoRotate by viewModel.autoRotate
                             .collectAsStateWithLifecycle(initialValue = true)
                         SettingsToggleRow(
-                            title = "Auto-rotate",
+                            title = "Automatisch drehen",
                             subtitle = "Geräteausrichtung übernehmen. Wenn ausgeschaltet, " +
-                                "AerioTV stays in its current orientation",
+                                "AerioTV Deutsch bleibt in der aktuellen Ausrichtung",
                             checked = autoRotate,
                             onCheckedChange = viewModel::setAutoRotate,
                         )
@@ -136,11 +136,11 @@ fun GeneralSettingsScreen(
                 // MARK: Refresh
                 SettingsSection(
                     header = "Aktualisieren",
-                    footer = "Refresh channels + the EPG in the background on Wi-Fi while the battery isn't low, so the guide is current the moment you open the app. " +
+                    footer = "Aktualisiert Sender und EPG im WLAN im Hintergrund, solange der Akku nicht niedrig ist, damit der EPG beim Öffnen der App aktuell ist. " +
                         if (isTv) {
-                            "Off here means data refreshes only when you launch AerioTV or refresh from the playlist menu."
+                            "Wenn ausgeschaltet, werden Daten nur beim Start von AerioTV Deutsch oder über das Wiedergabelisten-Menü aktualisiert."
                         } else {
-                            "Off here means data refreshes only when you launch AerioTV or pull to refresh."
+                            "Wenn ausgeschaltet, werden Daten nur beim Start von AerioTV Deutsch oder durch Herunterziehen zum Aktualisieren geladen."
                         },
                 ) {
                     SettingsToggleRow(
@@ -169,11 +169,11 @@ fun GeneralSettingsScreen(
                 // (5/10/15/30/60 seconds), not a slider: cleaner with a remote.
                 SettingsSection(
                     header = "Netzwerk",
-                    footer = "Adjust timeouts if you have a slow or unstable connection.",
+                    footer = "Passe die Zeitüberschreitungen bei einer langsamen oder instabilen Verbindung an.",
                 ) {
                     TIMEOUT_OPTIONS.forEach { secs ->
                         SettingsSelectionRow(
-                            label = if (secs == 1) "1 second" else "$secs seconds",
+                            label = if (secs == 1) "1 Sekunde" else "$secs Sekunden",
                             selected = timeoutSecs.toInt() == secs,
                             onClick = { viewModel.setNetworkTimeoutSecs(secs.toDouble()) },
                         )
@@ -182,8 +182,8 @@ fun GeneralSettingsScreen(
 
                 // Max Retries stays a stepper (no tvOS equivalent), on a resting card.
                 SettingsSection(
-                    header = "Max Retries",
-                    footer = "Per-request retry budget (0-10).",
+                    header = "Maximale Wiederholungen",
+                    footer = "Maximale Wiederholungsversuche pro Anfrage (0–10).",
                 ) {
                     Row(
                         modifier = Modifier
