@@ -428,16 +428,16 @@ fun LiveTvSettingsScreen(
 
     if (editingGroupSelector) {
         TvActionMenuDialog(
-            title = "Group Selection",
+            title = "Gruppenauswahl",
             actions = listOf(
                 TvMenuAction(
-                    label = if (guideGroupSelector != "sidebar") "Top group pills  (current)" else "Gruppen-Schaltflächen oben",
+                    label = if (guideGroupSelector != "sidebar") "Gruppen-Schaltflächen oben  (aktuell)" else "Gruppen-Schaltflächen oben",
                 ) {
                     viewModel.setGuideGroupSelector("pills")
                     editingGroupSelector = false
                 },
                 TvMenuAction(
-                    label = if (guideGroupSelector == "sidebar") "Sidebar menu  (current)" else "Seitenleisten-Menü",
+                    label = if (guideGroupSelector == "sidebar") "Seitenleisten-Menü  (aktuell)" else "Seitenleisten-Menü",
                 ) {
                     viewModel.setGuideGroupSelector("sidebar")
                     editingGroupSelector = false
