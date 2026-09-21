@@ -221,9 +221,9 @@ fun SyncSettingsScreen(
                     SettingsToggleRow(
                         title = "Synchronisierung aktiviert",
                         subtitle = if (signedIn)
-                            "Auto-syncing the categories you've toggled below."
+                            "Die unten ausgewählten Kategorien werden automatisch synchronisiert."
                         else
-                            "Sign in below, then enable sync to push and pull data.",
+                            "Melde dich unten an und aktiviere anschließend die Synchronisierung.",
                         checked = masterEnabled,
                         onCheckedChange = { enabled ->
                             viewModel.setMasterEnabled(enabled)
@@ -389,9 +389,8 @@ fun SyncSettingsScreen(
             title = { Text("Konfiguration zu Drive hochladen?") },
             text = {
                 Text(
-                    "This replaces the entire Drive backup with this device's " +
-                        "current configuration. Other devices that pull later " +
-                        "receive this copy.",
+                    "Dadurch wird die gesamte Drive-Sicherung durch die aktuelle Konfiguration " +
+                        "dieses Geräts ersetzt. Andere Geräte erhalten beim nächsten Herunterladen diese Version.",
                 )
             },
             confirmButton = {
@@ -415,9 +414,8 @@ fun SyncSettingsScreen(
             title = { Text("Konfiguration aus Drive laden?") },
             text = {
                 Text(
-                    "This replaces this device's playlists, preferences, and " +
-                        "watch progress with the Drive backup. The current setup " +
-                        "on this device is overwritten.",
+                    "Dadurch werden Wiedergabelisten, Einstellungen und Wiedergabefortschritt " +
+                        "dieses Geräts durch die Drive-Sicherung ersetzt. Die aktuelle Einrichtung auf diesem Gerät wird überschrieben.",
                 )
             },
             confirmButton = {
@@ -476,12 +474,10 @@ fun SyncSettingsScreen(
             title = { Text("Drive-Synchronisierung ist noch nicht eingerichtet") },
             text = {
                 Text(
-                    "In diesem Streamy-3.0-Build ist keine Google-Cloud-OAuth-Web-Client-ID hinterlegt. " +
-                        "Deshalb kann die Google-Anmeldung nicht geladen werden.\n\n" +
-                        "Für Drive-Synchronisierung muss eine OAuth-Web-Client-ID in der Google Cloud Console " +
-                        "erstellt, die SHA-1 des Signaturzertifikats dieser APK als Android-Client im selben " +
-                        "Projekt registriert und GOOGLE_DRIVE_WEB_CLIENT_ID=<deine-id> vor dem Build in " +
-                        "local.properties eingetragen werden.",
+                    "Die Google-Drive-Anmeldung ist in dieser Streamy-Version noch nicht vollständig eingerichtet. " +
+                        "Deshalb kann die Anmeldung mit Google derzeit nicht gestartet werden.\n\n" +
+                        "Deine vorhandenen Wiedergabelisten und Einstellungen sind davon nicht betroffen. " +
+                        "Sobald die Google-Verbindung für Streamy eingerichtet ist, kann die Synchronisierung hier verwendet werden.",
                 )
             },
             confirmButton = {
@@ -530,9 +526,9 @@ private fun SignedOutWelcomeBanner() {
             )
             Spacer(Modifier.height(2.dp))
             Text(
-                text = "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. Streamy 3.0 wird " +
-                    "then keep your playlists, watch progress, reminders, and preferences in " +
-                    "sync across every device signed into the same Google account.",
+                text = "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. Streamy 3.0 kann dann " +
+                    "Wiedergabelisten, Wiedergabefortschritt, Erinnerungen und Einstellungen zwischen " +
+                    "deinen Geräten mit demselben Google-Konto synchronisieren.",
                 style = MaterialTheme.typography.labelSmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -549,9 +545,7 @@ private fun SignedOutWelcomeBanner() {
 @Composable
 private fun DeveloperConfigHint() {
     Text(
-        text = "Für diesen Build ist kein Google-Cloud-OAuth-Client eingerichtet, daher " +
-            "Sign in with Google is disabled. Add GOOGLE_DRIVE_WEB_CLIENT_ID to " +
-            "local.properties and register the signing-cert SHA-1 in the same Cloud project.",
+        text = "Die Google-Drive-Anmeldung ist für diese Streamy-Version noch nicht aktiviert.",
         style = MaterialTheme.typography.labelSmall.subtext(),
         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.70f),
         modifier = Modifier.padding(horizontal = 4.dp),
@@ -599,8 +593,8 @@ private fun AccountRow(signedIn: Boolean, email: String) {
             Text(
                 text = when {
                     signedIn && email.isNotBlank() -> email
-                    signedIn -> "Account connected"
-                    else -> "Sign in to start syncing across devices"
+                    signedIn -> "Konto verbunden"
+                    else -> "Melde dich an, um deine Geräte zu synchronisieren"
                 },
                 style = MaterialTheme.typography.bodySmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -698,7 +692,7 @@ private fun SignInWithGoogleButton(enabled: Boolean, onClick: () -> Unit) {
 // renders the official four-color brand mark from res/drawable/ic_google_g.xml.
 
 private fun formatTimestamp(value: Long): String {
-    if (value <= 0L) return "never"
+    if (value <= 0L) return "nie"
     val df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
     return df.format(Date(value))
 }
