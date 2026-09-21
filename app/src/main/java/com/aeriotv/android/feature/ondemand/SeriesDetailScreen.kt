@@ -311,7 +311,7 @@ fun SeriesDetailScreen(
         (base + episodeInfo?.guestStars.orEmpty() + episodeInfo?.crew.orEmpty()).distinctBy { it.id }
     }
     val castCrewTitle = peopleEpisodeNumber
-        ?.let { "Cast & Crew · Episode $it" }
+        ?.let { "Besetzung & Team · Folge $it" }
         ?: "Besetzung & Team"
 
     // Card title: TMDB's episode name first, else the provider's own title
@@ -323,7 +323,7 @@ fun SeriesDetailScreen(
         if (tmdbName != null) return tmdbName
         val own = cleanedEpisodeTitle(ep.displayName, series?.displayName ?: "")
         if (own.length > 2) return own
-        return "Episode ${ep.episodeNumber ?: ep.id}"
+        return "Folge ${ep.episodeNumber ?: ep.id}"
     }
 
     fun episodeStill(ep: DispatcharrVODEpisode): String? =
@@ -412,8 +412,8 @@ fun SeriesDetailScreen(
                 qrLink = TvQrLink(
                     title = label,
                     caption = when (label) {
-                        "Trailer" -> "Scan with your phone to watch the trailer on YouTube."
-                        else -> "Scan with your phone to view this title on TMDB."
+                        "Trailer" -> "Mit dem Handy scannen, um den Trailer auf YouTube anzusehen."
+                        else -> "Mit dem Handy scannen, um diesen Titel auf TMDB anzusehen."
                     },
                     url = url,
                 )
@@ -762,19 +762,19 @@ fun SeriesDetailScreen(
                         val facts = buildList {
                             genre?.let { add("Genre" to joinGenres(it)) }
                             info?.effectiveReleaseDate?.takeIf { it.length > 4 }
-                                ?.let { add("Released" to it) }
+                                ?.let { add("Veröffentlicht" to it) }
                             if (episodes.isNotEmpty()) {
                                 val sN = seasons.size
                                 val eN = episodes.size
                                 add(
                                     "Seasons" to
-                                        "$sN season${if (sN == 1) "" else "s"}, " +
-                                        "$eN episode${if (eN == 1) "" else "s"}",
+                                        "$sN Staffel${if (sN == 1) "" else "n"}, " +
+                                        "$eN Folge${if (eN == 1) "" else "n"}",
                                 )
                             }
-                            director?.let { add("Director" to it) }
+                            director?.let { add("Regie" to it) }
                             if (castCrewPeople.isEmpty()) cast?.let { add("Übertragen" to it) }
-                            info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Country" to it) }
+                            info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Land" to it) }
                         }
                         TvDetailsBlock(facts = facts) {
                             TmdbSourceNote(
@@ -866,7 +866,7 @@ fun SeriesDetailScreen(
                         onClick = {
                             qrLink = TvQrLink(
                                 title = "Trailer",
-                                caption = "Scan with your phone to watch the trailer on YouTube.",
+                                caption = "Mit dem Handy scannen, um den Trailer auf YouTube anzusehen.",
                                 url = url,
                             )
                         },
@@ -1157,12 +1157,12 @@ private fun SeriesInfoSection(
         if (!genre.isNullOrBlank()) row("Genre", genre)
         // v0.26.0 release_date as its own row when it carries more than the
         // bare year already shown in the hero. Mirrors iOS VODDetailView.
-        info?.releaseDate?.takeIf { it.length > 4 }?.let { row("Released", it) }
+        info?.releaseDate?.takeIf { it.length > 4 }?.let { row("Veröffentlicht", it) }
         // The text rows duplicate the Cast & Crew photo strip when it
         // renders; they stay as the fallback when TMDB enrichment is off
         // or returned nothing for this title.
         if (!cast.isNullOrBlank() && !castPhotosVisible) row("Übertragen", cast)
-        if (!director.isNullOrBlank() && !castPhotosVisible) row("Director", director)
+        if (!director.isNullOrBlank() && !castPhotosVisible) row("Regie", director)
         if (!country.isNullOrBlank()) row("Country", country)
         if (isTv) {
             TmdbAttribution(modifier = Modifier.padding(top = 12.dp), long = true, isTv = true)
