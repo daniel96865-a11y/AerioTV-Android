@@ -87,7 +87,7 @@ fun HexPickerDialog(
                     Spacer(Modifier.size(12.dp))
                     Column(modifier = Modifier.weight(1f)) {
                         Text(
-                            text = "Default ${bucket.defaultHex}",
+                            text = "Standard ${bucket.defaultHex}",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
