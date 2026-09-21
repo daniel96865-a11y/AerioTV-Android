@@ -418,8 +418,8 @@ private fun ContinueWatchingSubScreen(
     val seriesById = remember(state.series) { state.series.associateBy { it.id } }
     if (movieRows.isEmpty() && episodeRows.isEmpty()) {
         EmptyState(
-            title = "Nothing in progress",
-            body = "Movies and shows you start will show up here so you can pick up where you left off.",
+            title = "Noch nichts angefangen",
+            body = "Filme und Serien, die du begonnen hast, erscheinen hier, damit du später weiterschauen kannst.",
         )
         return
     }
@@ -607,14 +607,14 @@ private fun MoviesSubScreen(
         if (visibleFiltered.isEmpty()) {
             EmptyState(
                 title = when {
-                    state.searchQuery.isNotBlank() -> "No matches"
-                    hiddenMovieGroups.isNotEmpty() -> "Everything's hidden"
-                    else -> "No movies"
+                    state.searchQuery.isNotBlank() -> "Keine Treffer"
+                    hiddenMovieGroups.isNotEmpty() -> "Alles ausgeblendet"
+                    else -> "Keine Filme"
                 },
                 body = when {
-                    state.searchQuery.isNotBlank() -> "Try a different search term."
-                    hiddenMovieGroups.isNotEmpty() -> "All ${hiddenMovieGroups.size} group${if (hiddenMovieGroups.size == 1) "" else "s"} you chose to hide accounts for every movie in this library. Use the filter button to show some again."
-                    else -> "Dispatcharr returned an empty Movies library. Confirm VOD is enabled on the server."
+                    state.searchQuery.isNotBlank() -> "Versuche einen anderen Suchbegriff."
+                    hiddenMovieGroups.isNotEmpty() -> "Alle ${hiddenMovieGroups.size} ausgeblendeten Gruppen enthalten zusammen alle Filme dieser Bibliothek. Verwende den Filter, um wieder Gruppen einzublenden."
+                    else -> "Der Server hat keine Filme geliefert. Prüfe, ob VOD auf dem Server aktiviert ist."
                 },
             )
             return@Column
@@ -829,7 +829,7 @@ private fun SeriesSubScreen(
         state.seriesError?.let { err ->
             if (state.series.isEmpty()) {
                 Text(
-                    text = "Couldn't load series: $err",
+                    text = "Serien konnten nicht geladen werden: $err",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(24.dp),
@@ -840,14 +840,14 @@ private fun SeriesSubScreen(
         if (visibleSeriesFiltered.isEmpty()) {
             EmptyState(
                 title = when {
-                    state.seriesSearchQuery.isNotBlank() -> "No matches"
-                    hiddenSeriesGroups.isNotEmpty() -> "Everything's hidden"
-                    else -> "No series"
+                    state.seriesSearchQuery.isNotBlank() -> "Keine Treffer"
+                    hiddenSeriesGroups.isNotEmpty() -> "Alles ausgeblendet"
+                    else -> "Keine Serien"
                 },
                 body = when {
-                    state.seriesSearchQuery.isNotBlank() -> "Try a different search term."
-                    hiddenSeriesGroups.isNotEmpty() -> "All ${hiddenSeriesGroups.size} group${if (hiddenSeriesGroups.size == 1) "" else "s"} you chose to hide accounts for every series in this library. Use the filter button to show some again."
-                    else -> "Dispatcharr returned an empty Series library. Confirm VOD is enabled on the server."
+                    state.seriesSearchQuery.isNotBlank() -> "Versuche einen anderen Suchbegriff."
+                    hiddenSeriesGroups.isNotEmpty() -> "Alle ${hiddenSeriesGroups.size} ausgeblendeten Gruppen enthalten zusammen alle Serien dieser Bibliothek. Verwende den Filter, um wieder Gruppen einzublenden."
+                    else -> "Der Server hat keine Serien geliefert. Prüfe, ob VOD auf dem Server aktiviert ist."
                 },
             )
             return@Column
