@@ -283,16 +283,16 @@ fun EditPlaylistScreen(
             // explaining the automatic LAN/WAN switch.
             item {
                 Section(
-                    header = "Local Network",
-                    footer = "Used automatically whenever the server answers at this address " +
-                        "(checked at launch, on network changes, and after edits). Leave blank " +
-                        "to always use the server URL.",
+                    header = "Lokales Netzwerk",
+                    footer = "Wird automatisch verwendet, sobald der Server unter dieser Adresse erreichbar ist " +
+                        "(Prüfung beim Start, bei Netzwerkänderungen und nach Änderungen). Leer lassen, " +
+                        "um immer die normale Server-URL zu verwenden.",
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         OutlinedTextField(
                             value = lanUrl,
                             onValueChange = { lanUrl = it },
-                            label = { Text("Local URL (optional)") },
+                            label = { Text("Lokale URL (optional)") },
                             placeholder = { Text("http://192.168.1.10:9191") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth().tvFormFieldInput(),
@@ -307,19 +307,19 @@ fun EditPlaylistScreen(
 
             when (sourceType) {
                 SourceType.DispatcharrApiKey -> item {
-                    Section(header = "Authentication") {
+                    Section(header = "Authentifizierung") {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                             val apiKeyReveal = rememberSecretRevealState()
                             OutlinedTextField(
                                 value = apiKey,
                                 onValueChange = { apiKey = it },
-                                label = { Text("API Key") },
+                                label = { Text("API-Schlüssel") },
                                 singleLine = true,
                                 visualTransformation = apiKeyReveal.transformation,
                                 trailingIcon = {
                                     SecretRevealIconButton(
                                         state = apiKeyReveal,
-                                        contentLabel = "API key",
+                                        contentLabel = "API-Schlüssel",
                                     )
                                 },
                                 modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -334,7 +334,7 @@ fun EditPlaylistScreen(
                     }
                 }
                 SourceType.DispatcharrUserPass -> item {
-                    Section(header = "Authentication") {
+                    Section(header = "Authentifizierung") {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                             val passwordReveal = rememberSecretRevealState()
                             val apiKeyReveal = rememberSecretRevealState()
@@ -366,7 +366,7 @@ fun EditPlaylistScreen(
                                     trailingIcon = {
                                         SecretRevealIconButton(
                                             state = passwordReveal,
-                                            contentLabel = "password",
+                                            contentLabel = "Passwort",
                                         )
                                     },
                                     modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -381,13 +381,13 @@ fun EditPlaylistScreen(
                                 OutlinedTextField(
                                     value = apiKey,
                                     onValueChange = { apiKey = it },
-                                    label = { Text("API Key") },
+                                    label = { Text("API-Schlüssel") },
                                     singleLine = true,
                                     visualTransformation = apiKeyReveal.transformation,
                                     trailingIcon = {
                                         SecretRevealIconButton(
                                             state = apiKeyReveal,
-                                            contentLabel = "API key",
+                                            contentLabel = "API-Schlüssel",
                                         )
                                     },
                                     modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -400,7 +400,7 @@ fun EditPlaylistScreen(
                     }
                 }
                 SourceType.XtreamCodes -> item {
-                    Section(header = "Authentication") {
+                    Section(header = "Authentifizierung") {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                             OutlinedTextField(
                                 value = username,
@@ -423,7 +423,7 @@ fun EditPlaylistScreen(
                                 trailingIcon = {
                                     SecretRevealIconButton(
                                         state = passwordReveal,
-                                        contentLabel = "password",
+                                        contentLabel = "Passwort",
                                     )
                                 },
                                 modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -449,7 +449,7 @@ fun EditPlaylistScreen(
                 item {
                     Section(
                         header = "Mediathek",
-                        footer = "When off, this playlist's movies and TV shows aren't loaded into On Demand. Useful if you only want Live TV from this server, or if you have a second playlist that already provides On Demand.",
+                        footer = "Wenn ausgeschaltet, werden Filme und Serien dieser Wiedergabeliste nicht in die Mediathek geladen. Nützlich, wenn du von diesem Server nur Live-TV möchtest oder eine zweite Wiedergabeliste bereits die Mediathek liefert.",
                     ) {
                         // Whole row is the focus/toggle target so D-pad focus is
                         // visible; the Switch is display-only.
@@ -491,7 +491,7 @@ fun EditPlaylistScreen(
             item {
                 Section(
                     header = "EPG-Tage",
-                    footer = "How many days of guide data to load, back and ahead. " +
+                    footer = "Wie viele Tage EPG-Daten rückwirkend und im Voraus geladen werden. " +
                         "Dispatcharr only; other sources show what their guide carries.",
                 ) {
                     Column(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -516,8 +516,8 @@ fun EditPlaylistScreen(
             if (isDispatcharr) {
                 item {
                     Section(
-                        header = "Channel Profile",
-                        footer = "Limit this playlist to the channels in a Dispatcharr profile. " +
+                        header = "Senderprofil",
+                        footer = "Beschränkt diese Wiedergabeliste auf die Sender eines Dispatcharr-Profils. " +
                             "\"All Channels\" shows everything on the server.",
                     ) {
                         Column(modifier = Modifier.padding(vertical = 4.dp)) {
