@@ -1216,7 +1216,7 @@ fun VODPlayerScreen(
                                     if (status in 400..499 && !isNativeCatchup) {
                                         android.widget.Toast.makeText(
                                             ctx,
-                                            "Catch-up isn't available for this program on your provider.",
+                                            "Catch-up ist für diese Sendung bei deinem Anbieter nicht verfügbar.",
                                             android.widget.Toast.LENGTH_LONG,
                                         ).show()
                                         onClose()
@@ -1417,7 +1417,7 @@ fun VODPlayerScreen(
                         String.format(java.util.Locale.US, "%d:%02d", totalSecs / 60L, totalSecs % 60L)
                     }
                     android.widget.Toast.makeText(
-                        context, "Resuming from $label", android.widget.Toast.LENGTH_SHORT,
+                        context, "Fortsetzen ab $label", android.widget.Toast.LENGTH_SHORT,
                     ).show()
                 }
             }
@@ -1890,7 +1890,7 @@ fun VODPlayerScreen(
                 )
                 Text(
                     text = "Dieses Gerät kann das Videoformat dieser Version nicht dekodieren, " +
-                        "so only the audio is playing.",
+                        "deshalb wird nur der Ton wiedergegeben.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.85f),
                     textAlign = TextAlign.Center,
@@ -1898,10 +1898,10 @@ fun VODPlayerScreen(
                 if (canSwitchVersion) {
                     Text(
                         text = if (isTvForm) {
-                            "Open Options in the player controls, then Switch Version, " +
-                                "to try another copy of this title."
+                            "Öffne die Optionen in der Player-Steuerung und wähle „Version wechseln“, " +
+                                "um eine andere Version dieses Titels zu versuchen."
                         } else {
-                            "Tap here to try another copy of this title."
+                            "Tippe hier, um eine andere Version dieses Titels zu versuchen."
                         },
                         style = MaterialTheme.typography.bodySmall,
                         color = Color.White.copy(alpha = 0.7f),
@@ -1977,7 +1977,7 @@ fun VODPlayerScreen(
                         dvrEndPromptDismissed = true
                         dvrEndPromptVisible = false
                     }) {
-                        Text("Keep Watching")
+                        Text("Weiter ansehen")
                     }
                 }
                 if (isTvForm) {
@@ -2027,7 +2027,7 @@ fun VODPlayerScreen(
                     modifier = Modifier.size(44.dp),
                 )
                 Text(
-                    text = "Playback Problem",
+                    text = "Wiedergabeproblem",
                     style = MaterialTheme.typography.headlineSmall,
                     color = Color.White,
                 )
@@ -2039,8 +2039,8 @@ fun VODPlayerScreen(
                 )
                 Text(
                     text = when {
-                        errorReconnecting -> "Reconnecting…"
-                        errorRetryCountdown > 0 -> "Retrying in ${errorRetryCountdown}s"
+                        errorReconnecting -> "Verbindung wird wiederhergestellt…"
+                        errorRetryCountdown > 0 -> "Neuer Versuch in ${errorRetryCountdown} s"
                         else -> " "
                     },
                     style = MaterialTheme.typography.bodyMedium,
