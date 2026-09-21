@@ -234,7 +234,7 @@ fun EditPlaylistScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             item {
-                Section(header = "Connection") {
+                Section(header = "Verbindung") {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         OutlinedTextField(
                             value = name,
@@ -254,7 +254,7 @@ fun EditPlaylistScreen(
                             label = {
                                 Text(
                                     when (sourceType) {
-                                        SourceType.M3uUrl -> "Playlist URL"
+                                        SourceType.M3uUrl -> "Wiedergabelisten-URL"
                                         SourceType.DispatcharrApiKey,
                                         SourceType.DispatcharrUserPass -> "Server-URL"
                                         SourceType.XtreamCodes -> "Server-URL"
