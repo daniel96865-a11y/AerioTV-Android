@@ -1,0 +1,23 @@
+name: Audit remaining German UI
+on:
+  push:
+    branches: [ deutsch ]
+    paths:
+      - tools/audit_remaining_english.py
+      - .github/workflows/audit-remaining-german.yml
+permissions:
+  contents: write
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: deutsch
+      - run: python3 tools/audit_remaining_english.py
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add REMAINING_ENGLISH_UI.tsv
+          git commit -m "Audit remaining English UI" || true
+          git push origin HEAD:deutsch
