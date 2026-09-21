@@ -445,18 +445,19 @@ fun SyncSettingsScreen(
             title = { Text("Zugangsdaten mit deinem Drive synchronisieren") },
             text = {
                 Text(
-                    "So your servers restore automatically on another device, AerioTV " +
-                        "includes each server's sign-in details (username, password, and API " +
-                        "key) in the Drive backup. These files live in your own Google Drive " +
-                        "app data, are reachable only by AerioTV, and never appear in your " +
-                        "Drive UI, but they are stored without an extra password. On this " +
-                        "device the same credentials are encrypted at rest.\n\n" +
-                        "You can turn this off any time with the Credentials toggle below.",
+                    "Damit deine Server auf einem anderen Gerät automatisch wiederhergestellt werden, " +
+                        "sichert Streamy 3.0 auch die Anmeldedaten des jeweiligen Servers " +
+                        "(Benutzername, Passwort und API-Schlüssel) im Drive-Backup. Diese Dateien " +
+                        "liegen im privaten App-Datenbereich deines eigenen Google Drive, sind nur " +
+                        "für Streamy 3.0 erreichbar und erscheinen nicht in deiner normalen Drive-Ansicht. " +
+                        "Sie werden dort jedoch ohne zusätzliches Passwort gespeichert. Auf diesem Gerät " +
+                        "werden dieselben Zugangsdaten verschlüsselt gespeichert.\n\n" +
+                        "Du kannst dies jederzeit über den Schalter für Zugangsdaten unten deaktivieren.",
                 )
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Got it",
+                    label = "Verstanden",
                     onClick = {
                         credsSyncDisclosureOpen = false
                         viewModel.markCredentialsSyncDisclosed()
@@ -475,17 +476,17 @@ fun SyncSettingsScreen(
             title = { Text("Drive-Synchronisierung ist noch nicht eingerichtet") },
             text = {
                 Text(
-                    "This AerioTV build doesn't have a Google Cloud OAuth Web Client ID baked in, " +
-                        "so the Sign in with Google sheet can't load.\n\n" +
-                        "To enable Drive Sync on your own build, create an OAuth Web Client ID in " +
-                        "Google Cloud Console, register the signing-cert SHA-1 of this APK as an " +
-                        "Android Client in the same project, then add the line " +
-                        "GOOGLE_DRIVE_WEB_CLIENT_ID=<your-id> to local.properties before rebuilding.",
+                    "In diesem Streamy-3.0-Build ist keine Google-Cloud-OAuth-Web-Client-ID hinterlegt. " +
+                        "Deshalb kann die Google-Anmeldung nicht geladen werden.\n\n" +
+                        "Für Drive-Synchronisierung muss eine OAuth-Web-Client-ID in der Google Cloud Console " +
+                        "erstellt, die SHA-1 des Signaturzertifikats dieser APK als Android-Client im selben " +
+                        "Projekt registriert und GOOGLE_DRIVE_WEB_CLIENT_ID=<deine-id> vor dem Build in " +
+                        "local.properties eingetragen werden.",
                 )
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Got it",
+                    label = "Verstanden",
                     onClick = { notConfiguredDialogOpen = false },
                 )
             },
@@ -529,7 +530,7 @@ private fun SignedOutWelcomeBanner() {
             )
             Spacer(Modifier.height(2.dp))
             Text(
-                text = "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. AerioTV Deutsch wird " +
+                text = "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. Streamy 3.0 wird " +
                     "then keep your playlists, watch progress, reminders, and preferences in " +
                     "sync across every device signed into the same Google account.",
                 style = MaterialTheme.typography.labelSmall.subtext(),
