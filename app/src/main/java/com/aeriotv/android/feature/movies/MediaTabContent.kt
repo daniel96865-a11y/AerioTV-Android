@@ -412,7 +412,7 @@ fun MediaTabContent(
     val searchExtras = buildList {
         if (personMatchName != null) add(PageRow("person") {
             Text(
-                "Includes titles with $personMatchName",
+                "Enthält Titel mit $personMatchName",
                 style = MaterialTheme.typography.labelMedium.subtext(),
                 color = MaterialTheme.colorScheme.tertiary,
                 maxLines = 1, overflow = TextOverflow.Ellipsis,
