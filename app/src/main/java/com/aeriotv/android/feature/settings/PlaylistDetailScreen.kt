@@ -195,13 +195,13 @@ fun PlaylistDetailScreen(
         ) {
             item {
                 Section(
-                    header = "Connection Details",
+                    header = "Verbindungsdetails",
                     // Only worth explaining when there are two URLs to
                     // choose between.
                     footer = if (!playlist.lanUrlString.isNullOrBlank()) {
-                        "A checkmark marks the connection in use right now. The local URL is used " +
-                            "automatically whenever the server answers on your home network; run " +
-                            "Refresh LAN Detection below after a network change."
+                        "Ein Häkchen markiert die aktuell verwendete Verbindung. Die lokale URL wird " +
+                            "automatisch verwendet, sobald der Server im Heimnetz erreichbar ist; führe nach " +
+                            "einem Netzwerkwechsel unten „LAN-Erkennung aktualisieren“ aus."
                     } else {
                         null
                     },
