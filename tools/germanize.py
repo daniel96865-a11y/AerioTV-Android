@@ -166,20 +166,20 @@ translations = {
   "Install failed (status $status)": "Installation fehlgeschlagen (Status $status)",
   "The download is incomplete (size mismatch). Try again.": "Der Download ist unvollständig. Versuche es erneut.",
   "The downloaded file is not a readable APK.": "Die heruntergeladene Datei ist keine lesbare APK.",
-  "The downloaded APK is not AerioTV (${archive.packageName}).": "Die heruntergeladene APK gehört nicht zu AerioTV Deutsch (${archive.packageName}).",
+  "The downloaded APK is not AerioTV (${archive.packageName}).": "Die heruntergeladene APK gehört nicht zu Streamy 3.0 (${archive.packageName}).",
   "Could not read the APK's signing certificate.": "Das Signaturzertifikat der APK konnte nicht gelesen werden.",
   "The APK's signing certificate does not match this app. Refusing to install.": "Das Signaturzertifikat der APK passt nicht zu dieser App. Installation abgebrochen.",
   "network error": "Netzwerkfehler",
   "rate limited": "Zu viele Anfragen",
   "bad response: ${t.message}": "Ungültige Serverantwort: ${t.message}",
-  "Would you like to close AerioTV?": "Möchtest du AerioTV Deutsch schließen?",
-  "Close AerioTV": "AerioTV Deutsch schließen",
+  "Would you like to close AerioTV?": "Möchtest du Streamy 3.0 schließen?",
+  "Close AerioTV": "Streamy 3.0 schließen",
   "Playing on ${companionTvName ?: \"TV\"}": "Wiedergabe auf ${companionTvName ?: \"TV\"}",
   "Playing on $castDevice": "Wiedergabe auf $castDevice",
   "Episode": "Episode",
   "Searching for devices...": "Geräte werden gesucht...",
   "Streaming to Cast device": "Streaming zum Cast-Gerät",
-  "AerioTV is relaying this channel to your TV": "AerioTV Deutsch überträgt diesen Sender auf deinen Fernseher",
+  "AerioTV is relaying this channel to your TV": "Streamy 3.0 überträgt diesen Sender auf deinen Fernseher",
   "Sports": "Sport",
   "Kids": "Kinder",
   "News": "Nachrichten",
@@ -210,21 +210,21 @@ translations = {
 
 gradle = Path("app/build.gradle.kts")
 s = gradle.read_text(encoding="utf-8")
-s = s.replace('applicationId = "com.aeriotv.android"', 'applicationId = "de.dgstudios.aeriotvde"')
-s = s.replace('versionCode = 65', 'versionCode = 1')
-s = s.replace('versionName = "0.5.9"', 'versionName = "0.5.9-de1"')
+s = s.replace('applicationId = "com.aeriotv.android"', 'applicationId = "de.dgstudios.streamy3"')
+s = s.replace('versionCode = 65', 'versionCode = 300')
+s = s.replace('versionName = "0.5.9"', 'versionName = "3.0"')
 gradle.write_text(s, encoding="utf-8")
 
 settings = Path("settings.gradle.kts")
-s = settings.read_text(encoding="utf-8").replace('rootProject.name = "AerioTV"', 'rootProject.name = "AerioTV-Deutsch"')
+s = settings.read_text(encoding="utf-8").replace('rootProject.name = "AerioTV"', 'rootProject.name = "Streamy-3.0"')
 settings.write_text(s, encoding="utf-8")
 
 strings = Path("app/src/main/res/values/strings.xml")
-s = strings.read_text(encoding="utf-8").replace('<string name="app_name">AerioTV</string>', '<string name="app_name">AerioTV Deutsch</string>')
+s = strings.read_text(encoding="utf-8").replace('<string name="app_name">AerioTV</string>', '<string name="app_name">Streamy 3.0</string>')
 strings.write_text(s, encoding="utf-8")
 
 manifest = Path("app/src/main/AndroidManifest.xml")
-s = manifest.read_text(encoding="utf-8").replace('android:scheme="aeriotv"', 'android:scheme="aeriotvde"')
+s = manifest.read_text(encoding="utf-8").replace('android:scheme="aeriotv"', 'android:scheme="streamy3"')
 manifest.write_text(s, encoding="utf-8")
 
 updater = Path("app/src/github/java/com/aeriotv/android/core/update/UpdateChecker.kt")
@@ -259,24 +259,24 @@ for p in candidates:
         if count:
             dst = dst.replace(old, new)
             replacements += count
-    dst = dst.replace('text = "AerioTV"', 'text = "AerioTV Deutsch"')
+    dst = dst.replace('text = "AerioTV"', 'text = "Streamy 3.0"')
     if dst != src:
         p.write_text(dst, encoding="utf-8")
         changed += 1
 
 readme = Path("README.md")
 original = readme.read_text(encoding="utf-8")
-note = """# AerioTV Deutsch
+note = """# Streamy 3.0
 
 **Inoffizielle deutsche Modifikation von AerioTV for Android.**
 Ausgangsprojekt: jonzey231/AerioTV-Android. Diese Variante wurde am 21.09.2026 verändert und übersetzt. Sie bleibt gemäß dem Ausgangsprojekt unter GNU GPL v3 oder später; LICENSE, LICENSE-EXCEPTIONS.md und THIRD_PARTY_LICENSES.md bleiben Bestandteil des Projekts.
 
-Die Variante verwendet die eigene Android-App-ID de.dgstudios.aeriotvde und kann dadurch neben dem Original installiert werden.
+Die Variante verwendet die eigene Android-App-ID de.dgstudios.streamy3 und kann dadurch neben dem Original installiert werden.
 
 ---
 
 """
-if not original.startswith("# AerioTV Deutsch"):
+if not original.startswith("# Streamy 3.0"):
     readme.write_text(note + original, encoding="utf-8")
 
 Path("GERMAN_TRANSLATION_STATUS.md").write_text(
@@ -312,14 +312,14 @@ second_pass = {
   "Password": "Passwort",
   "Dispatcharr admin password": "Dispatcharr-Admin-Passwort",
   "Use your Dispatcharr Dashboard password (System -> Users -> Account tab), ": "Verwende dein Dispatcharr-Dashboard-Passwort (System -> Benutzer -> Konto), ",
-  "Save credentials and refresh automatically. AerioTV signs in with these ": "Zugangsdaten speichern und automatisch aktualisieren. AerioTV Deutsch meldet sich damit ",
+  "Save credentials and refresh automatically. AerioTV signs in with these ": "Zugangsdaten speichern und automatisch aktualisieren. Streamy 3.0 meldet sich damit ",
   "XC Username": "XC-Benutzername",
   "XC Password": "XC-Passwort",
   "Enter your Xtream Codes server URL and credentials. Dispatcharr users: use your ": "Gib die Xtream-Codes-Server-URL und Zugangsdaten ein. Dispatcharr-Nutzer verwenden ",
   "Import M3U from a file instead": "M3U stattdessen aus einer Datei importieren",
   "Import XMLTV from a file instead": "XMLTV stattdessen aus einer Datei importieren",
   "Paste your M3U playlist URL. Works with Dispatcharr's /output/m3u, any IPTV ": "Füge die URL deiner M3U-Wiedergabeliste ein. Funktioniert mit Dispatcharr /output/m3u und IPTV-",
-  "AerioTV uses this URL automatically whenever your server is reachable on ": "AerioTV Deutsch verwendet diese URL automatisch, wenn dein Server erreichbar ist über ",
+  "AerioTV uses this URL automatically whenever your server is reachable on ": "Streamy 3.0 verwendet diese URL automatisch, wenn dein Server erreichbar ist über ",
   "Username & Password": "Benutzername & Passwort",
   "Fetch On Demand from this playlist": "Mediathek aus dieser Wiedergabeliste laden",
   "When off, this playlist's movies and TV shows aren't loaded into On Demand. Useful if you only want Live TV from this server, or if you have a second playlist that already provides On Demand. You can change this later in Settings.": "Wenn ausgeschaltet, werden Filme und Serien dieser Wiedergabeliste nicht in die Mediathek geladen. Nützlich, wenn du von diesem Server nur Live-TV möchtest oder eine zweite Wiedergabeliste bereits die Mediathek liefert. Dies kann später in den Einstellungen geändert werden.",
@@ -439,7 +439,7 @@ second_pass = {
   "Pull Config from Drive?": "Konfiguration aus Drive laden?",
   "Pull from Drive": "Aus Drive laden",
   "Credentials sync to your Drive": "Zugangsdaten mit deinem Drive synchronisieren",
-  "Select Sign in with Google below to connect your account. AerioTV will ": "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. AerioTV Deutsch wird ",
+  "Select Sign in with Google below to connect your account. AerioTV will ": "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. Streamy 3.0 wird ",
   "This build doesn't have a Google Cloud OAuth client configured, so ": "Für diesen Build ist kein Google-Cloud-OAuth-Client eingerichtet, daher ",
   "Signed in to Drive": "Bei Drive angemeldet",
   "Not signed in": "Nicht angemeldet",
@@ -447,9 +447,9 @@ second_pass = {
   "Sign in with Google": "Mit Google anmelden",
   "Check for updates": "Nach Updates suchen",
   "You're on the latest version.": "Du verwendest die neueste Version.",
-  "Download AerioTV ${s.info.versionName}": "AerioTV Deutsch ${s.info.versionName} herunterladen",
+  "Download AerioTV ${s.info.versionName}": "Streamy 3.0 ${s.info.versionName} herunterladen",
   "Verifying download...": "Download wird geprüft...",
-  "Install AerioTV ${s.info.versionName}": "AerioTV Deutsch ${s.info.versionName} installieren",
+  "Install AerioTV ${s.info.versionName}": "Streamy 3.0 ${s.info.versionName} installieren",
   "The license this app is distributed under": "Lizenz, unter der diese App veröffentlicht wird",
   "The license FFmpeg is distributed under": "Lizenz, unter der FFmpeg veröffentlicht wird",
   "The license the above are distributed under": "Lizenz, unter der die oben genannten Komponenten veröffentlicht werden",
@@ -666,7 +666,7 @@ second_pass = {
   "Close": "Schließen",
   "1 channel": "1 Sender",
   "$count channels": "$count Sender",
-  "Ongoing notification while AerioTV plays audio in the background.": "Fortlaufende Benachrichtigung, während AerioTV Deutsch Audio im Hintergrund abspielt.",
+  "Ongoing notification while AerioTV plays audio in the background.": "Fortlaufende Benachrichtigung, während Streamy 3.0 Audio im Hintergrund abspielt.",
   "Stream ended": "Stream beendet",
   "This stream was stopped by the server. Press Retry to start it again.": "Der Stream wurde vom Server beendet. Wähle „Erneut versuchen“, um ihn neu zu starten.",
   "Too many sessions playing": "Zu viele gleichzeitige Wiedergaben",
@@ -736,26 +736,26 @@ third_pass = {
   "Video Scale: $scaleLabel": "Videogröße: $scaleLabel",
   "Updates on this channel come from the project's GitHub ": "Updates für diese Variante kommen aus den GitHub-",
   "releases. Installing keeps your channels, settings, and ": "Releases des Projekts. Beim Installieren bleiben Sender, Einstellungen und ",
-  "recordings; AerioTV closes during the install and you reopen ": "Aufnahmen erhalten; AerioTV Deutsch wird für die Installation geschlossen und danach ",
+  "recordings; AerioTV closes during the install and you reopen ": "Aufnahmen erhalten; Streamy 3.0 wird für die Installation geschlossen und danach ",
   "it from your home screen.": "über den Startbildschirm wieder geöffnet.",
   "GitHub releases": "GitHub-Releases",
   "Update available": "Update verfügbar",
   "${s.info.apkSizeBytes / (1024 * 1024)} MB from GitHub": "${s.info.apkSizeBytes / (1024 * 1024)} MB von GitHub",
-  "Downloading AerioTV ${s.info.versionName}... ${s.progressPercent}%": "AerioTV Deutsch ${s.info.versionName} wird heruntergeladen... ${s.progressPercent}%",
+  "Downloading AerioTV ${s.info.versionName}... ${s.progressPercent}%": "Streamy 3.0 ${s.info.versionName} wird heruntergeladen... ${s.progressPercent}%",
   "Ready to install": "Bereit zur Installation",
-  "Your data is kept. AerioTV will close to install; reopen ": "Deine Daten bleiben erhalten. AerioTV Deutsch wird für die Installation geschlossen; öffne die App anschließend ",
+  "Your data is kept. AerioTV will close to install; reopen ": "Deine Daten bleiben erhalten. Streamy 3.0 wird für die Installation geschlossen; öffne die App anschließend ",
   "One-time permission needed": "Einmalige Berechtigung erforderlich",
-  "Allow AerioTV to install updates in the Settings screen, ": "Erlaube AerioTV Deutsch in den Android-Einstellungen, Updates zu installieren, ",
+  "Allow AerioTV to install updates in the Settings screen, ": "Erlaube Streamy 3.0 in den Android-Einstellungen, Updates zu installieren, ",
   "then come back. If you've already allowed it, Install ": "und kehre danach zurück. Wenn du es bereits erlaubt hast, wird die Installation ",
   "continues right away.": "sofort fortgesetzt.",
-  "Confirm the update in the Android dialog. AerioTV will close to ": "Bestätige das Update im Android-Dialog. AerioTV Deutsch wird für die ",
+  "Confirm the update in the Android dialog. AerioTV will close to ": "Bestätige das Update im Android-Dialog. Streamy 3.0 wird für die ",
   "install.": "Installation geschlossen.",
   "Update problem": "Update-Problem",
   "Try again": "Erneut versuchen",
   "Check again": "Erneut prüfen",
   "Dismiss": "Schließen",
   "Choose the palette and the light or dark appearance. Theme sets the color; Appearance sets light vs dark. They are independent, so any theme works in either appearance. Changes apply live; the preset accent kicks in unless Custom Accent is on.": "Wähle Farbpalette sowie helle oder dunkle Darstellung. Das Design bestimmt die Farben, die Darstellung Hell oder Dunkel. Beides ist unabhängig voneinander. Änderungen werden sofort übernommen; die voreingestellte Akzentfarbe gilt, solange keine eigene Akzentfarbe aktiviert ist.",
-  "Scales all text in AerioTV, on top of your device's font size. Changes apply live.": "Skaliert den gesamten Text in AerioTV Deutsch zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
+  "Scales all text in AerioTV, on top of your device's font size. Changes apply live.": "Skaliert den gesamten Text in Streamy 3.0 zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
   "Subtext Size": "Größe von Zusatztexten",
   "Scales only secondary text such as descriptions, program details, and captions, on top of Text Size. Titles and buttons stay the same. Changes apply live.": "Skaliert nur Zusatztexte wie Beschreibungen, Sendungsdetails und Hinweise zusätzlich zur Textgröße. Titel und Schaltflächen bleiben unverändert. Änderungen werden sofort übernommen.",
   "Text Contrast": "Textkontrast",
@@ -852,6 +852,6 @@ for root in [
     paths = [root] if root.is_file() else list(root.rglob("*.kt"))
     for p in paths:
         src = p.read_text(encoding="utf-8")
-        dst = src.replace("AerioTV Deutsch", "Streamy 3.0")
+        dst = src.replace("Streamy 3.0", "Streamy 3.0")
         if dst != src:
             p.write_text(dst, encoding="utf-8")
