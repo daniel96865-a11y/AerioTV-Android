@@ -268,7 +268,7 @@ internal fun ChannelPickRow(
         if (isPlaying) {
             Spacer(Modifier.width(8.dp))
             Text(
-                text = "Watching",
+                text = "Wird angesehen",
                 style = MaterialTheme.typography.labelSmall,
                 color = accent,
             )
