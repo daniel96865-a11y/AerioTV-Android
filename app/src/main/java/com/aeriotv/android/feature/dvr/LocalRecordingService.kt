@@ -609,7 +609,7 @@ class LocalRecordingService : Service() {
                 "Local recordings",
                 NotificationManager.IMPORTANCE_LOW,
             ).apply {
-                description = "Ongoing notification while AerioTV is recording a channel to local storage."
+                description = "Fortlaufende Benachrichtigung, während AerioTV Deutsch einen Sender lokal aufnimmt."
                 setShowBadge(false)
             }
             mgr.createNotificationChannel(channel)
