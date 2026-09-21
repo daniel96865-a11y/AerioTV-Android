@@ -55,9 +55,9 @@ private const val PINCH_IN_RATIO = 0.85f
 private const val SCALE_LABEL_MS = 1_000L
 
 fun videoScaleLabel(mode: String): String = when (mode) {
-    VIDEO_SCALE_FILL -> "Fill"
-    VIDEO_SCALE_STRETCH -> "Stretch"
-    else -> "Fit"
+    VIDEO_SCALE_FILL -> "Ausfüllen"
+    VIDEO_SCALE_STRETCH -> "Strecken"
+    else -> "Einpassen"
 }
 
 /** Options row order: Fit -> Fill -> Stretch -> Fit. */
@@ -239,7 +239,7 @@ fun VideoScaleOptionRow(settingsVm: SettingsViewModel) {
             .padding(horizontal = 8.dp, vertical = 12.dp),
     ) {
         Text(
-            text = "Video Scale: ${videoScaleLabel(scaleMode)}",
+            text = "Videoskalierung: ${videoScaleLabel(scaleMode)}",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onBackground,
         )
