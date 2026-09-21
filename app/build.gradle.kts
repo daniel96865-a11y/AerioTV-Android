@@ -230,7 +230,9 @@ dependencies {
     implementation(libs.ktor.server.websockets)
     implementation(libs.ktor.client.websockets)
     implementation(libs.kotlinx.serialization.json)
-    // J-PAKE + HKDF for encrypted six-digit device pairing (no cloud account required).\n    implementation("org.bouncycastle:bcprov-jdk15to18:1.85")\n
+    // J-PAKE + HKDF for encrypted six-digit device pairing (no cloud account required).
+    implementation("org.bouncycastle:bcprov-jdk15to18:1.85")
+
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
