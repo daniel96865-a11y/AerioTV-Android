@@ -70,11 +70,14 @@ jobs:
               out.append(f"{p}\t{n}\t{clean(s)}\t{clean(c)}")
           pathlib.Path("GERMAN_UI_STRINGS.tsv").write_text("\n".join(out)+"\n",encoding="utf-8")
           print(f"Extracted {len(rows)} candidate UI strings")
+      - name: Audit remaining visible English
+        run: python3 tools/audit_german_ui.py
+
       - name: Commit report
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add GERMAN_UI_STRINGS.tsv
+          git add GERMAN_UI_STRINGS.tsv GERMAN_UI_REMAINING.tsv
           git commit -m "Inventory AerioTV user-facing strings for German translation"
           git push origin HEAD:deutsch
 
