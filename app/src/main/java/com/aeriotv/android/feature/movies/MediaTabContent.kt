@@ -404,7 +404,7 @@ fun MediaTabContent(
             onPlayFromStart = {},
             onDetails = { item?.movieUuid?.let { u -> viewModel.noteMovieTitle(u, page.title); onMovieClick(u) } ?: item?.seriesId?.let(onSeriesClick) },
             onRemove = { item?.let { watchlistVm.remove(it.key) } },
-            removeLabel = "Remove from Watchlist",
+            removeLabel = "Von Merkliste entfernen",
             isHidden = item?.key in hiddenTitles,
             onToggleHidden = item?.let { m -> { viewModel.toggleHidden(m.key) } },
         )
@@ -542,7 +542,7 @@ fun MediaTabContent(
         query = query,
         onQueryChange = { submitQuery(it) },
         onSearchToggle = { searchActive = !searchActive; if (!searchActive) submitQuery("") },
-        searchPlaceholder = if (kind == MediaKind.Movies) "Search movies" else "Search TV shows",
+        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Search TV shows",
         isSearching = isSearching,
         searchExtras = searchExtras,
         pills = genrePills,
@@ -559,7 +559,7 @@ fun MediaTabContent(
                 menu = { close ->
                     DropdownMenuItem(text = { Text("Details") }, onClick = { close(); open() })
                     DropdownMenuItem(
-                        text = { Text(if (item.key in watchlistKeys) "Remove from Watchlist" else "Add to Watchlist") },
+                        text = { Text(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") },
                         onClick = { close(); watchlistVm.toggle(item) },
                     )
                     DropdownMenuItem(

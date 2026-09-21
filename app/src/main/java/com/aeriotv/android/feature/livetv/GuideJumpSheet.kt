@@ -144,7 +144,7 @@ fun GuideJumpSheet(
             }
             Spacer(Modifier.height(18.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                OutlinedButton(onClick = { onBackToNow(); onDismiss() }) { Text("Back to Now") }
+                OutlinedButton(onClick = { onBackToNow(); onDismiss() }) { Text("Zurück zu Jetzt") }
                 Spacer(Modifier.width(10.dp))
                 Button(onClick = { onJump(target()); onDismiss() }) { Text("Go") }
             }
@@ -247,7 +247,7 @@ internal fun GuideJumpTvContent(
         )
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 4.dp)) {
             com.aeriotv.android.ui.tv.TvPill("Go", selected = true, onClick = { onJump(target()); onDismiss() })
-            com.aeriotv.android.ui.tv.TvPill("Back to Now", selected = false, onClick = { onBackToNow(); onDismiss() })
+            com.aeriotv.android.ui.tv.TvPill("Zurück zu Jetzt", selected = false, onClick = { onBackToNow(); onDismiss() })
         }
     }
 }

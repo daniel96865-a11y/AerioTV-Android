@@ -333,7 +333,7 @@ fun DvrMediaTabContent(
                 recordedOnMillis = rec.startMillis, windowStartMillis = rec.startMillis, windowEndMillis = rec.endMillis,
                 fileSizeBytes = rec.fileSizeBytes,
                 format = if (ext.equals("m3u8", true)) "HLS" else ext,
-                location = if (rec.source == DvrViewModel.Source.Local) "This device" else (playlistState.playlist?.name?.takeIf { it.isNotBlank() } ?: "Dispatcharr"),
+                location = if (rec.source == DvrViewModel.Source.Local) "Dieses Gerät" else (playlistState.playlist?.name?.takeIf { it.isNotBlank() } ?: "Dispatcharr"),
                 status = statusLabel,
                 videoCodec = rec.videoCodec, resolution = rec.resolution, frameRate = rec.frameRate,
                 videoBitrateKbps = rec.videoBitrateKbps, audioCodec = rec.audioCodec, audioChannels = rec.audioChannels,
@@ -351,32 +351,32 @@ fun DvrMediaTabContent(
             if (s == DvrViewModel.Recording.Status.Completed || s == DvrViewModel.Recording.Status.Stopped) {
                 add(com.aeriotv.android.core.tv.TvMenuAction("Abspielen") { play(rec) })
                 if (isServer) {
-                    add(com.aeriotv.android.core.tv.TvMenuAction("Watch from Beginning") { playFromStart(rec) })
+                    add(com.aeriotv.android.core.tv.TvMenuAction("Von Anfang ansehen") { playFromStart(rec) })
                     // Save to Device is a read (GET the file), never gated.
-                    add(com.aeriotv.android.core.tv.TvMenuAction("Save to Device") { scope.launch { viewModel.saveToDevice(rec).onFailure { toast("Save failed: ${it.message}") }.onSuccess { toast("Saving to device") } } })
+                    add(com.aeriotv.android.core.tv.TvMenuAction("Auf Gerät speichern") { scope.launch { viewModel.saveToDevice(rec).onFailure { toast("Speichern fehlgeschlagen: ${it.message}") }.onSuccess { toast("Wird auf dem Gerät gespeichert") } } })
                     if (canManageDvr) {
-                        add(com.aeriotv.android.core.tv.TvMenuAction("Remove Commercials") { scope.launch { viewModel.applyComskip(rec).onFailure { toast("Comskip failed: ${it.message}") }.onSuccess { toast("Comskip started") } } })
+                        add(com.aeriotv.android.core.tv.TvMenuAction("Werbung entfernen") { scope.launch { viewModel.applyComskip(rec).onFailure { toast("Comskip fehlgeschlagen: ${it.message}") }.onSuccess { toast("Comskip gestartet") } } })
                     }
                 }
             }
             if (s == DvrViewModel.Recording.Status.Recording) {
                 if (rec.inProgressUrl != null) {
-                    add(com.aeriotv.android.core.tv.TvMenuAction("Start at Live") { jumpToLive(rec) })
-                    add(com.aeriotv.android.core.tv.TvMenuAction("Watch from Beginning") { playFromStart(rec) })
+                    add(com.aeriotv.android.core.tv.TvMenuAction("Bei Live starten") { jumpToLive(rec) })
+                    add(com.aeriotv.android.core.tv.TvMenuAction("Von Anfang ansehen") { playFromStart(rec) })
                 }
                 if (!isServer || canManageDvr) {
-                    add(com.aeriotv.android.core.tv.TvMenuAction("Aufnahme stoppen") { scope.launch { viewModel.stopRecording(rec).onFailure { toast("Stop failed: ${it.message}") } } })
+                    add(com.aeriotv.android.core.tv.TvMenuAction("Aufnahme stoppen") { scope.launch { viewModel.stopRecording(rec).onFailure { toast("Stoppen fehlgeschlagen: ${it.message}") } } })
                 }
             }
             if (s == DvrViewModel.Recording.Status.Scheduled) {
-                if (isServer && canManageDvr) add(com.aeriotv.android.core.tv.TvMenuAction("Edit Recording") { pendingEdit = rec })
+                if (isServer && canManageDvr) add(com.aeriotv.android.core.tv.TvMenuAction("Aufnahme bearbeiten") { pendingEdit = rec })
                 if (!isServer || canManageDvr) {
-                    add(com.aeriotv.android.core.tv.TvMenuAction("Cancel Recording", destructive = true) { pendingDelete = rec })
+                    add(com.aeriotv.android.core.tv.TvMenuAction("Aufnahme abbrechen", destructive = true) { pendingDelete = rec })
                 }
             } else if (!isServer || canManageDvr) {
-                // A local row's bytes are on this device: "Delete from Device"
+                // A local row's bytes are on this device: "Vom Gerät löschen"
                 // is always offered. The server copy stays behind dvr_access.
-                add(com.aeriotv.android.core.tv.TvMenuAction(if (isServer) "Delete from Server" else "Delete from Device", destructive = true) { pendingDelete = rec })
+                add(com.aeriotv.android.core.tv.TvMenuAction(if (isServer) "Vom Server löschen" else "Vom Gerät löschen", destructive = true) { pendingDelete = rec })
             }
         }
     }
@@ -526,10 +526,10 @@ fun DvrMediaTabContent(
             onSave = { newStart, newEnd, newTitle, newDescription ->
                 val id = rec.serverId()
                 pendingEdit = null
-                if (id <= 0) { toast("Invalid recording id."); return@EditRecordingSheet }
+                if (id <= 0) { toast("Ungültige Aufnahme-ID."); return@EditRecordingSheet }
                 scope.launch {
                     viewModel.editServerRecording(recordingId = id, startMillis = newStart, endMillis = newEnd, title = newTitle, description = newDescription)
-                        .fold(onSuccess = { toast("Recording updated.") }, onFailure = { toast("Update failed: ${it.message ?: it::class.simpleName}") })
+                        .fold(onSuccess = { toast("Aufnahme aktualisiert.") }, onFailure = { toast("Update failed: ${it.message ?: it::class.simpleName}") })
                 }
             },
         )
@@ -541,9 +541,9 @@ fun DvrMediaTabContent(
             title = {
                 Text(
                     when {
-                        scheduledNow -> "Cancel Recording"
-                        rec.source == DvrViewModel.Source.Server -> "Delete from Server"
-                        else -> "Delete from Device"
+                        scheduledNow -> "Aufnahme abbrechen"
+                        rec.source == DvrViewModel.Source.Server -> "Vom Server löschen"
+                        else -> "Vom Gerät löschen"
                     },
                 )
             },
@@ -561,7 +561,7 @@ fun DvrMediaTabContent(
                 TextButton(onClick = {
                     val target = rec; pendingDelete = null
                     scope.launch { viewModel.deleteRecording(target).onFailure { toast("Delete failed: ${it.message}") } }
-                }) { Text(if (scheduledNow) "Cancel Recording" else "Löschen", color = MaterialTheme.colorScheme.error) }
+                }) { Text(if (scheduledNow) "Aufnahme abbrechen" else "Löschen", color = MaterialTheme.colorScheme.error) }
             },
             dismissButton = { TextButton(onClick = { pendingDelete = null }) { Text("Keep") } },
         )

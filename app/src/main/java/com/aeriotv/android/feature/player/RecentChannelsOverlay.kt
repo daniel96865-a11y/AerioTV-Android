@@ -106,7 +106,7 @@ internal fun RecentChannelsOverlay(
             Spacer(Modifier.height(14.dp))
             if (entries.isEmpty()) {
                 Text(
-                    text = "Channels you watch will show up here.",
+                    text = "Hier erscheinen die Sender, die du ansiehst.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.7f),
                 )

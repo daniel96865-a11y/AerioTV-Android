@@ -157,10 +157,10 @@ internal fun TvMediaTab(
             add(TvHeroButton("Details", Icons.Outlined.Info, id = "Details", onClick = details))
         }
         val longPress = buildList {
-            if (item != null) add(TvMenuAction(if (item.key in watchlistKeys) "Remove from Watchlist" else "Add to Watchlist") { onToggleWatchlist(item) })
+            if (item != null) add(TvMenuAction(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") { onToggleWatchlist(item) })
             if (item != null) add(TvMenuAction(if (item.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(item) })
-            if (!watchlist) add(TvMenuAction("Remove from Continue Watching", destructive = true) { onRemoveProgress(videoId) })
-            else if (item != null) add(TvMenuAction("Remove from Watchlist", destructive = true) { onRemoveWatchlist(item.key) })
+            if (!watchlist) add(TvMenuAction("Aus „Weiterschauen“ entfernen", destructive = true) { onRemoveProgress(videoId) })
+            else if (item != null) add(TvMenuAction("Von Merkliste entfernen", destructive = true) { onRemoveWatchlist(item.key) })
         }
         return TvHeroPage(
             key = page.key, title = page.title, artUrl = backdrops[page.key] ?: page.artUrl,
@@ -201,7 +201,7 @@ internal fun TvMediaTab(
             longPressActions = listOfNotNull(
                 item?.let { TvMenuAction("Details") { open(it) } },
                 item?.let { TvMenuAction(if (it.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(it) } },
-                item?.let { TvMenuAction("Remove from Watchlist", destructive = true) { onRemoveWatchlist(it.key) } },
+                item?.let { TvMenuAction("Von Merkliste entfernen", destructive = true) { onRemoveWatchlist(it.key) } },
             ),
         )
     }
@@ -246,7 +246,7 @@ internal fun TvMediaTab(
         onQueryChange = onQueryChange,
         onSearchToggle = onSearchToggle,
         onClearSearch = onClearSearch,
-        searchPlaceholder = if (kind == MediaKind.Movies) "Search movies" else "Search TV shows",
+        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Search TV shows",
         isSearching = isSearching,
         searchExtras = extras,
         pills = genrePills,
@@ -261,7 +261,7 @@ internal fun TvMediaTab(
                 onClick = { open(item) }, modifier = scope.modifier,
                 longPressActions = listOf(
                     TvMenuAction("Details") { open(item) },
-                    TvMenuAction(if (item.key in watchlistKeys) "Remove from Watchlist" else "Add to Watchlist") { onToggleWatchlist(item) },
+                    TvMenuAction(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") { onToggleWatchlist(item) },
                     TvMenuAction(if (item.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(item) },
                 ),
             )

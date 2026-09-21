@@ -140,7 +140,7 @@ fun DvrSettingsScreen(
                         )
                         HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
                         DestinationRow(
-                            label = "This device",
+                            label = "Dieses Gerät",
                             selected = defaultDestination == "local",
                             onSelect = { settingsVm.setDvrDefaultDestination("local") },
                         )
@@ -368,7 +368,7 @@ private fun DestinationRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }

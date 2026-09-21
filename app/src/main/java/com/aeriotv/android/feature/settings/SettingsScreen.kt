@@ -316,7 +316,7 @@ fun SettingsScreen(
                         val url = "https://github.com/jonzey231/AerioTV-Android"
                         if (isTv) {
                             qrLink = TvQrLink(
-                                title = "Developer Website",
+                                title = "Entwickler-Webseite",
                                 caption = "Scan with your phone to open this page.",
                                 url = url,
                             )
@@ -329,7 +329,7 @@ fun SettingsScreen(
                         val url = "https://github.com/jonzey231/AerioTV-Android/issues/new"
                         if (isTv) {
                             qrLink = TvQrLink(
-                                title = "Report an Issue",
+                                title = "Problem melden",
                                 caption = "Scan with your phone to open this page.",
                                 url = url,
                             )
@@ -388,7 +388,7 @@ private fun PlaylistsSection(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "No playlists added",
+                        text = "Keine Wiedergabelisten hinzugefügt",
                         style = settingsRowValueStyle().subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -443,7 +443,7 @@ private fun PlaylistsSection(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Manage Playlists",
+                        text = "Wiedergabelisten verwalten",
                         style = settingsRowValueStyle(),
                         color = MaterialTheme.colorScheme.textAccent,
                         modifier = Modifier.weight(1f),
@@ -653,14 +653,14 @@ private fun AboutSection(
             AboutActionRow("Copy to Clipboard", Icons.Filled.ContentCopy, onClick = onCopy)
             RowDivider()
             AboutActionRow(
-                "Developer Website",
+                "Entwickler-Webseite",
                 Icons.Outlined.OpenInNew,
                 onClick = onOpenWebsite,
                 external = true,
             )
             RowDivider()
             AboutActionRow(
-                "Report an Issue",
+                "Problem melden",
                 Icons.Outlined.BugReport,
                 onClick = onReportIssue,
                 external = true,
@@ -891,7 +891,7 @@ enum class SettingsSection(
 ) {
     LiveTV(
         title = "Live-TV",
-        subtitle = "Guide, groups, badges, colors",
+        subtitle = "EPG, Gruppen, Markierungen, Farben",
         icon = Icons.Filled.LiveTv,
     ),
     Player(
@@ -901,12 +901,12 @@ enum class SettingsSection(
     ),
     MoviesAndTvShows(
         title = "Filme & Serien",
-        subtitle = "Library refresh, posters",
+        subtitle = "Bibliothek aktualisieren, Poster",
         icon = Icons.Filled.Movie,
     ),
     DvrSettings(
         title = "DVR",
-        subtitle = "Recordings, buffers, storage",
+        subtitle = "Aufnahmen, Puffer, Speicher",
         icon = Icons.Filled.FiberManualRecord,
     ),
     Appearance(
@@ -916,12 +916,12 @@ enum class SettingsSection(
     ),
     General(
         title = "Allgemein",
-        subtitle = "Startup, refresh, network",
+        subtitle = "Start, Aktualisierung, Netzwerk",
         icon = Icons.Filled.Tune,
     ),
     RemoteControl(
         title = "Fernbedienung",
-        subtitle = "Customize remote buttons",
+        subtitle = "Fernbedienungstasten anpassen",
         icon = Icons.Filled.SettingsRemote,
     ),
     Sync(
@@ -935,7 +935,7 @@ enum class SettingsSection(
     ),
     AppUpdates(
         title = "Updates",
-        subtitle = "Check for new releases",
+        subtitle = "Nach neuen Versionen suchen",
         icon = Icons.Filled.SystemUpdate,
     ),
     Developer(

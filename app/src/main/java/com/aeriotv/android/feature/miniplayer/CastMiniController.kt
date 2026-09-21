@@ -66,7 +66,7 @@ fun CastMiniController(
     transportIcon: ImageVector = Icons.Filled.Cast,
     /** Hidden while nothing is playing yet (there is nothing to pause). */
     showTransport: Boolean = true,
-    stopDescription: String = "Stop casting",
+    stopDescription: String = "Übertragung beenden",
 ) {
     Row(
         modifier = modifier
@@ -103,7 +103,7 @@ fun CastMiniController(
         Spacer(Modifier.width(12.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = title.ifBlank { "Now casting" },
+                text = title.ifBlank { "Wird übertragen" },
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
@@ -121,7 +121,7 @@ fun CastMiniController(
             }
             Text(
                 text = subtitle
-                    ?: if (!deviceName.isNullOrBlank()) "Casting to $deviceName" else "Tap to control",
+                    ?: if (!deviceName.isNullOrBlank()) "Übertragung auf $deviceName" else "Tap to control",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.textAccent,
                 maxLines = 1,

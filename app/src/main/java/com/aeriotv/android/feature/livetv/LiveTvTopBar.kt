@@ -146,7 +146,7 @@ internal fun TvRetainedChannelsCircle(
 ) {
     com.aeriotv.android.ui.tv.TvActionCircle(
         icon = Icons.Filled.FiberSmartRecord,
-        contentDescription = "$count channels kept live",
+        contentDescription = "$count Sender werden live gehalten",
         onClick = onClick,
         modifier = modifier,
         accentGlyph = true,
@@ -442,7 +442,7 @@ fun LiveTvPhoneHeaderRow(
         if (sidebarMode) {
             LiveTvPhoneCircle(
                 icon = Icons.Outlined.ViewSidebar,
-                contentDescription = "Channel Groups",
+                contentDescription = "Sendergruppen",
                 onClick = onOpenGroups,
             )
             // Name takes all the leftover width (a sibling spacer used to
@@ -508,7 +508,7 @@ fun LiveTvPhoneHeaderRow(
             }
             LiveTvPhoneCircle(
                 icon = Icons.Filled.MoreVert,
-                contentDescription = if (actionsExpanded) "Hide options" else "More options",
+                contentDescription = if (actionsExpanded) "Optionen ausblenden" else "Weitere Optionen",
                 onClick = { actionsExpanded = !actionsExpanded },
                 active = actionsExpanded,
             )
@@ -555,14 +555,14 @@ private fun LiveTvHeaderActions(
     var sortOpen by remember { mutableStateOf(false) }
     LiveTvPhoneCircle(
         icon = Icons.Outlined.Search,
-        contentDescription = if (searchActive) "Close search" else "Suche",
+        contentDescription = if (searchActive) "Suche schließen" else "Suche",
         onClick = { onActionTaken(); onToggleSearch() },
         active = searchActive,
     )
     Box {
         LiveTvPhoneCircle(
             icon = Icons.Filled.SwapVert,
-            contentDescription = "Sort: ${sortMode.label}",
+            contentDescription = "Sortieren: ${sortMode.label}",
             onClick = { sortOpen = true },
             active = sortOpen,
         )
@@ -601,7 +601,7 @@ private fun LiveTvHeaderActions(
     if (canToggleViewMode) {
         LiveTvPhoneCircle(
             icon = if (showingGuide) Icons.Filled.ViewList else Icons.Filled.CalendarMonth,
-            contentDescription = if (showingGuide) "Show List" else "Show Guide",
+            contentDescription = if (showingGuide) "Liste anzeigen" else "EPG anzeigen",
             onClick = { onActionTaken(); onToggleViewMode() },
         )
     }

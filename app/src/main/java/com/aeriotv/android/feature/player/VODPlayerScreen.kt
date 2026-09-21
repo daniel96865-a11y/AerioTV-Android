@@ -125,7 +125,7 @@ import com.aeriotv.android.core.ui.rememberSkipForwardSeconds
 private const val TAG = "VODPlayerScreen"
 
 /**
- * GH #78: how long the "Watch from Beginning" watcher follows an in-progress
+ * GH #78: how long the "Von Anfang ansehen" watcher follows an in-progress
  * DVR recording after prepare(), waiting to see whether media3's live-edge
  * default overrode our pinned start position. Generous on purpose: on a cold
  * app launch on a low-power Google TV box, a 25-minute recording's playlist
@@ -1033,7 +1033,7 @@ fun VODPlayerScreen(
         if (streamUrl.isBlank() || loadingMessage != null) {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = loadingMessage ?: "Loading…",
+                    text = loadingMessage ?: "Wird geladen…",
                     style = MaterialTheme.typography.titleMedium,
                     color = Color.White,
                 )
@@ -1271,7 +1271,7 @@ fun VODPlayerScreen(
                             }
                         })
                         playWhenReady = PhoneVodMini.playWhenReadyFor(this)
-                        // "Watch from Beginning" on an in-progress recording
+                        // "Von Anfang ansehen" on an in-progress recording
                         // pins the START POSITION at prepare time rather than
                         // seeking afterwards. Media3 resolves a live HLS to its
                         // DEFAULT position (the live edge) the moment the window
@@ -1423,7 +1423,7 @@ fun VODPlayerScreen(
             }
         }
 
-        // GH #78: "Watch from Beginning" on an in-progress recording.
+        // GH #78: "Von Anfang ansehen" on an in-progress recording.
         //
         // The start position is pinned to 0 at setMediaItem time (see the
         // player builder above), which is the primary fix. It is not
@@ -1891,12 +1891,12 @@ fun VODPlayerScreen(
                     modifier = Modifier.size(44.dp),
                 )
                 Text(
-                    text = "Video Not Supported",
+                    text = "Video nicht unterstützt",
                     style = MaterialTheme.typography.headlineSmall,
                     color = Color.White,
                 )
                 Text(
-                    text = "This device cannot decode this copy's video format, " +
+                    text = "Dieses Gerät kann das Videoformat dieser Version nicht dekodieren, " +
                         "so only the audio is playing.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.85f),
@@ -1949,12 +1949,12 @@ fun VODPlayerScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
-                    text = "Recording Ending",
+                    text = "Aufnahme endet",
                     style = MaterialTheme.typography.headlineSmall,
                     color = Color.White,
                 )
                 Text(
-                    text = "This recording is about to reach its scheduled end.",
+                    text = "Diese Aufnahme erreicht gleich ihr geplantes Ende.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White.copy(alpha = 0.85f),
                     textAlign = TextAlign.Center,
@@ -1970,7 +1970,7 @@ fun VODPlayerScreen(
                             },
                             modifier = Modifier.focusRequester(endPromptFocus),
                         ) {
-                            Text("Continue on Live TV")
+                            Text("Im Live-TV fortfahren")
                         }
                     }
                     Button(onClick = {
@@ -1978,7 +1978,7 @@ fun VODPlayerScreen(
                         dvrEndPromptVisible = false
                         onClose()
                     }) {
-                        Text("Back to DVR")
+                        Text("Zurück zu DVR")
                     }
                     Button(onClick = {
                         dvrEndPromptDismissed = true
@@ -2092,7 +2092,7 @@ fun VODPlayerScreen(
                         },
                         modifier = Modifier.focusRequester(errorRetryFocus),
                     ) {
-                        Text("Retry Now")
+                        Text("Jetzt erneut versuchen")
                     }
                     Button(onClick = onClose) {
                         Text("Schließen")
@@ -2386,7 +2386,7 @@ private fun BottomChrome(
             Spacer(Modifier.width(8.dp))
             TransportIconButton(
                 icon = Icons.Outlined.Tune,
-                contentDescription = "Player options",
+                contentDescription = "Player-Optionen",
                 onClick = onOptions,
                 focused = isTvForm && tvFocusZone == TvVodFocusZone.Options,
                 isTvForm = isTvForm,

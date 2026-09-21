@@ -115,9 +115,9 @@ fun CastRemoteSheet(
      *  has been unloaded and the new proxy session is warming up, so the header
      *  reads "Switching to <channel>" until the receiver reports PLAYING. */
     switchingTo: String? = null,
-    /** Label for the stop action: "Stop casting" for Cast, "Disconnect" for the
+    /** Label for the stop action: "Übertragung beenden" for Cast, "Disconnect" for the
      *  companion transport. */
-    stopLabel: String = "Stop casting",
+    stopLabel: String = "Übertragung beenden",
     /** Google Cast transport (Logan 2026-09-13): the skip back / skip forward 30 s
      *  buttons were only ever drawn for the AerioTV Remote transport, because
      *  the Cast receivers do not report a rewind window on the control channel.
@@ -158,7 +158,7 @@ fun CastRemoteSheet(
             )
             Spacer(Modifier.height(10.dp))
             Text(
-                text = switchingTo?.let { "Switching to $it" }
+                text = switchingTo?.let { "Wechsel zu $it" }
                     ?: channelTitle.ifBlank { "Nothing playing" },
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -350,11 +350,11 @@ fun CastRemoteSheet(
                     optionsOpen = false
                     sleepOpen = true
                 }
-                OptionRow(Icons.Filled.Info, "Stream Info", null) {
+                OptionRow(Icons.Filled.Info, "Stream-Info", null) {
                     optionsOpen = false
                     infoOpen = true
                 }
-                OptionRow(Icons.Filled.VideocamOff, "Audio Only", if (remoteState.audioOnly) "Ein" else "Aus") {
+                OptionRow(Icons.Filled.VideocamOff, "Nur Audio", if (remoteState.audioOnly) "Ein" else "Aus") {
                     onSetAudioOnly(!remoteState.audioOnly)
                 }
                 // Companion only: the X above stops the TV, this one just lets go
@@ -403,14 +403,14 @@ fun CastRemoteSheet(
         com.aeriotv.android.ui.FormFactorModal(onDismiss = { infoOpen = false }) {
             Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 8.dp)) {
                 Text(
-                    text = "Stream Info",
+                    text = "Stream-Info",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Spacer(Modifier.height(10.dp))
                 Text(
-                    text = remoteState.streamInfo.ifBlank { "No stream details available" },
+                    text = remoteState.streamInfo.ifBlank { "Keine Stream-Details verfügbar" },
                     style = MaterialTheme.typography.bodyMedium.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )

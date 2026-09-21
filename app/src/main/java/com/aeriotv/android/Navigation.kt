@@ -666,7 +666,7 @@ fun AerioTVNavHost(
                             googleSignInInFlight = false
                             android.widget.Toast.makeText(
                                 context,
-                                "Sign-in cancelled or failed.",
+                                "Anmeldung abgebrochen oder fehlgeschlagen.",
                                 android.widget.Toast.LENGTH_SHORT,
                             ).show()
                             return@launch
@@ -685,7 +685,7 @@ fun AerioTVNavHost(
                                 googleSignInInFlight = false
                                 android.widget.Toast.makeText(
                                     context,
-                                    "Drive authorization failed.",
+                                    "Drive-Autorisierung fehlgeschlagen.",
                                     android.widget.Toast.LENGTH_SHORT,
                                 ).show()
                             }
@@ -768,7 +768,7 @@ fun AerioTVNavHost(
                 if (welcomeNotConfiguredDialog) {
                     com.aeriotv.android.ui.scale.AlertDialog(
                         onDismissRequest = { welcomeNotConfiguredDialog = false },
-                        title = { androidx.compose.material3.Text("Drive Sync isn't set up yet") },
+                        title = { androidx.compose.material3.Text("Drive-Synchronisierung ist noch nicht eingerichtet") },
                         text = {
                             androidx.compose.material3.Text(
                                 "This AerioTV build doesn't have a Google Cloud OAuth Web " +
@@ -1552,7 +1552,7 @@ fun AerioTVNavHost(
                     // that resolved OFF the server's origin.
                     httpHeaders = if (resolved?.authSafe == false) emptyMap() else headers,
                     onClose = { if (!epMiniToken.minimized) navController.popBackStack() },
-                    loadingMessage = resolveError ?: if (resolved == null) "Loading…" else null,
+                    loadingMessage = resolveError ?: if (resolved == null) "Wird geladen…" else null,
                     videoId = episodeUuid,
                     posterUrl = parentSeriesPoster,
                     versionOptions = versionOptions,
@@ -1779,7 +1779,7 @@ fun AerioTVNavHost(
                     // that resolved OFF the server's origin.
                     httpHeaders = if (resolved?.authSafe == false) emptyMap() else headers,
                     onClose = { if (!movieMiniToken.minimized) navController.popBackStack() },
-                    loadingMessage = resolveError ?: if (resolved == null) "Loading…" else null,
+                    loadingMessage = resolveError ?: if (resolved == null) "Wird geladen…" else null,
                     videoId = movieUuid,
                     posterUrl = movie?.posterUrl,
                     versionOptions = versionOptions,

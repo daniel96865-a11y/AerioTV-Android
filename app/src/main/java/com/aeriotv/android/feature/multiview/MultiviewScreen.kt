@@ -362,7 +362,7 @@ fun MultiviewScreen(
             contentAlignment = Alignment.Center,
         ) {
             Text(
-                text = "No tiles selected.",
+                text = "Keine Kacheln ausgewählt.",
                 style = MaterialTheme.typography.bodyMedium.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -687,7 +687,7 @@ fun MultiviewScreen(
                 if (selected.size < storeHandle.maxTiles) {
                     add(
                         TvMenuAction(
-                            label = "Add Channel",
+                            label = "Sender hinzufügen",
                             icon = Icons.Filled.Add,
                             onClick = { addPickerOpen = true },
                         ),
@@ -705,11 +705,11 @@ fun MultiviewScreen(
                         onClick = { playbackMenuIndex = menuIdx },
                     ),
                 )
-                // "Change Channel" (nee Swap Stream, renamed with iOS
+                // "Sender wechseln" (nee Swap Stream, renamed with iOS
                 // 2026-08-28 - it re-points the tile at another CHANNEL).
                 add(
                     TvMenuAction(
-                        label = "Change Channel",
+                        label = "Sender wechseln",
                         icon = Icons.Filled.SwapHoriz,
                         onClick = {
                             swapTargetTileId = menuTile.id
@@ -733,7 +733,7 @@ fun MultiviewScreen(
                 )
                 add(
                     TvMenuAction(
-                        label = if (isSpotlit) "Remove Spotlight" else "Spotlight This Tile",
+                        label = if (isSpotlit) "Hervorhebung entfernen" else "Diese Kachel hervorheben",
                         icon = Icons.Filled.ViewSidebar,
                         onClick = {
                             if (isSpotlit) {
@@ -750,7 +750,7 @@ fun MultiviewScreen(
                 // Issue #48: grid SHAPE picker. Grid-wide (any tile sets the
                 // shared, persisted layout); only appears where a real alternative
                 // shape exists (3/5 Even Grid, 6 Hero + Corner). Spotlight is not a
-                // shape here -- it is the per-tile "Spotlight This Tile" action
+                // shape here -- it is the per-tile "Diese Kachel hervorheben" action
                 // above. The active shape shows a checkmark; picking any shape
                 // clears the per-tile spotlight so a leftover hero can't override
                 // the chosen shape and make the switch a no-op.
@@ -804,7 +804,7 @@ fun MultiviewScreen(
                     val scrubOn = menuIdx in scrubberTiles
                     add(
                         TvMenuAction(
-                            label = if (scrubOn) "Hide Scrubber" else "Show Scrubber",
+                            label = if (scrubOn) "Zeitleiste ausblenden" else "Zeitleiste anzeigen",
                             icon = Icons.Filled.Timeline,
                             onClick = {
                                 scrubberTiles = if (scrubOn) scrubberTiles - menuIdx
@@ -893,7 +893,7 @@ fun MultiviewScreen(
                 if (behindLive) {
                     add(
                         TvMenuAction(
-                            label = "Return to Live",
+                            label = "Zurück zu Live",
                             icon = Icons.Filled.LiveTv,
                             onClick = {
                                 pbPlayer?.let {
@@ -1328,7 +1328,7 @@ private fun TileGrid(
                         isDvr = tile.kind == TileKind.Dvr,
                         // Item #16 focus-trap fix: the strip must be able to hand
                         // the D-pad back to the single grid host (which owns ALL
-                        // nav + the long-OK tile menu where "Hide Scrubber"
+                        // nav + the long-OK tile menu where "Zeitleiste ausblenden"
                         // lives). UP/DOWN/BACK return focus; BACK also hides the
                         // scrubber so a remote can never get pinned on the strip.
                         gridFocusRequester = gridFocusRequester,
@@ -2220,7 +2220,7 @@ private fun BoxScope.TileScrubberOverlay(
     isTv: Boolean,
     isDvr: Boolean,
     // Item #16 focus-trap fix: the single grid host that owns ALL D-pad nav and
-    // the long-OK tile menu (where "Hide Scrubber" lives). The strip hands focus
+    // the long-OK tile menu (where "Zeitleiste ausblenden" lives). The strip hands focus
     // back to it on UP/DOWN/BACK so the remote is never pinned on the scrubber.
     gridFocusRequester: FocusRequester,
     // Hide this tile's scrubber (drops it from scrubberTiles). Called on BACK so

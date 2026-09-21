@@ -243,7 +243,7 @@ fun ManageGroupsSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = if (manualReorder) "Drag to reorder, check to show or hide."
+                    text = if (manualReorder) "Zum Sortieren ziehen; Häkchen zum Ein-/Ausblenden."
                     else "Check groups to show, uncheck to hide.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -313,7 +313,7 @@ fun ManageGroupsSheet(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "No groups available",
+                        text = "Keine Gruppen verfügbar",
                         style = MaterialTheme.typography.bodyMedium.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -372,7 +372,7 @@ fun ManageGroupsSheet(
                                 )
                                 Icon(
                                     imageVector = Icons.Filled.Menu,
-                                    contentDescription = "Drag to reorder",
+                                    contentDescription = "Zum Sortieren ziehen",
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier
                                         .draggableHandle(
@@ -576,7 +576,7 @@ fun TvGroupPicker(
                         }
                     }
                     Text(
-                        text = "Shift guide moves the TV Guide over so the sidebar never covers programs.",
+                        text = "„EPG verschieben“ rückt den EPG zur Seite, damit die Seitenleiste keine Sendungen verdeckt.",
                         style = MaterialTheme.typography.bodySmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(horizontal = 28.dp, vertical = 2.dp),
@@ -594,7 +594,7 @@ fun TvGroupPicker(
                         contentAlignment = Alignment.Center,
                     ) {
                         Text(
-                            text = "No groups available",
+                            text = "Keine Gruppen verfügbar",
                             style = MaterialTheme.typography.bodyMedium.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )

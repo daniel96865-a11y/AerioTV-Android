@@ -182,7 +182,7 @@ fun DeveloperSettingsScreen(
     if (pendingEnable) {
         AlertDialog(
             onDismissRequest = { pendingEnable = false },
-            title = { Text("Enable Debug Logging?") },
+            title = { Text("Debug-Protokollierung aktivieren?") },
             text = {
                 Text(
                     "AerioTV will write detailed diagnostic logs to a file in the app's " +
@@ -194,7 +194,7 @@ fun DeveloperSettingsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Enable Logging",
+                    label = "Protokollierung aktivieren",
                     onClick = {
                         pendingEnable = false
                         settingsVm.setDebugLoggingEnabled(true)
@@ -210,9 +210,9 @@ fun DeveloperSettingsScreen(
     if (pendingDisable) {
         AlertDialog(
             onDismissRequest = { pendingDisable = false },
-            title = { Text("Disable Debug Logging?") },
+            title = { Text("Debug-Protokollierung deaktivieren?") },
             text = {
-                Text("The existing log file will be kept. You can share or clear it at any time.")
+                Text("Die vorhandene Protokolldatei bleibt erhalten. Du kannst sie jederzeit teilen oder löschen.")
             },
             confirmButton = {
                 SettingsDialogTextButton(
@@ -233,7 +233,7 @@ fun DeveloperSettingsScreen(
     if (pendingClear) {
         AlertDialog(
             onDismissRequest = { pendingClear = false },
-            title = { Text("Delete All Logs?") },
+            title = { Text("Alle Protokolle löschen?") },
             text = {
                 Text(
                     "This permanently deletes the current log and any rotated " +
@@ -242,7 +242,7 @@ fun DeveloperSettingsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Delete All Logs",
+                    label = "Alle Protokolle löschen",
                     onClick = {
                         pendingClear = false
                         debugLogger.deleteAllLogs()
@@ -278,7 +278,7 @@ private fun LoggingSection(
     ) {
         SettingsToggleRow(
             title = "Debug Logging",
-            subtitle = if (enabled) "Active, writing to aerio_debug_logs.txt"
+            subtitle = if (enabled) "Aktiv, schreibt in aerio_debug_logs.txt"
             else "Off, no data is collected",
             leadingIcon = Icons.Filled.BugReport,
             checked = enabled,
@@ -308,19 +308,19 @@ private fun LogFileSection(
         )
         SettingsActionRow(
             label = "View Log File",
-            subtitle = "Scroll through entries in the app",
+            subtitle = "Einträge direkt in der App ansehen",
             leadingIcon = Icons.Outlined.Article,
             onClick = onView,
         )
         SettingsActionRow(
             label = "Share Log File",
-            subtitle = if (isTv) "Scan a QR code with your phone" else "Email, Messages, Drive, etc.",
+            subtitle = if (isTv) "QR-Code mit dem Handy scannen" else "E-Mail, Nachrichten, Drive usw.",
             leadingIcon = Icons.Filled.Share,
             onClick = onShare,
         )
         SettingsActionRow(
-            label = "Delete All Logs",
-            subtitle = "Removes the current log and rotated archives",
+            label = "Alle Protokolle löschen",
+            subtitle = "Löscht das aktuelle Protokoll und ältere Archive",
             leadingIcon = Icons.Filled.Delete,
             onClick = onClear,
             destructive = true,
@@ -337,7 +337,7 @@ private fun WhatsCapturedSection() {
     ) {
         CategoryRow(
             icon = Icons.Outlined.NetworkCheck,
-            title = "Network",
+            title = "Netzwerk",
             detail = "All API requests: URL, method, status code, duration, payload size",
         )
         DevRowDivider()
@@ -516,7 +516,7 @@ private fun shareLogFile(
 ) {
     val file = debugLogger.logFile()
     if (!file.exists() || file.length() == 0L) {
-        android.widget.Toast.makeText(context, "No log file to share yet.", android.widget.Toast.LENGTH_SHORT).show()
+        android.widget.Toast.makeText(context, "Noch keine Protokolldatei zum Teilen vorhanden.", android.widget.Toast.LENGTH_SHORT).show()
         return
     }
     val uri = runCatching {

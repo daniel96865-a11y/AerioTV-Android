@@ -200,7 +200,7 @@ fun EditPlaylistScreen(
 
         if (playlist == null) {
             Text(
-                "No playlist loaded",
+                "Keine Wiedergabeliste geladen",
                 modifier = Modifier.padding(24.dp),
                 style = MaterialTheme.typography.bodyMedium.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -256,8 +256,8 @@ fun EditPlaylistScreen(
                                     when (sourceType) {
                                         SourceType.M3uUrl -> "Playlist URL"
                                         SourceType.DispatcharrApiKey,
-                                        SourceType.DispatcharrUserPass -> "Server URL"
-                                        SourceType.XtreamCodes -> "Server URL"
+                                        SourceType.DispatcharrUserPass -> "Server-URL"
+                                        SourceType.XtreamCodes -> "Server-URL"
                                     },
                                 )
                             },
@@ -270,7 +270,7 @@ fun EditPlaylistScreen(
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            text = "Type: ${sourceType.displayName}. To switch types, use Change Playlist.",
+                            text = "Typ: ${sourceType.displayName}. Zum Wechseln des Typs „Wiedergabeliste ändern“ verwenden.",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -339,7 +339,7 @@ fun EditPlaylistScreen(
                             val passwordReveal = rememberSecretRevealState()
                             val apiKeyReveal = rememberSecretRevealState()
                             SegmentedToggle(
-                                left = "Username & Password",
+                                left = "Benutzername & Passwort",
                                 right = "API Key",
                                 selected = dispatcharrMode,
                                 onSelect = { dispatcharrMode = it },
@@ -349,7 +349,7 @@ fun EditPlaylistScreen(
                                 OutlinedTextField(
                                     value = username,
                                     onValueChange = { username = it },
-                                    label = { Text("Username") },
+                                    label = { Text("Benutzername") },
                                     singleLine = true,
                                     modifier = Modifier.fillMaxWidth().tvFormFieldInput(),
                                     keyboardOptions = aerioTextFieldKeyboardOptions(
@@ -360,7 +360,7 @@ fun EditPlaylistScreen(
                                 OutlinedTextField(
                                     value = password,
                                     onValueChange = { password = it },
-                                    label = { Text("Password") },
+                                    label = { Text("Passwort") },
                                     singleLine = true,
                                     visualTransformation = passwordReveal.transformation,
                                     trailingIcon = {
@@ -405,7 +405,7 @@ fun EditPlaylistScreen(
                             OutlinedTextField(
                                 value = username,
                                 onValueChange = { username = it },
-                                label = { Text("Username") },
+                                label = { Text("Benutzername") },
                                 singleLine = true,
                                 modifier = Modifier.fillMaxWidth().tvFormFieldInput(),
                                 keyboardOptions = aerioTextFieldKeyboardOptions(
@@ -417,7 +417,7 @@ fun EditPlaylistScreen(
                             OutlinedTextField(
                                 value = password,
                                 onValueChange = { password = it },
-                                label = { Text("Password") },
+                                label = { Text("Passwort") },
                                 singleLine = true,
                                 visualTransformation = passwordReveal.transformation,
                                 trailingIcon = {
@@ -465,7 +465,7 @@ fun EditPlaylistScreen(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(
-                                text = "Fetch On Demand from this playlist",
+                                text = "Mediathek aus dieser Wiedergabeliste laden",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontWeight = FontWeight.Medium,
@@ -490,7 +490,7 @@ fun EditPlaylistScreen(
             // guide browsable into the past.
             item {
                 Section(
-                    header = "Guide Days",
+                    header = "EPG-Tage",
                     footer = "How many days of guide data to load, back and ahead. " +
                         "Dispatcharr only; other sources show what their guide carries.",
                 ) {
@@ -593,11 +593,11 @@ fun EditPlaylistScreen(
             if (isTv) {
                 item {
                     SettingsActionRow(
-                        label = "Save Changes",
+                        label = "Änderungen speichern",
                         leadingIcon = Icons.Filled.Check,
                         onClick = performSave,
                         enabled = canSave,
-                        subtitle = if (canSave) null else "Name and Server URL are required",
+                        subtitle = if (canSave) null else "Name und Server-URL sind erforderlich",
                     )
                 }
             }
@@ -648,7 +648,7 @@ private fun ProfileRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(20.dp),
             )

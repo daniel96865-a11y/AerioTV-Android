@@ -299,7 +299,7 @@ fun RecordProgramSheet(
                 }
                 Spacer(Modifier.weight(1f))
                 Text(
-                    text = if (isLive) "Record from Now" else "Record Program",
+                    text = if (isLive) "Ab jetzt aufnehmen" else "Sendung aufnehmen",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
@@ -311,8 +311,8 @@ fun RecordProgramSheet(
                 ) {
                     Text(
                         text = when {
-                            submitting -> "Scheduling…"
-                            usingRule -> "Save Rule"
+                            submitting -> "Wird geplant…"
+                            usingRule -> "Regel speichern"
                             else -> "Aufnehmen"
                         },
                         color = LIVE_RED,
@@ -396,7 +396,7 @@ fun RecordProgramSheet(
                         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                             Column(modifier = Modifier.weight(1f)) {
                                 Text("Untagged episodes count as new", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
-                                Text("For guides that only tag repeats.", style = MaterialTheme.typography.bodySmall.subtext(), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("Für EPG-Daten, die nur Wiederholungen kennzeichnen.", style = MaterialTheme.typography.bodySmall.subtext(), color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                             Switch(checked = ruleUntaggedIsNew, onCheckedChange = { ruleUntaggedIsNew = it })
                         }
@@ -405,8 +405,8 @@ fun RecordProgramSheet(
                         Spacer(Modifier.height(8.dp))
                         Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
                             Column(modifier = Modifier.weight(1f)) {
-                                Text("Match on every channel", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
-                                Text("Off records only on ${target.channelName}.", style = MaterialTheme.typography.bodySmall.subtext(), color = MaterialTheme.colorScheme.onSurfaceVariant)
+                                Text("Auf allen Sendern abgleichen", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onBackground)
+                                Text("Aus nimmt nur auf ${target.channelName} auf.", style = MaterialTheme.typography.bodySmall.subtext(), color = MaterialTheme.colorScheme.onSurfaceVariant)
                             }
                             Switch(checked = ruleAllChannels, onCheckedChange = { ruleAllChannels = it })
                         }
@@ -419,7 +419,7 @@ fun RecordProgramSheet(
                 Spacer(Modifier.height(6.dp))
                 if (isLive) {
                     Text(
-                        text = "Pre-roll unavailable (program already started).",
+                        text = "Vorlauf nicht verfügbar (Sendung hat bereits begonnen).",
                         style = MaterialTheme.typography.bodySmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -461,19 +461,19 @@ fun RecordProgramSheet(
                             selected = destinationServer,
                             onClick = { destinationServer = true },
                             shape = SegmentedButtonDefaults.itemShape(index = 0, count = 2),
-                        ) { Text("Dispatcharr server") }
+                        ) { Text("Dispatcharr-Server") }
                         SegmentedButton(
                             selected = !destinationServer,
                             onClick = { destinationServer = false },
                             shape = SegmentedButtonDefaults.itemShape(index = 1, count = 2),
-                        ) { Text("This device") }
+                        ) { Text("Dieses Gerät") }
                     }
                 }
 
                 // iOS parity: a Dispatcharr non-admin live recording lands on
                 // this device. Surface an orange callout explaining why the
                 // server option isn't available. Mirrors iOS .orange
-                // "Saving to this device" hint.
+                // "Wird auf diesem Gerät gespeichert" hint.
                 if (isDispatcharr && !canRecordToServer) {
                     Spacer(Modifier.height(18.dp))
                     Row(
@@ -489,13 +489,13 @@ fun RecordProgramSheet(
                         Spacer(Modifier.size(8.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "Saving to this device",
+                                text = "Wird auf diesem Gerät gespeichert",
                                 style = MaterialTheme.typography.bodySmall,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontWeight = FontWeight.Bold,
                             )
                             Text(
-                                text = "Recording to the Dispatcharr server needs DVR manage access on your account. Contact your server administrator for more information.",
+                                text = "Für Aufnahmen auf dem Dispatcharr-Server benötigt dein Konto DVR-Verwaltungsrechte. Wende dich an deinen Serveradministrator.",
                                 style = MaterialTheme.typography.bodySmall.subtext(),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -513,13 +513,13 @@ fun RecordProgramSheet(
                     ) {
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "Remove commercials (Comskip)",
+                                text = "Werbung entfernen (Comskip)",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontWeight = FontWeight.Medium,
                             )
                             Text(
-                                text = "Detect and remove ad breaks after recording. Processed server-side.",
+                                text = "Werbeblöcke nach der Aufnahme erkennen und entfernen. Verarbeitung erfolgt auf dem Server.",
                                 style = MaterialTheme.typography.bodySmall.subtext(),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                             )
@@ -585,7 +585,7 @@ fun RecordProgramSheet(
                 }
                 if (editTarget == CustomBufferTarget.PreRoll && floor < 0) {
                     Text(
-                        text = "Step below zero to start the recording after the listed start time.",
+                        text = "Wähle einen Wert unter null, um die Aufnahme nach der angegebenen Startzeit zu beginnen.",
                         style = MaterialTheme.typography.bodySmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 8.dp),
@@ -669,7 +669,7 @@ private fun TvRecordForm(
                         )
                     }
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(if (isLive) "Record from Now" else "Record Program", fontSize = 19.sp, fontWeight = FontWeight.Bold, color = colors.onSurface)
+                        Text(if (isLive) "Ab jetzt aufnehmen" else "Sendung aufnehmen", fontSize = 19.sp, fontWeight = FontWeight.Bold, color = colors.onSurface)
                         Text(target.title.ifBlank { "Untitled" }, fontSize = 13.sp, fontWeight = FontWeight.SemiBold, color = colors.onSurface, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                         Text("${target.channelName} · ${formatTimeRange(target)}", fontSize = 11.sp.subtext(), color = colors.onSurfaceVariant)
                     }
@@ -712,8 +712,8 @@ private fun TvRecordForm(
                 if (isDispatcharr && isLive && canRecordToServer && !usingRule) {
                     TvSectionTitle("Destination")
                     TvPillRow {
-                        SheetPill("Dispatcharr server", selected = destinationServer, onClick = { onDestinationServer(true) })
-                        SheetPill("This device", selected = !destinationServer, onClick = { onDestinationServer(false) })
+                        SheetPill("Dispatcharr-Server", selected = destinationServer, onClick = { onDestinationServer(true) })
+                        SheetPill("Dieses Gerät", selected = !destinationServer, onClick = { onDestinationServer(false) })
                     }
                 }
                 if (isDispatcharr && !usingRule) {
@@ -746,7 +746,7 @@ private fun TvRecordForm(
                             fontSize = 11.sp.subtext(), color = colors.onSurfaceVariant, textAlign = androidx.compose.ui.text.style.TextAlign.Center,
                         )
                         TvRecordPill(
-                            label = when { submitting -> "Scheduling…"; usingRule -> "Save Rule"; else -> "Aufnehmen" },
+                            label = when { submitting -> "Wird geplant…"; usingRule -> "Regel speichern"; else -> "Aufnehmen" },
                             enabled = !submitting, onClick = onSubmit,
                         )
                     }

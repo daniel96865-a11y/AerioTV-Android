@@ -85,7 +85,7 @@ import com.aeriotv.android.ui.tv.tvFormFieldInput
  * Configure-source form. Mirrors iOS App Store screenshots IMG_1078 (Dispatcharr
  * API Key), IMG_1079 (Xtream Codes), IMG_1080 (M3U + EPG), IMG_1081 (Dispatcharr
  * Username & Password): same source-type card at top, same field set per type,
- * same info banner, same "Test Connection" CTA.
+ * same info banner, same "Verbindung testen" CTA.
  *
  * Field state mostly lives on PlaylistViewModel so it survives configuration
  * change and survives navigating away to the choose-type screen. A local
@@ -129,18 +129,18 @@ fun ConfigureSourceScreen(
         SourceType.DispatcharrApiKey, SourceType.DispatcharrUserPass -> {
             cardIcon = Icons.Filled.Key
             cardTitle = "Dispatcharr Direct Connect"
-            cardSubtitle = "Connect to Dispatcharr with your admin login or a personal API key " +
+            cardSubtitle = "Verbinde dich mit Dispatcharr über deinen Admin-Zugang oder einen persönlichen API-Schlüssel " +
                     "(*AerioTV is not officially affiliated with the Dispatcharr project)"
         }
         SourceType.XtreamCodes -> {
             cardIcon = Icons.Filled.Tv
             cardTitle = "Xtream Codes"
-            cardSubtitle = "Xtream Codes API. Live TV, VOD movies & series."
+            cardSubtitle = "Xtream-Codes-API. Live-TV, VOD-Filme und Serien."
         }
         SourceType.M3uUrl -> {
             cardIcon = Icons.Filled.Description
             cardTitle = "M3U + EPG"
-            cardSubtitle = "Any M3U playlist URL. Works with Dispatcharr, any IPTV provider."
+            cardSubtitle = "Beliebige M3U-Wiedergabelisten-URL. Funktioniert mit Dispatcharr und IPTV-Anbietern."
         }
     }
 
@@ -308,7 +308,7 @@ fun ConfigureSourceScreen(
                     )
                     Spacer(Modifier.size(10.dp))
                     Text(
-                        text = "Test Connection",
+                        text = "Verbindung testen",
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                     )
@@ -336,13 +336,13 @@ private fun DispatcharrFields(
         IconTextField(
             value = state.name,
             onValueChange = viewModel::onNameChange,
-            placeholder = "My IPTV Server",
+            placeholder = "Mein IPTV-Server",
             leading = Icons.Outlined.Sell,
             enabled = !state.isLoading,
         )
     }
 
-    LabeledField(label = "Server URL") {
+    LabeledField(label = "Server-URL") {
         IconTextField(
             value = state.url,
             onValueChange = viewModel::onUrlChange,
@@ -367,7 +367,7 @@ private fun DispatcharrFields(
                 IconTextField(
                     value = state.apiKey,
                     onValueChange = viewModel::onApiKeyChange,
-                    placeholder = "Paste your admin API key",
+                    placeholder = "Admin-API-Schlüssel einfügen",
                     leading = Icons.Filled.Key,
                     visualTransformation = apiKeyReveal.transformation,
                     trailing = {
@@ -382,37 +382,37 @@ private fun DispatcharrFields(
                 )
             }
             InfoBanner(
-                text = "Use a Dispatcharr Admin API Key (System -> Users -> Edit User -> API & XC). " +
+                text = "Verwende einen Dispatcharr-Admin-API-Schlüssel (System -> Benutzer -> Benutzer bearbeiten -> API & XC). " +
                         "This enables native Dispatcharr endpoints for Live TV, Guide, Movies, " +
                         "and TV Shows. If your admin rotates the key, you'll need to re-enter it " +
                         "here. For hands-off auto-refresh, switch to Username & Password.",
             )
         }
         DispatcharrAuthMode.UsernamePassword -> {
-            LabeledField(label = "Username") {
+            LabeledField(label = "Benutzername") {
                 IconTextField(
                     value = state.username,
                     onValueChange = viewModel::onUsernameChange,
-                    placeholder = "Dispatcharr admin username",
+                    placeholder = "Dispatcharr-Admin-Benutzername",
                     leading = Icons.Outlined.Person,
                     enabled = !state.isLoading,
                 )
             }
             PasswordField(
-                label = "Password",
+                label = "Passwort",
                 value = state.password,
                 onValueChange = viewModel::onPasswordChange,
-                placeholder = "Dispatcharr admin password",
+                placeholder = "Dispatcharr-Admin-Passwort",
                 enabled = !state.isLoading,
             )
             Text(
-                text = "Use your Dispatcharr Dashboard password (System -> Users -> Account tab), " +
+                text = "Verwende dein Dispatcharr-Dashboard-Passwort (System -> Benutzer -> Konto), " +
                         "not your Dispatcharr XC password.",
                 style = MaterialTheme.typography.bodySmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             InfoBanner(
-                text = "Save credentials and refresh automatically. AerioTV signs in with these " +
+                text = "Zugangsdaten speichern und automatisch aktualisieren. AerioTV Deutsch meldet sich damit " +
                         "credentials, then keeps your session alive in the background. If your " +
                         "Dispatcharr admin rotates your API key, AerioTV silently re-authenticates " +
                         "without prompting. Credentials are stored in encrypted Android storage.",
@@ -427,12 +427,12 @@ private fun XtreamFields(state: PlaylistViewModel.UiState, viewModel: PlaylistVi
         IconTextField(
             value = state.name,
             onValueChange = viewModel::onNameChange,
-            placeholder = "My IPTV Server",
+            placeholder = "Mein IPTV-Server",
             leading = Icons.Outlined.Sell,
             enabled = !state.isLoading,
         )
     }
-    LabeledField(label = "Server URL") {
+    LabeledField(label = "Server-URL") {
         IconTextField(
             value = state.url,
             onValueChange = viewModel::onUrlChange,
@@ -442,24 +442,24 @@ private fun XtreamFields(state: PlaylistViewModel.UiState, viewModel: PlaylistVi
         )
     }
     LanUrlField(state = state, viewModel = viewModel)
-    LabeledField(label = "Username") {
+    LabeledField(label = "Benutzername") {
         IconTextField(
             value = state.username,
             onValueChange = viewModel::onUsernameChange,
-            placeholder = "XC Username",
+            placeholder = "XC-Benutzername",
             leading = Icons.Outlined.Person,
             enabled = !state.isLoading,
         )
     }
     PasswordField(
-        label = "Password",
+        label = "Passwort",
         value = state.password,
         onValueChange = viewModel::onPasswordChange,
-        placeholder = "XC Password",
+        placeholder = "XC-Passwort",
         enabled = !state.isLoading,
     )
     InfoBanner(
-        text = "Enter your Xtream Codes server URL and credentials. Dispatcharr users: use your " +
+        text = "Gib die Xtream-Codes-Server-URL und Zugangsdaten ein. Dispatcharr-Nutzer verwenden " +
                 "Dispatcharr URL with the Xtream Codes username and password from Dispatcharr's " +
                 "User settings.",
     )
@@ -471,7 +471,7 @@ private fun M3uFields(state: PlaylistViewModel.UiState, viewModel: PlaylistViewM
         IconTextField(
             value = state.name,
             onValueChange = viewModel::onNameChange,
-            placeholder = "My IPTV Server",
+            placeholder = "Mein IPTV-Server",
             leading = Icons.Outlined.Sell,
             enabled = !state.isLoading,
         )
@@ -502,7 +502,7 @@ private fun M3uFields(state: PlaylistViewModel.UiState, viewModel: PlaylistViewM
                 }
             }
         }
-        ImportFileLink(label = "Import M3U from a file instead") {
+        ImportFileLink(label = "M3U stattdessen aus einer Datei importieren") {
             // M3U MIME registration is a mess in the wild (x-mpegurl,
             // audio/mpegurl, octet-stream, text/plain) -- accept anything,
             // like iOS's [.data, .plainText] allowance.
@@ -528,12 +528,12 @@ private fun M3uFields(state: PlaylistViewModel.UiState, viewModel: PlaylistViewM
                 }
             }
         }
-        ImportFileLink(label = "Import XMLTV from a file instead") {
+        ImportFileLink(label = "XMLTV stattdessen aus einer Datei importieren") {
             epgPicker.launch(arrayOf("*/*"))
         }
     }
     InfoBanner(
-        text = "Paste your M3U playlist URL. Works with Dispatcharr's /output/m3u, any IPTV " +
+        text = "Füge die URL deiner M3U-Wiedergabeliste ein. Funktioniert mit Dispatcharr /output/m3u und IPTV-" +
                 "provider, or a direct .m3u file link.",
     )
 }
@@ -606,7 +606,7 @@ private fun LanUrlField(state: PlaylistViewModel.UiState, viewModel: PlaylistVie
         )
     }
     Text(
-        text = "AerioTV uses this URL automatically whenever your server is reachable on " +
+        text = "AerioTV Deutsch verwendet diese URL automatisch, wenn dein Server erreichbar ist über " +
                 "the local network, and the public one above otherwise. No setup needed.",
         style = MaterialTheme.typography.bodySmall.subtext(),
         color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -716,7 +716,7 @@ private fun SegmentedAuthControl(
         horizontalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         SegmentItem(
-            label = "Username & Password",
+            label = "Benutzername & Passwort",
             isSelected = selected == DispatcharrAuthMode.UsernamePassword,
             enabled = enabled,
             modifier = Modifier.weight(1f),
@@ -766,13 +766,13 @@ private fun validate(
     authMode: DispatcharrAuthMode,
 ): String? {
     val missing = mutableListOf<String>()
-    if (state.url.isBlank()) missing += "Server URL"
+    if (state.url.isBlank()) missing += "Server-URL"
     when (sourceType) {
         // Dispatcharr accepts EITHER an admin API key OR a username +
         // password -- they're alternatives, never both. Validate against
         // whichever the user has actually filled rather than forcing the
         // segmented toggle's mode: a filled API key is accepted even if the
-        // control still reads "Username & Password" (and vice versa), so a
+        // control still reads "Benutzername & Passwort" (and vice versa), so a
         // stuck/mis-set toggle can't demand the other set of fields. Only
         // when NEITHER credential is present do we prompt -- for the field(s)
         // of the currently-selected mode.
@@ -783,14 +783,14 @@ private fun validate(
                 if (authMode == DispatcharrAuthMode.ApiKey) {
                     missing += "API key"
                 } else {
-                    if (state.username.isBlank()) missing += "Username"
-                    if (state.password.isBlank()) missing += "Password"
+                    if (state.username.isBlank()) missing += "Benutzername"
+                    if (state.password.isBlank()) missing += "Passwort"
                 }
             }
         }
         SourceType.XtreamCodes -> {
-            if (state.username.isBlank()) missing += "Username"
-            if (state.password.isBlank()) missing += "Password"
+            if (state.username.isBlank()) missing += "Benutzername"
+            if (state.password.isBlank()) missing += "Passwort"
         }
         SourceType.M3uUrl -> Unit
     }
@@ -831,7 +831,7 @@ private fun VodEnabledRow(
                 ),
         ) {
             Text(
-                text = "Fetch On Demand from this playlist",
+                text = "Mediathek aus dieser Wiedergabeliste laden",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Medium,
@@ -848,7 +848,7 @@ private fun VodEnabledRow(
             )
         }
         Text(
-            text = "When off, this playlist's movies and TV shows aren't loaded into On Demand. Useful if you only want Live TV from this server, or if you have a second playlist that already provides On Demand. You can change this later in Settings.",
+            text = "Wenn ausgeschaltet, werden Filme und Serien dieser Wiedergabeliste nicht in die Mediathek geladen. Nützlich, wenn du von diesem Server nur Live-TV möchtest oder eine zweite Wiedergabeliste bereits die Mediathek liefert. Dies kann später in den Einstellungen geändert werden.",
             style = MaterialTheme.typography.bodySmall.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 4.dp),
@@ -869,14 +869,14 @@ private fun DvrDestinationRow(
 ) {
     Column(modifier = Modifier.padding(vertical = 4.dp)) {
         Text(
-            text = "Default Recording Destination",
+            text = "Standard-Speicherort für Aufnahmen",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Medium,
         )
         Spacer(Modifier.height(8.dp))
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            listOf(true to "Server (Dispatcharr)", false to "This device").forEach { (isServer, label) ->
+            listOf(true to "Server (Dispatcharr)", false to "Dieses Gerät").forEach { (isServer, label) ->
                 val selected = isServer == server
                 Text(
                     text = label,
@@ -896,7 +896,7 @@ private fun DvrDestinationRow(
             }
         }
         Text(
-            text = "Where recordings are saved by default. Server recording requires a Dispatcharr admin account. You can change this later in Settings > DVR.",
+            text = "Legt fest, wo Aufnahmen standardmäßig gespeichert werden. Server-Aufnahmen benötigen ein Dispatcharr-Administratorkonto. Später unter Einstellungen > DVR änderbar.",
             style = MaterialTheme.typography.bodySmall.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 4.dp),
@@ -911,7 +911,7 @@ private fun GuideHistoryRow(
 ) {
     Column(modifier = Modifier.padding(vertical = 4.dp)) {
         Text(
-            text = "Guide Days",
+            text = "EPG-Tage",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Medium,
@@ -943,7 +943,7 @@ private fun GuideHistoryRow(
             }
         }
         Text(
-            text = "How many days of guide data to load, back and ahead. Dispatcharr only; other sources show what their guide carries.",
+            text = "Wie viele Tage EPG-Daten rückwirkend und im Voraus geladen werden. Nur für Dispatcharr; andere Quellen zeigen die gelieferten EPG-Daten.",
             style = MaterialTheme.typography.bodySmall.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(top = 4.dp),

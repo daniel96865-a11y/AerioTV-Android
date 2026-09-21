@@ -610,7 +610,7 @@ private fun settingsRouteIcon(route: SettingsRoute) = when (route) {
 private fun SettingsPanePlaceholder() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
         androidx.compose.material3.Text(
-            text = "Select a setting",
+            text = "Einstellung auswählen",
             style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant,
         )

@@ -227,7 +227,7 @@ class SyncSettingsViewModel @Inject constructor(
 
     /**
      * Pull-only counterpart to [syncNow], used by the Welcome onboarding
-     * "Sign in with Google" pill. Right after the user authorizes the Drive
+     * "Mit Google anmelden" pill. Right after the user authorizes the Drive
      * scope on a fresh device, we want to lift any playlists / watch progress
      * / reminders / prefs / credentials from their Drive AppData folder so
      * the device is fully usable without re-typing a server URL. Push is

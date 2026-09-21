@@ -295,15 +295,15 @@ object WhatsNewContent {
      *  versionName in build.gradle.kts to surface a new sheet on next launch. */
     val CURRENT = listOf(
         WhatsNewItem(
-            title = "Your whole library",
+            title = "Deine gesamte Bibliothek",
             body = "Movies and TV Shows no longer stop at 40,000 titles. The catalog is stored on the device as it loads, resumes where it left off after a restart, and never loads the whole library into memory.",
         ),
         WhatsNewItem(
-            title = "Guide channel column",
+            title = "Sender-Spalte im EPG",
             body = "Channel number, favorite star and catch-up icon sit in a band above the logo, and the logo fills the space below it. Season and episode moved from the guide cells to the program details.",
         ),
         WhatsNewItem(
-            title = "Playlist switching keeps your data",
+            title = "Beim Wechsel der Wiedergabeliste bleiben deine Daten erhalten",
             body = "Switching playlists no longer clears the previous playlist's guide or library, and permissions refresh the moment you switch. Refresh Everything rebuilds the library from scratch.",
         ),
         WhatsNewItem(
@@ -311,7 +311,7 @@ object WhatsNewContent {
             body = "Rounded corners for List view and Guide view are now separate in Settings > Appearance, and guide artwork follows the Guide toggle.",
         ),
         WhatsNewItem(
-            title = "Android TV: Guide only",
+            title = "Android TV: Nur EPG",
             body = "The List view is retired on TV. Live TV always opens the Guide, and its options live under Guide Presentation in Appearance.",
         ),
         WhatsNewItem(

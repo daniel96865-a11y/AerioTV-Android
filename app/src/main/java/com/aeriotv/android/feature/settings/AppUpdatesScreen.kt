@@ -69,7 +69,7 @@ fun AppUpdatesScreen(
                 verticalArrangement = Arrangement.spacedBy(20.dp),
             ) {
                 SettingsSection(
-                    header = "This device",
+                    header = "Dieses Gerät",
                     footer = "Updates on this channel come from the project's GitHub " +
                         "releases. Installing keeps your channels, settings, and " +
                         "recordings; AerioTV closes during the install and you reopen " +
@@ -78,20 +78,20 @@ fun AppUpdatesScreen(
                     SettingsInfoRow(label = "Version", value = BuildConfig.VERSION_NAME)
                     SettingsInfoRow(label = "Sender", value = "GitHub releases")
                     SettingsActionRow(
-                        label = "Check for updates",
+                        label = "Nach Updates suchen",
                         leadingIcon = Icons.Filled.Refresh,
                         onClick = { viewModel.manualCheck() },
                     )
                 }
 
                 when (val s = state) {
-                    is UpdateState.UpToDate -> StatusText("You're on the latest version.")
+                    is UpdateState.UpToDate -> StatusText("Du verwendest die neueste Version.")
                     is UpdateState.Available -> SettingsSection(
                         header = "Update available",
                         footer = s.info.notes.ifBlank { null },
                     ) {
                         SettingsActionRow(
-                            label = "Download AerioTV ${s.info.versionName}",
+                            label = "AerioTV Deutsch ${s.info.versionName} herunterladen",
                             subtitle = "${s.info.apkSizeBytes / (1024 * 1024)} MB from GitHub",
                             leadingIcon = Icons.Filled.Download,
                             onClick = { viewModel.download() },
@@ -108,7 +108,7 @@ fun AppUpdatesScreen(
                     is UpdateState.Verifying -> Row(verticalAlignment = Alignment.CenterVertically) {
                         CircularProgressIndicator(modifier = Modifier.width(22.dp).height(22.dp))
                         Spacer(Modifier.width(10.dp))
-                        StatusText("Verifying download...")
+                        StatusText("Download wird geprüft...")
                     }
                     is UpdateState.ReadyToInstall -> SettingsSection(
                         header = "Ready to install",
@@ -116,7 +116,7 @@ fun AppUpdatesScreen(
                             "it from your home screen.",
                     ) {
                         SettingsActionRow(
-                            label = "Install AerioTV ${s.info.versionName}",
+                            label = "AerioTV Deutsch ${s.info.versionName} installieren",
                             leadingIcon = Icons.Filled.SystemUpdate,
                             onClick = { viewModel.install() },
                         )

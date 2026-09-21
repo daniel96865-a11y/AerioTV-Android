@@ -93,13 +93,13 @@ fun OnboardingSyncCategoryChooser(
         ) {
             Column(modifier = Modifier.padding(24.dp)) {
                 Text(
-                    text = "What should come in from Drive?",
+                    text = "Was soll aus Google Drive übernommen werden?",
                     style = MaterialTheme.typography.headlineSmall,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
                 Text(
-                    text = "You can change any of this later in Settings, and each " +
+                    text = "Du kannst dies später jederzeit in den Einstellungen ändern. Jede " +
                         "device chooses for itself.",
                     style = MaterialTheme.typography.bodyMedium.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,

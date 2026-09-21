@@ -273,7 +273,7 @@ fun MainScaffold(
     // that ALSO exists in the active playlist. The raw DB count would keep
     // the tab pinned to the bottom bar after a playlist switch left stale
     // orphan rows pointing at channel ids that no longer exist - the user
-    // would see the tab, tap it, and find an empty "No Favorites" body
+    // would see the tab, tap it, and find an empty "Keine Favoriten" body
     // even though the DB count was non-zero.
     // GH #81: an EMPTY channel list is "still loading" (playlist refresh,
     // return from the player, sync apply), not "no favorites". Dropping the
@@ -1325,7 +1325,7 @@ fun MainScaffold(
                     )
                     Spacer(Modifier.height(8.dp))
                 }
-                // GH #33: round floating "Control a TV" button above the right
+                // GH #33: round floating "Fernseher steuern" button above the right
                 // end of the tab bar -- appears when a controllable AerioTV TV
                 // is discovered on the LAN OR a Google Cast route exists, so the
                 // phone can be a remote / start a cast without opening a channel
@@ -1528,7 +1528,7 @@ private fun CompanionControlFab(onClick: () -> Unit) {
             // Google's Cast glyph (Logan 2026-09-09): the Tv glyph doubled
             // as the TV Shows tab icon.
             imageVector = Icons.Filled.Cast,
-            contentDescription = "Control a TV",
+            contentDescription = "Fernseher steuern",
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(22.dp),
         )
@@ -1695,7 +1695,7 @@ private fun MinimizedTabPill(
         ) {
             Icon(
                 imageVector = tab.iconSelected,
-                contentDescription = "Show tab bar, ${tab.label}",
+                contentDescription = "Tableiste anzeigen, ${tab.label}",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(22.dp),
             )
@@ -2080,14 +2080,14 @@ private fun TvTopTabBar(
                     // Left press away.
                     TvBarCircleButton(
                         icon = Icons.Filled.Refresh,
-                        contentDescription = "Refresh channels and guide",
+                        contentDescription = "Sender und EPG aktualisieren",
                         onClick = onRefresh,
                         spinning = refreshing,
                     )
                     if (retainedCount > 0) {
                         TvBarCircleButton(
                             icon = Icons.Filled.FiberSmartRecord,
-                            contentDescription = "$retainedCount channels kept live",
+                            contentDescription = "$retainedCount Sender werden live gehalten",
                             onClick = onRetainedClick,
                         )
                     }

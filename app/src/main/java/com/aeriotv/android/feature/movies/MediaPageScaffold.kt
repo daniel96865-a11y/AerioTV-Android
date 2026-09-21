@@ -366,7 +366,7 @@ private fun SearchPillField(
                 leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null, tint = MaterialTheme.colorScheme.onSurfaceVariant) },
                 trailingIcon = {
                     androidx.compose.material3.IconButton(onClick = onClose) {
-                        Icon(Icons.Filled.Cancel, contentDescription = "Clear and close search", tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                        Icon(Icons.Filled.Cancel, contentDescription = "Suche leeren und schließen", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                 },
                 colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(

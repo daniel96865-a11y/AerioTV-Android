@@ -1362,7 +1362,7 @@ fun <T> TvMediaPage(
                         }
                         if (searchEnabled) {
                             TvActionCircle(
-                                icon = Icons.Filled.Search, contentDescription = if (searchActive) "Close search" else "Suche",
+                                icon = Icons.Filled.Search, contentDescription = if (searchActive) "Suche schließen" else "Suche",
                                 selected = searchActive, onClick = closeOrToggleSearch,
                                 modifier = Modifier
                                     .focusRequester(searchCircle)
@@ -1370,7 +1370,7 @@ fun <T> TvMediaPage(
                             )
                             if (isSearching) {
                                 TvActionCircle(
-                                    icon = Icons.Filled.Close, contentDescription = "Clear search", onClick = onClearSearch,
+                                    icon = Icons.Filled.Close, contentDescription = "Suche leeren", onClick = onClearSearch,
                                     modifier = Modifier.onFocusChanged { if (it.isFocused) TvFocusTrace.focus("header:Clear") },
                                 )
                             }

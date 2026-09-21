@@ -81,7 +81,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
  * Settings > Sync sub-screen. Mirrors iOS Settings > iCloud Sync layout.
  *
  * Sign-in is a two-step flow:
- *   1. Tap "Sign in with Google" → Credential Manager surfaces the
+ *   1. Tap "Mit Google anmelden" → Credential Manager surfaces the
  *      account picker → we get the user's email + GoogleId token.
  *   2. We immediately call AuthorizationClient for the Drive AppData
  *      scope. If the user has previously granted, we get an access
@@ -165,13 +165,13 @@ fun SyncSettingsScreen(
                     val email = viewModel.signInWithGoogle(activity)
                     if (email == null) {
                         inFlight = false
-                        Toast.makeText(context, "Sign-in cancelled or failed.", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Anmeldung abgebrochen oder fehlgeschlagen.", Toast.LENGTH_SHORT).show()
                         return@launch
                     }
                     when (val driveResult = viewModel.requestDriveScope()) {
                         is DriveSyncManager.RequestResult.Authorized -> {
                             inFlight = false
-                            Toast.makeText(context, "Signed in as $email", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Angemeldet als $email", Toast.LENGTH_SHORT).show()
                         }
                         is DriveSyncManager.RequestResult.NeedsConsent -> {
                             consentLauncher.launch(
@@ -182,7 +182,7 @@ fun SyncSettingsScreen(
                         DriveSyncManager.RequestResult.Failed,
                         null -> {
                             inFlight = false
-                            Toast.makeText(context, "Drive authorization failed.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Drive-Autorisierung fehlgeschlagen.", Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
@@ -219,7 +219,7 @@ fun SyncSettingsScreen(
                         email = accountEmail,
                     )
                     SettingsToggleRow(
-                        title = "Sync enabled",
+                        title = "Synchronisierung aktiviert",
                         subtitle = if (signedIn)
                             "Auto-syncing the categories you've toggled below."
                         else
@@ -245,7 +245,7 @@ fun SyncSettingsScreen(
                             enabled = !inFlight,
                             onClick = {
                                 viewModel.signOut()
-                                Toast.makeText(context, "Signed out of Drive.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Von Drive abgemeldet.", Toast.LENGTH_SHORT).show()
                             },
                         )
                     } else {
@@ -299,8 +299,8 @@ fun SyncSettingsScreen(
                             val shareRemoteMap by viewModel.syncRemoteControlMap
                                 .collectAsStateWithLifecycle(initialValue = true)
                             SettingsToggleRow(
-                                title = "Remote Button Map",
-                                subtitle = "Part of App Preferences. Turn off on a device whose " +
+                                title = "Fernbedienungstasten",
+                                subtitle = "Teil der App-Einstellungen. Auf einem Gerät ausschalten, dessen " +
                                     "remote differs from your others. This choice stays on this " +
                                     "device and is not shared.",
                                 checked = shareRemoteMap,
@@ -329,8 +329,8 @@ fun SyncSettingsScreen(
                         // wants every manual sync to state its direction. The
                         // periodic background worker still does push-then-pull.
                         SettingsActionRow(
-                            label = "Push Config to Drive",
-                            subtitle = "Overwrite the Drive backup with this device's setup",
+                            label = "Konfiguration zu Drive hochladen",
+                            subtitle = "Drive-Sicherung mit der Einrichtung dieses Geräts überschreiben",
                             leadingIcon = Icons.Filled.CloudUpload,
                             running = pushStatus is SyncSettingsViewModel.ActionStatus.Running,
                             statusLine = when (val s = pushStatus) {
@@ -345,8 +345,8 @@ fun SyncSettingsScreen(
                             },
                         )
                         SettingsActionRow(
-                            label = "Pull Config from Drive",
-                            subtitle = "Overwrite this device with the Drive backup",
+                            label = "Konfiguration aus Drive laden",
+                            subtitle = "Dieses Gerät mit der Drive-Sicherung überschreiben",
                             leadingIcon = Icons.Filled.CloudDownload,
                             running = pullStatus is SyncSettingsViewModel.ActionStatus.Running,
                             statusLine = when (val s = pullStatus) {
@@ -361,7 +361,7 @@ fun SyncSettingsScreen(
                             },
                         )
                         SettingsActionRow(
-                            label = "Clear Drive Data",
+                            label = "Drive-Daten löschen",
                             leadingIcon = Icons.Filled.CloudOff,
                             destructive = true,
                             running = clearStatus is SyncSettingsViewModel.ActionStatus.Running,
@@ -386,7 +386,7 @@ fun SyncSettingsScreen(
     if (pushConfirmOpen) {
         com.aeriotv.android.ui.scale.AlertDialog(
             onDismissRequest = { pushConfirmOpen = false },
-            title = { Text("Push Config to Drive?") },
+            title = { Text("Konfiguration zu Drive hochladen?") },
             text = {
                 Text(
                     "This replaces the entire Drive backup with this device's " +
@@ -396,7 +396,7 @@ fun SyncSettingsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Push to Drive",
+                    label = "Zu Drive hochladen",
                     onClick = {
                         pushConfirmOpen = false
                         viewModel.runPushOnly()
@@ -412,7 +412,7 @@ fun SyncSettingsScreen(
     if (pullConfirmOpen) {
         com.aeriotv.android.ui.scale.AlertDialog(
             onDismissRequest = { pullConfirmOpen = false },
-            title = { Text("Pull Config from Drive?") },
+            title = { Text("Konfiguration aus Drive laden?") },
             text = {
                 Text(
                     "This replaces this device's playlists, preferences, and " +
@@ -422,7 +422,7 @@ fun SyncSettingsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Pull from Drive",
+                    label = "Aus Drive laden",
                     onClick = {
                         pullConfirmOpen = false
                         viewModel.runPullOnly()
@@ -442,7 +442,7 @@ fun SyncSettingsScreen(
                 credsSyncDisclosureOpen = false
                 viewModel.markCredentialsSyncDisclosed()
             },
-            title = { Text("Credentials sync to your Drive") },
+            title = { Text("Zugangsdaten mit deinem Drive synchronisieren") },
             text = {
                 Text(
                     "So your servers restore automatically on another device, AerioTV " +
@@ -472,7 +472,7 @@ fun SyncSettingsScreen(
     if (notConfiguredDialogOpen) {
         com.aeriotv.android.ui.scale.AlertDialog(
             onDismissRequest = { notConfiguredDialogOpen = false },
-            title = { Text("Drive Sync isn't set up yet") },
+            title = { Text("Drive-Synchronisierung ist noch nicht eingerichtet") },
             text = {
                 Text(
                     "This AerioTV build doesn't have a Google Cloud OAuth Web Client ID baked in, " +
@@ -522,14 +522,14 @@ private fun SignedOutWelcomeBanner() {
         Spacer(Modifier.size(10.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = "Drive Sync isn't set up yet",
+                text = "Drive-Synchronisierung ist noch nicht eingerichtet",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
             )
             Spacer(Modifier.height(2.dp))
             Text(
-                text = "Select Sign in with Google below to connect your account. AerioTV will " +
+                text = "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. AerioTV Deutsch wird " +
                     "then keep your playlists, watch progress, reminders, and preferences in " +
                     "sync across every device signed into the same Google account.",
                 style = MaterialTheme.typography.labelSmall.subtext(),
@@ -548,7 +548,7 @@ private fun SignedOutWelcomeBanner() {
 @Composable
 private fun DeveloperConfigHint() {
     Text(
-        text = "This build doesn't have a Google Cloud OAuth client configured, so " +
+        text = "Für diesen Build ist kein Google-Cloud-OAuth-Client eingerichtet, daher " +
             "Sign in with Google is disabled. Add GOOGLE_DRIVE_WEB_CLIENT_ID to " +
             "local.properties and register the signing-cert SHA-1 in the same Cloud project.",
         style = MaterialTheme.typography.labelSmall.subtext(),
@@ -590,7 +590,7 @@ private fun AccountRow(signedIn: Boolean, email: String) {
         Spacer(Modifier.size(12.dp))
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = if (signedIn) "Signed in to Drive" else "Not signed in",
+                text = if (signedIn) "Bei Drive angemeldet" else "Nicht angemeldet",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Medium,
@@ -628,7 +628,7 @@ private fun SignOutButton(enabled: Boolean, onClick: () -> Unit) {
         horizontalArrangement = Arrangement.Center,
     ) {
         Text(
-            text = "Sign out",
+            text = "Abmelden",
             color = if (enabled) MaterialTheme.colorScheme.error
             else MaterialTheme.colorScheme.error.copy(alpha = 0.5f),
             style = MaterialTheme.typography.labelLarge,
@@ -640,7 +640,7 @@ private fun SignOutButton(enabled: Boolean, onClick: () -> Unit) {
 /**
  * Google-branded Sign in button. We render a Compose approximation that
  * follows Google's brand guidelines (white background, 1px outline, Google G
- * mark on the left, "Sign in with Google" label). Avoids embedding a raster
+ * mark on the left, "Mit Google anmelden" label). Avoids embedding a raster
  * since the brand asset has strict size/colour rules and the rendering here
  * stays consistent across light/dark themes.
  */
@@ -685,7 +685,7 @@ private fun SignInWithGoogleButton(enabled: Boolean, onClick: () -> Unit) {
         )
         Spacer(Modifier.size(12.dp))
         Text(
-            text = "Sign in with Google",
+            text = "Mit Google anmelden",
             color = fg,
             style = MaterialTheme.typography.labelLarge,
             fontWeight = FontWeight.Medium,

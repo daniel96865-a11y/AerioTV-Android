@@ -78,7 +78,7 @@ fun EditRecordingSheet(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
-                text = "Edit Recording",
+                text = "Aufnahme bearbeiten",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.SemiBold,
@@ -171,7 +171,7 @@ private fun SectionHeader(label: String) {
 private fun DeltaRollRow(selected: Int, onSelect: (Int) -> Unit) {
     Column {
         DELTA_OPTIONS.forEachIndexed { idx, mins ->
-            val label = if (mins == 0) "No change" else "+$mins min"
+            val label = if (mins == 0) "Keine Änderung" else "+$mins min"
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Foreground service that downloads a Dispatcharr proxy stream to local
  * storage for a fixed duration. Mirrors iOS LocalRecordingSession behaviour
- * scoped down to "Record from Now" (iOS doesn't support scheduled local
+ * scoped down to "Ab jetzt aufnehmen" (iOS doesn't support scheduled local
  * recordings either — Android matches that limit).
  *
  * Lifecycle:
@@ -417,7 +417,7 @@ class LocalRecordingService : Service() {
         val notif = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle(title)
-            .setContentText(if (success) "Saved to device" else "Save to device failed")
+            .setContentText(if (success) "Auf Gerät gespeichert" else "Speichern auf Gerät fehlgeschlagen")
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()

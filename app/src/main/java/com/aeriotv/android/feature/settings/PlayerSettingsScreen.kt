@@ -116,32 +116,32 @@ fun PlayerSettingsScreen(
                         "player while the controls are showing.",
                 ) {
                     SettingsToggleRow(
-                        title = "Channel Logo",
+                        title = "Senderlogo",
                         checked = cardChannelLogo,
                         onCheckedChange = viewModel::setPlayerCardShowChannelLogo,
                     )
                     SettingsToggleRow(
-                        title = "Channel Name",
+                        title = "Sendername",
                         checked = cardChannelName,
                         onCheckedChange = viewModel::setPlayerCardShowChannelName,
                     )
                     SettingsToggleRow(
-                        title = "Program Name",
+                        title = "Sendungsname",
                         checked = cardProgramName,
                         onCheckedChange = viewModel::setPlayerCardShowProgramName,
                     )
                     SettingsToggleRow(
-                        title = "Program Time",
+                        title = "Sendezeit",
                         checked = cardProgramTime,
                         onCheckedChange = viewModel::setPlayerCardShowProgramTime,
                     )
                     SettingsToggleRow(
-                        title = "Program Subtitle",
+                        title = "Sendungsuntertitel",
                         checked = cardProgramSubtitle,
                         onCheckedChange = viewModel::setPlayerCardShowProgramSubtitle,
                     )
                     SettingsToggleRow(
-                        title = "Program Description",
+                        title = "Sendungsbeschreibung",
                         checked = cardProgramDescription,
                         onCheckedChange = viewModel::setPlayerCardShowProgramDescription,
                     )
@@ -155,8 +155,8 @@ fun PlayerSettingsScreen(
                         "video is removed automatically.",
                 ) {
                     SettingsToggleRow(
-                        title = "Pause & rewind live TV",
-                        subtitle = "Buffer fullscreen live playback on this device",
+                        title = "Live-TV pausieren & zurückspulen",
+                        subtitle = "Live-Wiedergabe im Vollbild auf diesem Gerät puffern",
                         checked = liveRewindEnabled,
                         onCheckedChange = viewModel::setLiveRewindEnabled,
                     )
@@ -170,7 +170,7 @@ fun PlayerSettingsScreen(
                             depthEstimateText(liveRewindDepth),
                     ) {
                         SteppedSliderRow(
-                            label = "Rewind up to",
+                            label = "Zurückspulen bis",
                             values = REWIND_DEPTH_MINUTES,
                             selected = liveRewindDepth,
                             format = ::formatDepthMinutes,
@@ -191,14 +191,14 @@ fun PlayerSettingsScreen(
                         },
                     ) {
                         SettingsToggleRow(
-                            title = "Keep recent channels live",
-                            subtitle = "Buffer flipped-away channels in the background",
+                            title = "Letzte Sender live halten",
+                            subtitle = "Verlassene Sender im Hintergrund weiter puffern",
                             checked = keepRecent,
                             onCheckedChange = viewModel::setLiveRewindKeepRecent,
                         )
                         if (keepRecent) {
                             SteppedSliderRow(
-                                label = "Channels to keep",
+                                label = "Anzahl der Sender",
                                 values = listOf(1, 2, 3, 4, 5),
                                 selected = keepCount,
                                 format = { it.toString() },
@@ -232,7 +232,7 @@ fun PlayerSettingsScreen(
                         "next channel you tune.",
                 ) {
                     SteppedSliderRow(
-                        label = "Skip back",
+                        label = "Zurückspringen",
                         values = SkipIntervals.CHOICES,
                         selected = skipBackSeconds,
                         format = ::formatSkipSeconds,
@@ -254,8 +254,8 @@ fun PlayerSettingsScreen(
                         )
                     }
                     SettingsToggleRow(
-                        title = "Auto-Recover Frozen Streams",
-                        subtitle = "Reload a live stream that stops sending video. Off keeps the stream as-is through commercial-break stutters.",
+                        title = "Hängende Streams automatisch neu laden",
+                        subtitle = "Lädt einen Live-Stream neu, wenn kein Video mehr kommt. Aus lässt den Stream bei kurzen Werbepausen unverändert.",
                         checked = autoRecoverFrozenStreams,
                         onCheckedChange = viewModel::setAutoRecoverFrozenStreams,
                     )
@@ -267,7 +267,7 @@ fun PlayerSettingsScreen(
                 ) {
                     SettingsToggleRow(
                         title = "Surround sound passthrough",
-                        subtitle = "Send AC-3 and E-AC-3 audio to your receiver untouched. Leave off if lip sync drifts.",
+                        subtitle = "AC-3- und E-AC-3-Audio unverändert an den Receiver senden. Ausschalten, wenn Bild und Ton auseinanderlaufen.",
                         checked = audioPassthrough,
                         onCheckedChange = viewModel::setAudioPassthroughEnabled,
                     )
@@ -288,7 +288,7 @@ fun PlayerSettingsScreen(
                     },
                 ) {
                     SettingsToggleRow(
-                        title = "Up / Down channel change",
+                        title = "Senderwechsel mit Hoch/Runter",
                         subtitle = if (isTv) {
                             "While the player chrome is visible, press up for the next channel and down for the previous. Live single-stream playback only."
                         } else {
@@ -300,13 +300,13 @@ fun PlayerSettingsScreen(
                     if (!isTv) {
                         SettingsToggleRow(
                             title = "Brightness edge slide",
-                            subtitle = "Slide a finger up or down the brightness edge to dim or brighten the screen. Applies to this app only and is restored when you leave the player.",
+                            subtitle = "Am Helligkeitsrand nach oben oder unten wischen, um das Bild heller oder dunkler zu stellen. Gilt nur in dieser App.",
                             checked = playerBrightnessGesture,
                             onCheckedChange = viewModel::setPlayerBrightnessGesture,
                         )
                         SettingsToggleRow(
                             title = "Volume edge slide",
-                            subtitle = "Slide a finger up or down the other edge to change the media volume.",
+                            subtitle = "Am anderen Rand nach oben oder unten wischen, um die Medienlautstärke zu ändern.",
                             checked = playerVolumeGesture,
                             onCheckedChange = viewModel::setPlayerVolumeGesture,
                         )
@@ -344,7 +344,7 @@ fun PlayerSettingsScreen(
                     }
                     SettingsToggleRow(
                         title = "Padding Between Tiles",
-                        subtitle = "Add a small gap between tiles for visual separation.",
+                        subtitle = "Kleinen Abstand zwischen Kacheln für bessere Trennung hinzufügen.",
                         checked = multiviewPadding,
                         onCheckedChange = viewModel::setMultiviewTilePadding,
                     )
@@ -371,7 +371,7 @@ fun PlayerSettingsScreen(
                     ) {
                         SettingsToggleRow(
                             title = "Match content resolution",
-                            subtitle = "Output 1080p streams at 1080p and let the TV upscale. Off keeps the display at its native mode.",
+                            subtitle = "1080p-Streams in 1080p ausgeben und den Fernseher hochskalieren lassen. Aus behält den nativen Anzeigemodus.",
                             checked = matchContentResolution,
                             onCheckedChange = viewModel::setMatchContentResolution,
                         )
@@ -442,7 +442,7 @@ internal fun bufferMillisFor(id: String): Int =
 private val REWIND_DEPTH_MINUTES = listOf(15, 30, 60, 90, 120, 180)
 
 private fun formatDepthMinutes(mins: Int): String = when {
-    mins < 60 -> "$mins minutes"
+    mins < 60 -> "$mins Minuten"
     mins == 60 -> "1 hour"
     mins % 60 == 0 -> "${mins / 60} hours"
     else -> "${mins / 60}h ${mins % 60}m"

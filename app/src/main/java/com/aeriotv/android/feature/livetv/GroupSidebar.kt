@@ -360,7 +360,7 @@ private fun GroupSidebarRow(
                 color = fg, maxLines = 1, overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.weight(1f, fill = false),
             )
-            if (trailingPin) Icon(Icons.Filled.PushPin, contentDescription = "Default group", tint = fg.copy(alpha = 0.7f), modifier = Modifier.size(7.dp))
+            if (trailingPin) Icon(Icons.Filled.PushPin, contentDescription = "Standardgruppe", tint = fg.copy(alpha = 0.7f), modifier = Modifier.size(7.dp))
         }
         return
     }
@@ -563,7 +563,7 @@ internal fun GuideGroupSidebarPane(
 
 /**
  * Phone group drawer (Apple `PhoneGroupDrawer`, ChannelListView.swift:4653-4723,
- * Logan 2026-09-05): the phone's default group selector. "CHANNEL GROUPS"
+ * Logan 2026-09-05): the phone's default group selector. "SENDERGRUPPEN"
  * heading with the Manage Groups circle beside it, then Favorites, All and
  * the visible groups (collections ride along where their pill placement puts
  * them) as tight 34dp rows with no dividers. The default group carries a pin
@@ -599,7 +599,7 @@ internal fun PhoneGroupDrawer(
                 .padding(start = 18.dp, end = 18.dp, top = 12.dp, bottom = 4.dp),
         ) {
             Text(
-                text = "CHANNEL GROUPS",
+                text = "SENDERGRUPPEN",
                 fontSize = 12.sp,
                 fontWeight = FontWeight.Bold,
                 letterSpacing = 1.2.sp,
@@ -673,7 +673,7 @@ internal fun PhoneGroupDrawer(
                         if (token == PlaylistViewModel.ALL_GROUPS) {
                             Icon(
                                 imageVector = Icons.Filled.PushPin,
-                                contentDescription = "Default group",
+                                contentDescription = "Standardgruppe",
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 modifier = Modifier.size(11.dp),
                             )

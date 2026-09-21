@@ -96,7 +96,7 @@ class GuideIndex private constructor(
             val out = ArrayList<EPGProgramme>(3)
             val when_ = java.text.SimpleDateFormat("EEE h:mm a", java.util.Locale.getDefault()).format(java.util.Date(start))
             if (start > windowStartMs) out += placeholder(channelId, name, windowStartMs, start).copy(description = "Starts $when_")
-            out += placeholder(channelId, name, maxOf(start, windowStartMs), minOf(end, windowEndMs)).copy(description = "Event listing from the channel name; the provider has no guide data for it.")
+            out += placeholder(channelId, name, maxOf(start, windowStartMs), minOf(end, windowEndMs)).copy(description = "Ereigniseintrag aus dem Sendernamen; der Anbieter liefert dafür keine EPG-Daten.")
             if (end < windowEndMs) out += placeholder(channelId, name, end, windowEndMs).copy(description = "Started $when_")
             return out
         }

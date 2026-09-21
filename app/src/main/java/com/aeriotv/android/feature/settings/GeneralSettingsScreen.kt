@@ -106,14 +106,14 @@ fun GeneralSettingsScreen(
                         )
                     }
                     SettingsToggleRow(
-                        title = "Skip loading screen",
-                        subtitle = "Land on Live TV instantly; data hydrates in the background",
+                        title = "Ladebildschirm überspringen",
+                        subtitle = "Sofort Live-TV öffnen; Daten werden im Hintergrund geladen",
                         checked = skipLoadingScreen,
                         onCheckedChange = viewModel::setSkipLoadingScreen,
                     )
                     SettingsToggleRow(
-                        title = "Resume last channel",
-                        subtitle = "Auto-start the last-played channel on launch.",
+                        title = "Letzten Sender fortsetzen",
+                        subtitle = "Beim Start automatisch den zuletzt abgespielten Sender öffnen.",
                         checked = autoResumeLastChannel,
                         onCheckedChange = viewModel::setAutoResumeLastChannel,
                     )
@@ -125,7 +125,7 @@ fun GeneralSettingsScreen(
                             .collectAsStateWithLifecycle(initialValue = true)
                         SettingsToggleRow(
                             title = "Auto-rotate",
-                            subtitle = "Follow the device orientation. When off, " +
+                            subtitle = "Geräteausrichtung übernehmen. Wenn ausgeschaltet, " +
                                 "AerioTV stays in its current orientation",
                             checked = autoRotate,
                             onCheckedChange = viewModel::setAutoRotate,
@@ -144,7 +144,7 @@ fun GeneralSettingsScreen(
                         },
                 ) {
                     SettingsToggleRow(
-                        title = "Refresh in the background",
+                        title = "Im Hintergrund aktualisieren",
                         checked = backgroundRefreshEnabled,
                         onCheckedChange = viewModel::setBackgroundRefreshEnabled,
                     )
@@ -168,7 +168,7 @@ fun GeneralSettingsScreen(
                 // tvOS Network (s_10) presents Request Timeout as a selection list
                 // (5/10/15/30/60 seconds), not a slider: cleaner with a remote.
                 SettingsSection(
-                    header = "Network",
+                    header = "Netzwerk",
                     footer = "Adjust timeouts if you have a slow or unstable connection.",
                 ) {
                     TIMEOUT_OPTIONS.forEach { secs ->

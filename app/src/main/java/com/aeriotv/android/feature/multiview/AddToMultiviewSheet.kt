@@ -305,7 +305,7 @@ fun AddToMultiviewSheet(
                 }
                 Spacer(Modifier.weight(1f))
                 Text(
-                    text = "Add to Multiview",
+                    text = "Zur Mehrfachansicht hinzufügen",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
@@ -313,7 +313,7 @@ fun AddToMultiviewSheet(
                 Spacer(Modifier.weight(1f))
                 TextButton(onClick = onLaunch, enabled = canLaunch) {
                     Text(
-                        text = "Play (${selected.size})",
+                        text = "Abspielen (${selected.size})",
                         color = if (canLaunch) MaterialTheme.colorScheme.textAccent
                         else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f),
                         fontWeight = FontWeight.SemiBold,
@@ -385,7 +385,7 @@ fun AddToMultiviewSheet(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Search,
-                            contentDescription = if (searchActive) "Close search" else "Sender suchen",
+                            contentDescription = if (searchActive) "Suche schließen" else "Sender suchen",
                         )
                     }
                     Spacer(Modifier.width(8.dp))
@@ -400,7 +400,7 @@ fun AddToMultiviewSheet(
                             trailingIcon = {
                                 if (query.isNotEmpty()) {
                                     IconButton(onClick = { query = "" }) {
-                                        Icon(Icons.Filled.Close, contentDescription = "Clear search")
+                                        Icon(Icons.Filled.Close, contentDescription = "Suche leeren")
                                     }
                                 }
                             },
@@ -497,7 +497,7 @@ fun AddToMultiviewSheet(
                             val isSel = tileId in selectedIds
                             VodPickerRow(
                                 title = item.title,
-                                subtitle = item.year?.let { "Movie · $it" } ?: "Movie",
+                                subtitle = item.year?.let { "Film · $it" } ?: "Film",
                                 posterUrl = item.posterUrl,
                                 selected = isSel,
                                 resolving = movieUuid in resolving,
@@ -741,7 +741,7 @@ fun AddToMultiviewSheet(
                         pendingWarnedAdd = null
                         commit()
                     },
-                ) { Text("Don't Show Again") }
+                ) { Text("Nicht mehr anzeigen") }
                 TextButton(onClick = { pendingWarnedAdd = null }) { Text("Abbrechen") }
             },
         )
@@ -819,7 +819,7 @@ private fun NowPlayingPinnedRow(
                 overflow = TextOverflow.Ellipsis,
             )
             Text(
-                text = if (nowTitle.isNotBlank()) "Tile 1 · Now playing · $nowTitle"
+                text = if (nowTitle.isNotBlank()) "Kachel 1 · Läuft jetzt · $nowTitle"
                 else "Tile 1 · Now playing",
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.textAccent,
@@ -919,7 +919,7 @@ private fun ChannelPickerRow(
             if (selected) {
                 Icon(
                     imageVector = Icons.Filled.Check,
-                    contentDescription = "Selected",
+                    contentDescription = "Ausgewählt",
                     tint = MaterialTheme.colorScheme.primary,
                 )
             } else {
@@ -1029,12 +1029,12 @@ private fun VodPickerRow(
                 )
                 chevron -> Icon(
                     imageVector = Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                    contentDescription = "Open",
+                    contentDescription = "Öffnen",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
                 selected -> Icon(
                     imageVector = Icons.Filled.Check,
-                    contentDescription = "Selected",
+                    contentDescription = "Ausgewählt",
                     tint = MaterialTheme.colorScheme.primary,
                 )
                 else -> Icon(
@@ -1069,7 +1069,7 @@ private fun BackRow(onClick: () -> Unit) {
         )
         Spacer(Modifier.width(10.dp))
         Text(
-            text = "All Series",
+            text = "Alle Serien",
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.textAccent,
             fontWeight = FontWeight.Medium,

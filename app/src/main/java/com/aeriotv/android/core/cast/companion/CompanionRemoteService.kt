@@ -260,7 +260,7 @@ class CompanionRemoteService : MediaSessionService() {
         if (nm.getNotificationChannel(CHANNEL_ID) == null) {
             nm.createNotificationChannel(
                 NotificationChannel(CHANNEL_ID, "TV remote control", NotificationManager.IMPORTANCE_LOW).apply {
-                    description = "Controls for the TV you are controlling from this phone"
+                    description = "Steuerung für den Fernseher, den du mit diesem Handy bedienst"
                     setShowBadge(false)
                 },
             )

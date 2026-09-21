@@ -317,7 +317,7 @@ class AerioMediaPlaybackService : MediaLibraryService() {
             "Background playback",
             NotificationManager.IMPORTANCE_LOW,
         ).apply {
-            description = "Ongoing notification while AerioTV plays audio in the background."
+            description = "Fortlaufende Benachrichtigung, während AerioTV Deutsch Audio im Hintergrund abspielt."
             setShowBadge(false)
         }
         mgr.createNotificationChannel(channel)
@@ -335,7 +335,7 @@ class AerioMediaPlaybackService : MediaLibraryService() {
                 castSender.state.value as?
                     com.aeriotv.android.core.cast.AerioCastSender.State.Connected
                 )?.deviceName
-            if (!device.isNullOrBlank()) "Casting to $device" else "Casting"
+            if (!device.isNullOrBlank()) "Casting to $device" else "Übertragung"
         } else {
             com.aeriotv.android.core.pip.PipState.nowPlayingSubtitle.ifBlank { "Live" }
         }

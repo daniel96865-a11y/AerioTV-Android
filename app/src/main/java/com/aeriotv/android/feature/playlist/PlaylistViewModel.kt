@@ -86,7 +86,7 @@ class PlaylistViewModel @Inject constructor(
         val username: String = "",
         val password: String = "",
         /** Per-playlist On Demand opt-in (iOS ServerConnection.vodEnabled).
-         *  Bound to the "Fetch On Demand from this playlist" toggle in
+         *  Bound to the "Mediathek aus dieser Wiedergabeliste laden" toggle in
          *  ConfigureSourceScreen / EditPlaylistScreen. Default true, threaded
          *  through SaveRequest into PlaylistEntity.vodEnabled. */
         val vodEnabled: Boolean = true,
@@ -541,7 +541,7 @@ class PlaylistViewModel @Inject constructor(
     fun onPasswordChange(value: String) {
         _state.update { it.copy(password = value) }
     }
-    /** Bound to "Fetch On Demand from this playlist" in ConfigureSourceScreen /
+    /** Bound to "Mediathek aus dieser Wiedergabeliste laden" in ConfigureSourceScreen /
      *  EditPlaylistScreen. Threaded into SaveRequest.vodEnabled on submit. */
     fun onVodEnabledChange(value: Boolean) {
         _state.update { it.copy(vodEnabled = value) }
@@ -551,7 +551,7 @@ class PlaylistViewModel @Inject constructor(
     fun onDvrDestinationChange(server: Boolean) {
         _state.update { it.copy(dvrDestinationServer = server) }
     }
-    /** Bound to the "Guide Days" picker in ConfigureSourceScreen (task
+    /** Bound to the "EPG-Tage" picker in ConfigureSourceScreen (task
      *  #135). Threaded into SaveRequest.epgRetentionDays on submit. */
     fun onEpgRetentionDaysChange(value: Int) {
         _state.update { it.copy(epgRetentionDays = sanitizeGuideDays(value)) }
@@ -1334,7 +1334,7 @@ class PlaylistViewModel @Inject constructor(
 
     /**
      * Re-fetch the active playlist (channels) and follow with EPG. Used by
-     * Playlist Detail's "Refresh Playlist" action.
+     * Playlist Detail's "Wiedergabeliste aktualisieren" action.
      */
     fun refreshPlaylist() {
         viewModelScope.launch {
@@ -1753,7 +1753,7 @@ class PlaylistViewModel @Inject constructor(
         }
     }
 
-    /** Manual "Refresh LAN Detection" action on Playlist Detail: re-probe
+    /** Manual "LAN-Erkennung aktualisieren" action on Playlist Detail: re-probe
      *  which URL answers and report the outcome inline. The same probe
      *  already runs automatically on entry and ON_RESUME; this row exists
      *  for parity with iOS and for users who just changed networks. */
@@ -1981,7 +1981,7 @@ class PlaylistViewModel @Inject constructor(
     suspend fun loadCurrentStreamUrl(channelUuid: String): String? =
         runCatching { repository.currentDispatcharrStreamUrl(channelUuid) }.getOrNull()
 
-    /** Clean-end session check for the player's "Stream ended" card. */
+    /** Clean-end session check for the player's "Stream beendet" card. */
     suspend fun verifyStreamEndedByLimit(
         channelUuid: String?,
         ourConnectedAtEpochSec: Double,

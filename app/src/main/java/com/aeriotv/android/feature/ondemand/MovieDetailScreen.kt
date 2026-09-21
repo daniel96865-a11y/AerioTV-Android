@@ -290,7 +290,7 @@ fun MovieDetailScreen(
                     androidx.compose.material3.CircularProgressIndicator()
                 } else {
                     Text(
-                        text = "Movie not found",
+                        text = "Film nicht gefunden",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -402,7 +402,7 @@ fun MovieDetailScreen(
                                     icon = Icons.Outlined.Info,
                                     onClick = {
                                         qrLink = TvQrLink(
-                                            title = "View on TMDB",
+                                            title = "Auf TMDB ansehen",
                                             caption = "Scan with your phone to view this title on TMDB.",
                                             url = url,
                                         )
@@ -503,7 +503,7 @@ fun MovieDetailScreen(
                                 ?.let { add("Released" to it) }
                             runtimeSecs?.let { add("Runtime" to formatDuration(it)) }
                             director?.let { add("Director" to it) }
-                            if (castCrewPeople.isEmpty()) cast?.let { add("Cast" to it) }
+                            if (castCrewPeople.isEmpty()) cast?.let { add("Übertragen" to it) }
                             info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Country" to it) }
                         }
                         TvDetailsBlock(facts = facts) {
@@ -577,7 +577,7 @@ fun MovieDetailScreen(
                 title = "Trailer",
                 actions = listOf(
                     TvMenuAction(
-                        label = "Play in YouTube",
+                        label = "In YouTube abspielen",
                         icon = Icons.Filled.PlayArrow,
                         onClick = {
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -586,7 +586,7 @@ fun MovieDetailScreen(
                         },
                     ),
                     TvMenuAction(
-                        label = "Show QR Code",
+                        label = "QR-Code anzeigen",
                         icon = Icons.Filled.QrCode,
                         onClick = {
                             qrLink = TvQrLink(
@@ -983,8 +983,8 @@ private fun InfoSection(
                 if (tmdbUrl != null) {
                     PillButton(
                         icon = Icons.Outlined.Info,
-                        text = "View on TMDB",
-                        onClick = { onOpenUrl("View on TMDB", tmdbUrl) },
+                        text = "Auf TMDB ansehen",
+                        onClick = { onOpenUrl("Auf TMDB ansehen", tmdbUrl) },
                     )
                 }
                 if (isTv && versionLabel != null) {
@@ -1008,7 +1008,7 @@ private fun InfoSection(
         // The text rows duplicate the Cast & Crew photo strip when it
         // renders; they stay as the fallback when TMDB enrichment is off
         // or returned nothing for this title.
-        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Cast", cast)
+        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Übertragen", cast)
         if (!director.isNullOrBlank() && !castPhotosVisible) row("Director", director)
         if (!country.isNullOrBlank()) row("Country", country)
         if (isTv) {
@@ -1042,7 +1042,7 @@ private fun CastCrewSection(
     val edgeInset = if (isTv) TV_DETAIL_INSET else 16.dp
     Column(modifier = modifier.fillMaxWidth().padding(bottom = 16.dp)) {
         Text(
-            text = "Cast & Crew",
+            text = "Besetzung & Team",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.onBackground,
             // tvOS .headlineSmall is SEMIbold (Typography.swift).
@@ -1258,7 +1258,7 @@ private fun formatDuration(totalSecs: Int): String {
 
 /**
  * Phone/tablet "Related" strip: library titles TMDB recommends for the
- * opened one (tvOS "Available Related Titles"). Header matches the Cast &
+ * opened one (tvOS "Verfügbare ähnliche Titel"). Header matches the Cast &
  * Crew section; tiles are the Movies tab poster cards.
  */
 @Composable

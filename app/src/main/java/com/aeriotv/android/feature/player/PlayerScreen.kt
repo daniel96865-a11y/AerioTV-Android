@@ -2285,7 +2285,7 @@ private fun PlayerSheets(
                         //      only a fatal player error or a confirmed dead session reopens.
                         val newUrl = runCatching { onSwitchChannelStream(uuid, id) }.getOrNull()
                         if (newUrl.isNullOrBlank()) {
-                            Toast.makeText(context, "Stream switch failed", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Streamwechsel fehlgeschlagen", Toast.LENGTH_SHORT).show()
                             return@launch
                         }
 
@@ -2317,7 +2317,7 @@ private fun PlayerSheets(
                             return@launch
                         }
 
-                        Toast.makeText(context, "Switching stream...", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Stream wird gewechselt...", Toast.LENGTH_SHORT).show()
                         // GH #33: while casting, the phone must NOT start a local decode.
                         // change_stream already landed server-side (confirmed above), so the
                         // channel's /proxy/ts/ URL now serves the switched upstream -- re-tune
@@ -2622,7 +2622,7 @@ private fun LiveRewindChromeSection(
         // Remote hint strip: generated from the user's EFFECTIVE map plus the
         // player's live mode, so a remapped button is named as the user set
         // it and a slot that does nothing here drops out. Off when the
-        // "Show remote hints" toggle is off.
+        // "Fernbedienungshinweise anzeigen" toggle is off.
         formatBadge = if (isTvForm) formatBadge else null,
         hintPairs = if (isTvForm && showRemoteHints) {
             com.aeriotv.android.core.remote.RemoteControlHints.livePlayerStripHints(
@@ -2802,7 +2802,7 @@ private fun CatchupUnavailableCard(
             )
         }
         Button(onClick = onClose) {
-            Text("Go Back")
+            Text("Zurück")
         }
     }
 }
@@ -2844,7 +2844,7 @@ private fun StreamUnavailableCard(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Channel Unavailable",
+            text = "Sender nicht verfügbar",
             style = MaterialTheme.typography.headlineSmall,
             color = Color.White,
         )
@@ -2874,7 +2874,7 @@ private fun StreamUnavailableCard(
                 unavailableRetrySerial += 1
                 exoHolder.retryUnavailable()
             }) {
-                Text("Retry Now")
+                Text("Jetzt erneut versuchen")
             }
         }
         Text(
@@ -2904,12 +2904,12 @@ private fun ChannelNotAvailableCard(onClose: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Channel Not Available",
+            text = "Sender nicht verfügbar",
             style = MaterialTheme.typography.headlineSmall,
             color = Color.White,
         )
         Text(
-            text = "This channel isn't in the active playlist. If you just " +
+            text = "Dieser Sender befindet sich nicht in der aktiven Wiedergabeliste. Wenn du gerade " +
                 "switched playlists, go back and pick it again from the " +
                 "refreshed guide.",
             style = MaterialTheme.typography.bodyMedium,
@@ -2917,7 +2917,7 @@ private fun ChannelNotAvailableCard(onClose: () -> Unit) {
             textAlign = TextAlign.Center,
         )
         Button(onClick = onClose) {
-            Text("Go Back")
+            Text("Zurück")
         }
     }
 }
@@ -2935,19 +2935,19 @@ private fun NoStreamAssignedCard(onClose: () -> Unit) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "No Stream Assigned",
+            text = "Kein Stream zugewiesen",
             style = MaterialTheme.typography.headlineSmall,
             color = Color.White,
         )
         Text(
-            text = "This channel doesn't have a stream yet. Event channels " +
+            text = "Für diesen Sender ist noch kein Stream hinterlegt. Ereignissender " +
                 "usually get one shortly before air time.",
             style = MaterialTheme.typography.bodyMedium,
             color = Color.White.copy(alpha = 0.72f),
             textAlign = TextAlign.Center,
         )
         Button(onClick = onClose) {
-            Text("Go Back")
+            Text("Zurück")
         }
     }
 }

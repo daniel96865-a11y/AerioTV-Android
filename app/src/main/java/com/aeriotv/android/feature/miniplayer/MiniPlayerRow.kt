@@ -106,7 +106,7 @@ fun MiniPlayerRow(
                 )
             } else {
                 Text(
-                    text = "Tap to resume",
+                    text = "Tippen zum Fortsetzen",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -115,14 +115,14 @@ fun MiniPlayerRow(
         IconButton(onClick = onTogglePause) {
             Icon(
                 imageVector = if (isPaused) Icons.Filled.PlayArrow else Icons.Filled.Pause,
-                contentDescription = if (isPaused) "Resume audio" else "Pause audio",
+                contentDescription = if (isPaused) "Audio fortsetzen" else "Audio pausieren",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
         IconButton(onClick = onResume) {
             Icon(
                 imageVector = Icons.Filled.PlayArrow,
-                contentDescription = "Return to player",
+                contentDescription = "Zurück zum Player",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }

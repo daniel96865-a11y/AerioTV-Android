@@ -223,7 +223,7 @@ fun PlaylistsScreen(
                             {
                                 Icon(
                                     imageVector = Icons.Filled.Menu,
-                                    contentDescription = "Drag to reorder",
+                                    contentDescription = "Zum Sortieren ziehen",
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier
                                         .draggableHandle(
@@ -271,7 +271,7 @@ fun PlaylistsScreen(
     pendingDelete?.let { pl ->
         AlertDialog(
             onDismissRequest = { pendingDelete = null },
-            title = { Text("Delete playlist?") },
+            title = { Text("Wiedergabeliste löschen?") },
             text = {
                 Text(
                     "This removes \"${pl.name}\" and its credentials from this device. " +

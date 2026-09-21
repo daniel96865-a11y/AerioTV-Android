@@ -99,7 +99,7 @@ fun TvLogShareDialog(
                 )
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    text = "On your phone, scan the QR code or open this URL. " +
+                    text = "Scanne auf deinem Handy den QR-Code oder öffne diese URL. " +
                         "The .txt file will download. Attach it to a GitHub Issue or email.",
                     style = MaterialTheme.typography.bodyMedium.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -121,7 +121,7 @@ fun TvLogShareDialog(
                         ) {
                             Image(
                                 bitmap = qr.asImageBitmap(),
-                                contentDescription = "QR code for the log download URL",
+                                contentDescription = "QR-Code für die Protokoll-Download-URL",
                                 filterQuality = FilterQuality.None,
                                 modifier = Modifier.size(240.dp),
                             )
@@ -141,7 +141,7 @@ fun TvLogShareDialog(
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "The server stops when you close this screen. " +
+                        text = "Der Server wird beendet, wenn du diese Seite schließt. " +
                             "The TV and your phone must be on the same Wi-Fi network.",
                         style = MaterialTheme.typography.labelSmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f),
@@ -149,7 +149,7 @@ fun TvLogShareDialog(
                     )
                 } else if (failed) {
                     Text(
-                        text = "Could not start LAN server. Check the TV's network connection.",
+                        text = "LAN-Server konnte nicht gestartet werden. Prüfe die Netzwerkverbindung des Fernsehers.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.error,
                         textAlign = TextAlign.Center,

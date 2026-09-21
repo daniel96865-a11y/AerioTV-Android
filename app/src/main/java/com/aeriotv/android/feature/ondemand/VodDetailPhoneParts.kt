@@ -210,28 +210,28 @@ internal fun TmdbSourceNote(
         tmdbPosterUsed && tmdbDetailsPresent -> TmdbNoteRow(
             icon = Icons.Filled.Verified,
             tint = accent,
-            text = "Poster and missing details pulled from TMDB using your API key.",
+            text = "Poster und fehlende Details wurden mit deinem API-Schlüssel von TMDB geladen.",
         )
         tmdbPosterUsed -> TmdbNoteRow(
             icon = Icons.Filled.Verified,
             tint = accent,
-            text = "Poster pulled from TMDB using your API key.",
+            text = "Poster wurde mit deinem API-Schlüssel von TMDB geladen.",
         )
         tmdbDetailsPresent -> TmdbNoteRow(
             icon = Icons.Filled.Verified,
             tint = accent,
-            text = "Missing details filled in from TMDB using your API key.",
+            text = "Fehlende Details wurden mit deinem API-Schlüssel von TMDB ergänzt.",
         )
         !hasProviderArt && !tmdbConfigured -> TmdbNoteRow(
             icon = Icons.Filled.AutoAwesome,
             tint = accent,
-            text = "No artwork from your provider. Enter a TMDB API key in Settings > App Behaviors " +
+            text = "Dein Anbieter liefert kein Bildmaterial. Hinterlege einen TMDB-API-Schlüssel in den Einstellungen " +
                 "to fill it in automatically. Only works when TMDB has a matching title.",
         )
         !hasProviderArt && lookupDone -> TmdbNoteRow(
             icon = Icons.Filled.Search,
             tint = MaterialTheme.colorScheme.tertiary,
-            text = "No matching title found on TMDB.",
+            text = "Kein passender Titel auf TMDB gefunden.",
         )
     }
 }

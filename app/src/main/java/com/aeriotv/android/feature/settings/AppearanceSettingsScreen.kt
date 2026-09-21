@@ -434,7 +434,7 @@ internal fun ThemeRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
@@ -512,7 +512,7 @@ private fun AppearanceModeRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
@@ -690,7 +690,7 @@ internal fun CheckRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(22.dp),
             )
@@ -958,7 +958,7 @@ internal fun AddMoreCategoriesRow(
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = "Add More Categories",
+                text = "Weitere Kategorien hinzufügen",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Medium,

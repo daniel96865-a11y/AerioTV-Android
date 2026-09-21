@@ -110,7 +110,7 @@ fun CastIconButton(
         ) {
             Icon(
                 imageVector = if (connected) Icons.Filled.CastConnected else Icons.Filled.Cast,
-                contentDescription = if (connected) "Casting" else "Cast",
+                contentDescription = if (connected) "Übertragung" else "Übertragen",
                 tint = Color.White,
             )
         }
@@ -132,7 +132,7 @@ fun CastIconButton(
  * action. Selecting a route hands off to the Cast framework's SessionManager,
  * which starts the session; [AerioCastSender] then loads the pending content.
  *
- * Shared with MainScaffold's floating "Control a TV" button (task #255): the
+ * Shared with MainScaffold's floating "Fernseher steuern" button (task #255): the
  * guide entry point used to show a companion-only list while this one showed
  * cast routes too, so the same TV appeared in one picker but not the other.
  * Nothing here needs a playing item -- selecting a route just connects, and
@@ -217,7 +217,7 @@ fun CastRouteChooserDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (connected) "Casting" else "Cast to") },
+        title = { Text(if (connected) "Übertragung" else "Übertragen auf") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 if (routes.isEmpty() && tvs.isEmpty() &&
@@ -326,7 +326,7 @@ fun CastRouteChooserDialog(
                 connected -> TextButton(onClick = {
                     sender.stopCasting()
                     onDismiss()
-                }) { Text("Stop casting") }
+                }) { Text("Übertragung beenden") }
                 companionConn is CompanionRemoteController.Conn.Connected -> TextButton(onClick = {
                     companionRemote?.disconnect()
                     onDismiss()

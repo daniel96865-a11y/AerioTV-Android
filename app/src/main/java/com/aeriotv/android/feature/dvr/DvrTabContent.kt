@@ -84,7 +84,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
 
 /**
  * DVR tab. Mirrors iOS MyRecordingsView (project_aeriotv_ios_canon.md "DVR tab"):
- * "My Recordings" title, three filter chips with counts (Scheduled / Recording /
+ * "Meine Aufnahmen" title, three filter chips with counts (Scheduled / Recording /
  * Completed), empty-state film-strip icon + helper copy, and a list of row cards.
  *
  * Phase 9a is server-only — recordings come from Dispatcharr's
@@ -158,7 +158,7 @@ fun DvrTabContent(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "My Recordings",
+                    text = "Meine Aufnahmen",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -199,14 +199,14 @@ fun DvrTabContent(
             ) {
                 item {
                     FilterPill(
-                        label = "Scheduled (${state.scheduledCount})",
+                        label = "Geplant (${state.scheduledCount})",
                         selected = state.filter == DvrViewModel.Filter.Scheduled,
                         onClick = { viewModel.setFilter(DvrViewModel.Filter.Scheduled) },
                     )
                 }
                 item {
                     FilterPill(
-                        label = "Recording (${state.recordingCount})",
+                        label = "Aufnahme (${state.recordingCount})",
                         selected = state.filter == DvrViewModel.Filter.Recording,
                         onClick = { viewModel.setFilter(DvrViewModel.Filter.Recording) },
                     )
@@ -256,7 +256,7 @@ fun DvrTabContent(
                         contentAlignment = Alignment.Center,
                     ) {
                         Text(
-                            text = "Clear All",
+                            text = "Alle löschen",
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.error,
                             fontWeight = FontWeight.Medium,
@@ -268,7 +268,7 @@ fun DvrTabContent(
                         modifier = Modifier.padding(start = 8.dp),
                     ) {
                         Text(
-                            text = "Clear All",
+                            text = "Alle löschen",
                             color = MaterialTheme.colorScheme.error,
                             fontWeight = FontWeight.Medium,
                         )
@@ -285,7 +285,7 @@ fun DvrTabContent(
         }
         state.error?.let { err ->
             Text(
-                text = "Couldn't load recordings: $err",
+                text = "Aufnahmen konnten nicht geladen werden: $err",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.error,
                 modifier = Modifier.padding(24.dp),
@@ -452,7 +452,7 @@ fun DvrTabContent(
                 val id = rec.id.removePrefix("server-").toIntOrNull()
                 pendingEdit = null
                 if (id == null) {
-                    Toast.makeText(context, "Invalid recording id.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Ungültige Aufnahme-ID.", Toast.LENGTH_SHORT).show()
                     return@EditRecordingSheet
                 }
                 scope.launch {
@@ -464,7 +464,7 @@ fun DvrTabContent(
                         description = newDescription,
                     ).fold(
                         onSuccess = {
-                            Toast.makeText(context, "Recording updated.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Aufnahme aktualisiert.", Toast.LENGTH_SHORT).show()
                         },
                         onFailure = { t ->
                             Toast.makeText(
@@ -498,7 +498,7 @@ fun DvrTabContent(
                     scope.launch {
                         viewModel.deleteRecording(rec).fold(
                             onSuccess = {
-                                Toast.makeText(context, "Recording deleted.", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, "Aufnahme gelöscht.", Toast.LENGTH_SHORT).show()
                             },
                             onFailure = { t ->
                                 Toast.makeText(
@@ -523,7 +523,7 @@ fun DvrTabContent(
     if (pendingClearAll) {
         AlertDialog(
             onDismissRequest = { pendingClearAll = false },
-            title = { Text("Clear all completed?") },
+            title = { Text("Alle abgeschlossenen Aufnahmen löschen?") },
             text = {
                 Text(
                     if (canManageDvr) {
@@ -561,7 +561,7 @@ fun DvrTabContent(
                         )
                     }
                 }) {
-                    Text("Delete All", color = MaterialTheme.colorScheme.error)
+                    Text("Alle löschen", color = MaterialTheme.colorScheme.error)
                 }
             },
             dismissButton = {
@@ -728,7 +728,7 @@ private fun RecordingRow(
                     // server row with a server URL tap-plays FROM THE BEGINNING
                     // (Logan 2026-07-20: a recording-in-progress is something
                     // you started to watch from the start; the live edge is the
-                    // deliberate "Start at Live" menu choice). Other rows no-op
+                    // deliberate "Bei Live starten" menu choice). Other rows no-op
                     // and use the long-press menu.
                     onClick = tvGuard.wrap {
                         when {
@@ -807,7 +807,7 @@ private fun RecordingRow(
                 // it on the focused row only, where the eye already is.
                 if (isTv && focused) {
                     Text(
-                        text = "Hold OK for options",
+                        text = "OK gedrückt halten für Optionen",
                         style = MaterialTheme.typography.labelMedium.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.8f),
                     )
@@ -846,7 +846,7 @@ private fun RecordingRow(
 private fun DestinationBadge(source: DvrViewModel.Source) {
     val isLocal = source == DvrViewModel.Source.Local
     val icon = if (isLocal) Icons.Outlined.Smartphone else Icons.Outlined.Storage
-    val label = if (isLocal) "Local" else "Server"
+    val label = if (isLocal) "Lokal" else "Server"
     // iOS uses `Color.green` for local rows — system green (#34C759). Server
     // rows pull the active theme accent so the badge stays brand-coherent
     // when a custom accent is set in Appearance.
@@ -915,10 +915,10 @@ private fun RecordingActionMenu(
     // modal idiom on TV is the centered panel).
     val actions = buildList {
         if (isCompleted && isServer) {
-            add(TvMenuAction("Save to Device", Icons.Outlined.Download) { onSaveToDevice() })
+            add(TvMenuAction("Auf Gerät speichern", Icons.Outlined.Download) { onSaveToDevice() })
             // Comskip is a server-side write (IsAdminOrDVRManager).
             if (canManage) {
-                add(TvMenuAction("Remove Commercials", Icons.Outlined.ContentCut) { onRemoveCommercials() })
+                add(TvMenuAction("Werbung entfernen", Icons.Outlined.ContentCut) { onRemoveCommercials() })
             }
         }
         if (isInProgress && isServer) {
@@ -930,8 +930,8 @@ private fun RecordingActionMenu(
                 // Tap already starts from the beginning (see the row's
                 // onClick), so the menu leads with the OTHER option, Start
                 // at Live, and keeps Watch from Beginning for discoverability.
-                add(TvMenuAction("Start at Live", Icons.Outlined.PlayArrow) { onWatchLive() })
-                add(TvMenuAction("Watch from Beginning", Icons.Outlined.SkipPrevious) { onWatchFromBeginning() })
+                add(TvMenuAction("Bei Live starten", Icons.Outlined.PlayArrow) { onWatchLive() })
+                add(TvMenuAction("Von Anfang ansehen", Icons.Outlined.SkipPrevious) { onWatchFromBeginning() })
             }
             // Dispatcharr 0.30 dvr_access "view": list and play only.
             if (canManage) add(TvMenuAction("Aufnahme stoppen", Icons.Outlined.Stop) { onStopRecording() })
@@ -941,10 +941,10 @@ private fun RecordingActionMenu(
         }
         val deleteLabel = when {
             isServer && isScheduled -> "Abbrechen"
-            isServer -> "Delete from Server"
+            isServer -> "Vom Server löschen"
             // Unambiguous local label (Logan 2026-09-15): the bytes live on
             // this device, and this never touches the server.
-            else -> "Delete from Device"
+            else -> "Vom Gerät löschen"
         }
         if (!isServer || canManage) {
             add(TvMenuAction(deleteLabel, Icons.Outlined.Delete, destructive = true) { onDelete() })

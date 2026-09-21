@@ -124,7 +124,7 @@ fun LiveTvSettingsScreen(
                             "or cell they sit in. Artwork that floats on a transparent background stays square either way.",
                     ) {
                         SettingsToggleRow(
-                            title = "Show Channel Logos",
+                            title = "Senderlogos anzeigen",
                             subtitle = if (listViewShown) {
                                 "Display each channel's logo in the Live TV list."
                             } else {
@@ -134,7 +134,7 @@ fun LiveTvSettingsScreen(
                             onCheckedChange = viewModel::setShowChannelLogos,
                         )
                         SettingsToggleRow(
-                            title = "Show Channel Numbers",
+                            title = "Sendernummern anzeigen",
                             subtitle = if (listViewShown) {
                                 "Display each channel's number in the Live TV list and Guide."
                             } else {
@@ -144,13 +144,13 @@ fun LiveTvSettingsScreen(
                             onCheckedChange = viewModel::setShowChannelNumbers,
                         )
                         SettingsToggleRow(
-                            title = "Show Channel Names",
-                            subtitle = "Display each channel's name in the Guide's channel column.",
+                            title = "Sendernamen anzeigen",
+                            subtitle = "Sendernamen in der Sender-Spalte des EPG anzeigen.",
                             checked = showChannelNames,
                             onCheckedChange = viewModel::setShowChannelNames,
                         )
                         SettingsToggleRow(
-                            title = "Show Program Subtitles",
+                            title = "Sendungsuntertitel anzeigen",
                             subtitle = if (listViewShown) {
                                 "Display the episode or match name under each program title in the Guide and Live TV list. Turn off if your EPG repeats the description there."
                             } else {
@@ -160,7 +160,7 @@ fun LiveTvSettingsScreen(
                             onCheckedChange = viewModel::setShowProgramSubtitles,
                         )
                         SettingsToggleRow(
-                            title = "Rounded corners in Guide view",
+                            title = "Abgerundete Ecken in der EPG-Ansicht",
                             checked = roundedArtworkGuide,
                             onCheckedChange = viewModel::setRoundedArtworkGuide,
                         )
@@ -200,13 +200,13 @@ fun LiveTvSettingsScreen(
                     SettingsSection(header = "Guide Layout") {
                         SettingsSelectionRow(
                             label = "Basic",
-                            subtitle = "Full program details in every guide cell",
+                            subtitle = "Vollständige Sendungsdetails in jeder EPG-Zelle",
                             selected = liveTvLayout != "preview",
                             onClick = { viewModel.setLiveTvLayout("basic") },
                         )
                         SettingsSelectionRow(
-                            label = "Channel Preview",
-                            subtitle = "A banner shows the highlighted program; cells keep the title and tags",
+                            label = "Sendervorschau",
+                            subtitle = "Ein Banner zeigt die markierte Sendung; Zellen behalten Titel und Markierungen",
                             selected = liveTvLayout == "preview",
                             onClick = { viewModel.setLiveTvLayout("preview") },
                         )
@@ -290,8 +290,8 @@ fun LiveTvSettingsScreen(
                             (if (isTv) "TVs" else "mobile devices") + ".",
                     ) {
                         SettingsToggleRow(
-                            title = "Show program badges",
-                            subtitle = "LIVE, NEW, and season/episode pills on the guide",
+                            title = "Sendungsmarkierungen anzeigen",
+                            subtitle = "LIVE, NEU und Staffel-/Episodenmarkierungen im EPG",
                             checked = showEpgBadges,
                             onCheckedChange = { viewModel.setShowEpgBadges(isTv, it) },
                         )
@@ -319,7 +319,7 @@ fun LiveTvSettingsScreen(
                     },
                 ) {
                     ScaleSliderRow(
-                        label = if (listViewShown) "Live TV List" else "Live-TV",
+                        label = if (listViewShown) "Live-TV-Liste" else "Live-TV",
                         value = scaleLiveTV,
                         onValueChange = viewModel::setDisplayScaleLiveTV,
                     )
@@ -331,8 +331,8 @@ fun LiveTvSettingsScreen(
                     footer = "Tint EPG cells and channel cards by program category. Select a category below to override its hex.",
                 ) {
                     ToggleRow(
-                        title = "Color Programs by Category",
-                        subtitle = "Apply category tints to the guide and channel rows.",
+                        title = "Sendungen nach Kategorie einfärben",
+                        subtitle = "Kategoriefarben auf EPG und Senderzeilen anwenden.",
                         checked = palette.masterEnabled,
                         onCheckedChange = viewModel::setCategoryColorsEnabled,
                     )
@@ -390,7 +390,7 @@ fun LiveTvSettingsScreen(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
-                            text = "Reset Colors to Defaults",
+                            text = "Farben auf Standard zurücksetzen",
                             style = MaterialTheme.typography.bodyMedium,
                             color = Color(0xFFFB8C00),
                             fontWeight = FontWeight.Medium,

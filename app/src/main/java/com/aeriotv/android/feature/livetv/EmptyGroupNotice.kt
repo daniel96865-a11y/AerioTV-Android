@@ -74,7 +74,7 @@ fun EmptyGroupNotice(
             modifier = Modifier.size(if (isTv) 64.dp else 56.dp),
         )
         Text(
-            text = if (isSearching) "No Matching Channels" else "No Channels in This Group",
+            text = if (isSearching) "Keine passenden Sender" else "Keine Sender in dieser Gruppe",
             style = if (isTv) MaterialTheme.typography.headlineSmall
             else MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
@@ -136,7 +136,7 @@ private fun ShowAllChannelsButton(
             ),
     ) {
         Text(
-            text = "Show All Channels",
+            text = "Alle Sender anzeigen",
             style = if (isTv) MaterialTheme.typography.titleMedium
             else MaterialTheme.typography.bodyLarge,
             fontWeight = FontWeight.SemiBold,

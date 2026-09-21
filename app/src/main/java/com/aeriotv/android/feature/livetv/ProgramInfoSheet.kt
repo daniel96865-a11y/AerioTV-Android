@@ -331,7 +331,7 @@ private fun TvProgramInfoCard(
     var descFocused by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) { runCatching { descFocus.requestFocus() } }
     Text(
-        text = if (target.description.isBlank()) "No program description provided in XMLTV." else target.description,
+        text = if (target.description.isBlank()) "Keine Sendungsbeschreibung in XMLTV vorhanden." else target.description,
         fontSize = 12.sp, lineHeight = 16.sp,
         fontStyle = if (target.description.isBlank()) FontStyle.Italic else FontStyle.Normal,
         color = if (target.description.isBlank()) colors.tertiary else colors.onBackground,
@@ -424,7 +424,7 @@ private fun ProgramInfoBody(
             // not itself flagged a live broadcast (avoids a double LIVE).
             // "ON NOW" is a live-airing status, not one of the toggleable feed
             // pills, so it stays; the LIVE/NEW/etc feed flags follow the user's
-            // "Show program badges" preference. Rendered UNDER the title in a
+            // "Sendungsmarkierungen anzeigen" preference. Rendered UNDER the title in a
             // wrapping row so several badges flow onto extra lines instead of
             // stealing width from the title.
             val showEpgBadges = LocalShowEpgBadges.current
@@ -514,7 +514,7 @@ private fun ProgramInfoBody(
     Spacer(Modifier.height(8.dp))
     if (target.description.isBlank()) {
         Text(
-            text = "No program description provided in XMLTV.",
+            text = "Keine Sendungsbeschreibung in XMLTV vorhanden.",
             style = MaterialTheme.typography.bodyMedium.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             fontStyle = FontStyle.Italic,

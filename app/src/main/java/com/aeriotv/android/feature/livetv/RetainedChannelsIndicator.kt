@@ -58,7 +58,7 @@ fun RetainedChannelsAction(
     IconButton(onClick = { dialogOpen = true }, modifier = Modifier.size(buttonSize)) {
         Icon(
             imageVector = Icons.Filled.FiberSmartRecord,
-            contentDescription = "${retained.size} channels kept live",
+            contentDescription = "${retained.size} Sender werden live gehalten",
             tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier.size(iconSize),
         )
@@ -84,7 +84,7 @@ fun RetainedChannelsDialog(
         retained.asReversed().forEach { ch ->
             add(
                 TvMenuAction(
-                    label = "Watch ${ch.channelName}",
+                    label = "${ch.channelName} ansehen",
                     icon = Icons.Filled.PlayArrow,
                 ) { onJumpToChannel(ch.channelId) },
             )
@@ -99,7 +99,7 @@ fun RetainedChannelsDialog(
         if (retained.size > 1) {
             add(
                 TvMenuAction(
-                    label = "Stop All",
+                    label = "Alle stoppen",
                     icon = Icons.Filled.Stop,
                     destructive = true,
                 ) { viewModel.stopAll() },
@@ -107,7 +107,7 @@ fun RetainedChannelsDialog(
         }
     }
     TvActionMenuDialog(
-        title = "Kept Live",
+        title = "Live gehalten",
         actions = actions,
         guard = guard,
         onDismiss = onDismiss,

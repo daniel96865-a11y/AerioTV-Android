@@ -13,43 +13,43 @@ enum class SyncCategory(
 ) {
     Playlists(
         displayName = "Playlists & Servers",
-        subtitle = "M3U URLs, Dispatcharr servers, Xtream credentials (server-side only)",
+        subtitle = "M3U-URLs, Dispatcharr-Server, Xtream-Zugangsdaten (nur serverseitig)",
         fileName = "playlists.v1.json",
         storageSuffix = "playlists",
     ),
     WatchProgress(
         displayName = "Watch Progress",
-        subtitle = "Resume points for movies, episodes, and recordings",
+        subtitle = "Fortsetzungspunkte für Filme, Episoden und Aufnahmen",
         fileName = "watch_progress.v1.json",
         storageSuffix = "watch_progress",
     ),
     Reminders(
         displayName = "Reminders",
-        subtitle = "Scheduled program reminders",
+        subtitle = "Geplante Sendungserinnerungen",
         fileName = "reminders.v1.json",
         storageSuffix = "reminders",
     ),
     Favorites(
         displayName = "Favorites",
-        subtitle = "Favorite channels + your manual order",
+        subtitle = "Favorisierte Sender + deine manuelle Reihenfolge",
         fileName = "favorites.v1.json",
         storageSuffix = "favorites",
     ),
     Watchlist(
         displayName = "Watchlist",
-        subtitle = "Movies and TV shows you saved for later, plus titles you hid",
+        subtitle = "Filme und Serien für später sowie ausgeblendete Titel",
         fileName = "watchlist.v1.json",
         storageSuffix = "watchlist",
     ),
     Preferences(
         displayName = "App Preferences",
-        subtitle = "Theme, appearance mode, accent color, default tab, hidden groups, palette overrides",
+        subtitle = "Design, Darstellungsmodus, Akzentfarbe, Standard-Tab, ausgeblendete Gruppen und Farbanpassungen",
         fileName = "preferences.v1.json",
         storageSuffix = "preferences",
     ),
     Credentials(
         displayName = "Credentials",
-        subtitle = "Server passwords + API keys (Drive AppData is private to the app)",
+        subtitle = "Server-Passwörter + API-Schlüssel (Drive-AppData ist nur für die App sichtbar)",
         fileName = "credentials.v1.json",
         storageSuffix = "credentials",
     );

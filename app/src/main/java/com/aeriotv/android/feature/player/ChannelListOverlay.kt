@@ -183,7 +183,7 @@ internal fun ChannelListOverlay(
                 Spacer(Modifier.height(14.dp))
                 if (entries.isEmpty()) {
                     Text(
-                        text = "No channels in this group.",
+                        text = "Keine Sender in dieser Gruppe.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.White.copy(alpha = 0.7f),
                     )

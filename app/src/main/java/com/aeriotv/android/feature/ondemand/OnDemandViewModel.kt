@@ -2195,7 +2195,7 @@ class OnDemandViewModel @Inject constructor(
     }
 
     /**
-     * Navigation target for a "Known For" tile in the cast bio sheet: the
+     * Navigation target for a "Bekannt für" tile in the cast bio sheet: the
      * library entity's route key (movie [Movie.uuid] / series [Series.id],
      * the same args Routes.movieDetail / Routes.seriesDetail take). Null
      * from [resolveKnownForTarget] means the title is not in the library.
@@ -2210,7 +2210,7 @@ class OnDemandViewModel @Inject constructor(
     private fun normalizeVodTitle(raw: String): String = com.aeriotv.android.core.data.vod.normalizeVodTitle(raw)
 
     /**
-     * Find the library entity behind a "Known For" tile so the bio sheet can
+     * Find the library entity behind a "Bekannt für" tile so the bio sheet can
      * open its detail screen. Loaded lists first (browse + search results,
      * same pair the by-uuid/by-id lookups above walk): an entity with a
      * non-blank tmdbId must match on tmdbId, everything else falls back to
@@ -2932,7 +2932,7 @@ class OnDemandViewModel @Inject constructor(
                     // GH #87: an ART allocation dump is not a user message.
                     val oom = generateSequence(t as Throwable?) { it.cause }.any { it is OutOfMemoryError } ||
                         t.message?.contains("Failed to allocate", ignoreCase = true) == true
-                    val message = if (oom) "This series is too large to load on this device."
+                    val message = if (oom) "Diese Serie ist zu groß, um auf diesem Gerät geladen zu werden."
                     else (t.message ?: t::class.simpleName.orEmpty())
                     _state.update { st ->
                         st.copy(

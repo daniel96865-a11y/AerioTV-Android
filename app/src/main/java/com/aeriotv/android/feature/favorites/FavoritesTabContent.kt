@@ -94,8 +94,8 @@ fun FavoritesTabContent(
     var programInfoTarget by remember { mutableStateOf<ProgramInfoTarget?>(null) }
     var recordTarget by remember { mutableStateOf<ProgramInfoTarget?>(null) }
 
-    // Channel Collections (#45): iOS surfaces "Add to Collection…" +
-    // "Remove from All Collections" on favorites rows too. Favorites is never
+    // Channel Collections (#45): iOS surfaces "Zur Sammlung hinzufügen…" +
+    // "Aus allen Sammlungen entfernen" on favorites rows too. Favorites is never
     // a collection VIEW (iOS clears activeFilterCollectionID on appear), so
     // activeCollectionId is null -> the row only ever offers the "all" remove.
     val collectionsVm: CollectionsViewModel = hiltViewModel()
@@ -169,14 +169,14 @@ fun FavoritesTabContent(
                 )
                 Spacer(Modifier.height(14.dp))
                 Text(
-                    text = "No Favorites",
+                    text = "Keine Favoriten",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
                 )
                 Spacer(Modifier.height(6.dp))
                 Text(
-                    text = "Long-press a channel in Live TV and tap Add to Favorites.",
+                    text = "Halte einen Sender in Live-TV gedrückt und wähle „Zu Favoriten hinzufügen“.",
                     style = MaterialTheme.typography.bodyMedium.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -219,7 +219,7 @@ fun FavoritesTabContent(
                         reorderHandle = {
                             Icon(
                                 imageVector = Icons.Filled.Menu,
-                                contentDescription = "Drag to reorder",
+                                contentDescription = "Zum Sortieren ziehen",
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier
                                     .draggableHandle(

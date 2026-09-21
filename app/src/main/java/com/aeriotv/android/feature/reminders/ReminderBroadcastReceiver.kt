@@ -59,7 +59,7 @@ class ReminderBroadcastReceiver : BroadcastReceiver() {
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle(title)
-            .setContentText("Starting soon on $channelName")
+            .setContentText("Beginnt bald auf $channelName")
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingTap)
@@ -78,7 +78,7 @@ class ReminderBroadcastReceiver : BroadcastReceiver() {
             "Programme reminders",
             NotificationManager.IMPORTANCE_DEFAULT,
         ).apply {
-            description = "Heads-up when a programme you set a reminder on is about to start."
+            description = "Benachrichtigung, wenn eine vorgemerkte Sendung bald beginnt."
             setShowBadge(true)
         }
         mgr.createNotificationChannel(channel)

@@ -200,7 +200,7 @@ fun MoviesAndTvShowsSettingsScreen(
                         footer = "Independent scale for Movies & Series. 100% matches the default; 85-175% lets you trade density for readability (150%+ shows fewer, larger items - handy on a TV across the room). Changes apply live.",
                     ) {
                         ScaleSliderRow(
-                            label = "Movies & Series",
+                            label = "Filme & Serien",
                             value = scaleMovies,
                             onValueChange = viewModel::setDisplayScaleMovies,
                         )

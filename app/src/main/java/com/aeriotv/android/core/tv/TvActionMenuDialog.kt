@@ -110,7 +110,7 @@ fun TvActionMenuDialog(
                     )
                 }
                 TvMenuCapsule(
-                    label = "Cancel",
+                    label = "Abbrechen",
                     enabled = true,
                     destructive = false,
                     accent = accent,

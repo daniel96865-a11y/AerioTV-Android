@@ -189,7 +189,7 @@ private val GuideRemoteAction.displayName: String
         GuideRemoteAction.JUMP_TO_DAY -> "Jump to a day and time"
         GuideRemoteAction.JUMP_TO_TOP -> "Jump to top channel"
         GuideRemoteAction.FOCUS_GROUP_PILLS -> "Go to group pills"
-        GuideRemoteAction.RESUME_PLAYER -> "Return to player"
+        GuideRemoteAction.RESUME_PLAYER -> "Zurück zum Player"
         GuideRemoteAction.CLOSE_MINI_PLAYER -> "Close mini player"
         GuideRemoteAction.PROGRAM_INFO -> "Program info"
         GuideRemoteAction.PROGRAM_MENU -> "Program menu"
@@ -243,8 +243,8 @@ fun RemoteControlSettingsScreen(
                     footer = "The one-line key reminder under the tab bar on Live TV and at the bottom of the player controls. Turn it off once the buttons are second nature.",
                 ) {
                     SettingsToggleRow(
-                        title = "Show remote hints",
-                        subtitle = "Key reminders on Live TV and in the player",
+                        title = "Fernbedienungshinweise anzeigen",
+                        subtitle = "Tastenhinweise in Live-TV und im Player",
                         checked = showRemoteHints,
                         onCheckedChange = { viewModel.setShowRemoteHints(it) },
                     )
@@ -301,7 +301,7 @@ fun RemoteControlSettingsScreen(
                     footer = "Where a channel starts playing when you press OK on it in Live TV. Mini player keeps you browsing with the channel in the corner; press OK on it again (or hold Right) to go fullscreen.",
                 ) {
                     SlotRow(
-                        slotName = "Play Channels In",
+                        slotName = "Sender abspielen in",
                         valueName = if (tuneInMini) "Mini player" else "Full screen",
                         onClick = { editingTuneTarget = true },
                     )
@@ -312,7 +312,7 @@ fun RemoteControlSettingsScreen(
                     footer = "Restore every button to the standard AerioTV scheme.",
                 ) {
                     SlotRow(
-                        slotName = "Reset to Defaults",
+                        slotName = "Auf Standard zurücksetzen",
                         valueName = "",
                         onClick = { showResetConfirm = true },
                     )
@@ -323,7 +323,7 @@ fun RemoteControlSettingsScreen(
 
     if (editingTuneTarget) {
         TvActionMenuDialog(
-            title = "Play Channels In",
+            title = "Sender abspielen in",
             actions = listOf(
                 TvMenuAction(
                     label = if (!tuneInMini) "Full screen  (current)" else "Full screen",
@@ -367,7 +367,7 @@ fun RemoteControlSettingsScreen(
                 val current = map.guideAction(slot, groupSelector == "sidebar") == action
                 val name = action.displayName(groupSelector == "sidebar")
                 TvMenuAction(
-                    label = if (current) "$name  (current)" else name,
+                    label = if (current) "$name  (aktuell)" else name,
                 ) {
                     saveEdited(map.copy(guide = map.guide + (slot to action)))
                     editingGuideSlot = null
@@ -380,9 +380,9 @@ fun RemoteControlSettingsScreen(
 
     if (showResetConfirm) {
         TvActionMenuDialog(
-            title = "Lose your remote control customizations?",
+            title = "Anpassungen der Fernbedienung zurücksetzen?",
             actions = listOf(
-                TvMenuAction(label = "Reset to Defaults", destructive = true) {
+                TvMenuAction(label = "Auf Standard zurücksetzen", destructive = true) {
                     viewModel.setRemoteControlMap(RemoteControlMap.DEFAULT)
                     showResetConfirm = false
                 },

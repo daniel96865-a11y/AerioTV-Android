@@ -120,7 +120,7 @@ fun TvQrLinkDialog(
                     ) {
                         Image(
                             bitmap = qr.asImageBitmap(),
-                            contentDescription = "QR code for $title",
+                            contentDescription = "QR-Code für $title",
                             filterQuality = FilterQuality.None,
                             modifier = Modifier.size(240.dp),
                         )
@@ -142,7 +142,7 @@ fun TvQrLinkDialog(
                 )
 
                 Spacer(Modifier.height(14.dp))
-                SettingsDialogTextButton(label = "Close", onClick = onDismiss)
+                SettingsDialogTextButton(label = "Schließen", onClick = onDismiss)
             }
         }
     }

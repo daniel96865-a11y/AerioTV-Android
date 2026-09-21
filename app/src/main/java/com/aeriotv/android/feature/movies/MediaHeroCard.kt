@@ -93,7 +93,7 @@ fun MediaHeroCard(
     /** Long-press menu: Add to / Remove from Watchlist (Apple parity). */
     isOnWatchlist: Boolean = false,
     onToggleWatchlist: (() -> Unit)? = null,
-    removeLabel: String = "Remove from Continue Watching",
+    removeLabel: String = "Aus „Weiterschauen“ entfernen",
     /** Hide / Unhide the title (Logan 2026-09-14); null leaves the row out. */
     isHidden: Boolean = false,
     onToggleHidden: (() -> Unit)? = null,
@@ -196,7 +196,7 @@ fun MediaHeroCard(
                         DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                             if (onToggleWatchlist != null) {
                                 DropdownMenuItem(
-                                    text = { Text(if (isOnWatchlist) "Remove from Watchlist" else "Add to Watchlist") },
+                                    text = { Text(if (isOnWatchlist) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") },
                                     onClick = { menu = false; onToggleWatchlist() },
                                 )
                             }

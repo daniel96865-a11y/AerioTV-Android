@@ -312,7 +312,7 @@ fun SeriesDetailScreen(
     }
     val castCrewTitle = peopleEpisodeNumber
         ?.let { "Cast & Crew · Episode $it" }
-        ?: "Cast & Crew"
+        ?: "Besetzung & Team"
 
     // Card title: TMDB's episode name first, else the provider's own title
     // with the SHOW name and the S01E01 markers stripped (the raw provider
@@ -482,7 +482,7 @@ fun SeriesDetailScreen(
                     androidx.compose.material3.CircularProgressIndicator()
                 } else {
                     Text(
-                        text = "Series not found",
+                        text = "Serie nicht gefunden",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -530,7 +530,7 @@ fun SeriesDetailScreen(
                         ) {
                             TvHeroActionButton(
                                 title = when {
-                                    isLoading && episodes.isEmpty() -> "Loading…"
+                                    isLoading && episodes.isEmpty() -> "Wird geladen…"
                                     else -> target?.label ?: "Abspielen"
                                 },
                                 icon = Icons.Filled.PlayArrow,
@@ -565,7 +565,7 @@ fun SeriesDetailScreen(
                                 TvHeroActionButton(
                                     title = "TMDB",
                                     icon = Icons.Outlined.Info,
-                                    onClick = { openLink("View on TMDB", url) },
+                                    onClick = { openLink("Auf TMDB ansehen", url) },
                                 )
                             }
                         }
@@ -667,7 +667,7 @@ fun SeriesDetailScreen(
                 } else if (error != null && episodes.isEmpty()) {
                     item {
                         Text(
-                            text = "Couldn't load episodes: $error",
+                            text = "Episoden konnten nicht geladen werden: $error",
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.error,
                             modifier = Modifier.padding(horizontal = edgeInset, vertical = 24.dp),
@@ -676,7 +676,7 @@ fun SeriesDetailScreen(
                 } else if (episodes.isEmpty()) {
                     item {
                         Text(
-                            text = "Server returned no episodes for this series.",
+                            text = "Der Server hat keine Episoden für diese Serie geliefert.",
                             style = MaterialTheme.typography.bodyMedium.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(horizontal = edgeInset, vertical = 24.dp),
@@ -773,7 +773,7 @@ fun SeriesDetailScreen(
                                 )
                             }
                             director?.let { add("Director" to it) }
-                            if (castCrewPeople.isEmpty()) cast?.let { add("Cast" to it) }
+                            if (castCrewPeople.isEmpty()) cast?.let { add("Übertragen" to it) }
                             info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Country" to it) }
                         }
                         TvDetailsBlock(facts = facts) {
@@ -852,7 +852,7 @@ fun SeriesDetailScreen(
                 title = "Trailer",
                 actions = listOf(
                     TvMenuAction(
-                        label = "Play in YouTube",
+                        label = "In YouTube abspielen",
                         icon = Icons.Filled.PlayArrow,
                         onClick = {
                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
@@ -861,7 +861,7 @@ fun SeriesDetailScreen(
                         },
                     ),
                     TvMenuAction(
-                        label = "Show QR Code",
+                        label = "QR-Code anzeigen",
                         icon = Icons.Filled.QrCode,
                         onClick = {
                             qrLink = TvQrLink(
@@ -1139,8 +1139,8 @@ private fun SeriesInfoSection(
                     }
                 }
                 if (tmdbUrl != null) {
-                    PillButton(icon = Icons.Outlined.Info, text = "View on TMDB") {
-                        onOpenUrl("View on TMDB", tmdbUrl)
+                    PillButton(icon = Icons.Outlined.Info, text = "Auf TMDB ansehen") {
+                        onOpenUrl("Auf TMDB ansehen", tmdbUrl)
                     }
                 }
                 if (isTv && versionLabel != null) {
@@ -1161,7 +1161,7 @@ private fun SeriesInfoSection(
         // The text rows duplicate the Cast & Crew photo strip when it
         // renders; they stay as the fallback when TMDB enrichment is off
         // or returned nothing for this title.
-        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Cast", cast)
+        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Übertragen", cast)
         if (!director.isNullOrBlank() && !castPhotosVisible) row("Director", director)
         if (!country.isNullOrBlank()) row("Country", country)
         if (isTv) {
@@ -1378,7 +1378,7 @@ private fun SeasonPicker(
                 // as the library group pills (tvOS MoviesPillStyle).
                 com.aeriotv.android.ui.tv.TvPill(
                     // Apple always renders "Season {n}" (VODDetailView 849).
-                    label = "Season $season",
+                    label = "Staffel $season",
                     selected = isSelected,
                     onClick = { onSelect(season) },
                 )
@@ -1396,7 +1396,7 @@ private fun SeasonPicker(
                 // reads in the app background over the accent fill, unselected
                 // in secondary text (1552).
                 Text(
-                    text = "Season $season",
+                    text = "Staffel $season",
                     style = MaterialTheme.typography.labelMedium,
                     color = if (isSelected) MaterialTheme.colorScheme.background else MaterialTheme.colorScheme.onSurfaceVariant,
                     fontWeight = FontWeight.Medium,
