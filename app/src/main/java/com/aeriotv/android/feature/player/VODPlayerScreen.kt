@@ -1546,13 +1546,8 @@ fun VODPlayerScreen(
             }
         }
 
-        // Exit flush + sync freshness (2026-08-28): the 5s loop loses the
-        // tail on close, and progress otherwise reaches Drive only on the
-        // 6h unmetered worker - cross-device resume felt broken. Persist
-        // the final position on dispose and nudge an expedited one-shot
-        // push (debounced by unique-work REPLACE; the worker re-checks
-        // the master/category/initial-pull gates itself).
-        val flushContext = androidx.compose.ui.platform.LocalContext.current
+        // Exit flush: the 5s loop can lose the tail on close, so persist
+        // the final local position on dispose.
         DisposableEffect(exoPlayer, videoId) {
             onDispose {
                 val player = exoPlayer ?: return@onDispose
@@ -1564,8 +1559,6 @@ fun VODPlayerScreen(
                 ) {
                     saveVodProgress(watchVm, videoId, latestTitle, latestPosterUrl, pos, dur, progressMeta)
                 }
-                com.aeriotv.android.core.sync.DriveSyncWorker
-                    .enqueueOneShotPush(flushContext.applicationContext)
             }
         }
 
