@@ -563,9 +563,9 @@ fun EditPlaylistScreen(
             if (sourceType == SourceType.M3uUrl || sourceType == SourceType.XtreamCodes) {
                 item {
                     val footerText = if (sourceType == SourceType.M3uUrl) {
-                        "Optional XMLTV URL. Leave empty if your M3U doesn't ship with a separate EPG."
+                        "Optionale XMLTV-URL. Leer lassen, wenn deine M3U-Wiedergabeliste keine separate EPG-Quelle verwendet."
                     } else {
-                        "Optional override. When set, AerioTV pulls the guide from this XMLTV URL instead of the server's xmltv.php. Useful when an external provider supplies richer category tags."
+                        "Optionale EPG-Quelle. Wenn gesetzt, lädt Streamy den EPG von dieser XMLTV-URL statt über xmltv.php des Servers. Nützlich, wenn ein externer Anbieter bessere EPG-Daten bereitstellt."
                     }
                     Section(
                         header = "EPG-Quelle",
