@@ -82,7 +82,7 @@ fun LogViewerScreen(onBack: () -> Unit) {
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "Log File",
+                    text = "Protokolldatei",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -134,15 +134,15 @@ fun LogViewerScreen(onBack: () -> Unit) {
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Text(
-                        text = "Log file is empty",
+                        text = "Protokolldatei ist leer",
                         style = MaterialTheme.typography.titleMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.SemiBold,
                     )
                     Spacer(Modifier.height(6.dp))
                     Text(
-                        text = "Enable Debug Logging on the previous screen and reproduce " +
-                            "the issue you want to diagnose. Lines appear here as the app writes them.",
+                        text = "Aktiviere auf dem vorherigen Bildschirm die Debug-Protokollierung und " +
+                            "stelle das Problem erneut nach. Neue Einträge erscheinen hier, sobald Streamy sie schreibt.",
                         style = MaterialTheme.typography.bodyMedium.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
