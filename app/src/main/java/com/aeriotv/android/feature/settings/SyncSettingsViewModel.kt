@@ -152,23 +152,23 @@ class SyncSettingsViewModel @Inject constructor(
             _pushStatus.value = ActionStatus.Running
             val token = (sync.status.value as? DriveSyncManager.Status.SignedIn)?.accessToken
             if (token == null) {
-                _pushStatus.value = ActionStatus.Failure("Not signed in to Drive")
+                _pushStatus.value = ActionStatus.Failure("Nicht bei Drive angemeldet")
                 return@launch
             }
             val enabled = SyncCategory.entries
                 .filter { prefs.syncCategoryEnabled(it).first() }
                 .toSet()
             if (enabled.isEmpty()) {
-                _pushStatus.value = ActionStatus.Failure("No sync categories enabled")
+                _pushStatus.value = ActionStatus.Failure("Keine Synchronisierungskategorien aktiviert")
                 return@launch
             }
             val pushed = sync.pushAll(token, enabled)
             val failed = pushed.count { !it.value }
             if (failed == 0) prefs.setSyncInitialPullDone(true)
             _pushStatus.value = if (failed == 0) {
-                ActionStatus.Success("Pushed ${pushed.size} ${if (pushed.size == 1) "category" else "categories"} to Drive")
+                ActionStatus.Success("${pushed.size} ${if (pushed.size == 1) "Kategorie wurde" else "Kategorien wurden"} zu Drive hochgeladen")
             } else {
-                ActionStatus.Failure("$failed of ${pushed.size} categories failed to push")
+                ActionStatus.Failure("$failed von ${pushed.size} Kategorien konnten nicht hochgeladen werden")
             }
         }
     }
@@ -184,22 +184,22 @@ class SyncSettingsViewModel @Inject constructor(
             _pullStatus.value = ActionStatus.Running
             val token = (sync.status.value as? DriveSyncManager.Status.SignedIn)?.accessToken
             if (token == null) {
-                _pullStatus.value = ActionStatus.Failure("Not signed in to Drive")
+                _pullStatus.value = ActionStatus.Failure("Nicht bei Drive angemeldet")
                 return@launch
             }
             val enabled = SyncCategory.entries
                 .filter { prefs.syncCategoryEnabled(it).first() }
                 .toSet()
             if (enabled.isEmpty()) {
-                _pullStatus.value = ActionStatus.Failure("No sync categories enabled")
+                _pullStatus.value = ActionStatus.Failure("Keine Synchronisierungskategorien aktiviert")
                 return@launch
             }
             val pulled = sync.pullAll(token, enabled)
             val failed = pulled.count { !it.value }
             _pullStatus.value = if (failed == 0) {
-                ActionStatus.Success("Pulled ${pulled.size} ${if (pulled.size == 1) "category" else "categories"} from Drive")
+                ActionStatus.Success("${pulled.size} ${if (pulled.size == 1) "Kategorie wurde" else "Kategorien wurden"} aus Drive geladen")
             } else {
-                ActionStatus.Failure("$failed of ${pulled.size} categories did not apply (missing in Drive or failed)")
+                ActionStatus.Failure("$failed von ${pulled.size} Kategorien konnten nicht übernommen werden")
             }
         }
     }
@@ -215,12 +215,12 @@ class SyncSettingsViewModel @Inject constructor(
             _clearStatus.value = ActionStatus.Running
             val token = (sync.status.value as? DriveSyncManager.Status.SignedIn)?.accessToken
             if (token == null) {
-                _clearStatus.value = ActionStatus.Failure("Not signed in to Drive")
+                _clearStatus.value = ActionStatus.Failure("Nicht bei Drive angemeldet")
                 return@launch
             }
             _clearStatus.value = runCatching { sync.clearRemote(token) }.fold(
-                onSuccess = { ActionStatus.Success("Drive data cleared") },
-                onFailure = { ActionStatus.Failure(it.message ?: "Couldn't clear Drive data") },
+                onSuccess = { ActionStatus.Success("Drive-Daten wurden gelöscht") },
+                onFailure = { ActionStatus.Failure(it.message ?: "Drive-Daten konnten nicht gelöscht werden") },
             )
         }
     }
