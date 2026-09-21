@@ -606,7 +606,7 @@ class LocalRecordingService : Service() {
             val mgr = getSystemService(NotificationManager::class.java)
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "Local recordings",
+                "Lokale Aufnahmen",
                 NotificationManager.IMPORTANCE_LOW,
             ).apply {
                 description = "Fortlaufende Benachrichtigung, während AerioTV Deutsch einen Sender lokal aufnimmt."
