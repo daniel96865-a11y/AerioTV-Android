@@ -25,3 +25,5 @@ jobs:
           name: AerioTV-Deutsch-0.5.11-de1-unsigned
           path: app/build/outputs/apk/github/release/*.apk
           if-no-files-found: error
+
+# final-german-build
