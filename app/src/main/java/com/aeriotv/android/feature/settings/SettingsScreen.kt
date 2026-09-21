@@ -918,6 +918,11 @@ enum class SettingsSection(
         subtitle = "Fernbedienungstasten anpassen",
         icon = Icons.Filled.SettingsRemote,
     ),
+    DevicePairing(
+        title = "Geräte koppeln",
+        subtitle = "Wiedergabeliste per Code übertragen",
+        icon = Icons.Filled.Link,
+    ),
     AppUpdates(
         title = "Updates",
         subtitle = "Nach neuen Versionen suchen",
