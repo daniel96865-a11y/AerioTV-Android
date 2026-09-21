@@ -338,8 +338,8 @@ fun PlaylistDetailScreen(
 
             if (isActivePlaylist) item {
                 Section(
-                    header = "EPG Cache",
-                    footer = "Clears this playlist's cached guide data and downloads it fresh from the server. Use this if program cells look wrong or are missing. Takes a few minutes on large playlists.",
+                    header = "EPG-Zwischenspeicher",
+                    footer = "Löscht die zwischengespeicherten EPG-Daten dieser Wiedergabeliste und lädt sie neu vom Server. Verwende dies, wenn Sendungen falsch angezeigt werden oder fehlen. Bei großen Wiedergabelisten kann dies einige Minuten dauern.",
                 ) {
                     ActionRow(
                         icon = Icons.Filled.Refresh,
@@ -350,7 +350,7 @@ fun PlaylistDetailScreen(
                     )
                     playlist.lastEpgRefreshedAt?.let { ts ->
                         Text(
-                            text = "Last refreshed: ${DateFormat.getDateTimeInstance().format(Date(ts))}",
+                            text = "Zuletzt aktualisiert: ${DateFormat.getDateTimeInstance().format(Date(ts))}",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
@@ -361,8 +361,8 @@ fun PlaylistDetailScreen(
 
             if (isActivePlaylist) item {
                 Section(
-                    header = "Full Refresh",
-                    footer = "Clears every cache (channels, guide data, and On Demand) and reloads this playlist from scratch. Use this if newly-added channels, guide data, or movies and shows are missing or stale after changes on the server.",
+                    header = "Komplett aktualisieren",
+                    footer = "Löscht alle Zwischenspeicher (Sender, EPG und Mediathek) und lädt diese Wiedergabeliste vollständig neu. Verwende dies, wenn neu hinzugefügte Sender, EPG-Daten, Filme oder Serien nach Änderungen am Server fehlen oder veraltet sind.",
                 ) {
                     ActionRow(
                         icon = Icons.Filled.Refresh,
@@ -377,8 +377,8 @@ fun PlaylistDetailScreen(
 
             item {
                 Section(
-                    header = "Danger Zone",
-                    footer = "Removes this playlist and its credentials from this device. Your server data will not be affected.",
+                    header = "Gefahrenbereich",
+                    footer = "Entfernt diese Wiedergabeliste und ihre Zugangsdaten von diesem Gerät. Daten auf deinem Server bleiben unverändert.",
                 ) {
                     ActionRow(
                         icon = Icons.Outlined.Delete,
