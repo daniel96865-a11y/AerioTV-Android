@@ -52,10 +52,10 @@
         android:largeHeap="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/streamy_logo"
+        android:roundIcon="@drawable/streamy_logo"
         android:label="@string/app_name"
-        android:banner="@drawable/tv_banner"
+        android:banner="@drawable/streamy_tv_banner"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AerioTV">
@@ -99,7 +99,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="aeriotvde" />
+                <data android:scheme="streamy3" />
                 <data android:host="channel" />
                 <data android:host="vod" />
                 <!-- Audit #47 Watch Next: resume VOD playback directly. -->
