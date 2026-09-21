@@ -383,9 +383,9 @@ private fun DispatcharrFields(
             }
             InfoBanner(
                 text = "Verwende einen Dispatcharr-Admin-API-Schlüssel (System -> Benutzer -> Benutzer bearbeiten -> API & XC). " +
-                        "This enables native Dispatcharr endpoints for Live TV, Guide, Movies, " +
-                        "and TV Shows. If your admin rotates the key, you'll need to re-enter it " +
-                        "here. For hands-off auto-refresh, switch to Username & Password.",
+                        "Damit werden die nativen Dispatcharr-Schnittstellen für Live-TV, EPG, Filme und " +
+                        "Serien aktiviert. Wenn dein Administrator den Schlüssel ändert, musst du ihn hier " +
+                        "neu eingeben. Für eine automatische Aktualisierung verwende Benutzername & Passwort.",
             )
         }
         DispatcharrAuthMode.UsernamePassword -> {
@@ -459,8 +459,8 @@ private fun XtreamFields(state: PlaylistViewModel.UiState, viewModel: PlaylistVi
     )
     InfoBanner(
         text = "Gib die Xtream-Codes-Server-URL und Zugangsdaten ein. Dispatcharr-Nutzer verwenden " +
-                "Dispatcharr URL with the Xtream Codes username and password from Dispatcharr's " +
-                "User settings.",
+                "die Dispatcharr-URL zusammen mit dem Xtream-Codes-Benutzernamen und -Passwort aus den " +
+                "Dispatcharr-Benutzereinstellungen.",
     )
 }
 
