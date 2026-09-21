@@ -767,13 +767,13 @@ fun SeriesDetailScreen(
                                 val sN = seasons.size
                                 val eN = episodes.size
                                 add(
-                                    "Seasons" to
+                                    "Staffeln" to
                                         "$sN Staffel${if (sN == 1) "" else "n"}, " +
                                         "$eN Folge${if (eN == 1) "" else "n"}",
                                 )
                             }
                             director?.let { add("Regie" to it) }
-                            if (castCrewPeople.isEmpty()) cast?.let { add("Übertragen" to it) }
+                            if (castCrewPeople.isEmpty()) cast?.let { add("Besetzung" to it) }
                             info?.effectiveCountry?.takeIf { it.isNotBlank() }?.let { add("Land" to it) }
                         }
                         TvDetailsBlock(facts = facts) {
@@ -1161,9 +1161,9 @@ private fun SeriesInfoSection(
         // The text rows duplicate the Cast & Crew photo strip when it
         // renders; they stay as the fallback when TMDB enrichment is off
         // or returned nothing for this title.
-        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Übertragen", cast)
+        if (!cast.isNullOrBlank() && !castPhotosVisible) row("Besetzung", cast)
         if (!director.isNullOrBlank() && !castPhotosVisible) row("Regie", director)
-        if (!country.isNullOrBlank()) row("Country", country)
+        if (!country.isNullOrBlank()) row("Land", country)
         if (isTv) {
             TmdbAttribution(modifier = Modifier.padding(top = 12.dp), long = true, isTv = true)
         } else {
