@@ -67,7 +67,7 @@ https://www.apache.org/licenses/LICENSE-2.0
 (UI, Material 3, Material Icons, window size class), `androidx.navigation`,
 `androidx.tv:tv-material`, `androidx.tvprovider`, `androidx.room`,
 `androidx.datastore`, `androidx.documentfile`, `androidx.profileinstaller`,
-`androidx.credentials`, `androidx.work`, `androidx.hilt`, `androidx.media`,
+`androidx.work`, `androidx.hilt`, `androidx.media`,
 `androidx.media3` (ExoPlayer, HLS, DASH, extractor, session, UI, OkHttp
 datasource), `androidx.mediarouter`
 
@@ -83,13 +83,21 @@ Kotlin standard library, `kotlinx.coroutines`, `kotlinx.serialization`, Ktor
 - ZXing Core (ZXing Authors) https://github.com/zxing/zxing
 - Reorderable (Calvin Liang) https://github.com/Calvin-LL/Reorderable
 
+## Bouncy Castle (MIT-style Bouncy Castle License)
+
+`org.bouncycastle:bcprov-jdk15to18:1.85` provides J-PAKE and HKDF primitives
+used by Streamy's local six-digit device pairing. The Bouncy Castle APIs are
+released under the regular Bouncy Castle license, which the project describes
+as the MIT license. Copyright (c) 2000-2026 The Legion of the Bouncy Castle Inc.
+The full license is available at https://www.bouncycastle.org/licence.html and
+is also carried in the distributed library.
+
 ## Google Play services (proprietary)
 
-`play-services-cast-framework`, `play-services-cast-tv`, `play-services-auth`,
-and the Google Identity library are **not** open source. They are distributed
-under the Android Software Development Kit License Agreement and the Google APIs
-Terms of Service, are linked from Google's Maven repository, and are not
-redistributed in source form here.
+`play-services-cast-framework` and `play-services-cast-tv` are **not** open
+source. They are distributed under the Android Software Development Kit License
+Agreement and the Google APIs Terms of Service, are linked from Google's Maven
+repository, and are not redistributed in source form here.
 
 Because those terms are not GPL-compatible, the copyright holder grants an
 additional permission under GPL section 7 to permit linking them with this
