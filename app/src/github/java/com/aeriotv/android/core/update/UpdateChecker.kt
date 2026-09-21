@@ -142,7 +142,7 @@ class UpdateChecker @Inject constructor() {
 
     companion object {
         private const val LATEST_RELEASE_URL =
-            "https://api.github.com/repos/daniel96865-a11y/AerioTV-Android/releases/latest"
+            "https://api.github.com/repos/daniel96865-a11y/Streamy-3.0/releases/latest"
 
         /**
          * Semver-ish compare for our vX.Y.Z tags. Numeric triple compare; a
