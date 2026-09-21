@@ -216,20 +216,19 @@ fun PlayerSettingsScreen(
                     header = "Wiedergabe",
                     footer = (
                         if (isTv) {
-                            "How far the skip buttons and a single left or right press move " +
-                                "in live rewind, catch-up, recordings, movies, and TV shows. " +
-                                "Holding left or right still scrubs faster the longer you hold."
+                            "Legt fest, wie weit die Sprungtasten sowie ein einzelner Druck auf Links oder Rechts " +
+                                "bei Live-Zurückspulen, Catch-up, Aufnahmen, Filmen und Serien springen. " +
+                                "Gedrückthalten spult weiterhin zunehmend schneller."
                         } else {
-                            "How far the skip buttons move in live rewind, catch-up, " +
-                                "recordings, movies, and TV shows, including the cast remote " +
-                                "and the playback notification."
+                            "Legt fest, wie weit die Sprungtasten bei Live-Zurückspulen, Catch-up, " +
+                                "Aufnahmen, Filmen und Serien springen – einschließlich Cast-Fernbedienung " +
+                                "und Wiedergabebenachrichtigung."
                         }
-                        ) + " Buffer Size controls how much stream data is pre-loaded: larger " +
-                        "buffers reduce stuttering on poor connections but add startup delay. " +
-                        "If a live stream stops sending video, Auto-Recover reloads it; turn " +
-                        "that off if live channels restart or stutter during commercial " +
-                        "breaks, and a brief freeze may show instead. Recovery applies to the " +
-                        "next channel you tune.",
+                        ) + " Die Puffergröße bestimmt, wie viele Streamdaten vorgeladen werden: größere " +
+                        "Puffer verringern Ruckler bei schlechten Verbindungen, verlängern aber den Start. " +
+                        "Wenn ein Live-Stream kein Bild mehr liefert, lädt die automatische Wiederherstellung " +
+                        "ihn neu. Schalte sie aus, falls Sender während Werbepausen neu starten oder ruckeln. " +
+                        "Die Änderung gilt ab dem nächsten Senderwechsel.",
                 ) {
                     SteppedSliderRow(
                         label = "Zurückspringen",
@@ -263,10 +262,10 @@ fun PlayerSettingsScreen(
 
                 SettingsSection(
                     header = "Audio",
-                    footer = "Passthrough sendet Surround-Audio als Bitstream an Fernseher oder Receiver. Einige Fernseher verarbeiten es verzögert, wodurch Bild und Ton bei Live-TV auseinanderlaufen können. Wenn ausgeschaltet, decodiert AerioTV Deutsch das Audio selbst. Die Änderung gilt ab der nächsten Wiedergabe.",
+                    footer = "Die Surround-Durchleitung sendet Mehrkanalton unverändert an Fernseher oder Receiver. Einige Fernseher verarbeiten ihn verzögert, wodurch Bild und Ton bei Live-TV auseinanderlaufen können. Wenn ausgeschaltet, decodiert Streamy das Audio selbst. Die Änderung gilt ab der nächsten Wiedergabe.",
                 ) {
                     SettingsToggleRow(
-                        title = "Surround-Sound-Passthrough",
+                        title = "Surround-Sound-Durchleitung",
                         subtitle = "AC-3- und E-AC-3-Audio unverändert an den Receiver senden. Ausschalten, wenn Bild und Ton auseinanderlaufen.",
                         checked = audioPassthrough,
                         onCheckedChange = viewModel::setAudioPassthroughEnabled,
@@ -397,9 +396,9 @@ fun PlayerSettingsScreen(
 private data class AudioFocusOption(val id: String, val label: String, val detail: String)
 
 private val AUDIO_FOCUS_OPTIONS: List<AudioFocusOption> = listOf(
-    AudioFocusOption("centerIcon", "Center Icon", "Speaker icon centered on the active tile. Default."),
-    AudioFocusOption("grayPersistent", "Gray Outline", "Subtle gray border always around the active tile."),
-    AudioFocusOption("themeFading", "Accent Outline (Fading)", "Accent-tinted border that auto-hides after 5 seconds."),
+    AudioFocusOption("centerIcon", "Mittiges Symbol", "Lautsprechersymbol mittig auf der aktiven Kachel. Standard."),
+    AudioFocusOption("grayPersistent", "Graue Umrandung", "Dezente graue Umrandung dauerhaft um die aktive Kachel."),
+    AudioFocusOption("themeFading", "Akzent-Umrandung (ausblendend)", "Akzentfarbene Umrandung, die nach 5 Sekunden automatisch ausgeblendet wird."),
 )
 
 data class BufferOption(val id: String, val label: String, val detail: String, val cachingMs: Int)
@@ -427,9 +426,9 @@ data class BufferOption(val id: String, val label: String, val detail: String, v
  * claimed.
  */
 internal val BUFFER_OPTIONS: List<BufferOption> = listOf(
-    BufferOption("default", "Standard", "4 seconds - recommended", 4_000),
-    BufferOption("large", "Large", "8 seconds - unstable connections", 8_000),
-    BufferOption("xlarge", "Extra Large", "16 seconds - very poor networks", 16_000),
+    BufferOption("default", "Standard", "4 Sekunden – empfohlen", 4_000),
+    BufferOption("large", "Groß", "8 Sekunden – instabile Verbindungen", 8_000),
+    BufferOption("xlarge", "Sehr groß", "16 Sekunden – sehr schlechte Verbindungen", 16_000),
 )
 
 /** Unknown ids (including the retired "small") resolve to Default. */
@@ -443,13 +442,13 @@ private val REWIND_DEPTH_MINUTES = listOf(15, 30, 60, 90, 120, 180)
 
 private fun formatDepthMinutes(mins: Int): String = when {
     mins < 60 -> "$mins Minuten"
-    mins == 60 -> "1 hour"
-    mins % 60 == 0 -> "${mins / 60} hours"
-    else -> "${mins / 60}h ${mins % 60}m"
+    mins == 60 -> "1 Stunde"
+    mins % 60 == 0 -> "${mins / 60} Stunden"
+    else -> "${mins / 60} Std. ${mins % 60} Min."
 }
 
 /** Skip Intervals value readout: "10 seconds". */
-private fun formatSkipSeconds(seconds: Int): String = "$seconds seconds"
+private fun formatSkipSeconds(seconds: Int): String = "$seconds Sekunden"
 
 /**
  * Storage estimate under the Keep Available slider: scales with the
@@ -462,7 +461,7 @@ private fun depthEstimateText(mins: Int): String {
         val v = mbps * 7.5 * mins / 1024.0
         return if (v < 10) String.format("~%.1f GB", v) else "~${v.roundToInt()} GB"
     }
-    return "Uses up to ${gb(4)} in HD, ${gb(8)} in FHD, or ${gb(20)} in UHD while you watch."
+    return "Benötigt beim Ansehen bis zu ${gb(4)} bei HD, ${gb(8)} bei FHD oder ${gb(20)} bei UHD."
 }
 
 /**
