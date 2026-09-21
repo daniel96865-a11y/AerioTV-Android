@@ -185,11 +185,11 @@ fun DeveloperSettingsScreen(
             title = { Text("Debug-Protokollierung aktivieren?") },
             text = {
                 Text(
-                    "AerioTV will write detailed diagnostic logs to a file in the app's " +
-                        "private storage.\n\nLogs include network requests, playback events, " +
-                        "and error details. They never leave the device unless you share the " +
-                        "file from this screen.\n\nLogging has a minor impact on performance " +
-                        "and storage. You can disable it at any time.",
+                    "Streamy schreibt detaillierte Diagnoseprotokolle in eine Datei im privaten " +
+                        "App-Speicher.\n\nDie Protokolle enthalten Netzwerkanfragen, Wiedergabeereignisse " +
+                        "und Fehlerdetails. Sie verlassen das Gerät nur, wenn du die Datei über diesen " +
+                        "Bildschirm teilst.\n\nDie Protokollierung hat geringe Auswirkungen auf Leistung " +
+                        "und Speicher. Du kannst sie jederzeit deaktivieren.",
                 )
             },
             confirmButton = {
@@ -225,7 +225,7 @@ fun DeveloperSettingsScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Keep Logging", onClick = { pendingDisable = false })
+                SettingsDialogTextButton(label = "Protokollierung beibehalten", onClick = { pendingDisable = false })
             },
         )
     }
@@ -236,8 +236,8 @@ fun DeveloperSettingsScreen(
             title = { Text("Alle Protokolle löschen?") },
             text = {
                 Text(
-                    "This permanently deletes the current log and any rotated " +
-                        "archives. This cannot be undone.",
+                    "Dadurch werden das aktuelle Protokoll und alle älteren Archive dauerhaft " +
+                        "gelöscht. Dies kann nicht rückgängig gemacht werden.",
                 )
             },
             confirmButton = {
@@ -332,7 +332,7 @@ private fun LogFileSection(
 private fun WhatsCapturedSection() {
     DevSectionGroup(
         header = "Was wird erfasst?",
-        footer = "Die Protokolle enthalten nur Diagnoseinformationen. AerioTV Deutsch protokolliert niemals deine Dispatcharr-" +
+        footer = "Die Protokolle enthalten nur Diagnoseinformationen. Streamy protokolliert niemals deine Dispatcharr-" +
             "Zugangsdaten, Wiedergabefortschritts-IDs oder andere Daten, die dich identifizieren könnten.",
     ) {
         CategoryRow(
@@ -524,7 +524,7 @@ private fun shareLogFile(
     }.getOrElse {
         android.widget.Toast.makeText(
             context,
-            "Couldn't prepare log for share: ${it.message ?: it::class.simpleName}",
+            "Protokoll konnte nicht zum Teilen vorbereitet werden: ${it.message ?: it::class.simpleName}",
             android.widget.Toast.LENGTH_SHORT,
         ).show()
         return
@@ -532,23 +532,23 @@ private fun shareLogFile(
     val sendIntent = Intent(Intent.ACTION_SEND).apply {
         type = "text/plain"
         putExtra(Intent.EXTRA_STREAM, uri)
-        putExtra(Intent.EXTRA_SUBJECT, "AerioTV debug logs")
+        putExtra(Intent.EXTRA_SUBJECT, "Streamy-Debug-Protokolle")
         addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
     }
-    val chooser = Intent.createChooser(sendIntent, "Share Log File")
+    val chooser = Intent.createChooser(sendIntent, "Protokolldatei teilen")
         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     runCatching { context.startActivity(chooser) }
         .onFailure {
             android.widget.Toast.makeText(
                 context,
-                "No app available to receive the log file.",
+                "Keine App zum Empfangen der Protokolldatei verfügbar.",
                 android.widget.Toast.LENGTH_SHORT,
             ).show()
         }
 }
 
 private fun formatBytes(bytes: Long): String {
-    if (bytes <= 0L) return "Empty"
+    if (bytes <= 0L) return "Leer"
     val kb = bytes / 1024.0
     if (kb < 1024.0) return String.format(java.util.Locale.US, "%.1f KB", kb)
     val mb = kb / 1024.0
