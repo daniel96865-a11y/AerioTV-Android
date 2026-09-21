@@ -2532,6 +2532,11 @@ private fun SettingsTabContent(
                 com.aeriotv.android.feature.settings.RemoteControlSettingsScreen(
                     onBack = { nav.pop() },
                 )
+            SettingsSection.DevicePairing ->
+                com.aeriotv.android.feature.settings.DevicePairingScreen(
+                    onBack = { nav.pop() },
+                    viewModel = playlistVm,
+                )
             SettingsSection.AppUpdates ->
                 com.aeriotv.android.feature.settings.AppUpdatesScreen(onBack = { nav.pop() })
             SettingsSection.DvrSettings -> DvrSettingsScreen(onBack = { nav.pop() })
