@@ -144,7 +144,7 @@ class GithubUpdateManager @Inject constructor(
                 val dir = File(context.filesDir, UPDATES_DIR).apply { mkdirs() }
                 // Stale staged files are spent the moment a new download starts.
                 dir.listFiles()?.forEach { it.delete() }
-                val target = File(dir, "AerioTV-${info.versionName}.apk")
+                val target = File(dir, "Streamy-3.0-${info.versionName}.apk")
                 if (dir.usableSpace < info.apkSizeBytes + FREE_SPACE_HEADROOM_BYTES) {
                     _state.value = UpdateState.Error(
                         "Nicht genügend freier Speicher zum Herunterladen des Updates.", info,
@@ -368,7 +368,7 @@ class GithubUpdateManager @Inject constructor(
         val archive = context.packageManager.getPackageArchiveInfo(file.absolutePath, flags)
             ?: return fail("Die heruntergeladene Datei ist keine lesbare APK.")
         if (archive.packageName != context.packageName) {
-            return fail("Die heruntergeladene APK gehört nicht zu AerioTV Deutsch (${archive.packageName}).")
+            return fail("Die heruntergeladene APK gehört nicht zu Streamy 3.0 (${archive.packageName}).")
         }
         val archiveCode = PackageInfoCompat.getLongVersionCode(archive)
         val currentCode = BuildConfig.VERSION_CODE.toLong()
@@ -436,7 +436,7 @@ class GithubUpdateManager @Inject constructor(
         runCatching { context.startActivity(intent) }
             .onFailure {
                 _state.value = UpdateState.Error(
-                    "Open Settings > Apps > Security and allow AerioTV to install apps, " +
+                    "Open Settings > Apps > Security and erlaube Streamy 3.0, Apps zu installieren, " +
                         "then try again.",
                     (_state.value as? UpdateState.AwaitingInstallPermission)?.info,
                 )
