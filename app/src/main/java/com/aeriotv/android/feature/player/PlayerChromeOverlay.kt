@@ -752,7 +752,7 @@ fun PlayerChromeOverlay(
                     }
                 } ?: run {
                     Text(
-                        text = channel?.name ?: "AerioTV",
+                        text = channel?.name ?: "Streamy",
                         style = MaterialTheme.typography.titleMedium,
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
