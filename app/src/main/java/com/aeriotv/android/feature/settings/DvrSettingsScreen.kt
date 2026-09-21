@@ -245,12 +245,12 @@ fun DvrSettingsScreen(
 
             item {
                 Card(
-                    header = "Storage Location",
-                    footer = "Local recordings save to your Downloads folder (in an AerioTV subfolder) by default, so you can find them in any file manager. Choose Folder picks a custom location via the Storage Access Framework, retained across reboots.",
+                    header = "Speicherort",
+                    footer = "Lokale Aufnahmen werden standardmäßig im Download-Ordner in einem AerioTV-Unterordner gespeichert und sind so in jedem Dateimanager auffindbar. Mit „Ordner auswählen“ kannst du einen eigenen Speicherort festlegen, der auch nach einem Neustart erhalten bleibt.",
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         Text(
-                            text = "Currently saving to:",
+                            text = "Aktueller Speicherort:",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -268,7 +268,7 @@ fun DvrSettingsScreen(
                                 modifier = Modifier.dpadFocusRing(RoundedCornerShape(50)),
                             ) {
                                 Text(
-                                    text = "Choose Folder",
+                                    text = "Ordner auswählen",
                                     color = MaterialTheme.colorScheme.textAccent,
                                 )
                             }
@@ -292,7 +292,7 @@ fun DvrSettingsScreen(
                                     ),
                                 ) {
                                     Text(
-                                        text = "Reset to Default",
+                                        text = "Auf Standard zurücksetzen",
                                         color = MaterialTheme.colorScheme.error,
                                     )
                                 }
@@ -304,8 +304,8 @@ fun DvrSettingsScreen(
 
             item {
                 SettingsSection(
-                    header = "Behavior",
-                    footer = "Holds a CPU wake lock while a local recording is downloading so Doze can't stall it. Server-side recordings are unaffected (they run on Dispatcharr). Leave on unless you're debugging battery drain.",
+                    header = "Verhalten",
+                    footer = "Hält das Gerät während einer lokalen Aufnahme aktiv, damit der Energiesparmodus sie nicht anhält. Serveraufnahmen auf Dispatcharr sind davon nicht betroffen. Nur zur Fehlersuche bei hohem Akkuverbrauch ausschalten.",
                 ) {
                     SettingsToggleRow(
                         title = "Gerät während der Aufnahme wach halten",
