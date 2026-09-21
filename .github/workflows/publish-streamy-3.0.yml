@@ -16,8 +16,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Set up JDK 21
         uses: actions/setup-java@v4
@@ -25,37 +23,21 @@ jobs:
           distribution: temurin
           java-version: "21"
 
-      - name: Create permanent Streamy 3.0 signing key
-        run: |
-          set -euo pipefail
-          mkdir -p "$RUNNER_TEMP/streamy3-signing"
-          PASS="$(openssl rand -hex 32)"
-          printf '%s' "$PASS" > "$RUNNER_TEMP/streamy3-signing/password.txt"
-          keytool -genkeypair -v \
-            -keystore "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
-            -storepass "$PASS" -keypass "$PASS" \
-            -alias streamy3 -keyalg RSA -keysize 4096 -validity 10000 \
-            -dname "CN=Streamy 3.0 Release, OU=DG Studios, O=DG Studios, C=DE"
-          FINGERPRINT="$(keytool -list -v -keystore "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" -storepass "$PASS" -alias streamy3 | sed -n 's/.*SHA256: //p' | tr -d ':' | tr '[:upper:]' '[:lower:]' | head -1)"
-          test -n "$FINGERPRINT"
-          printf '%s' "$FINGERPRINT" > "$RUNNER_TEMP/streamy3-signing/fingerprint.txt"
-          printf 'Alias: streamy3\nCertificate SHA-256: %s\n' "$FINGERPRINT" > "$RUNNER_TEMP/streamy3-signing/README.txt"
-          echo "STREAMY_FINGERPRINT=$FINGERPRINT" >> "$GITHUB_ENV"
+      - name: Restore permanent Streamy 3.0 signing backup
+        uses: actions/download-artifact@v4
+        with:
+          name: Streamy3-PRIVATE-Signing-Backup-COMPLETE
+          path: ${{ runner.temp }}/streamy3-signing
+          github-token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          run-id: 35603949656
 
-      - name: Put signing fingerprint into updater
+      - name: Verify signing backup
         run: |
-          python3 - <<'PY'
-          from pathlib import Path
-          import os, re
-          p = Path("app/src/github/java/com/aeriotv/android/core/update/GithubUpdateManager.kt")
-          s = p.read_text()
-          fp = os.environ["STREAMY_FINGERPRINT"]
-          s2, n = re.subn(r'(?i)[0-9a-f]{64}', fp, s, count=1)
-          if n != 1:
-              raise SystemExit("Could not update signing fingerprint")
-          p.write_text(s2)
-          PY
-          grep -qi "$STREAMY_FINGERPRINT" app/src/github/java/com/aeriotv/android/core/update/GithubUpdateManager.kt
+          test -f "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks"
+          test -f "$RUNNER_TEMP/streamy3-signing/password.txt"
+          test -f "$RUNNER_TEMP/streamy3-signing/fingerprint.txt"
+          test "$(cat "$RUNNER_TEMP/streamy3-signing/fingerprint.txt")" = "1719ef5261a5520899a8fcbed1898a52f4775abfc87a62d6df4ace93baa1ef05"
 
       - name: Build Streamy 3.0.1
         run: |
@@ -69,7 +51,6 @@ jobs:
           PASS="$(cat "$RUNNER_TEMP/streamy3-signing/password.txt")"
           OUT="$RUNNER_TEMP/Streamy-3.0.1.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
-          test -f "$UNSIGNED"
           "$APKSIGNER" sign \
             --ks "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
             --ks-key-alias streamy3 \
@@ -77,32 +58,9 @@ jobs:
             --out "$OUT" "$UNSIGNED"
           VERIFY="$("$APKSIGNER" verify --verbose --print-certs "$OUT")"
           printf '%s\n' "$VERIFY"
-          echo "$VERIFY" | tr -d ':' | grep -qi "$STREAMY_FINGERPRINT"
+          echo "$VERIFY" | tr -d ':' | grep -qi "1719ef5261a5520899a8fcbed1898a52f4775abfc87a62d6df4ace93baa1ef05"
           sha256sum "$OUT"
           echo "APK=$OUT" >> "$GITHUB_ENV"
-
-      - name: Save complete private signing backup
-        uses: actions/upload-artifact@v4
-        with:
-          name: Streamy3-PRIVATE-Signing-Backup-COMPLETE
-          path: |
-            ${{ runner.temp }}/streamy3-signing/Streamy3-release.jks
-            ${{ runner.temp }}/streamy3-signing/password.txt
-            ${{ runner.temp }}/streamy3-signing/fingerprint.txt
-            ${{ runner.temp }}/streamy3-signing/README.txt
-          if-no-files-found: error
-          retention-days: 90
-
-      - name: Persist updater fingerprint on main
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add app/src/github/java/com/aeriotv/android/core/update/GithubUpdateManager.kt
-          if ! git diff --cached --quiet; then
-            git commit -m "Lock updater to permanent Streamy 3.0 signing certificate"
-            git push origin HEAD:main
-          fi
 
       - name: Publish v3.0.1
         env:
