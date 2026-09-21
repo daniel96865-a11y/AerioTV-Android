@@ -97,12 +97,12 @@ private fun loadingDetail(
             } else {
                 val s = reader.value()
                 when {
-                    !s.connected -> "Connecting to server"
+                    !s.connected -> "Verbindung zum Server wird hergestellt"
                     s.bytes <= 0L -> {
                         if (connectedFallbackAtMs == 0L) connectedFallbackAtMs = now
                         val base = maxOf(s.connectedAtMs, stepAtMs, connectedFallbackAtMs)
                         val secs = ((now - base) / 1000L).coerceAtLeast(0L)
-                        "Waiting for stream data  $secs s"
+                        "Warte auf Streamdaten  $secs s"
                     }
                     else -> receivedText(s.bytes)
                 }
