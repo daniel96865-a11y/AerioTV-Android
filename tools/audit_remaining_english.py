@@ -52,3 +52,5 @@ Path("REMAINING_ENGLISH_UI.tsv").write_text("path\tline\tstring\tcontext\n"+"\n"
     f"{p}\t{n}\t{s.replace(chr(9),' ')}\t{c.replace(chr(9),' ')}" for p,n,s,c in rows
 )+"\n",encoding="utf-8")
 print("remaining",len(rows))
+
+# rerun after de2 translation pass
