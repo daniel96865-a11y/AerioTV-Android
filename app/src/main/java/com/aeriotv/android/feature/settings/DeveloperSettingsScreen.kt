@@ -332,7 +332,7 @@ private fun LogFileSection(
 private fun WhatsCapturedSection() {
     DevSectionGroup(
         header = "Was wird erfasst?",
-        footer = "Die Protokolle enthalten nur Diagnoseinformationen. AerioTV Deutsch protokolliert niemals deine Dispatcharr-" +
+        footer = "Die Protokolle enthalten nur Diagnoseinformationen. Streamy 3.0 protokolliert niemals deine Dispatcharr-" +
             "Zugangsdaten, Wiedergabefortschritts-IDs oder andere Daten, die dich identifizieren könnten.",
     ) {
         CategoryRow(

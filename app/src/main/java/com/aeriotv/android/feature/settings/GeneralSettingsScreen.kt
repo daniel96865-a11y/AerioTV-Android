@@ -126,7 +126,7 @@ fun GeneralSettingsScreen(
                         SettingsToggleRow(
                             title = "Automatisch drehen",
                             subtitle = "Geräteausrichtung übernehmen. Wenn ausgeschaltet, " +
-                                "AerioTV Deutsch bleibt in der aktuellen Ausrichtung",
+                                "Streamy 3.0 bleibt in der aktuellen Ausrichtung",
                             checked = autoRotate,
                             onCheckedChange = viewModel::setAutoRotate,
                         )
@@ -138,9 +138,9 @@ fun GeneralSettingsScreen(
                     header = "Aktualisieren",
                     footer = "Aktualisiert Sender und EPG im WLAN im Hintergrund, solange der Akku nicht niedrig ist, damit der EPG beim Öffnen der App aktuell ist. " +
                         if (isTv) {
-                            "Wenn ausgeschaltet, werden Daten nur beim Start von AerioTV Deutsch oder über das Wiedergabelisten-Menü aktualisiert."
+                            "Wenn ausgeschaltet, werden Daten nur beim Start von Streamy 3.0 oder über das Wiedergabelisten-Menü aktualisiert."
                         } else {
-                            "Wenn ausgeschaltet, werden Daten nur beim Start von AerioTV Deutsch oder durch Herunterziehen zum Aktualisieren geladen."
+                            "Wenn ausgeschaltet, werden Daten nur beim Start von Streamy 3.0 oder durch Herunterziehen zum Aktualisieren geladen."
                         },
                 ) {
                     SettingsToggleRow(

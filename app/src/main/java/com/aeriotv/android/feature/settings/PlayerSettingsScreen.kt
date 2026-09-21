@@ -263,7 +263,7 @@ fun PlayerSettingsScreen(
 
                 SettingsSection(
                     header = "Audio",
-                    footer = "Passthrough sendet Surround-Audio als Bitstream an Fernseher oder Receiver. Einige Fernseher verarbeiten es verzögert, wodurch Bild und Ton bei Live-TV auseinanderlaufen können. Wenn ausgeschaltet, decodiert AerioTV Deutsch das Audio selbst. Die Änderung gilt ab der nächsten Wiedergabe.",
+                    footer = "Passthrough sendet Surround-Audio als Bitstream an Fernseher oder Receiver. Einige Fernseher verarbeiten es verzögert, wodurch Bild und Ton bei Live-TV auseinanderlaufen können. Wenn ausgeschaltet, decodiert Streamy 3.0 das Audio selbst. Die Änderung gilt ab der nächsten Wiedergabe.",
                 ) {
                     SettingsToggleRow(
                         title = "Surround-Sound-Passthrough",

@@ -246,7 +246,7 @@ fun AppearanceSettingsScreen(
                 // still multiply on top for their own surfaces.
                 settingsCard(
                     header = "Textgröße",
-                    footer = "Skaliert den gesamten Text in AerioTV Deutsch zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
+                    footer = "Skaliert den gesamten Text in Streamy 3.0 zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
                         label = "Textgröße",

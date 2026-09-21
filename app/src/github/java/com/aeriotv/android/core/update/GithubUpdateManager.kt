@@ -368,7 +368,7 @@ class GithubUpdateManager @Inject constructor(
         val archive = context.packageManager.getPackageArchiveInfo(file.absolutePath, flags)
             ?: return fail("Die heruntergeladene Datei ist keine lesbare APK.")
         if (archive.packageName != context.packageName) {
-            return fail("Die heruntergeladene APK gehört nicht zu AerioTV Deutsch (${archive.packageName}).")
+            return fail("Die heruntergeladene APK gehört nicht zu Streamy 3.0 (${archive.packageName}).")
         }
         val archiveCode = PackageInfoCompat.getLongVersionCode(archive)
         val currentCode = BuildConfig.VERSION_CODE.toLong()

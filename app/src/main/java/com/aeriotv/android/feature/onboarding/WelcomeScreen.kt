@@ -207,7 +207,7 @@ private fun BrandBlock(alignStart: Boolean = false) {
         BrandLogo()
         Spacer(Modifier.height(10.dp))
         Text(
-            text = "AerioTV Deutsch",
+            text = "Streamy 3.0",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Bold,

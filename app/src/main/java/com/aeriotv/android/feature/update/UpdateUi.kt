@@ -226,7 +226,7 @@ private fun UpdatePromptBody(
         }
         is UpdateState.Installing -> {
             titleText = "Installing"
-            bodyText = "Bestätige das Update im Android-Dialog. AerioTV Deutsch wird für die " +
+            bodyText = "Bestätige das Update im Android-Dialog. Streamy 3.0 wird für die " +
                 "install; reopen it from your home screen. Your data is kept."
             indeterminate = true
             laterLabel = null

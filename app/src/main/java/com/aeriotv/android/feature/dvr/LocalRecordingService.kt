@@ -609,7 +609,7 @@ class LocalRecordingService : Service() {
                 "Lokale Aufnahmen",
                 NotificationManager.IMPORTANCE_LOW,
             ).apply {
-                description = "Fortlaufende Benachrichtigung, während AerioTV Deutsch einen Sender lokal aufnimmt."
+                description = "Fortlaufende Benachrichtigung, während Streamy 3.0 einen Sender lokal aufnimmt."
                 setShowBadge(false)
             }
             mgr.createNotificationChannel(channel)

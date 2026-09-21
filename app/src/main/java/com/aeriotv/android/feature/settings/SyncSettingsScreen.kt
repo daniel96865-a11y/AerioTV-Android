@@ -529,7 +529,7 @@ private fun SignedOutWelcomeBanner() {
             )
             Spacer(Modifier.height(2.dp))
             Text(
-                text = "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. AerioTV Deutsch wird " +
+                text = "Wähle unten „Mit Google anmelden“, um dein Konto zu verbinden. Streamy 3.0 wird " +
                     "then keep your playlists, watch progress, reminders, and preferences in " +
                     "sync across every device signed into the same Google account.",
                 style = MaterialTheme.typography.labelSmall.subtext(),

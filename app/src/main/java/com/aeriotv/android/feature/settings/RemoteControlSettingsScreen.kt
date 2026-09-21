@@ -309,7 +309,7 @@ fun RemoteControlSettingsScreen(
 
                 SettingsSection(
                     header = "Zurücksetzen",
-                    footer = "Setzt alle Tasten auf die Standardbelegung von AerioTV Deutsch zurück.",
+                    footer = "Setzt alle Tasten auf die Standardbelegung von Streamy 3.0 zurück.",
                 ) {
                     SlotRow(
                         slotName = "Auf Standard zurücksetzen",

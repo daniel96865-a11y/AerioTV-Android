@@ -412,7 +412,7 @@ private fun DispatcharrFields(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
             InfoBanner(
-                text = "Zugangsdaten speichern und automatisch aktualisieren. AerioTV Deutsch meldet sich damit " +
+                text = "Zugangsdaten speichern und automatisch aktualisieren. Streamy 3.0 meldet sich damit " +
                         "credentials, then keeps your session alive in the background. If your " +
                         "Dispatcharr admin rotates your API key, AerioTV silently re-authenticates " +
                         "without prompting. Credentials are stored in encrypted Android storage.",
@@ -606,7 +606,7 @@ private fun LanUrlField(state: PlaylistViewModel.UiState, viewModel: PlaylistVie
         )
     }
     Text(
-        text = "AerioTV Deutsch verwendet diese URL automatisch, wenn dein Server erreichbar ist über " +
+        text = "Streamy 3.0 verwendet diese URL automatisch, wenn dein Server erreichbar ist über " +
                 "the local network, and the public one above otherwise. No setup needed.",
         style = MaterialTheme.typography.bodySmall.subtext(),
         color = MaterialTheme.colorScheme.onSurfaceVariant,
