@@ -204,7 +204,7 @@ fun GeneralSettingsScreen(
                             enabled = maxRetries > 0,
                             modifier = Modifier.dpadFocusRing(CircleShape),
                         ) {
-                            Icon(Icons.Filled.Remove, contentDescription = "Decrease")
+                            Icon(Icons.Filled.Remove, contentDescription = "Verringern")
                         }
                         Text(
                             text = maxRetries.toString(),
@@ -217,7 +217,7 @@ fun GeneralSettingsScreen(
                             enabled = maxRetries < 10,
                             modifier = Modifier.dpadFocusRing(CircleShape),
                         ) {
-                            Icon(Icons.Filled.Add, contentDescription = "Increase")
+                            Icon(Icons.Filled.Add, contentDescription = "Erhöhen")
                         }
                     }
                 }
@@ -234,10 +234,10 @@ private data class BgRefreshIntervalOption(val mins: Int, val label: String)
 /** iOS bgRefreshIntervalMins picker options. 360 (6h) is the default;
  *  match the iOS picker so synced preferences round-trip cleanly. */
 private val BG_REFRESH_INTERVAL_OPTIONS: List<BgRefreshIntervalOption> = listOf(
-    BgRefreshIntervalOption(60, "Every hour"),
-    BgRefreshIntervalOption(180, "Every 3 hours"),
-    BgRefreshIntervalOption(360, "Every 6 hours"),
-    BgRefreshIntervalOption(720, "Every 12 hours"),
-    BgRefreshIntervalOption(1440, "Every 24 hours"),
-    BgRefreshIntervalOption(2880, "Every 48 hours"),
+    BgRefreshIntervalOption(60, "Jede Stunde"),
+    BgRefreshIntervalOption(180, "Alle 3 Stunden"),
+    BgRefreshIntervalOption(360, "Alle 6 Stunden"),
+    BgRefreshIntervalOption(720, "Alle 12 Stunden"),
+    BgRefreshIntervalOption(1440, "Alle 24 Stunden"),
+    BgRefreshIntervalOption(2880, "Alle 48 Stunden"),
 )
