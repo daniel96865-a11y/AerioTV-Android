@@ -6,17 +6,17 @@ import java.text.Normalizer
 
 /** Which library a media tab shows. Apple parity: MoviesView(kind:). */
 enum class MediaKind(val title: String, val libraryTitle: String, val emptyTitle: String) {
-    Movies("Filme", "All Movies", "No Movies"),
-    TVShows("Serien", "All TV Shows", "No TV Shows"),
+    Movies("Filme", "Alle Filme", "Keine Filme"),
+    TVShows("Serien", "Alle Serien", "Keine Serien"),
 }
 
 /** Library sort (Apple parity: MoviesSortOrder). Recently Added is deliberately absent. */
 enum class MediaSortOrder(val wire: String, val label: String) {
     TitleAZ("titleAZ", "Title · A to Z"),
     TitleZA("titleZA", "Title · Z to A"),
-    YearNewest("yearNewest", "Year · Newest"),
-    YearOldest("yearOldest", "Year · Oldest"),
-    RatingHighest("ratingHighest", "Rating · Highest");
+    YearNewest("yearNewest", "Jahr · Neueste zuerst"),
+    YearOldest("yearOldest", "Jahr · Älteste zuerst"),
+    RatingHighest("ratingHighest", "Bewertung · Höchste zuerst");
 
     companion object {
         fun fromWire(s: String?): MediaSortOrder = entries.firstOrNull { it.wire == s } ?: TitleAZ
