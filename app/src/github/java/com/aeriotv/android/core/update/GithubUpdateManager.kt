@@ -491,7 +491,7 @@ class GithubUpdateManager @Inject constructor(
          *  every GitHub release APK). Builds signed with anything else --
          *  debug, or Play's re-signed deliveries -- are not this lineage. */
         private const val UPLOAD_KEY_SHA256 =
-            "511d38ccd49511e9fcce1c816d1186ad57aa6d2dd7d9155d6d029e1c7a97e9da"
+            "1719ef5261a5520899a8fcbed1898a52f4775abfc87a62d6df4ace93baa1ef05"
     }
 }
 
