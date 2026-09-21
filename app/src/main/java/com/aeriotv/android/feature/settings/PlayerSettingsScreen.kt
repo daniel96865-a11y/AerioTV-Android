@@ -216,20 +216,20 @@ fun PlayerSettingsScreen(
                     header = "Wiedergabe",
                     footer = (
                         if (isTv) {
-                            "How far the skip buttons and a single left or right press move " +
-                                "in live rewind, catch-up, recordings, movies, and TV shows. " +
-                                "Holding left or right still scrubs faster the longer you hold."
+                            "Legt fest, wie weit die Sprungtasten sowie ein einzelner Druck auf Links oder Rechts " +
+                                "bei Live-Zurückspulen, Catch-up, Aufnahmen, Filmen und Serien springen. " +
+                                "Gedrückthalten von Links oder Rechts spult weiterhin schneller, je länger du die Taste hältst."
                         } else {
-                            "How far the skip buttons move in live rewind, catch-up, " +
-                                "recordings, movies, and TV shows, including the cast remote " +
-                                "and the playback notification."
+                            "Legt fest, wie weit die Sprungtasten bei Live-Zurückspulen, Catch-up, " +
+                                "Aufnahmen, Filmen und Serien springen, einschließlich Cast-Fernbedienung " +
+                                "und Wiedergabebenachrichtigung."
                         }
-                        ) + " Buffer Size controls how much stream data is pre-loaded: larger " +
-                        "buffers reduce stuttering on poor connections but add startup delay. " +
-                        "If a live stream stops sending video, Auto-Recover reloads it; turn " +
-                        "that off if live channels restart or stutter during commercial " +
-                        "breaks, and a brief freeze may show instead. Recovery applies to the " +
-                        "next channel you tune.",
+                        ) + " Die Puffergröße bestimmt, wie viele Stream-Daten vorgeladen werden: größere " +
+                        "Puffer reduzieren Ruckler bei schlechten Verbindungen, erhöhen aber die Startzeit. " +
+                        "Wenn ein Live-Stream kein Video mehr liefert, lädt die automatische Wiederherstellung ihn neu; " +
+                        "schalte dies aus, wenn Live-Sender während Werbepausen neu starten oder ruckeln, " +
+                        "stattdessen kann kurz ein Standbild erscheinen. Die Wiederherstellung gilt für den " +
+                        "nächsten Sender, den du öffnest.",
                 ) {
                     SteppedSliderRow(
                         label = "Zurückspringen",
