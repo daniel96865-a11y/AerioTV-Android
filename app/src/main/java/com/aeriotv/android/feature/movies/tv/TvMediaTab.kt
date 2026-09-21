@@ -217,10 +217,10 @@ internal fun TvMediaTab(
         }
         if (showProviderPills) add {
             LazyRow(horizontalArrangement = Arrangement.spacedBy(6.dp), contentPadding = PaddingValues(end = 8.dp), modifier = Modifier.fillMaxWidth()) {
-                item(key = "all") { TvPill("All Providers", selectedProviderId == null, onClick = { onSelectProvider(null) }) }
+                item(key = "all") { TvPill("Alle Anbieter", selectedProviderId == null, onClick = { onSelectProvider(null) }) }
                 items(providerIds.size, key = { providerIds[it] }) { i ->
                     val pid = providerIds[i]
-                    TvPill(providerNames[pid] ?: "Provider $pid", selectedProviderId == pid, onClick = { onSelectProvider(if (selectedProviderId == pid) null else pid) })
+                    TvPill(providerNames[pid] ?: "Anbieter $pid", selectedProviderId == pid, onClick = { onSelectProvider(if (selectedProviderId == pid) null else pid) })
                 }
             }
         }
@@ -246,7 +246,7 @@ internal fun TvMediaTab(
         onQueryChange = onQueryChange,
         onSearchToggle = onSearchToggle,
         onClearSearch = onClearSearch,
-        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Search TV shows",
+        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Serien suchen",
         isSearching = isSearching,
         searchExtras = extras,
         pills = genrePills,
