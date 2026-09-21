@@ -1,9 +1,9 @@
-name: Release AerioTV Deutsch
+name: Release Streamy 3.0
 
 on:
   push:
     tags:
-      - "de-v*"
+      - "v*"
 
 permissions:
   contents: write
@@ -39,8 +39,8 @@ jobs:
           test -n "$SIGNING_PASSWORD" || { echo "Missing AERIOTV_SIGNING_PASSWORD"; exit 1; }
           UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
           test -f "$UNSIGNED"
-          VERSION="${GITHUB_REF_NAME#de-v}"
-          OUT="$RUNNER_TEMP/AerioTV-Deutsch-$VERSION.apk"
+          VERSION="${GITHUB_REF_NAME#v}"
+          OUT="$RUNNER_TEMP/Streamy-3.0-$VERSION.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
           "$APKSIGNER" sign \
             --ks "$RUNNER_TEMP/aeriotv-deutsch-release.jks" \
@@ -58,5 +58,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "$GITHUB_REF_NAME" "$APK" \
-            --title "AerioTV Deutsch $VERSION" \
-            --notes "Deutsche AerioTV-Variante. Android TV, Handy und Tablet. Eigene App-ID: de.dgstudios.aeriotvde."
+            --title "Streamy 3.0 $VERSION" \
+            --notes "Streamy 3.0 für Android TV, Handy und Tablet. In-App-Updates über GitHub Releases aktiviert."
