@@ -93,10 +93,7 @@ import java.util.Date
  *                  Add Playlist row. Footer surfaces the matching hints.
  *  2. App Settings - Appearance / App Behaviors / Multiview / Network rows
  *                  inside a single grouped card.
- *  3. Sync       - current cut routes through to the full SyncSettingsScreen.
  *                  iOS surfaces the toggle inline here; that follow-up lands
- *                  alongside the Google Drive Sync rewrite that mirrors the
- *                  iCloud Sync toggle / Sync Now / Clear Data set.
  *  4. DVR        - single nav row.
  *  5. Developer  - single nav row.
  *  6. About      - Device / System / App Version / First Installed /
@@ -145,10 +142,7 @@ fun SettingsScreen(
     // channel (play flavor binds a disabled no-op manager).
     val updateVm: com.aeriotv.android.feature.update.UpdateViewModel = hiltViewModel()
     val updaterEnabled = updateVm.isEnabled
-    // Root row values: Sync reads On/Off, About reads the installed version.
-    val settingsVm: SettingsViewModel = hiltViewModel()
-    val syncEnabled by settingsVm.syncMasterEnabled
-        .collectAsStateWithLifecycle(initialValue = false)
+    // About reads the installed version.
     val state by viewModel.state.collectAsStateWithLifecycle()
     val playlists by viewModel.allPlaylists.collectAsStateWithLifecycle(initialValue = emptyList())
     // LIVE from the DAO, not the UiState snapshot (Logan 2026-09-16): the
@@ -262,7 +256,7 @@ fun SettingsScreen(
                 )
             }
 
-            // MARK: App Settings / Sync / DVR / Developer
+            // MARK: App Settings / DVR / Developer
             //
             // Sourced from the shared canon so the sidebar in the two-pane
             // hosts cannot drift from this list (plan B7: frozen canon).
@@ -279,7 +273,7 @@ fun SettingsScreen(
                         valueFor = { section ->
                             if (section == SettingsSection.About) versionName else null
                         },
-                        syncEnabled = syncEnabled,
+                        syncEnabled = false,
                     )
                 }
             }
@@ -924,15 +918,6 @@ enum class SettingsSection(
         subtitle = "Fernbedienungstasten anpassen",
         icon = Icons.Filled.SettingsRemote,
     ),
-    Sync(
-        // Subtitle comes from [settingsSectionSubtitle]: the row reads the live
-        // On / Off state instead of a description. Apple does the same, and the
-        // long string truncated on the Android TV rail. The description lives on
-        // the Sync page's own Drive Sync footer.
-        title = "Synchronisierung",
-        subtitle = null,
-        icon = Icons.Filled.Cloud,
-    ),
     AppUpdates(
         title = "Updates",
         subtitle = "Nach neuen Versionen suchen",
@@ -950,14 +935,5 @@ enum class SettingsSection(
     ),
 }
 
-/**
- * Subtitle for a section row in the root list, the tablet sidebar and the TV
- * rail. Everything but Sync uses its static enum subtitle; Sync reports whether
- * Drive sync is currently on.
- */
-fun settingsSectionSubtitle(section: SettingsSection, syncEnabled: Boolean): String? =
-    if (section == SettingsSection.Sync) {
-        if (syncEnabled) "Ein" else "Aus"
-    } else {
-        section.subtitle
-    }
+/** Subtitle for a section row in the root list, tablet sidebar and TV rail. */
+fun settingsSectionSubtitle(section: SettingsSection, syncEnabled: Boolean): String? = section.subtitle
