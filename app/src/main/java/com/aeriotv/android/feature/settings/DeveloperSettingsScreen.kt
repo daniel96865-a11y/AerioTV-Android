@@ -225,7 +225,7 @@ fun DeveloperSettingsScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Keep Logging", onClick = { pendingDisable = false })
+                SettingsDialogTextButton(label = "Protokollierung behalten", onClick = { pendingDisable = false })
             },
         )
     }
@@ -236,8 +236,8 @@ fun DeveloperSettingsScreen(
             title = { Text("Alle Protokolle löschen?") },
             text = {
                 Text(
-                    "This permanently deletes the current log and any rotated " +
-                        "archives. This cannot be undone.",
+                    "Dadurch werden das aktuelle Protokoll und alle rotierten Archive dauerhaft gelöscht. " +
+                        "Dieser Vorgang kann nicht rückgängig gemacht werden.",
                 )
             },
             confirmButton = {
