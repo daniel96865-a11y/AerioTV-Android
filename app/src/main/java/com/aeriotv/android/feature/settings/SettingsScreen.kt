@@ -305,7 +305,7 @@ fun SettingsScreen(
                             updatedAt,
                         )
                         val cm = context.getSystemService(android.content.ClipboardManager::class.java)
-                        cm?.setPrimaryClip(android.content.ClipData.newPlainText("AerioTV diagnostics", text))
+                        cm?.setPrimaryClip(android.content.ClipData.newPlainText("Streamy 3.0 Diagnose", text))
                         android.widget.Toast.makeText(
                             context,
                             "Copied diagnostics to clipboard.",
@@ -313,7 +313,7 @@ fun SettingsScreen(
                         ).show()
                     },
                     onOpenWebsite = {
-                        val url = "https://github.com/jonzey231/AerioTV-Android"
+                        val url = "https://github.com/daniel96865-a11y/AerioTV-Android"
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Entwickler-Webseite",
@@ -326,7 +326,7 @@ fun SettingsScreen(
                     },
                     onOpenLicenses = onOpenLicenses,
                     onReportIssue = {
-                        val url = "https://github.com/jonzey231/AerioTV-Android/issues/new"
+                        val url = "https://github.com/daniel96865-a11y/AerioTV-Android/issues/new"
                         if (isTv) {
                             qrLink = TvQrLink(
                                 title = "Problem melden",
@@ -859,7 +859,7 @@ private fun buildAboutClipboard(
     installedAt: Long,
     updatedAt: Long,
 ): String = buildString {
-    appendLine("AerioTV diagnostics")
+    appendLine("Streamy 3.0 Diagnose")
     appendLine("Device: ${deviceDisplayName()}")
     appendLine("System: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
     appendLine("App Version: $versionName ($versionCode)")
