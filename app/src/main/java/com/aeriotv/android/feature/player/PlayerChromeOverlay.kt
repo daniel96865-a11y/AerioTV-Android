@@ -1187,7 +1187,7 @@ private fun PlayerMoreMenu(
                 )
             },
             text = {
-                Text(if (sleepActive) "Sleep Timer (active)" else "Sleep-Timer")
+                Text(if (sleepActive) "Sleep-Timer (aktiv)" else "Sleep-Timer")
             },
             onClick = onSleepTimer,
         )
