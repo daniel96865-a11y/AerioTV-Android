@@ -58,7 +58,7 @@ import com.aeriotv.android.feature.onboarding.components.SourceTypeCard
 
 /**
  * Cold-start welcome surface. Mirrors iOS App Store screenshot IMG_1076: AerioTV
- * brand block + supported source types + Sync / Detect-Home-WiFi info cards +
+ * brand block + supported source types +
  * "Server verbinden" CTA + "Vorerst überspringen" link.
  *
  * Layout adapts to viewport: a short-but-wide screen (Android TV at 960dp x
@@ -70,15 +70,6 @@ import com.aeriotv.android.feature.onboarding.components.SourceTypeCard
 fun WelcomeScreen(
     onConnectServer: () -> Unit,
     onSkip: () -> Unit,
-    /**
-     * Optional Sign-in-with-Google handler. When provided, a pill appears
-     * between Connect-a-Server and Skip on the welcome screen so the user
-     * can authenticate Drive Sync up front instead of being routed back to
-     * Settings later. Setting this null hides the row entirely (e.g. on
-     * builds that ship without a Google Cloud OAuth client ID baked in).
-     */
-    onSignInWithGoogle: (() -> Unit)? = null,
-    googleSignInInProgress: Boolean = false,
 ) {
     val config = LocalConfiguration.current
     val isTv = com.aeriotv.android.feature.livetv.rememberLiveTvFormFactor().isTv
@@ -87,16 +78,14 @@ fun WelcomeScreen(
     // single column to mirror the tvOS welcome layout.
     val twoColumn = !isTv && config.screenWidthDp >= 720 && config.screenHeightDp < 720
 
-    if (twoColumn) WelcomeTwoColumn(onConnectServer, onSkip, onSignInWithGoogle, googleSignInInProgress)
-    else WelcomeSingleColumn(onConnectServer, onSkip, onSignInWithGoogle, googleSignInInProgress)
+    if (twoColumn) WelcomeTwoColumn(onConnectServer, onSkip)
+    else WelcomeSingleColumn(onConnectServer, onSkip)
 }
 
 @Composable
 private fun WelcomeSingleColumn(
     onConnectServer: () -> Unit,
     onSkip: () -> Unit,
-    onSignInWithGoogle: (() -> Unit)?,
-    googleSignInInProgress: Boolean,
 ) {
     Box(
         modifier = Modifier
@@ -125,8 +114,6 @@ private fun WelcomeSingleColumn(
             Spacer(Modifier.height(22.dp))
             SupportedTypesGroup(alignStart = false)
             Spacer(Modifier.height(22.dp))
-            SyncCard(inProgress = googleSignInInProgress, onClick = onSignInWithGoogle)
-            if (onSignInWithGoogle != null) Spacer(Modifier.height(12.dp))
             ConnectServerRow(onClick = onConnectServer)
             Spacer(Modifier.height(4.dp))
             SkipRow(onSkip = onSkip)
@@ -138,8 +125,6 @@ private fun WelcomeSingleColumn(
 private fun WelcomeTwoColumn(
     onConnectServer: () -> Unit,
     onSkip: () -> Unit,
-    onSignInWithGoogle: (() -> Unit)?,
-    googleSignInInProgress: Boolean,
 ) {
     Box(
         modifier = Modifier
@@ -147,7 +132,7 @@ private fun WelcomeTwoColumn(
             .background(MaterialTheme.colorScheme.background),
     ) {
         WelcomeAmbientOrbs(modifier = Modifier.fillMaxSize())
-        WelcomeTwoColumnRow(onConnectServer, onSkip, onSignInWithGoogle, googleSignInInProgress)
+        WelcomeTwoColumnRow(onConnectServer, onSkip)
     }
 }
 
@@ -155,8 +140,6 @@ private fun WelcomeTwoColumn(
 private fun WelcomeTwoColumnRow(
     onConnectServer: () -> Unit,
     onSkip: () -> Unit,
-    onSignInWithGoogle: (() -> Unit)?,
-    googleSignInInProgress: Boolean,
 ) {
     Row(
         modifier = Modifier
@@ -189,8 +172,6 @@ private fun WelcomeTwoColumnRow(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.Center,
         ) {
-            SyncCard(inProgress = googleSignInInProgress, onClick = onSignInWithGoogle)
-            if (onSignInWithGoogle != null) Spacer(Modifier.height(12.dp))
             ConnectServerRow(onClick = onConnectServer)
             Spacer(Modifier.height(4.dp))
             SkipRow(onSkip = onSkip)
@@ -234,45 +215,6 @@ private fun SupportedTypesGroup(alignStart: Boolean = false) {
         SupportedTypeRow(icon = Icons.Filled.Tv, label = "Xtream Codes", alignStart = alignStart)
         SupportedTypeRow(icon = Icons.Filled.Description, label = "M3U + EPG", alignStart = alignStart)
     }
-}
-
-/**
- * Sync opt-in card, the Drive analog of the tvOS WelcomeView iCloud card: one
- * card with an On/Off status pill. On the welcome screen sync is always Off
- * (signing in transitions onboarding to the restore-progress screen), so the
- * card is the tap target that launches Google sign-in. Hidden entirely when
- * the build ships without an OAuth client id (onClick null).
- */
-@Composable
-private fun SyncCard(inProgress: Boolean, onClick: (() -> Unit)?) {
-    if (onClick == null) return
-    SourceTypeCard(
-        modifier = Modifier
-            .clip(RoundedCornerShape(16.dp))
-            .clickable(enabled = !inProgress, onClick = onClick),
-        icon = Icons.Filled.CloudOff,
-        title = "Über Google-Konto synchronisieren",
-        subtitle = "Melde dich an, um Wiedergabelisten, Wiedergabefortschritt, Erinnerungen und Einstellungen auf deinen Geräten zu synchronisieren.",
-        trailing = {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                Box(
-                    modifier = Modifier
-                        .size(8.dp)
-                        .clip(CircleShape)
-                        .background(MaterialTheme.colorScheme.decorSecondary),
-                )
-                Text(
-                    text = if (inProgress) "..." else "Aus",
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.SemiBold,
-                    color = MaterialTheme.colorScheme.onBackground,
-                )
-            }
-        },
-    )
 }
 
 /** "Server verbinden" as a single-line row with a trailing chevron, mirroring
