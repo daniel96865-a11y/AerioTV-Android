@@ -173,14 +173,14 @@ fun LiveTvSettingsScreen(
                 // source screens gated these rows before the regroup.
                 if (listViewShown) item("list-view") {
                     SettingsSection(
-                        header = "List view",
-                        footer = "Which layout Live TV opens in. Automatic uses the List on " +
-                            "phones and the Guide on TV and larger tablets. On phones you " +
-                            "can still switch for the current session with the List / Guide " +
-                            "button; on TV this setting is the only switch.",
+                        header = "Listenansicht",
+                        footer = "Legt fest, in welcher Ansicht Live-TV geöffnet wird. Automatisch verwendet die Liste auf " +
+                            "Handys und den EPG auf Fernsehern und größeren Tablets. Auf Handys kannst du " +
+                            "für die aktuelle Sitzung weiterhin über die Schaltfläche Liste / EPG wechseln; " +
+                            "auf dem Fernseher ist diese Einstellung der Umschalter.",
                     ) {
                         SettingsToggleRow(
-                            title = "Rounded corners in List view",
+                            title = "Abgerundete Ecken in der Listenansicht",
                             checked = roundedArtwork,
                             onCheckedChange = viewModel::setRoundedArtwork,
                         )
@@ -199,7 +199,7 @@ fun LiveTvSettingsScreen(
                 if (isTv) item("guide-layout") {
                     SettingsSection(header = "EPG-Layout") {
                         SettingsSelectionRow(
-                            label = "Basic",
+                            label = "Einfach",
                             subtitle = "Vollständige Sendungsdetails in jeder EPG-Zelle",
                             selected = liveTvLayout != "preview",
                             onClick = { viewModel.setLiveTvLayout("basic") },
@@ -216,12 +216,12 @@ fun LiveTvSettingsScreen(
                 // MARK: Groups
                 item("groups") {
                     SettingsSection(
-                        header = "Groups",
-                        footer = "The Live TV group the app opens on for this playlist. " +
-                            "Recently Watched is the last 25 channels you played, newest " +
-                            "first; picking it also shows it in Manage Groups. A group " +
-                            "that later disappears from the playlist falls back " +
-                            "automatically.",
+                        header = "Gruppen",
+                        footer = "Die Live-TV-Gruppe, die beim Öffnen dieser Wiedergabeliste angezeigt wird. " +
+                            "„Zuletzt angesehen“ enthält die letzten 25 abgespielten Sender, die neuesten " +
+                            "zuerst. Bei Auswahl wird sie auch unter „Gruppen verwalten“ angezeigt. Eine Gruppe, " +
+                            "die später aus der Wiedergabeliste verschwindet, wird automatisch " +
+                            "auf eine verfügbare Gruppe zurückgesetzt.",
                     ) {
                         val fixedTokens = listOf(
                             com.aeriotv.android.feature.playlist.PlaylistViewModel.ALL_GROUPS,
@@ -248,29 +248,29 @@ fun LiveTvSettingsScreen(
                         // Moved here from Remote Control (Settings phase 1). Same
                         // row, same dialog, same persisted key.
                         SettingsSection(
-                            header = "Group Selection",
-                            footer = "How channel groups are picked in the guide. Top pills keep the group row above the grid; the sidebar menu hides that row and opens by holding Left in the grid (unless Left (Hold) is reassigned in Remote Control). Only one is active at a time.",
+                            header = "Gruppenauswahl",
+                            footer = "Legt fest, wie Sendergruppen im EPG ausgewählt werden. Gruppen-Schaltflächen bleiben oberhalb des EPG; das Seitenleisten-Menü blendet diese Zeile aus und öffnet sich durch Gedrückthalten von Links im EPG. Es kann jeweils nur eine Variante aktiv sein.",
                         ) {
                             GroupSelectionRow(
-                                slotName = "Group Selection",
-                                valueName = if (guideGroupSelector == "sidebar") "Sidebar menu" else "Top group pills",
+                                slotName = "Gruppenauswahl",
+                                valueName = if (guideGroupSelector == "sidebar") "Seitenleisten-Menü" else "Gruppen-Schaltflächen oben",
                                 onClick = { editingGroupSelector = true },
                             )
                         }
                     } else {
                         SettingsSection(
-                            header = "Group Selection",
-                            footer = "How Live TV picks a channel group. Drawer opens a " +
-                                "group list from the header button; Pills puts the groups " +
-                                "in a strip across the header.",
+                            header = "Gruppenauswahl",
+                            footer = "Legt fest, wie Live-TV eine Sendergruppe auswählt. „Seitenleiste“ öffnet eine " +
+                                "Gruppenliste über die Schaltfläche oben; „Schaltflächen“ zeigt die Gruppen " +
+                                "als Leiste im Kopfbereich an.",
                         ) {
                             SettingsSelectionRow(
-                                label = "Drawer",
+                                label = "Seitenleiste",
                                 selected = phoneGroupSelector != "pills",
                                 onClick = { viewModel.setPhoneGroupSelector("sidebar") },
                             )
                             SettingsSelectionRow(
-                                label = "Pills",
+                                label = "Schaltflächen",
                                 selected = phoneGroupSelector == "pills",
                                 onClick = { viewModel.setPhoneGroupSelector("pills") },
                             )
@@ -281,13 +281,13 @@ fun LiveTvSettingsScreen(
                 // MARK: Badges
                 item("badges") {
                     SettingsSection(
-                        header = "Badges",
-                        footer = "Program badges are the LIVE, NEW, PREMIERE, FINALE, " +
-                            "REPEAT, and season/episode pills on the guide and channel " +
-                            "list. Remembered separately for " +
-                            (if (isTv) "TVs" else "phones and tablets") +
+                        header = "Markierungen",
+                        footer = "Sendungsmarkierungen sind LIVE, NEU, PREMIERE, FINALE, " +
+                            "WIEDERHOLUNG sowie Staffel-/Episodenmarkierungen im EPG und in der Sender" +
+                            "liste. Die Einstellung wird getrennt gespeichert für " +
+                            (if (isTv) "Fernseher" else "Handys und Tablets") +
                             " and synced across your " +
-                            (if (isTv) "TVs" else "mobile devices") + ".",
+                            (if (isTv) "Fernseher" else "Mobilgeräte") + ".",
                     ) {
                         SettingsToggleRow(
                             title = "Sendungsmarkierungen anzeigen",
@@ -298,7 +298,7 @@ fun LiveTvSettingsScreen(
                         if (showEpgBadges) {
                             for (badge in listOf("NEW", "REPEAT", "LIVE", "PREMIERE", "FINALE")) {
                                 SettingsToggleRow(
-                                    title = "${badge.first()}${badge.drop(1).lowercase()} badge",
+                                    title = "${badge.first()}${badge.drop(1).lowercase()}-Markierung",
                                     checked = badge !in hiddenEpgBadges,
                                     onCheckedChange = { on ->
                                         viewModel.setBadgeHidden(badge, hidden = !on)
@@ -431,13 +431,13 @@ fun LiveTvSettingsScreen(
             title = "Group Selection",
             actions = listOf(
                 TvMenuAction(
-                    label = if (guideGroupSelector != "sidebar") "Top group pills  (current)" else "Top group pills",
+                    label = if (guideGroupSelector != "sidebar") "Top group pills  (current)" else "Gruppen-Schaltflächen oben",
                 ) {
                     viewModel.setGuideGroupSelector("pills")
                     editingGroupSelector = false
                 },
                 TvMenuAction(
-                    label = if (guideGroupSelector == "sidebar") "Sidebar menu  (current)" else "Sidebar menu",
+                    label = if (guideGroupSelector == "sidebar") "Sidebar menu  (current)" else "Seitenleisten-Menü",
                 ) {
                     viewModel.setGuideGroupSelector("sidebar")
                     editingGroupSelector = false
