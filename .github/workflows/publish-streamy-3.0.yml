@@ -71,7 +71,7 @@ jobs:
             gh release create v3.0.8 \
               --repo "$GITHUB_REPOSITORY" \
               --title "Streamy 3.0.8" \
-              --notes "Streamy 3.0.8: TV-Fokusnavigation für Filme und Serien korrigiert: Mit Hoch sind Kategorien wie Doku wieder zuverlässig erreichbar. TMDB-Einstellungen erklären jetzt Beschreibungen und Poster; fehlende Beschreibungen werden bei vorhandenem eigenen TMDB-Schlüssel ergänzt. Deutsche TV-Oberfläche und sichere Geräte-Kopplung bleiben enthalten.
+              --notes "Streamy 3.0.8: TV-Fokusnavigation für Filme und Serien korrigiert. Mit Hoch sind Kategorien wie Doku wieder zuverlässig erreichbar. TMDB-Einstellungen erklären jetzt Beschreibungen und Poster; fehlende Beschreibungen werden bei vorhandenem eigenen TMDB-Schlüssel ergänzt. Deutsche TV-Oberfläche und sichere Geräte-Kopplung bleiben enthalten."
           fi
 
       - name: Upload Streamy 3.0.8 APK
