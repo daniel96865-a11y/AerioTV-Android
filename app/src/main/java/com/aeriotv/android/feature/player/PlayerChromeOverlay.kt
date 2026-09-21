@@ -444,7 +444,7 @@ fun PlayerChromeOverlay(
                 val backSeconds = rememberSkipBackSeconds()
                 PlayerControlCircle(
                     icon = SkipIntervals.backIcon(backSeconds),
-                    title = "Rewind",
+                    title = "Zurückspulen",
                     contentDescription = SkipIntervals.backLabel(backSeconds),
                     enabled = seekEnabled,
                     disabledCaption = seekDisabledCaption,
@@ -459,7 +459,7 @@ fun PlayerChromeOverlay(
                 val forwardSeconds = rememberSkipForwardSeconds()
                 PlayerControlCircle(
                     icon = SkipIntervals.forwardIcon(forwardSeconds),
-                    title = "Forward",
+                    title = "Vorspulen",
                     contentDescription = SkipIntervals.forwardLabel(forwardSeconds),
                     enabled = seekEnabled,
                     disabledCaption = seekDisabledCaption,
@@ -621,7 +621,7 @@ fun PlayerChromeOverlay(
                 Spacer(Modifier.weight(1f))
                 CircleIconButton(
                     icon = if (forcedLandscape) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
-                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Vollbild",
+                    contentDescription = if (forcedLandscape) "Vollbild verlassen" else "Vollbild",
                     onClick = {
                         forcedLandscape = !forcedLandscape
                         context.findActivity()?.requestedOrientation = if (forcedLandscape) {
@@ -636,7 +636,7 @@ fun PlayerChromeOverlay(
                 Box {
                     CircleIconButton(
                         icon = Icons.Filled.MoreHoriz,
-                        contentDescription = "More",
+                        contentDescription = "Mehr",
                         onClick = { moreOpen = true },
                     )
                     PlayerMoreMenu(
@@ -1479,9 +1479,9 @@ private fun RewindTransportBar(
                 val remMin = ((prog.endMillis - current).coerceAtLeast(0) / 60_000).toInt()
                 Text(
                     text = if (remMin >= 60) {
-                        "${remMin / 60} h ${remMin % 60} min remaining"
+                        "noch ${remMin / 60} Std. ${remMin % 60} Min."
                     } else {
-                        "$remMin min remaining"
+                        "noch $remMin Min."
                     },
                     style = MaterialTheme.typography.labelMedium,
                     color = Color.White.copy(alpha = 0.7f),
@@ -1795,9 +1795,9 @@ private fun TvRewindTimeline(
                 val remMin = ((prog.endMillis - current).coerceAtLeast(0) / 60_000).toInt()
                 Text(
                     text = if (remMin >= 60) {
-                        "${remMin / 60} h ${remMin % 60} min remaining"
+                        "noch ${remMin / 60} Std. ${remMin % 60} Min."
                     } else {
-                        "$remMin min remaining"
+                        "noch $remMin Min."
                     },
                     style = MaterialTheme.typography.labelMedium,
                     color = Color.White.copy(alpha = 0.7f),
@@ -1971,7 +1971,7 @@ fun SubtitlesSheet(
             } else {
                 tracks.forEach { track ->
                     val label = buildString {
-                        append(track.title.ifBlank { "Track ${track.id}" })
+                        append(track.title.ifBlank { "Spur ${track.id}" })
                         if (track.lang.isNotBlank()) append("  ·  ${track.lang}")
                     }
                     SubtitleRow(
@@ -2019,7 +2019,7 @@ fun AudioTracksSheet(
             } else {
                 tracks.forEach { track ->
                     val label = buildString {
-                        append(track.title.ifBlank { "Track ${track.id}" })
+                        append(track.title.ifBlank { "Spur ${track.id}" })
                         val meta = buildList {
                             if (track.lang.isNotBlank()) add(track.lang)
                             if (track.codec.isNotBlank()) add(track.codec)
@@ -2212,11 +2212,11 @@ private fun SubtitleRow(label: String, selected: Boolean, onClick: () -> Unit) {
 private fun formatRemaining(programme: EPGProgramme): String {
     val remainingMs = (programme.endMillis - System.currentTimeMillis()).coerceAtLeast(0L)
     val minutes = remainingMs / 60_000L
-    if (minutes <= 0L) return "ending"
-    if (minutes < 60L) return "$minutes min remaining"
+    if (minutes <= 0L) return "endet gleich"
+    if (minutes < 60L) return "noch $minutes Min."
     val hours = minutes / 60L
     val leftover = minutes % 60L
-    return if (leftover == 0L) "$hours h remaining" else "$hours h $leftover min remaining"
+    return if (leftover == 0L) "noch $hours Std." else "noch $hours Std. $leftover Min."
 }
 
 private fun formatTimeRange(programme: EPGProgramme): String {
