@@ -243,7 +243,7 @@ fun PlaylistDetailScreen(
                         )
                         playlist.lanUrlString?.takeIf { it.isNotBlank() }?.let { lan ->
                             DetailRow(
-                                label = "Local URL",
+                                label = "Lokale URL",
                                 value = lan,
                                 icon = Icons.Filled.CheckCircle.takeIf { activeRoute?.isLan == true },
                                 iconTint = MaterialTheme.colorScheme.primary,
