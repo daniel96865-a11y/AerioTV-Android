@@ -1762,7 +1762,7 @@ fun VODPlayerScreen(
                                     } else {
                                         Icons.Filled.Fullscreen
                                     },
-                                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Vollbild",
+                                    contentDescription = if (forcedLandscape) "Vollbild verlassen" else "Vollbild",
                                     tint = Color.White,
                                 )
                             }
