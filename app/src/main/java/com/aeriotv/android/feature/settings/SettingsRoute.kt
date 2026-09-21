@@ -121,7 +121,6 @@ fun visibleSettingsSections(
             add(SettingsSection.General)
             // Remote Control initiative: TV form factors only.
             if (isTv) add(SettingsSection.RemoteControl)
-            add(SettingsSection.Sync)
             if (updaterEnabled) add(SettingsSection.AppUpdates)
         },
     ),
@@ -155,7 +154,6 @@ fun settingsRouteForDeepLinkPage(
     "appearance" -> SettingsRoute.Section(SettingsSection.Appearance)
     "general" -> SettingsRoute.Section(SettingsSection.General)
     "remote" -> SettingsRoute.Section(SettingsSection.RemoteControl)
-    "sync" -> SettingsRoute.Section(SettingsSection.Sync)
     "updates" -> SettingsRoute.Section(SettingsSection.AppUpdates)
     "developer" -> SettingsRoute.Section(SettingsSection.Developer)
     "about" -> SettingsRoute.About
