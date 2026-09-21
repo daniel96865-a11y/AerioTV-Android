@@ -111,9 +111,9 @@ fun PlayerSettingsScreen(
             ) {
                 // MARK: Info Card
                 SettingsSection(
-                    header = "Info Card",
-                    footer = "Choose what appears on the program info card in the " +
-                        "player while the controls are showing.",
+                    header = "Infokarte",
+                    footer = "Wähle aus, was auf der Sendungsinfokarte im " +
+                        "Player angezeigt wird, während die Bedienelemente sichtbar sind.",
                 ) {
                     SettingsToggleRow(
                         title = "Senderlogo",
@@ -149,10 +149,10 @@ fun PlayerSettingsScreen(
 
                 // MARK: Live Rewind
                 SettingsSection(
-                    header = "Live Rewind",
-                    footer = "Buffers the channel you are watching so you can pause and " +
-                        "rewind live TV. Uses device storage while you watch; buffered " +
-                        "video is removed automatically.",
+                    header = "Live-Zurückspulen",
+                    footer = "Puffert den aktuell angesehenen Sender, damit du Live-TV pausieren und " +
+                        "zurückspulen kannst. Während der Wiedergabe wird Gerätespeicher verwendet; gepufferte " +
+                        "Videodaten werden automatisch gelöscht.",
                 ) {
                     SettingsToggleRow(
                         title = "Live-TV pausieren & zurückspulen",
@@ -164,9 +164,9 @@ fun PlayerSettingsScreen(
                 if (liveRewindEnabled) {
                     SettingsSection(
                         header = "Verfügbar halten",
-                        footer = "How far back you can rewind the channel you are " +
-                            "watching. Buffered video is released as soon as you " +
-                            "leave the channel. " +
+                        footer = "Legt fest, wie weit du beim aktuell angesehenen Sender " +
+                            "zurückspulen kannst. Gepufferte Videodaten werden freigegeben, sobald du " +
+                            "den Sender verlässt. " +
                             depthEstimateText(liveRewindDepth),
                     ) {
                         SteppedSliderRow(
@@ -180,14 +180,14 @@ fun PlayerSettingsScreen(
                     SettingsSection(
                         header = "Letzte Sender live halten",
                         footer = if (keepRecent) {
-                            "Channels you flip away from keep buffering so you can flip " +
-                                "back and rewind across the time you were away. Each kept " +
-                                "channel uses an extra connection to your provider; accounts " +
-                                "limited to one connection should leave this off. Oldest " +
-                                "channels stop first, and all stop when the app leaves the screen."
+                            "Verlassene Sender werden weiter gepuffert, damit du zurückwechseln " +
+                                "und über die Zeit deiner Abwesenheit zurückspulen kannst. Jeder gehaltene " +
+                                "Sender benötigt eine zusätzliche Verbindung zu deinem Anbieter; Konten " +
+                                "mit nur einer Verbindung sollten dies ausgeschaltet lassen. Die ältesten " +
+                                "Sender werden zuerst beendet; alle werden beendet, wenn die App diese Ansicht verlässt."
                         } else {
-                            "Keep buffering the channels you most recently flipped away " +
-                                "from. Uses one extra provider connection per kept channel."
+                            "Puffert die zuletzt verlassenen Sender weiter " +
+                                "und benötigt pro gehaltenem Sender eine zusätzliche Anbieter-Verbindung."
                         },
                     ) {
                         SettingsToggleRow(
@@ -213,7 +213,7 @@ fun PlayerSettingsScreen(
                 // Apple phase 1 parity: skip intervals, buffer size and stream
                 // recovery share one section.
                 SettingsSection(
-                    header = "Playback",
+                    header = "Wiedergabe",
                     footer = (
                         if (isTv) {
                             "How far the skip buttons and a single left or right press move " +
@@ -239,7 +239,7 @@ fun PlayerSettingsScreen(
                         onSelect = viewModel::setSkipBackSeconds,
                     )
                     SteppedSliderRow(
-                        label = "Skip forward",
+                        label = "Vorspringen",
                         values = SkipIntervals.CHOICES,
                         selected = skipForwardSeconds,
                         format = ::formatSkipSeconds,
@@ -263,10 +263,10 @@ fun PlayerSettingsScreen(
 
                 SettingsSection(
                     header = "Audio",
-                    footer = "Passthrough sends surround sound audio as a bitstream for your TV or receiver to decode. Some TVs decode it late, which shows up as voices out of sync with lips on live TV. Off, AerioTV decodes audio itself and stays in sync. Takes effect on the next playback.",
+                    footer = "Passthrough sendet Surround-Audio als Bitstream an Fernseher oder Receiver. Einige Fernseher verarbeiten es verzögert, wodurch Bild und Ton bei Live-TV auseinanderlaufen können. Wenn ausgeschaltet, decodiert AerioTV Deutsch das Audio selbst. Die Änderung gilt ab der nächsten Wiedergabe.",
                 ) {
                     SettingsToggleRow(
-                        title = "Surround sound passthrough",
+                        title = "Surround-Sound-Passthrough",
                         subtitle = "AC-3- und E-AC-3-Audio unverändert an den Receiver senden. Ausschalten, wenn Bild und Ton auseinanderlaufen.",
                         checked = audioPassthrough,
                         onCheckedChange = viewModel::setAudioPassthroughEnabled,
@@ -275,45 +275,45 @@ fun PlayerSettingsScreen(
 
                 // MARK: Gestures
                 SettingsSection(
-                    header = "Gestures",
+                    header = "Gesten",
                     // tvOS / Android TV flip channels with D-pad up/down, not a
                     // swipe, so the "accidental swipes" caution is meaningless on
                     // a remote (user request: drop the note on TV). Phones keep it.
                     footer = if (isTv) {
                         null
                     } else {
-                        "Turn off if accidental swipes during playback flip channels by mistake. " +
-                            "Brightness and volume slides are recognized only inside a narrow band at the very edge of the screen, " +
-                            "so they stay clear of the channel flip and of swiping down to minimize."
+                        "Ausschalten, wenn versehentliches Wischen während der Wiedergabe unbeabsichtigt Sender wechselt. " +
+                            "Helligkeits- und Lautstärkegesten werden nur in einem schmalen Bereich am Bildschirmrand erkannt, " +
+                            "damit sie nicht mit Senderwechsel oder Herunterwischen zum Minimieren kollidieren."
                     },
                 ) {
                     SettingsToggleRow(
                         title = "Senderwechsel mit Hoch/Runter",
                         subtitle = if (isTv) {
-                            "While the player chrome is visible, press up for the next channel and down for the previous. Live single-stream playback only."
+                            "Während die Player-Steuerung sichtbar ist, wechselt Hoch zum nächsten und Runter zum vorherigen Sender. Nur bei Live-Einzelstream-Wiedergabe."
                         } else {
-                            "While the player chrome is visible, swipe up for the next channel and down for the previous. Live single-stream playback only."
+                            "Während die Player-Steuerung sichtbar ist, nach oben für den nächsten und nach unten für den vorherigen Sender wischen. Nur bei Live-Einzelstream-Wiedergabe."
                         },
                         checked = appleTVChannelFlip,
                         onCheckedChange = viewModel::setAppleTVChannelFlip,
                     )
                     if (!isTv) {
                         SettingsToggleRow(
-                            title = "Brightness edge slide",
+                            title = "Helligkeit am Bildschirmrand",
                             subtitle = "Am Helligkeitsrand nach oben oder unten wischen, um das Bild heller oder dunkler zu stellen. Gilt nur in dieser App.",
                             checked = playerBrightnessGesture,
                             onCheckedChange = viewModel::setPlayerBrightnessGesture,
                         )
                         SettingsToggleRow(
-                            title = "Volume edge slide",
+                            title = "Lautstärke am Bildschirmrand",
                             subtitle = "Am anderen Rand nach oben oder unten wischen, um die Medienlautstärke zu ändern.",
                             checked = playerVolumeGesture,
                             onCheckedChange = viewModel::setPlayerVolumeGesture,
                         )
                         if (playerBrightnessGesture || playerVolumeGesture) {
                             listOf(
-                                PLAYER_EDGE_LEFT to "Brightness: Left, Volume: Right",
-                                PLAYER_EDGE_RIGHT to "Brightness: Right, Volume: Left",
+                                PLAYER_EDGE_LEFT to "Helligkeit: links, Lautstärke: rechts",
+                                PLAYER_EDGE_RIGHT to "Helligkeit: rechts, Lautstärke: links",
                             ).forEach { (wire, label) ->
                                 SettingsSelectionRow(
                                     label = label,
@@ -332,7 +332,7 @@ fun PlayerSettingsScreen(
                 // Rounded selection (s_09); same underlying Boolean.
                 SettingsSection(
                     header = "Mehrfachansicht",
-                    footer = "How the grid shows which tile is unmuted. Center Icon fades with the chrome, Gray Outline stays visible, Accent Outline appears on switch and fades after 5 seconds. Padding inserts a small gap between tiles so each stream stands on its own.",
+                    footer = "Legt fest, wie die Mehrfachansicht die aktive Ton-Kachel markiert. Das mittlere Symbol blendet mit der Steuerung aus, die graue Umrandung bleibt sichtbar und die Akzent-Umrandung erscheint beim Wechsel und verschwindet nach 5 Sekunden. Ein Abstand trennt die Kacheln optisch voneinander.",
                 ) {
                     AUDIO_FOCUS_OPTIONS.forEach { opt ->
                         SettingsSelectionRow(
@@ -343,18 +343,18 @@ fun PlayerSettingsScreen(
                         )
                     }
                     SettingsToggleRow(
-                        title = "Padding Between Tiles",
+                        title = "Abstand zwischen Kacheln",
                         subtitle = "Kleinen Abstand zwischen Kacheln für bessere Trennung hinzufügen.",
                         checked = multiviewPadding,
                         onCheckedChange = viewModel::setMultiviewTilePadding,
                     )
                     SettingsSelectionRow(
-                        label = "Square",
+                        label = "Eckig",
                         selected = !multiviewRounded,
                         onClick = { viewModel.setMultiviewTileCornersRounded(false) },
                     )
                     SettingsSelectionRow(
-                        label = "Rounded",
+                        label = "Abgerundet",
                         selected = multiviewRounded,
                         onClick = { viewModel.setMultiviewTileCornersRounded(true) },
                     )
@@ -367,16 +367,16 @@ fun PlayerSettingsScreen(
                 if (isTv) {
                     SettingsSection(
                         header = "Anzeige",
-                        footer = "Startup Refresh Rate switches the display once at app launch so it is already on your main content rate before the first channel (changes apply on next launch). Match Content Resolution outputs at the stream's resolution so your TV does the upscaling; the screen blinks briefly on each switch.",
+                        footer = "Die Start-Bildwiederholrate stellt die Anzeige beim App-Start einmal um, damit sie schon vor dem ersten Sender zur Haupt-Bildrate passt. „Inhaltsauflösung anpassen“ gibt den Stream in seiner Auflösung aus, damit der Fernseher hochskaliert; beim Wechsel kann der Bildschirm kurz blinken.",
                     ) {
                         SettingsToggleRow(
-                            title = "Match content resolution",
+                            title = "Inhaltsauflösung anpassen",
                             subtitle = "1080p-Streams in 1080p ausgeben und den Fernseher hochskalieren lassen. Aus behält den nativen Anzeigemodus.",
                             checked = matchContentResolution,
                             onCheckedChange = viewModel::setMatchContentResolution,
                         )
                         listOf(
-                            "off" to "Off (system default)",
+                            "off" to "Aus (Systemstandard)",
                             "50" to "50 Hz",
                             "59.94" to "59.94 Hz",
                             "60" to "60 Hz",
