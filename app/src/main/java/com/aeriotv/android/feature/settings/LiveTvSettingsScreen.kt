@@ -116,19 +116,19 @@ fun LiveTvSettingsScreen(
                         header = "EPG-Darstellung",
                         footer = (
                             if (listViewShown) {
-                                "Turn logos or numbers off to give long channel names more row width. Applies to the Live TV list and the Guide."
+                                "Schalte Logos oder Nummern aus, damit lange Sendernamen mehr Platz haben. Gilt für die Live-TV-Liste und den EPG."
                             } else {
-                                "Turn logos or numbers off to give long channel names more room in the Guide's channel column."
+                                "Schalte Logos oder Nummern aus, damit lange Sendernamen in der Sender-Spalte des EPG mehr Platz haben."
                             }
-                            ) + " Rounded corners round channel logos and program artwork to match the card " +
-                            "or cell they sit in. Artwork that floats on a transparent background stays square either way.",
+                            ) + " Abgerundete Ecken passen Senderlogos und Sendungsbilder an die Form der Karte oder Zelle an. " +
+                            "Bilder mit transparentem Hintergrund bleiben unabhängig davon eckig.",
                     ) {
                         SettingsToggleRow(
                             title = "Senderlogos anzeigen",
                             subtitle = if (listViewShown) {
-                                "Display each channel's logo in the Live TV list."
+                                "Senderlogo in der Live-TV-Liste anzeigen."
                             } else {
-                                "Display each channel's logo in the Guide's channel column."
+                                "Senderlogo in der Sender-Spalte des EPG anzeigen."
                             },
                             checked = showChannelLogos,
                             onCheckedChange = viewModel::setShowChannelLogos,
@@ -136,9 +136,9 @@ fun LiveTvSettingsScreen(
                         SettingsToggleRow(
                             title = "Sendernummern anzeigen",
                             subtitle = if (listViewShown) {
-                                "Display each channel's number in the Live TV list and Guide."
+                                "Sendernummer in der Live-TV-Liste und im EPG anzeigen."
                             } else {
-                                "Display each channel's number in the Guide's channel column."
+                                "Sendernummer in der Sender-Spalte des EPG anzeigen."
                             },
                             checked = showChannelNumbers,
                             onCheckedChange = viewModel::setShowChannelNumbers,
@@ -152,9 +152,9 @@ fun LiveTvSettingsScreen(
                         SettingsToggleRow(
                             title = "Sendungsuntertitel anzeigen",
                             subtitle = if (listViewShown) {
-                                "Display the episode or match name under each program title in the Guide and Live TV list. Turn off if your EPG repeats the description there."
+                                "Folgen- oder Spielnamen unter dem Sendungstitel im EPG und in der Live-TV-Liste anzeigen. Ausschalten, wenn dein EPG dort nur die Beschreibung wiederholt."
                             } else {
-                                "Display the episode or match name under each program title in the Guide. Turn off if your EPG repeats the description there."
+                                "Folgen- oder Spielnamen unter dem Sendungstitel im EPG anzeigen. Ausschalten, wenn dein EPG dort nur die Beschreibung wiederholt."
                             },
                             checked = showProgramSubtitles,
                             onCheckedChange = viewModel::setShowProgramSubtitles,
@@ -286,8 +286,8 @@ fun LiveTvSettingsScreen(
                             "WIEDERHOLUNG sowie Staffel-/Episodenmarkierungen im EPG und in der Sender" +
                             "liste. Die Einstellung wird getrennt gespeichert für " +
                             (if (isTv) "Fernseher" else "Handys und Tablets") +
-                            " and synced across your " +
-                            (if (isTv) "Fernseher" else "Mobilgeräte") + ".",
+                            " und getrennt für deine " +
+                            (if (isTv) "Fernseher" else "Mobilgeräte") + " verwendet.",
                     ) {
                         SettingsToggleRow(
                             title = "Sendungsmarkierungen anzeigen",
@@ -313,9 +313,9 @@ fun LiveTvSettingsScreen(
                 settingsCard(
                     header = "Darstellungsgröße",
                     footer = if (listViewShown) {
-                        "Independent scale for the Live TV List. 100% matches the default; 85-175% lets you trade density for readability (150%+ shows fewer, larger items - handy on a TV across the room). Changes apply live."
+                        "Unabhängige Größe für die Live-TV-Liste. 100 % entspricht dem Standard; mit 85–175 % kannst du zwischen mehr Inhalt und besserer Lesbarkeit wählen. Ab 150 % werden weniger, dafür größere Einträge angezeigt. Änderungen gelten sofort."
                     } else {
-                        "Independent scale for Live TV. 100% matches the default; 85-175% lets you trade density for readability (150%+ shows fewer, larger items - handy on a TV across the room). Changes apply live."
+                        "Unabhängige Größe für Live-TV. 100 % entspricht dem Standard; mit 85–175 % kannst du zwischen mehr Inhalt und besserer Lesbarkeit wählen. Ab 150 % werden weniger, dafür größere Einträge angezeigt. Änderungen gelten sofort."
                     },
                 ) {
                     ScaleSliderRow(
@@ -327,7 +327,7 @@ fun LiveTvSettingsScreen(
 
                 // MARK: Colors
                 settingsCard(
-                    header = "Colors",
+                    header = "Farben",
                     footer = "EPG-Zellen und Senderkarten nach Sendungskategorie einfärben. Wähle unten eine Kategorie, um ihren Hex-Farbwert anzupassen.",
                 ) {
                     ToggleRow(
@@ -481,7 +481,7 @@ private fun GroupSelectionRow(
  *  Live TV screen reads; the in-screen List / Guide button is session-only and
  *  never writes here. */
 private val DEFAULT_LIVE_TV_VIEW_OPTIONS = listOf(
-    "" to "Automatic",
+    "" to "Automatisch",
     "list" to "List",
-    "guide" to "Guide",
+    "guide" to "EPG",
 )
