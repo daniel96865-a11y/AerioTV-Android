@@ -542,7 +542,7 @@ fun MediaTabContent(
         query = query,
         onQueryChange = { submitQuery(it) },
         onSearchToggle = { searchActive = !searchActive; if (!searchActive) submitQuery("") },
-        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Search TV shows",
+        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Serien suchen",
         isSearching = isSearching,
         searchExtras = searchExtras,
         pills = genrePills,
