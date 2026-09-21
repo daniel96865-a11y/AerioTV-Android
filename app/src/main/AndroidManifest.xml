@@ -52,10 +52,10 @@
         android:largeHeap="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/streamy_logo"
+        android:roundIcon="@drawable/streamy_logo"
         android:label="@string/app_name"
-        android:banner="@drawable/tv_banner"
+        android:banner="@drawable/tv_banner_s2"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.AerioTV">
