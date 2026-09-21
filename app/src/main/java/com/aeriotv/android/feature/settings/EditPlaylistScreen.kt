@@ -61,7 +61,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
 
 /**
  * Edit Playlist sub-screen. Mirrors iOS Edit Playlist modal: Cancel header
- * left, "Edit Playlist" title, Save header right. Three sections — Connection,
+ * left, "Wiedergabeliste bearbeiten" title, Save header right. Three sections — Connection,
  * Authentication (with segmented control for Dispatcharr User+Pass vs API Key),
  * EPG Source (M3U only). Save calls [PlaylistViewModel.saveEdits] which reuses
  * the bootstrap load path with `existingId` so the row's UUID stays stable.
@@ -167,7 +167,7 @@ fun EditPlaylistScreen(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "Edit Playlist",
+                    text = "Wiedergabeliste bearbeiten",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -177,7 +177,7 @@ fun EditPlaylistScreen(
                 // discards and pops the screen. Phones/tablets keep Cancel.
                 if (!isTv) {
                     TextButton(onClick = onBack) {
-                        Text("Cancel", color = MaterialTheme.colorScheme.textAccent)
+                        Text("Abbrechen", color = MaterialTheme.colorScheme.textAccent)
                     }
                 }
             },
@@ -186,7 +186,7 @@ fun EditPlaylistScreen(
                 // action is off the natural D-pad path through the fields).
                 if (!isTv) {
                     SettingsHeaderTextButton(
-                        label = "Save",
+                        label = "Speichern",
                         enabled = canSave,
                         onClick = performSave,
                     )
@@ -200,7 +200,7 @@ fun EditPlaylistScreen(
 
         if (playlist == null) {
             Text(
-                "No playlist loaded",
+                "Keine Wiedergabeliste geladen",
                 modifier = Modifier.padding(24.dp),
                 style = MaterialTheme.typography.bodyMedium.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -256,8 +256,8 @@ fun EditPlaylistScreen(
                                     when (sourceType) {
                                         SourceType.M3uUrl -> "Playlist URL"
                                         SourceType.DispatcharrApiKey,
-                                        SourceType.DispatcharrUserPass -> "Server URL"
-                                        SourceType.XtreamCodes -> "Server URL"
+                                        SourceType.DispatcharrUserPass -> "Server-URL"
+                                        SourceType.XtreamCodes -> "Server-URL"
                                     },
                                 )
                             },
@@ -270,7 +270,7 @@ fun EditPlaylistScreen(
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            text = "Type: ${sourceType.displayName}. To switch types, use Change Playlist.",
+                            text = "Typ: ${sourceType.displayName}. Zum Wechseln des Typs „Wiedergabeliste ändern“ verwenden.",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -283,16 +283,16 @@ fun EditPlaylistScreen(
             // explaining the automatic LAN/WAN switch.
             item {
                 Section(
-                    header = "Local Network",
-                    footer = "Used automatically whenever the server answers at this address " +
-                        "(checked at launch, on network changes, and after edits). Leave blank " +
-                        "to always use the server URL.",
+                    header = "Lokales Netzwerk",
+                    footer = "Wird automatisch verwendet, sobald der Server unter dieser Adresse erreichbar ist " +
+                        "(Prüfung beim Start, bei Netzwerkänderungen und nach Änderungen). Leer lassen, " +
+                        "um immer die normale Server-URL zu verwenden.",
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         OutlinedTextField(
                             value = lanUrl,
                             onValueChange = { lanUrl = it },
-                            label = { Text("Local URL (optional)") },
+                            label = { Text("Lokale URL (optional)") },
                             placeholder = { Text("http://192.168.1.10:9191") },
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth().tvFormFieldInput(),
@@ -307,19 +307,19 @@ fun EditPlaylistScreen(
 
             when (sourceType) {
                 SourceType.DispatcharrApiKey -> item {
-                    Section(header = "Authentication") {
+                    Section(header = "Authentifizierung") {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                             val apiKeyReveal = rememberSecretRevealState()
                             OutlinedTextField(
                                 value = apiKey,
                                 onValueChange = { apiKey = it },
-                                label = { Text("API Key") },
+                                label = { Text("API-Schlüssel") },
                                 singleLine = true,
                                 visualTransformation = apiKeyReveal.transformation,
                                 trailingIcon = {
                                     SecretRevealIconButton(
                                         state = apiKeyReveal,
-                                        contentLabel = "API key",
+                                        contentLabel = "API-Schlüssel",
                                     )
                                 },
                                 modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -334,12 +334,12 @@ fun EditPlaylistScreen(
                     }
                 }
                 SourceType.DispatcharrUserPass -> item {
-                    Section(header = "Authentication") {
+                    Section(header = "Authentifizierung") {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                             val passwordReveal = rememberSecretRevealState()
                             val apiKeyReveal = rememberSecretRevealState()
                             SegmentedToggle(
-                                left = "Username & Password",
+                                left = "Benutzername & Passwort",
                                 right = "API Key",
                                 selected = dispatcharrMode,
                                 onSelect = { dispatcharrMode = it },
@@ -349,7 +349,7 @@ fun EditPlaylistScreen(
                                 OutlinedTextField(
                                     value = username,
                                     onValueChange = { username = it },
-                                    label = { Text("Username") },
+                                    label = { Text("Benutzername") },
                                     singleLine = true,
                                     modifier = Modifier.fillMaxWidth().tvFormFieldInput(),
                                     keyboardOptions = aerioTextFieldKeyboardOptions(
@@ -360,13 +360,13 @@ fun EditPlaylistScreen(
                                 OutlinedTextField(
                                     value = password,
                                     onValueChange = { password = it },
-                                    label = { Text("Password") },
+                                    label = { Text("Passwort") },
                                     singleLine = true,
                                     visualTransformation = passwordReveal.transformation,
                                     trailingIcon = {
                                         SecretRevealIconButton(
                                             state = passwordReveal,
-                                            contentLabel = "password",
+                                            contentLabel = "Passwort",
                                         )
                                     },
                                     modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -381,13 +381,13 @@ fun EditPlaylistScreen(
                                 OutlinedTextField(
                                     value = apiKey,
                                     onValueChange = { apiKey = it },
-                                    label = { Text("API Key") },
+                                    label = { Text("API-Schlüssel") },
                                     singleLine = true,
                                     visualTransformation = apiKeyReveal.transformation,
                                     trailingIcon = {
                                         SecretRevealIconButton(
                                             state = apiKeyReveal,
-                                            contentLabel = "API key",
+                                            contentLabel = "API-Schlüssel",
                                         )
                                     },
                                     modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -400,12 +400,12 @@ fun EditPlaylistScreen(
                     }
                 }
                 SourceType.XtreamCodes -> item {
-                    Section(header = "Authentication") {
+                    Section(header = "Authentifizierung") {
                         Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                             OutlinedTextField(
                                 value = username,
                                 onValueChange = { username = it },
-                                label = { Text("Username") },
+                                label = { Text("Benutzername") },
                                 singleLine = true,
                                 modifier = Modifier.fillMaxWidth().tvFormFieldInput(),
                                 keyboardOptions = aerioTextFieldKeyboardOptions(
@@ -417,13 +417,13 @@ fun EditPlaylistScreen(
                             OutlinedTextField(
                                 value = password,
                                 onValueChange = { password = it },
-                                label = { Text("Password") },
+                                label = { Text("Passwort") },
                                 singleLine = true,
                                 visualTransformation = passwordReveal.transformation,
                                 trailingIcon = {
                                     SecretRevealIconButton(
                                         state = passwordReveal,
-                                        contentLabel = "password",
+                                        contentLabel = "Passwort",
                                     )
                                 },
                                 modifier = Modifier.fillMaxWidth().tvFormFieldInput(
@@ -448,8 +448,8 @@ fun EditPlaylistScreen(
             if (sourceType.supportsVOD) {
                 item {
                     Section(
-                        header = "On Demand",
-                        footer = "When off, this playlist's movies and TV shows aren't loaded into On Demand. Useful if you only want Live TV from this server, or if you have a second playlist that already provides On Demand.",
+                        header = "Mediathek",
+                        footer = "Wenn ausgeschaltet, werden Filme und Serien dieser Wiedergabeliste nicht in die Mediathek geladen. Nützlich, wenn du von diesem Server nur Live-TV möchtest oder eine zweite Wiedergabeliste bereits die Mediathek liefert.",
                     ) {
                         // Whole row is the focus/toggle target so D-pad focus is
                         // visible; the Switch is display-only.
@@ -465,7 +465,7 @@ fun EditPlaylistScreen(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             Text(
-                                text = "Fetch On Demand from this playlist",
+                                text = "Mediathek aus dieser Wiedergabeliste laden",
                                 style = MaterialTheme.typography.bodyLarge,
                                 color = MaterialTheme.colorScheme.onBackground,
                                 fontWeight = FontWeight.Medium,
@@ -490,8 +490,8 @@ fun EditPlaylistScreen(
             // guide browsable into the past.
             item {
                 Section(
-                    header = "Guide Days",
-                    footer = "How many days of guide data to load, back and ahead. " +
+                    header = "EPG-Tage",
+                    footer = "Wie viele Tage EPG-Daten rückwirkend und im Voraus geladen werden. " +
                         "Dispatcharr only; other sources show what their guide carries.",
                 ) {
                     Column(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -500,11 +500,11 @@ fun EditPlaylistScreen(
                         listOf(1, 3, 7, 14, 0).forEach { days ->
                             ProfileRow(
                                 label = when (days) {
-                                    0 -> "All Available"
+                                    0 -> "Alles verfügbar"
                                     1 -> "1 Day"
                                     else -> "$days Days"
                                 },
-                                detail = if (days == 7) "Default" else null,
+                                detail = if (days == 7) "Standard" else null,
                                 selected = sanitizeGuideDays(epgRetentionDays) == days,
                                 onClick = { epgRetentionDays = days },
                             )
@@ -516,8 +516,8 @@ fun EditPlaylistScreen(
             if (isDispatcharr) {
                 item {
                     Section(
-                        header = "Channel Profile",
-                        footer = "Limit this playlist to the channels in a Dispatcharr profile. " +
+                        header = "Senderprofil",
+                        footer = "Beschränkt diese Wiedergabeliste auf die Sender eines Dispatcharr-Profils. " +
                             "\"All Channels\" shows everything on the server.",
                     ) {
                         Column(modifier = Modifier.padding(vertical = 4.dp)) {
@@ -541,7 +541,7 @@ fun EditPlaylistScreen(
                                 }
                             } else {
                                 ProfileRow(
-                                    label = "All Channels",
+                                    label = "Alle Sender",
                                     detail = null,
                                     selected = selectedProfileId == null,
                                     onClick = { selectedProfileId = null },
@@ -593,11 +593,11 @@ fun EditPlaylistScreen(
             if (isTv) {
                 item {
                     SettingsActionRow(
-                        label = "Save Changes",
+                        label = "Änderungen speichern",
                         leadingIcon = Icons.Filled.Check,
                         onClick = performSave,
                         enabled = canSave,
-                        subtitle = if (canSave) null else "Name and Server URL are required",
+                        subtitle = if (canSave) null else "Name und Server-URL sind erforderlich",
                     )
                 }
             }
@@ -648,7 +648,7 @@ private fun ProfileRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(20.dp),
             )

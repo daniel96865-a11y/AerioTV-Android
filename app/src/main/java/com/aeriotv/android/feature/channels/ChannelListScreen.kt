@@ -185,7 +185,7 @@ fun ChannelListScreen(
     val hiddenGroups by settingsVm.hiddenGroups.collectAsStateWithLifecycle(initialValue = emptySet())
     val showChannelLogos by settingsVm.showChannelLogos.collectAsStateWithLifecycle(initialValue = true)
     val showChannelNumbers by settingsVm.showChannelNumbers.collectAsStateWithLifecycle(initialValue = true)
-    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Default")
+    val groupSortModeRaw by settingsVm.groupSortMode.collectAsStateWithLifecycle(initialValue = "Standard")
     val groupOrder by settingsVm.groupOrder.collectAsStateWithLifecycle(initialValue = emptyList())
     val groupSortMode = com.aeriotv.android.feature.livetv.GroupSortMode.from(groupSortModeRaw)
     // Logan 2026-09-14: Recently Watched is a synthetic group, unchecked in
@@ -289,7 +289,7 @@ fun ChannelListScreen(
 
     val groups by remember(allGroupsRaw, effectiveHidden) {
         derivedStateOf {
-            // Drop any provider group literally named "All" -- it collides with
+            // Drop any provider group literally named "Alle" -- it collides with
             // the ALL_GROUPS sentinel and crashes the pill LazyRow on a
             // duplicate key (#45 review).
             val visible = allGroupsRaw.filterNot { it in effectiveHidden }
@@ -393,7 +393,7 @@ fun ChannelListScreen(
             hiddenGroupsCount = hiddenGroups.size,
             onManageGroups = { manageGroupsOpen = true },
             // Also show the pill strip when collections exist even if there is
-            // only the "All" group, else a collection filter is inescapable on
+            // only the "Alle" group, else a collection filter is inescapable on
             // a groupless playlist (#45 review). Mirrors GuideScreen.
             showPills = groups.size > 1 || collections.isNotEmpty() || hiddenGroups.isNotEmpty(),
             groups = groups,
@@ -431,7 +431,7 @@ fun ChannelListScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 4.dp),
             singleLine = true,
-            placeholder = { Text("Search channels") },
+            placeholder = { Text("Sender suchen") },
             leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
             // Trailing X clears the query in one tap. iOS UISearchBar has
             // this for free; Compose's OutlinedTextField doesn't, so we
@@ -441,7 +441,7 @@ fun ChannelListScreen(
                     IconButton(onClick = { viewModel.onSearchQueryChange("") }) {
                         Icon(
                             imageVector = Icons.Filled.Close,
-                            contentDescription = "Clear search",
+                            contentDescription = "Suche leeren",
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
@@ -845,13 +845,13 @@ internal fun SortMenu(
         if (phoneCircle) {
             com.aeriotv.android.feature.livetv.LiveTvPhoneCircle(
                 icon = Icons.Filled.SwapVert,
-                contentDescription = "Sort channels",
+                contentDescription = "Sender sortieren",
                 onClick = { expanded = true },
             )
         } else if (circular) {
             ListControlCircle(
                 icon = Icons.Filled.SwapVert,
-                contentDescription = "Sort channels",
+                contentDescription = "Sender sortieren",
                 onClick = { expanded = true },
             )
         } else {
@@ -861,7 +861,7 @@ internal fun SortMenu(
             ) {
                 Icon(
                     imageVector = Icons.Filled.SwapVert,
-                    contentDescription = "Sort channels",
+                    contentDescription = "Sender sortieren",
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = if (iconSize != null) Modifier.size(iconSize) else Modifier,
                 )
@@ -1052,7 +1052,7 @@ internal fun ChannelRow(
         val target = nowProgramme?.toInfoTarget(channel.name, channel.dispatcharrChannelId)
             ?: ProgramInfoTarget(
                 channelName = channel.name,
-                title = "${channel.name} live recording",
+                title = "${channel.name} Live-Aufnahme",
                 startMillis = now,
                 endMillis = now + 3_600_000L,
                 description = "",
@@ -1069,7 +1069,7 @@ internal fun ChannelRow(
     //
     // Dispatcharr's bulk EPG grid drops `<category>` so nowProgramme.category
     // is typically blank for Dispatcharr-sourced playlists; the channel's
-    // groupTitle ("Sports", "Movies HD", "Kids", "News" etc.) is passed as a
+    // groupTitle ("Sport", "Movies HD", "Kinder", "Nachrichten" etc.) is passed as a
     // fallback so the row still tints when the program-level category isn't
     // available. The per-program lazy fetch in ProgramInfoSheet still wins
     // when the user opens the detail sheet.
@@ -1243,7 +1243,7 @@ internal fun ChannelRow(
                             if (showChannelName || isFavorite) Spacer(Modifier.width(6.dp))
                             Icon(
                                 imageVector = Icons.Filled.History,
-                                contentDescription = "Catch-up available",
+                                contentDescription = "Catch-up verfügbar",
                                 tint = MaterialTheme.colorScheme.tertiary,
                                 modifier = Modifier.size(13.dp),
                             )
@@ -1372,7 +1372,7 @@ internal fun ChannelRow(
                         actions = buildList {
                             add(
                                 TvMenuAction(
-                                    if (isFavorite) "Remove from Favorites" else "Add to Favorites",
+                                    if (isFavorite) "Aus Favoriten entfernen" else "Zu Favoriten hinzufügen",
                                     if (isFavorite) Icons.Filled.Star else Icons.Outlined.Star,
                                 ) { onToggleFavorite() },
                             )
@@ -1380,7 +1380,7 @@ internal fun ChannelRow(
                             // (iOS cardMenuButtons order: right after Favorites).
                             collectionsMenu?.let { cm ->
                                 add(
-                                    TvMenuAction("Add to Collection…", Icons.Outlined.Folder) {
+                                    TvMenuAction("Zur Sammlung hinzufügen…", Icons.Outlined.Folder) {
                                         cm.onOpenPicker(channel.id, channel.name, -1, 0L)
                                     },
                                 )
@@ -1389,7 +1389,7 @@ internal fun ChannelRow(
                                 if (active != null && channel.id in active.memberIds) {
                                     add(
                                         TvMenuAction(
-                                            "Remove from ${active.name}",
+                                            "Aus ${active.name} entfernen",
                                             Icons.Outlined.Folder,
                                             destructive = true,
                                         ) { cm.onRemoveMember(active.id, channel.id) },
@@ -1399,7 +1399,7 @@ internal fun ChannelRow(
                                 ) {
                                     add(
                                         TvMenuAction(
-                                            "Remove from All Collections",
+                                            "Aus allen Sammlungen entfernen",
                                             Icons.Outlined.Folder,
                                             destructive = true,
                                         ) { cm.onRemoveFromAll(channel.id) },
@@ -1408,7 +1408,7 @@ internal fun ChannelRow(
                             }
                             if (nowProgramme != null) {
                                 add(
-                                    TvMenuAction("Program Info", Icons.Outlined.Info) {
+                                    TvMenuAction("Sendungsinfo", Icons.Outlined.Info) {
                                         onShowProgramInfo(nowProgramme.toInfoTarget(channel.name, channel.dispatcharrChannelId))
                                     },
                                 )
@@ -1428,7 +1428,7 @@ internal fun ChannelRow(
                             if (channel.url.isNotBlank()) {
                                 add(
                                     TvMenuAction(
-                                        if (nowProgramme != null) "Record from Now" else "Record",
+                                        if (nowProgramme != null) "Ab jetzt aufnehmen" else "Aufnehmen",
                                         Icons.Outlined.FiberManualRecord,
                                     ) { recordFromMenu() },
                                 )
@@ -1447,32 +1447,32 @@ internal fun ChannelRow(
                     title = channel.name,
                     subtitle = nowProgramme?.title ?: " ",
                     actions = buildList {
-                        add(TvMenuAction("Watch", Icons.Filled.PlayArrow) { onPlay() })
+                        add(TvMenuAction("Ansehen", Icons.Filled.PlayArrow) { onPlay() })
                         add(
                             TvMenuAction(
-                                if (isFavorite) "Remove from Favorites" else "Add to Favorites",
+                                if (isFavorite) "Aus Favoriten entfernen" else "Zu Favoriten hinzufügen",
                                 if (isFavorite) Icons.Outlined.Star else Icons.Filled.Star,
                             ) { onToggleFavorite() },
                         )
                         onToggleMultiview?.let { toggle ->
-                            add(TvMenuAction(if (inMultiview) "Remove from Multiview" else "Add to Multiview", Icons.Outlined.GridView) { toggle() })
+                            add(TvMenuAction(if (inMultiview) "Aus Mehrfachansicht entfernen" else "Zur Mehrfachansicht hinzufügen", Icons.Outlined.GridView) { toggle() })
                         }
                         collectionsMenu?.let { cm ->
-                            add(TvMenuAction("Add Channel to Collection", Icons.Outlined.Folder) { cm.onOpenPicker(channel.id, channel.name, -1, 0L) })
+                            add(TvMenuAction("Sender zu Sammlung hinzufügen", Icons.Outlined.Folder) { cm.onOpenPicker(channel.id, channel.name, -1, 0L) })
                             val active = cm.activeCollectionId?.let { id -> cm.collections.firstOrNull { it.id == id } }
                             if (active != null && channel.id in active.memberIds) {
-                                add(TvMenuAction("Remove from ${active.name}", Icons.Outlined.Folder, destructive = true) { cm.onRemoveMember(active.id, channel.id) })
+                                add(TvMenuAction("Aus ${active.name} entfernen", Icons.Outlined.Folder, destructive = true) { cm.onRemoveMember(active.id, channel.id) })
                             } else if (cm.activeCollectionId == null && cm.collections.any { channel.id in it.memberIds }) {
-                                add(TvMenuAction("Remove from All Collections", Icons.Outlined.Folder, destructive = true) { cm.onRemoveFromAll(channel.id) })
+                                add(TvMenuAction("Aus allen Sammlungen entfernen", Icons.Outlined.Folder, destructive = true) { cm.onRemoveFromAll(channel.id) })
                             }
                         }
                         if (nowProgramme != null) {
-                            add(TvMenuAction("Program Info", Icons.Outlined.Info) {
+                            add(TvMenuAction("Sendungsinfo", Icons.Outlined.Info) {
                                 onShowProgramInfo(nowProgramme.toInfoTarget(channel.name, channel.dispatcharrChannelId))
                             })
                         }
                         if (channel.url.isNotBlank()) {
-                            add(TvMenuAction(if (nowProgramme != null) "Record from Now" else "Record", Icons.Outlined.FiberManualRecord) { recordFromMenu() })
+                            add(TvMenuAction(if (nowProgramme != null) "Ab jetzt aufnehmen" else "Aufnehmen", Icons.Outlined.FiberManualRecord) { recordFromMenu() })
                         }
                     },
                     onDismiss = { menuOpen = false },
@@ -1571,7 +1571,7 @@ private fun ChannelGuidePanel(
         )
         if (recentlyAired.isEmpty() && upcoming.isEmpty()) {
             Text(
-                text = "No upcoming schedule available",
+                text = "Keine kommenden EPG-Daten verfügbar",
                 style = MaterialTheme.typography.bodySmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(horizontal = 14.dp, vertical = 10.dp),
@@ -1721,7 +1721,7 @@ private fun UpcomingProgrammeRow(
                     if (replayable) {
                         Icon(
                             imageVector = Icons.Outlined.History,
-                            contentDescription = "Catch-up available",
+                            contentDescription = "Catch-up verfügbar",
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(12.dp),
                         )
@@ -1791,12 +1791,12 @@ private fun UpcomingProgrammeRow(
             // Catch-up (task #137): a replayable aired programme leads with
             // Watch, mirroring the guide-cell menu.
             onWatch?.let { watch ->
-                add(TvMenuAction("Watch", Icons.Outlined.Replay) { watch() })
+                add(TvMenuAction("Ansehen", Icons.Outlined.Replay) { watch() })
             }
-            add(TvMenuAction("Program Info", Icons.Outlined.Info) { onTap() })
+            add(TvMenuAction("Sendungsinfo", Icons.Outlined.Info) { onTap() })
             if (!isPast) add(
                 TvMenuAction(
-                    if (isReminderSet) "Cancel Reminder" else "Set Reminder",
+                    if (isReminderSet) "Erinnerung abbrechen" else "Erinnerung setzen",
                     Icons.Outlined.Notifications,
                 ) {
                     if (isReminderSet) {
@@ -1814,7 +1814,7 @@ private fun UpcomingProgrammeRow(
                     }
                 },
             )
-            if (!isPast) add(TvMenuAction("Record", Icons.Outlined.FiberManualRecord) { onShowRecord() })
+            if (!isPast) add(TvMenuAction("Aufnehmen", Icons.Outlined.FiberManualRecord) { onShowRecord() })
         }
         if (isTv) {
             if (menuOpen) {

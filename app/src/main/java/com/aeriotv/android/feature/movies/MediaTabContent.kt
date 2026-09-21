@@ -88,7 +88,7 @@ fun MediaTabContent(
     onEpisodeResume: (String) -> Unit,
     onResumeMovie: (String) -> Unit,
     onPlayMovie: (String) -> Unit = onResumeMovie,
-    /** Hero "Play from Beginning": start at 0 and KEEP the Continue Watching
+    /** Hero "Von Anfang abspielen": start at 0 and KEEP the Continue Watching
      *  row (tvOS MoviesView:1507-1511 plays with resumePositionMs 0). */
     onPlayMovieFromStart: (String) -> Unit = onPlayMovie,
     onEpisodeResumeFromStart: (String) -> Unit = onEpisodeResume,
@@ -136,8 +136,8 @@ fun MediaTabContent(
             rows.filter { it.vodType == "movie" }.mapNotNull { r ->
                 val m = viewModel.movieByUuid(r.videoId)
                 // A row the player saved before the title was known reads
-                // "On Demand"; without the movie loaded there is nothing to show.
-                if (m == null && (r.title.isBlank() || r.title == "On Demand")) return@mapNotNull null
+                // "Mediathek"; without the movie loaded there is nothing to show.
+                if (m == null && (r.title.isBlank() || r.title == "Mediathek")) return@mapNotNull null
                 MediaHeroPage(
                     key = "cw:" + r.videoId, title = m?.let { displayTitle(it.displayName, it.year) } ?: displayTitle(r.title, null),
                     artUrl = m?.posterUrl ?: r.posterUrl, year = m?.year, season = null, episode = null,
@@ -404,7 +404,7 @@ fun MediaTabContent(
             onPlayFromStart = {},
             onDetails = { item?.movieUuid?.let { u -> viewModel.noteMovieTitle(u, page.title); onMovieClick(u) } ?: item?.seriesId?.let(onSeriesClick) },
             onRemove = { item?.let { watchlistVm.remove(it.key) } },
-            removeLabel = "Remove from Watchlist",
+            removeLabel = "Von Merkliste entfernen",
             isHidden = item?.key in hiddenTitles,
             onToggleHidden = item?.let { m -> { viewModel.toggleHidden(m.key) } },
         )
@@ -435,7 +435,7 @@ fun MediaTabContent(
     }
 
     val isTv = rememberLiveTvFormFactor().isTv
-    // TV hero "Play" for a SERIES: the library / watchlist hero used to fall
+    // TV hero "Abspielen" for a SERIES: the library / watchlist hero used to fall
     // through to Details because a series carries no movieUuid. Resolve the
     // same target episode the series detail page does (Apple tvSeriesTarget,
     // VODDetailView.swift:731-751) and play it, labelled "Play S1 E1" /
@@ -515,10 +515,10 @@ fun MediaTabContent(
         gridState = gridState,
         compact = compact,
         decks = listOf(
-            PageDeck("Continue Watching", heroPages, { it.key }, heroCard),
+            PageDeck("Weiterschauen", heroPages, { it.key }, heroCard),
             PageDeck("Watchlist", watchlistPages, { it.key }, wlCard),
         ),
-        headerTitle = if (isSearching) "Results" else kind.libraryTitle,
+        headerTitle = if (isSearching) "Ergebnisse" else kind.libraryTitle,
         headerCount = gridItems.size,
         sortMenu = {
             DropdownMenu(expanded = showSort, onDismissRequest = { showSort = false }) {
@@ -542,7 +542,7 @@ fun MediaTabContent(
         query = query,
         onQueryChange = { submitQuery(it) },
         onSearchToggle = { searchActive = !searchActive; if (!searchActive) submitQuery("") },
-        searchPlaceholder = if (kind == MediaKind.Movies) "Search movies" else "Search TV shows",
+        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Search TV shows",
         isSearching = isSearching,
         searchExtras = searchExtras,
         pills = genrePills,
@@ -559,11 +559,11 @@ fun MediaTabContent(
                 menu = { close ->
                     DropdownMenuItem(text = { Text("Details") }, onClick = { close(); open() })
                     DropdownMenuItem(
-                        text = { Text(if (item.key in watchlistKeys) "Remove from Watchlist" else "Add to Watchlist") },
+                        text = { Text(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") },
                         onClick = { close(); watchlistVm.toggle(item) },
                     )
                     DropdownMenuItem(
-                        text = { Text(if (item.key in hiddenTitles) "Unhide" else "Hide") },
+                        text = { Text(if (item.key in hiddenTitles) "Einblenden" else "Ausblenden") },
                         onClick = { close(); viewModel.toggleHidden(item.key) },
                     )
                 },
@@ -571,7 +571,7 @@ fun MediaTabContent(
         },
         emptyContent = {
             if (isLoading || (!isSearching && libraryPending) || (isSearching && (state.isSearching || state.isSearchingSeries))) CircularProgressIndicator()
-            else Text(if (isSearching) "No results" else kind.emptyTitle, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            else Text(if (isSearching) "Keine Ergebnisse" else kind.emptyTitle, color = MaterialTheme.colorScheme.onSurfaceVariant)
         },
         railLetters = available,
         // The library is a window over the catalog (GH #109): the rail index

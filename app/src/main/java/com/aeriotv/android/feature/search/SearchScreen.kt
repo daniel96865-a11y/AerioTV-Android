@@ -112,7 +112,7 @@ fun SearchScreen(
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = "Zurück",
                         tint = MaterialTheme.colorScheme.onBackground,
                     )
                 }
@@ -139,7 +139,7 @@ fun SearchScreen(
                     },
                 singleLine = true,
                 leadingIcon = { Icon(Icons.Filled.Search, contentDescription = null) },
-                placeholder = { Text("Search movies, shows, programs…") },
+                placeholder = { Text("Filme, Serien und Sendungen suchen…") },
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             )
         }
@@ -161,7 +161,7 @@ fun SearchScreen(
         when {
             state.query.isBlank() -> CenterMessage(
                 icon = Icons.Filled.Search,
-                title = "Search for movies, shows, or EPG programs",
+                title = "Nach Filmen, Serien oder EPG-Sendungen suchen",
             )
             state.isSearching && state.results.isEmpty() -> Box(
                 modifier = Modifier.fillMaxSize(),
@@ -169,8 +169,8 @@ fun SearchScreen(
             ) { CircularProgressIndicator(color = MaterialTheme.colorScheme.primary) }
             state.results.isEmpty() -> CenterMessage(
                 icon = Icons.Filled.Search,
-                title = "No results for “${state.query}”",
-                subtitle = "Try a different search term or change the scope filter.",
+                title = "Keine Ergebnisse für „${state.query}“",
+                subtitle = "Versuche einen anderen Suchbegriff oder ändere den Bereichsfilter.",
             )
             else -> LazyColumn(
                 modifier = Modifier.fillMaxSize(),
@@ -331,7 +331,7 @@ private fun resultDisplay(result: SearchViewModel.Result): ResultDisplay = when 
     is SearchViewModel.Result.Movie -> ResultDisplay(
         title = result.movie.displayName,
         subtitle = listOfNotNull(
-            "Movie",
+            "Film",
             result.movie.year?.toString(),
             result.movie.genre?.takeIf { it.isNotBlank() },
         ).joinToString("  ·  "),

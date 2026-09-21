@@ -42,8 +42,8 @@ import com.aeriotv.android.ui.settings.dpadFocusRing
 import com.aeriotv.android.ui.settings.rememberIsTvDevice
 
 /**
- * Mirrors iOS App Store screenshot IMG_1077: "Add Playlist" back stack frame
- * with "Choose Source Type" header and three rounded cards (Dispatcharr,
+ * Mirrors iOS App Store screenshot IMG_1077: "Wiedergabeliste hinzufügen" back stack frame
+ * with "Quellentyp auswählen" header and three rounded cards (Dispatcharr,
  * Xtream Codes, M3U + EPG). Tapping a card pushes to the Configure form.
  *
  * Per the no-bundled-media rule, this surface ships zero hardcoded URLs - the
@@ -60,7 +60,7 @@ fun ChooseSourceTypeScreen(
         TopAppBar(
             title = {
                 Text(
-                    "Add Playlist",
+                    "Wiedergabeliste hinzufügen",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                     // TV hides the back arrow below, which collapses the
@@ -81,7 +81,7 @@ fun ChooseSourceTypeScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -113,14 +113,14 @@ fun ChooseSourceTypeScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Text(
-                    text = "Choose Source Type",
+                    text = "Quellentyp auswählen",
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.Center,
                 )
                 Text(
-                    text = "Select how you want to connect to your media source.",
+                    text = "Wähle aus, wie du dich mit deiner Medienquelle verbinden möchtest.",
                     style = MaterialTheme.typography.bodyMedium.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Center,
@@ -131,20 +131,20 @@ fun ChooseSourceTypeScreen(
                 SourceTypeCard(
                     icon = Icons.Filled.Key,
                     title = "Dispatcharr Direct Connect",
-                    subtitle = "Connect to Dispatcharr with your admin login or a personal API key " +
+                    subtitle = "Verbinde dich mit Dispatcharr über deinen Admin-Zugang oder einen persönlichen API-Schlüssel " +
                             "(*AerioTV is not officially affiliated with the Dispatcharr project)",
                     modifier = Modifier.tappable { onChoose(SourceType.DispatcharrUserPass) },
                 )
                 SourceTypeCard(
                     icon = Icons.Filled.Tv,
                     title = "Xtream Codes",
-                    subtitle = "Xtream Codes API. Live TV, VOD movies & series.",
+                    subtitle = "Xtream-Codes-API. Live-TV, VOD-Filme und Serien.",
                     modifier = Modifier.tappable { onChoose(SourceType.XtreamCodes) },
                 )
                 SourceTypeCard(
                     icon = Icons.Filled.Description,
                     title = "M3U + EPG",
-                    subtitle = "Any M3U playlist URL. Works with Dispatcharr, any IPTV provider.",
+                    subtitle = "Beliebige M3U-Wiedergabelisten-URL. Funktioniert mit Dispatcharr und IPTV-Anbietern.",
                     modifier = Modifier.tappable { onChoose(SourceType.M3uUrl) },
                 )
             }

@@ -148,14 +148,14 @@ private fun SplashContent(modifier: Modifier = Modifier) {
             )
             Spacer(Modifier.height(logoBottomPad))
             Text(
-                text = "AerioTV",
+                text = "AerioTV Deutsch",
                 fontSize = titleSize,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
             )
             Spacer(Modifier.height(subtitleTopPad))
             Text(
-                text = "Live TV  ·  Movies  ·  Series",
+                text = "Live-TV  ·  Filme  ·  Serien",
                 fontSize = subtitleSize,
                 fontWeight = FontWeight.Light,
                 color = accent,

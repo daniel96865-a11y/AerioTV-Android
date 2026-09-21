@@ -238,7 +238,7 @@ class AutoBrowseTree @Inject constructor(
                 browsable(
                     id = GROUP_PREFIX + group,
                     title = group,
-                    subtitle = if (count == 1) "1 channel" else "$count channels",
+                    subtitle = if (count == 1) "1 Sender" else "$count Sender",
                 )
             }
             .toList()

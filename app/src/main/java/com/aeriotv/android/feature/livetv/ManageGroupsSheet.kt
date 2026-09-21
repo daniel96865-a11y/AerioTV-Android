@@ -71,7 +71,7 @@ enum class GroupSortMode {
 
     val label: String
         get() = when (this) {
-            Default -> "Default"
+            Default -> "Standard"
             Alphabetical -> "A-Z"
             Manual -> "Manual"
         }
@@ -103,7 +103,7 @@ fun orderGroups(
 ): List<String> {
     // The All Channels token is part of the ordered list (Logan 2026-09-08,
     // Apple parity): in Manual mode any group can sit above it. A provider
-    // group literally named "All" is dropped so it can never collide with
+    // group literally named "Alle" is dropped so it can never collide with
     // the sentinel (#45 review).
     val groups = allGroups.filterNot {
         it.equals(PlaylistViewModel.ALL_GROUPS, ignoreCase = true) ||
@@ -140,7 +140,7 @@ private fun moveInList(list: List<String>, item: String, delta: Int): List<Strin
  * Manage Groups bottom sheet. Mirrors iOS Settings > Manage Groups modal:
  * a scrollable checkbox list with "All / None" toggles in the header. Checked
  * groups stay visible in the Live TV filter row; unchecked groups disappear
- * from the chips but their channels remain in "All" so they can still be
+ * from the chips but their channels remain in "Alle" so they can still be
  * found via search.
  *
  * Hide/show persists via the [hiddenGroups] set in AppPreferences (working copy,
@@ -197,7 +197,7 @@ fun ManageGroupsSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = "Manage Groups",
+                    text = "Gruppen verwalten",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = FontWeight.SemiBold,
@@ -207,7 +207,7 @@ fun ManageGroupsSheet(
                     onSave(working.toSet())
                     onDismiss()
                 }) {
-                    Text("Done", color = MaterialTheme.colorScheme.textAccent)
+                    Text("Fertig", color = MaterialTheme.colorScheme.textAccent)
                 }
             }
             if (reorderEnabled) {
@@ -243,14 +243,14 @@ fun ManageGroupsSheet(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
-                    text = if (manualReorder) "Drag to reorder, check to show or hide."
+                    text = if (manualReorder) "Zum Sortieren ziehen; Häkchen zum Ein-/Ausblenden."
                     else "Check groups to show, uncheck to hide.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.weight(1f),
                 )
                 TextButton(onClick = { working = mutableSetOf() }) {
-                    Text("All", color = MaterialTheme.colorScheme.textAccent)
+                    Text("Alle", color = MaterialTheme.colorScheme.textAccent)
                 }
                 Box(
                     modifier = Modifier
@@ -258,7 +258,7 @@ fun ManageGroupsSheet(
                         .background(MaterialTheme.colorScheme.surfaceVariant),
                 )
                 TextButton(onClick = { working = allGroups.toMutableSet() }) {
-                    Text("None", color = MaterialTheme.colorScheme.textAccent)
+                    Text("Keine", color = MaterialTheme.colorScheme.textAccent)
                 }
             }
             HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
@@ -292,7 +292,7 @@ fun ManageGroupsSheet(
                     )
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        text = "All Channels",
+                        text = "Alle Sender",
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.SemiBold,
@@ -313,7 +313,7 @@ fun ManageGroupsSheet(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "No groups available",
+                        text = "Keine Gruppen verfügbar",
                         style = MaterialTheme.typography.bodyMedium.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -372,7 +372,7 @@ fun ManageGroupsSheet(
                                 )
                                 Icon(
                                     imageVector = Icons.Filled.Menu,
-                                    contentDescription = "Drag to reorder",
+                                    contentDescription = "Zum Sortieren ziehen",
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier
                                         .draggableHandle(
@@ -576,7 +576,7 @@ fun TvGroupPicker(
                         }
                     }
                     Text(
-                        text = "Shift guide moves the TV Guide over so the sidebar never covers programs.",
+                        text = "„EPG verschieben“ rückt den EPG zur Seite, damit die Seitenleiste keine Sendungen verdeckt.",
                         style = MaterialTheme.typography.bodySmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(horizontal = 28.dp, vertical = 2.dp),
@@ -594,7 +594,7 @@ fun TvGroupPicker(
                         contentAlignment = Alignment.Center,
                     ) {
                         Text(
-                            text = "No groups available",
+                            text = "Keine Gruppen verfügbar",
                             style = MaterialTheme.typography.bodyMedium.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -646,7 +646,7 @@ fun TvGroupPicker(
                         )
                         Spacer(Modifier.width(12.dp))
                         Text(
-                            text = "All Channels",
+                            text = "Alle Sender",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.SemiBold,
                             color = MaterialTheme.colorScheme.onSurface,
@@ -753,8 +753,8 @@ fun TvGroupPicker(
                             Text(
                                 text = when {
                                     isMoving -> "Moving"
-                                    visible -> "On"
-                                    else -> "Off"
+                                    visible -> "Ein"
+                                    else -> "Aus"
                                 },
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.SemiBold,

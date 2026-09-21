@@ -6,8 +6,8 @@ import java.text.Normalizer
 
 /** Which library a media tab shows. Apple parity: MoviesView(kind:). */
 enum class MediaKind(val title: String, val libraryTitle: String, val emptyTitle: String) {
-    Movies("Movies", "All Movies", "No Movies"),
-    TVShows("TV Shows", "All TV Shows", "No TV Shows"),
+    Movies("Filme", "All Movies", "No Movies"),
+    TVShows("Serien", "All TV Shows", "No TV Shows"),
 }
 
 /** Library sort (Apple parity: MoviesSortOrder). Recently Added is deliberately absent. */

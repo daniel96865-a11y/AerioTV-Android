@@ -100,7 +100,7 @@ class WatchProgressViewModel @Inject constructor(
 
     /**
      * Most-recently-updated rows. Caller filters by videoId-set to match
-     * the current Movies / Series cache. iOS calls this "Continue Watching"
+     * the current Movies / Series cache. iOS calls this "Weiterschauen"
      * (project_aeriotv_ios_architecture.md section D); the "5 min from end =
      * completed" heuristic that hides finished items is applied at the UI
      * site, not in the DAO query.

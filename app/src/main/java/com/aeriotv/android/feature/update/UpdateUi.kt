@@ -190,11 +190,11 @@ private fun UpdatePromptBody(
 
     when (state) {
         is UpdateState.Available -> {
-            titleText = "Update available"
+            titleText = "Update verfügbar"
             val mb = state.info.apkSizeBytes / (1024 * 1024)
             bodyText = "AerioTV ${state.info.versionName} is ready to download (${mb} MB)."
             notes = state.info.notes
-            primaryLabel = "Download"
+            primaryLabel = "Herunterladen"
         }
         is UpdateState.Downloading -> {
             titleText = "Downloading update"
@@ -209,33 +209,33 @@ private fun UpdatePromptBody(
             laterLabel = null
         }
         is UpdateState.ReadyToInstall -> {
-            titleText = "Ready to install"
+            titleText = "Bereit zur Installation"
             bodyText = "AerioTV ${state.info.versionName} is verified and ready. Your " +
                 "channels, settings, and recordings are kept. AerioTV will close to " +
                 "install; reopen it from your home screen."
-            primaryLabel = "Install"
+            primaryLabel = "Installieren"
         }
         is UpdateState.AwaitingInstallPermission -> {
-            titleText = "One-time permission needed"
+            titleText = "Einmalige Berechtigung erforderlich"
             bodyText = "Android needs you to allow AerioTV to install updates. Turn on " +
-                "\"Allow from this source\" in the Settings screen, come back, and tap " +
+                "„Aus dieser Quelle zulassen“ in den Android-Einstellungen, kehre zurück und tippe auf " +
                 "Install. If you've already allowed it, Install continues right away."
             // Routes through install(): proceeds if the grant is in place,
             // reopens the Settings toggle otherwise.
-            primaryLabel = "Install"
+            primaryLabel = "Installieren"
         }
         is UpdateState.Installing -> {
             titleText = "Installing"
-            bodyText = "Confirm the update in the Android dialog. AerioTV will close to " +
+            bodyText = "Bestätige das Update im Android-Dialog. AerioTV Deutsch wird für die " +
                 "install; reopen it from your home screen. Your data is kept."
             indeterminate = true
             laterLabel = null
         }
         is UpdateState.Error -> {
-            titleText = "Update problem"
+            titleText = "Update-Problem"
             bodyText = state.message
-            primaryLabel = "Try again"
-            laterLabel = "Close"
+            primaryLabel = "Erneut versuchen"
+            laterLabel = "Schließen"
         }
         else -> return
     }

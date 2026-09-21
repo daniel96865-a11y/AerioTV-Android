@@ -47,7 +47,7 @@ import com.aeriotv.android.feature.livetv.groupSidebarLabel
 import com.aeriotv.android.feature.playlist.PlaylistViewModel
 
 /**
- * Player Left-press "Channels" overlay (Remote Control initiative / GH #54,
+ * Player Left-press "Sender" overlay (Remote Control initiative / GH #54,
  * Logan spec 2026-07-20): the channels of the previously selected group as a
  * focusable list over the live picture. A further Left from the list slides
  * in the shared [GroupSidebarPanel] to switch groups (Right or Back returns
@@ -183,7 +183,7 @@ internal fun ChannelListOverlay(
                 Spacer(Modifier.height(14.dp))
                 if (entries.isEmpty()) {
                     Text(
-                        text = "No channels in this group.",
+                        text = "Keine Sender in dieser Gruppe.",
                         style = MaterialTheme.typography.bodyMedium,
                         color = Color.White.copy(alpha = 0.7f),
                     )

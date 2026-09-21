@@ -118,7 +118,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
 
 /**
  * On Demand tab shell. Mirrors iOS OnDemandView (Aerio/Features/VOD/OnDemandView.swift):
- * "Movies" / "Series" pill segment selector above the active sub-view.
+ * "Filme" / "Serien" pill segment selector above the active sub-view.
  *
  * Phase 10b ships Movies fully wired (browse + play). Series is a placeholder
  * until Phase 10c lands the `/api/vod/series/` endpoint, episode picker, and
@@ -235,7 +235,7 @@ fun OnDemandTabContent(
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = "On Demand",
+                        text = "Mediathek",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.Bold,
                     )
@@ -431,7 +431,7 @@ private fun ContinueWatchingSubScreen(
     ) {
         if (movieRows.isNotEmpty()) {
             ContinueWatchingRail(
-                title = "Movies",
+                title = "Filme",
                 items = movieRows,
                 posterFor = { it.posterUrl },
                 // Resume by id: opens the movie detail (with its Resume button),
@@ -442,7 +442,7 @@ private fun ContinueWatchingSubScreen(
         }
         if (episodeRows.isNotEmpty()) {
             SeriesContinueWatchingRail(
-                title = "TV Shows",
+                title = "Serien",
                 items = episodeRows,
                 seriesById = seriesById,
                 onItemClick = { onEpisodeResume(it.videoId) },
@@ -525,8 +525,8 @@ private fun MoviesSubScreen(
 
     if (state.unsupportedSource) {
         EmptyState(
-            title = "Movies needs Dispatcharr",
-            body = "Switch to a Dispatcharr playlist in Settings to browse movies.",
+            title = "Filme benötigen Dispatcharr",
+            body = "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Filme zu durchsuchen.",
         )
         return
     }
@@ -562,7 +562,7 @@ private fun MoviesSubScreen(
                     upTarget = sectionPillsFocus,
                     query = state.searchQuery,
                     onQueryChange = viewModel::setSearchQuery,
-                    placeholder = "Search movies",
+                    placeholder = "Filme suchen",
                     isTv = isTv,
                 )
             },
@@ -596,7 +596,7 @@ private fun MoviesSubScreen(
         state.error?.let { err ->
             if (state.movies.isEmpty()) {
                 Text(
-                    text = "Couldn't load movies: $err",
+                    text = "Filme konnten nicht geladen werden: $err",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier.padding(24.dp),
@@ -773,8 +773,8 @@ private fun SeriesSubScreen(
 
     if (state.unsupportedSource) {
         EmptyState(
-            title = "Series needs Dispatcharr",
-            body = "Switch to a Dispatcharr playlist in Settings to browse series.",
+            title = "Serien benötigen Dispatcharr",
+            body = "Wechsle in den Einstellungen zu einer Dispatcharr-Wiedergabeliste, um Serien zu durchsuchen.",
         )
         return
     }
@@ -795,7 +795,7 @@ private fun SeriesSubScreen(
                     upTarget = sectionPillsFocus,
                     query = state.seriesSearchQuery,
                     onQueryChange = viewModel::setSeriesSearchQuery,
-                    placeholder = "Search series",
+                    placeholder = "Serien suchen",
                     isTv = isTv,
                 )
             },
@@ -985,7 +985,7 @@ private fun VodHeaderRow(
                 TvHeaderIconButton(
                     upTarget = upTarget,
                     icon = Icons.Filled.TravelExplore,
-                    contentDescription = "Search",
+                    contentDescription = "Suche",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     onClick = onOpenSearch,
                 )
@@ -996,7 +996,7 @@ private fun VodHeaderRow(
                 ) {
                     Icon(
                         imageVector = Icons.Filled.TravelExplore,
-                        contentDescription = "Search",
+                        contentDescription = "Suche",
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(22.dp),
                     )
@@ -1008,7 +1008,7 @@ private fun VodHeaderRow(
             TvHeaderIconButton(
                 upTarget = upTarget,
                 icon = Icons.Filled.FilterList,
-                contentDescription = "Filter groups",
+                contentDescription = "Gruppen filtern",
                 tint = if (hiddenCount == 0) MaterialTheme.colorScheme.onSurfaceVariant
                 else MaterialTheme.colorScheme.primary,
                 onClick = onManageGroups,
@@ -1020,7 +1020,7 @@ private fun VodHeaderRow(
             ) {
                 Icon(
                     imageVector = Icons.Filled.FilterList,
-                    contentDescription = "Filter groups",
+                    contentDescription = "Gruppen filtern",
                     tint = if (hiddenCount == 0)
                         MaterialTheme.colorScheme.onSurfaceVariant
                     else
@@ -1201,7 +1201,7 @@ private fun ContinueWatchingRail(
     posterFor: (WatchProgressEntity) -> String?,
     onItemClick: (WatchProgressEntity) -> Unit,
     onRemove: (WatchProgressEntity) -> Unit,
-    title: String = "Continue Watching",
+    title: String = "Weiterschauen",
     /** BACK-from-detail refocus hook: non-null only for the card the focus
      *  restore should land on (see VodReturnFocusState). */
     focusRequesterFor: (WatchProgressEntity) -> FocusRequester? = { null },
@@ -1356,7 +1356,7 @@ private fun ContinueWatchingActionMenu(
     onDismiss: () -> Unit,
     onRemove: () -> Unit,
     // iOS parity (16e3b8377, Models/VODModels.swift): the series-variant card
-    // offers "Open Series" above Remove. Null for the movie variant, and null
+    // offers "Serie öffnen" above Remove. Null for the movie variant, and null
     // when the parent series can't be resolved from the library cache.
     onOpenSeries: (() -> Unit)? = null,
 ) {
@@ -1366,21 +1366,21 @@ private fun ContinueWatchingActionMenu(
             if (onOpenSeries != null) {
                 add(
                     TvMenuAction(
-                        label = "Open Series",
+                        label = "Serie öffnen",
                         icon = Icons.Outlined.Tv,
                     ) { onOpenSeries() },
                 )
             }
             add(
                 TvMenuAction(
-                    label = "Remove from Continue Watching",
+                    label = "Aus „Weiterschauen“ entfernen",
                     icon = Icons.Outlined.Delete,
                     destructive = true,
                 ) { onRemove() },
             )
             // Dismiss-only escape hatch; the dialog itself dismisses before
             // running any action, so the click body is intentionally empty.
-            add(TvMenuAction(label = "Cancel") {})
+            add(TvMenuAction(label = "Abbrechen") {})
         },
         guard = guard,
         onDismiss = onDismiss,
@@ -1399,7 +1399,7 @@ private fun SeriesContinueWatchingRail(
     seriesById: Map<Int, DispatcharrVODSeries>,
     onItemClick: (WatchProgressEntity) -> Unit,
     onRemove: (WatchProgressEntity) -> Unit,
-    title: String = "Continue Watching",
+    title: String = "Weiterschauen",
     // iOS parity: long-press -> Open Series jumps to the full show page.
     onOpenSeries: (WatchProgressEntity) -> Unit = {},
     /** BACK-from-player refocus hook: non-null only for the card the focus
@@ -1705,9 +1705,9 @@ private fun EmptyState(title: String, body: String) {
 private enum class OnDemandSection(val label: String, val icon: ImageVector) {
     // Issue #9: a Continue Watching sub-tab, shown only when there is
     // in-progress content (movies + episodes). Rendered first, before Movies.
-    ContinueWatching(label = "Continue", icon = Icons.Outlined.History),
-    Movies(label = "Movies", icon = Icons.Outlined.Movie),
-    Series(label = "Series", icon = Icons.Outlined.Tv),
+    ContinueWatching(label = "Weiter", icon = Icons.Outlined.History),
+    Movies(label = "Filme", icon = Icons.Outlined.Movie),
+    Series(label = "Serien", icon = Icons.Outlined.Tv),
 }
 
 /**
@@ -1746,7 +1746,7 @@ private fun VodSearchField(
                     IconButton(onClick = { onQueryChange("") }) {
                         Icon(
                             imageVector = Icons.Filled.Close,
-                            contentDescription = "Clear search",
+                            contentDescription = "Suche leeren",
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }
@@ -1786,7 +1786,7 @@ private fun VodSearchField(
             TvHeaderIconButton(
                 upTarget = upTarget,
                 icon = Icons.Outlined.Search,
-                contentDescription = "Search",
+                contentDescription = "Suche",
                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 onClick = { focusOnExpand = true; expanded = true },
             )
@@ -1826,7 +1826,7 @@ private fun VodSearchField(
             }) {
                 Icon(
                     imageVector = Icons.Filled.Close,
-                    contentDescription = if (query.isNotEmpty()) "Clear search" else "Close search",
+                    contentDescription = if (query.isNotEmpty()) "Suche leeren" else "Suche schließen",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }

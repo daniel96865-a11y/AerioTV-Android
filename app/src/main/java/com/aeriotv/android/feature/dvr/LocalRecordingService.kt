@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Foreground service that downloads a Dispatcharr proxy stream to local
  * storage for a fixed duration. Mirrors iOS LocalRecordingSession behaviour
- * scoped down to "Record from Now" (iOS doesn't support scheduled local
+ * scoped down to "Ab jetzt aufnehmen" (iOS doesn't support scheduled local
  * recordings either — Android matches that limit).
  *
  * Lifecycle:
@@ -77,7 +77,7 @@ class LocalRecordingService : Service() {
 
     /**
      * Partial wake lock held while a local recording is in flight, gated by
-     * the "Keep device awake during recording" DVR setting (default ON, iOS
+     * the "Gerät während der Aufnahme wach halten" DVR setting (default ON, iOS
      * parity). PARTIAL_WAKE_LOCK keeps the CPU running with the screen off so
      * the download read-loop isn't paused by doze; it does NOT keep the
      * screen on. Released in [releaseWakeLock] from the recording coroutine's
@@ -125,7 +125,7 @@ class LocalRecordingService : Service() {
                     reaffirmForeground()
                 } else {
                     val streamUrl = intent.getStringExtra(EXTRA_STREAM_URL).orEmpty()
-                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Recording"
+                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Aufnahme"
                     val channelName = intent.getStringExtra(EXTRA_CHANNEL_NAME) ?: title
                     val apiKey = intent.getStringExtra(EXTRA_API_KEY).orEmpty()
                     val durationMs = intent.getLongExtra(EXTRA_DURATION_MS, 60 * 60 * 1000L)
@@ -141,7 +141,7 @@ class LocalRecordingService : Service() {
                     reaffirmForeground()
                 } else {
                     val fileUrl = intent.getStringExtra(EXTRA_STREAM_URL).orEmpty()
-                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Recording"
+                    val title = intent.getStringExtra(EXTRA_TITLE) ?: "Aufnahme"
                     val channelName = intent.getStringExtra(EXTRA_CHANNEL_NAME) ?: title
                     val apiKey = intent.getStringExtra(EXTRA_API_KEY).orEmpty()
                     startDownload(fileUrl, title, channelName, apiKey)
@@ -183,7 +183,7 @@ class LocalRecordingService : Service() {
 
         val recJob = scope.launch {
             // Acquire the wake lock before the read-loop if the user left the
-            // "Keep device awake during recording" toggle on. Bounded to
+            // "Gerät während der Aufnahme wach halten" toggle on. Bounded to
             // duration + 1 min so a hung job can never hold the CPU awake
             // forever; the finally below releases it on the normal path.
             if (runCatching { appPreferences.dvrKeepAwakeOnce() }.getOrDefault(true)) {
@@ -417,7 +417,7 @@ class LocalRecordingService : Service() {
         val notif = NotificationCompat.Builder(this, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher)
             .setContentTitle(title)
-            .setContentText(if (success) "Saved to device" else "Save to device failed")
+            .setContentText(if (success) "Auf Gerät gespeichert" else "Speichern auf Gerät fehlgeschlagen")
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
@@ -589,7 +589,7 @@ class LocalRecordingService : Service() {
      */
     private fun reaffirmForeground() {
         ensureNotificationChannel()
-        startForegroundCompat(buildNotification(activeTitle.ifBlank { "Recording" }, "Recording…"))
+        startForegroundCompat(buildNotification(activeTitle.ifBlank { "Aufnahme" }, "Recording…"))
     }
 
     private fun stopForegroundCompat() {
@@ -606,10 +606,10 @@ class LocalRecordingService : Service() {
             val mgr = getSystemService(NotificationManager::class.java)
             val channel = NotificationChannel(
                 CHANNEL_ID,
-                "Local recordings",
+                "Lokale Aufnahmen",
                 NotificationManager.IMPORTANCE_LOW,
             ).apply {
-                description = "Ongoing notification while AerioTV is recording a channel to local storage."
+                description = "Fortlaufende Benachrichtigung, während AerioTV Deutsch einen Sender lokal aufnimmt."
                 setShowBadge(false)
             }
             mgr.createNotificationChannel(channel)

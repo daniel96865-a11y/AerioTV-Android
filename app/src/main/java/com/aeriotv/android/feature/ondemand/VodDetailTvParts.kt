@@ -347,7 +347,7 @@ internal fun TvRelatedSection(
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         Text(
-            text = "Available Related Titles",
+            text = "Verfügbare ähnliche Titel",
             style = MaterialTheme.typography.titleMedium,
             fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.onBackground,
@@ -368,7 +368,7 @@ internal fun TvRelatedSection(
                     modifier = Modifier.width(100.dp),
                     longPressActions = listOf(
                         TvMenuAction(
-                            if (watchlisted(item)) "Remove from Watchlist" else "Add to Watchlist",
+                            if (watchlisted(item)) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen",
                         ) { onToggleWatchlist(item) },
                     ),
                 )

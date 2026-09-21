@@ -205,7 +205,7 @@ fun PersonBioDialog(
                                     modifier = Modifier.size(24.dp),
                                 )
                                 biography.isNullOrBlank() -> Text(
-                                    text = "No biography available.",
+                                    text = "Keine Biografie verfügbar.",
                                     style = MaterialTheme.typography.bodyMedium.subtext(),
                                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
@@ -222,7 +222,7 @@ fun PersonBioDialog(
                         // filmography on a phone. A real layout child (not an
                         // overlay) so it never sits on top of the bio text. On
                         // phone/tablet the QR makes no sense (you're already on
-                        // the device) -- a tappable "View on TMDB" link in the
+                        // the device) -- a tappable "Auf TMDB ansehen" link in the
                         // footer opens the page directly instead.
                         if (isTv) {
                             TmdbPersonQr(personId = person.id)
@@ -233,7 +233,7 @@ fun PersonBioDialog(
                     if (knownFor.isNotEmpty()) {
                         Spacer(Modifier.height(18.dp))
                         Text(
-                            text = "Known For",
+                            text = "Bekannt für",
                             style = MaterialTheme.typography.titleMedium,
                             color = MaterialTheme.colorScheme.onBackground,
                             fontWeight = FontWeight.Bold,
@@ -273,7 +273,7 @@ fun PersonBioDialog(
                     // opens the person's TMDB page in the browser.
                     if (!isTv) {
                         SettingsDialogTextButton(
-                            label = "View on TMDB",
+                            label = "Auf TMDB ansehen",
                             onClick = {
                                 val url = "https://www.themoviedb.org/person/${person.id}"
                                 runCatching {
@@ -286,7 +286,7 @@ fun PersonBioDialog(
                         )
                         Spacer(Modifier.width(8.dp))
                     }
-                    SettingsDialogTextButton(label = "Close", onClick = onDismiss)
+                    SettingsDialogTextButton(label = "Schließen", onClick = onDismiss)
                 }
             }
         }
@@ -320,7 +320,7 @@ private fun TmdbPersonQr(personId: String) {
         }
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "View on TMDB",
+            text = "Auf TMDB ansehen",
             style = MaterialTheme.typography.labelSmall.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -328,7 +328,7 @@ private fun TmdbPersonQr(personId: String) {
 }
 
 /**
- * One poster + title tile in the bio sheet's "Known For" strip, with the
+ * One poster + title tile in the bio sheet's "Bekannt für" strip, with the
  * poster-card ring + scale chrome. Only ~5 of the 8 tiles fit the dialog
  * width, so D-pad LEFT/RIGHT walking the tiles is what scrolls the rest of
  * the strip into view on TV. [onClick] (when non-null) makes OK open the

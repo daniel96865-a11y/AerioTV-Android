@@ -93,8 +93,8 @@ class CastNotificationController @Inject constructor(
         )
         val notif = NotificationCompat.Builder(context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher)
-            .setContentTitle(content.title.ifBlank { "Now casting" })
-            .setContentText(if (!deviceName.isNullOrBlank()) "Casting to $deviceName" else "Casting")
+            .setContentTitle(content.title.ifBlank { "Wird übertragen" })
+            .setContentText(if (!deviceName.isNullOrBlank()) "Übertragung auf $deviceName" else "Übertragung")
             .setContentIntent(launchPi)
             .setOngoing(true)
             .setPriority(NotificationCompat.PRIORITY_LOW)
@@ -130,7 +130,7 @@ class CastNotificationController @Inject constructor(
             .setAutoCancel(true)
             // Its own channel, not the ongoing chip's. On Android 8+ the CHANNEL
             // importance governs alerting and setPriority is ignored, so posting
-            // this to the IMPORTANCE_LOW "Casting" channel would make it silent
+            // this to the IMPORTANCE_LOW "Übertragung" channel would make it silent
             // and buried -- nearly as invisible as the silent disappearance this
             // is meant to fix. A channel's importance is also immutable once
             // created, so it has to be a separate channel, not a bumped one.
@@ -149,7 +149,7 @@ class CastNotificationController @Inject constructor(
         val mgr = context.getSystemService(NotificationManager::class.java) ?: return
         if (mgr.getNotificationChannel(CHANNEL_ID) == null) {
             mgr.createNotificationChannel(
-                NotificationChannel(CHANNEL_ID, "Casting", NotificationManager.IMPORTANCE_LOW).apply {
+                NotificationChannel(CHANNEL_ID, "Übertragung", NotificationManager.IMPORTANCE_LOW).apply {
                     setShowBadge(false)
                 },
             )

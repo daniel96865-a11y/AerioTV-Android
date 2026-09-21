@@ -59,7 +59,7 @@ import com.aeriotv.android.feature.onboarding.components.SourceTypeCard
 /**
  * Cold-start welcome surface. Mirrors iOS App Store screenshot IMG_1076: AerioTV
  * brand block + supported source types + Sync / Detect-Home-WiFi info cards +
- * "Connect a Server" CTA + "Skip for now" link.
+ * "Server verbinden" CTA + "Vorerst überspringen" link.
  *
  * Layout adapts to viewport: a short-but-wide screen (Android TV at 960dp x
  * 540dp, tablets in landscape, foldables unfolded) switches to a two-column
@@ -207,20 +207,20 @@ private fun BrandBlock(alignStart: Boolean = false) {
         BrandLogo()
         Spacer(Modifier.height(10.dp))
         Text(
-            text = "AerioTV",
+            text = "AerioTV Deutsch",
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.onBackground,
             fontWeight = FontWeight.Bold,
         )
         Spacer(Modifier.height(2.dp))
         Text(
-            text = "Your IPTV & Media Hub",
+            text = "Deine IPTV- & Medienzentrale",
             style = MaterialTheme.typography.titleMedium,
             color = MaterialTheme.colorScheme.textAccent,
         )
         Spacer(Modifier.height(2.dp))
         Text(
-            text = "Android TV · Phone · Tablet",
+            text = "Android TV · Handy · Tablet",
             style = MaterialTheme.typography.bodySmall.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -251,8 +251,8 @@ private fun SyncCard(inProgress: Boolean, onClick: (() -> Unit)?) {
             .clip(RoundedCornerShape(16.dp))
             .clickable(enabled = !inProgress, onClick = onClick),
         icon = Icons.Filled.CloudOff,
-        title = "Sync via Google Account",
-        subtitle = "Sign in to mirror playlists, watch progress, reminders, and preferences across your devices.",
+        title = "Über Google-Konto synchronisieren",
+        subtitle = "Melde dich an, um Wiedergabelisten, Wiedergabefortschritt, Erinnerungen und Einstellungen auf deinen Geräten zu synchronisieren.",
         trailing = {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -265,7 +265,7 @@ private fun SyncCard(inProgress: Boolean, onClick: (() -> Unit)?) {
                         .background(MaterialTheme.colorScheme.decorSecondary),
                 )
                 Text(
-                    text = if (inProgress) "..." else "Off",
+                    text = if (inProgress) "..." else "Aus",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
                     color = MaterialTheme.colorScheme.onBackground,
@@ -275,7 +275,7 @@ private fun SyncCard(inProgress: Boolean, onClick: (() -> Unit)?) {
     )
 }
 
-/** "Connect a Server" as a single-line row with a trailing chevron, mirroring
+/** "Server verbinden" as a single-line row with a trailing chevron, mirroring
  *  the tvOS WelcomeView nav row (not a full-bleed gradient button). */
 @Composable
 private fun ConnectServerRow(onClick: () -> Unit) {
@@ -284,7 +284,7 @@ private fun ConnectServerRow(onClick: () -> Unit) {
             .clip(RoundedCornerShape(16.dp))
             .clickable(onClick = onClick),
         icon = Icons.Outlined.Hub,
-        title = "Connect a Server",
+        title = "Server verbinden",
         subtitle = null,
         trailing = {
             Icon(
@@ -300,7 +300,7 @@ private fun ConnectServerRow(onClick: () -> Unit) {
 private fun SkipRow(onSkip: () -> Unit) {
     TextButton(onClick = onSkip) {
         Text(
-            text = "Skip for now",
+            text = "Vorerst überspringen",
             color = MaterialTheme.colorScheme.textAccent,
             style = MaterialTheme.typography.bodyMedium,
         )

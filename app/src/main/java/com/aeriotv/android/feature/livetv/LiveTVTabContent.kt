@@ -124,7 +124,7 @@ fun LiveTVTabContent(
         }
     }
 
-    // iOS canon scopes the "Live TV List" Display Scale slider to List mode
+    // iOS canon scopes the "Live-TV-Liste" Display Scale slider to List mode
     // only (the Guide grid is a strict-pitch layout that the user shouldn't
     // be free-scaling). Match that scoping rule here.
     CompositionLocalProvider(

@@ -110,7 +110,7 @@ fun CastIconButton(
         ) {
             Icon(
                 imageVector = if (connected) Icons.Filled.CastConnected else Icons.Filled.Cast,
-                contentDescription = if (connected) "Casting" else "Cast",
+                contentDescription = if (connected) "Übertragung" else "Übertragen",
                 tint = Color.White,
             )
         }
@@ -132,7 +132,7 @@ fun CastIconButton(
  * action. Selecting a route hands off to the Cast framework's SessionManager,
  * which starts the session; [AerioCastSender] then loads the pending content.
  *
- * Shared with MainScaffold's floating "Control a TV" button (task #255): the
+ * Shared with MainScaffold's floating "Fernseher steuern" button (task #255): the
  * guide entry point used to show a companion-only list while this one showed
  * cast routes too, so the same TV appeared in one picker but not the other.
  * Nothing here needs a playing item -- selecting a route just connects, and
@@ -217,13 +217,13 @@ fun CastRouteChooserDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (connected) "Casting" else "Cast to") },
+        title = { Text(if (connected) "Übertragung" else "Übertragen auf") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 if (routes.isEmpty() && tvs.isEmpty() &&
                     companionConn !is CompanionRemoteController.Conn.NeedsPairing
                 ) {
-                    Text("Searching for devices...")
+                    Text("Geräte werden gesucht...")
                 }
                 @Composable
                 fun routeRow(route: MediaRouter.RouteInfo) {
@@ -272,26 +272,26 @@ fun CastRouteChooserDialog(
                 // over the section with the code entry.
                 when (companionConn) {
                     is CompanionRemoteController.Conn.NeedsPairing -> {
-                        Text("Enter the code shown on ${companionConn.name ?: "the TV"}")
+                        Text("Gib den Code ein, der auf ${companionConn.name ?: "dem Fernseher"} angezeigt wird")
                         OutlinedTextField(
                             value = pairCode,
                             onValueChange = { v ->
                                 if (v.length <= 6 && v.all { it.isDigit() }) pairCode = v
                             },
-                            label = { Text("6-digit code") },
+                            label = { Text("6-stelliger Code") },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                             singleLine = true,
                         )
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                            TextButton(onClick = { companionRemote?.disconnect() }) { Text("Cancel") }
+                            TextButton(onClick = { companionRemote?.disconnect() }) { Text("Abbrechen") }
                             TextButton(
                                 onClick = { companionRemote?.submitPairingCode(pairCode) },
                                 enabled = pairCode.length == 6,
-                            ) { Text("Pair") }
+                            ) { Text("Koppeln") }
                         }
                     }
                     is CompanionRemoteController.Conn.Connecting ->
-                        Text("Connecting to ${companionConn.name ?: "TV"}...")
+                        Text("Verbindung zu ${companionConn.name ?: "TV"} wird hergestellt...")
                     else -> tvs.forEach { tv ->
                         Row(
                             modifier = Modifier
@@ -326,16 +326,16 @@ fun CastRouteChooserDialog(
                 connected -> TextButton(onClick = {
                     sender.stopCasting()
                     onDismiss()
-                }) { Text("Stop casting") }
+                }) { Text("Übertragung beenden") }
                 companionConn is CompanionRemoteController.Conn.Connected -> TextButton(onClick = {
                     companionRemote?.disconnect()
                     onDismiss()
                 }) { Text("Disconnect TV") }
-                else -> TextButton(onClick = onDismiss) { Text("Close") }
+                else -> TextButton(onClick = onDismiss) { Text("Schließen") }
             }
         },
         dismissButton = if (connected || companionConn is CompanionRemoteController.Conn.Connected) {
-            { TextButton(onClick = onDismiss) { Text("Close") } }
+            { TextButton(onClick = onDismiss) { Text("Schließen") } }
         } else {
             null
         },

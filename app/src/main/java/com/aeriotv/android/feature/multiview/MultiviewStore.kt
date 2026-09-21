@@ -153,7 +153,7 @@ class MultiviewStore @Inject constructor() {
     /**
      * Player-flow seed: ensure [channel] is present at index 0 (the
      * audio-focused tile) WITHOUT discarding any already-staged tiles.
-     * Used when the user opens "Add to Multiview" while watching a single
+     * Used when the user opens "Zur Mehrfachansicht hinzufügen" while watching a single
      * stream -- the now-playing channel becomes Tile 1 and keeps audio
      * focus, while a previously Guide-staged set (if any) is preserved
      * behind it. Idempotent: if the channel is already staged it is moved

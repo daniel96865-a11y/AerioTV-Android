@@ -122,7 +122,7 @@ fun LicensesScreen(onBack: () -> Unit) {
 
     Column(modifier = Modifier.fillMaxSize()) {
         SettingsDetailTopBar(
-            title = viewing?.title ?: "Open Source Licenses",
+            title = viewing?.title ?: "Open-Source-Lizenzen",
             onBack = { if (viewing != null) viewing = null else onBack() },
         )
 
@@ -186,7 +186,7 @@ private fun LicenseIndex(
             LicenseCard {
                 SettingsNavRow(
                     title = "GNU General Public License v3.0",
-                    subtitle = "The license this app is distributed under",
+                    subtitle = "Lizenz, unter der diese App veröffentlicht wird",
                     icon = Icons.Outlined.Description,
                     onClick = { onOpenLicense(BundledLicense.Gpl3) },
                 )
@@ -241,7 +241,7 @@ private fun LicenseIndex(
             LicenseCard {
                 SettingsNavRow(
                     title = "GNU Lesser General Public License v2.1",
-                    subtitle = "The license FFmpeg is distributed under",
+                    subtitle = "Lizenz, unter der FFmpeg veröffentlicht wird",
                     icon = Icons.Outlined.Description,
                     onClick = { onOpenLicense(BundledLicense.Lgpl21) },
                 )
@@ -269,7 +269,7 @@ private fun LicenseIndex(
             LicenseCard {
                 SettingsNavRow(
                     title = "Apache License 2.0",
-                    subtitle = "The license the above are distributed under",
+                    subtitle = "Lizenz, unter der die oben genannten Komponenten veröffentlicht werden",
                     icon = Icons.Outlined.Description,
                     onClick = { onOpenLicense(BundledLicense.Apache2) },
                 )

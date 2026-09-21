@@ -956,7 +956,7 @@ class DvrViewModel @Inject constructor(
 
     /**
      * Kick off server-side commercial detection / removal on a completed
-     * recording. Mirrors iOS contextMenu "Remove Commercials" (MyRecordingsView
+     * recording. Mirrors iOS contextMenu "Werbung entfernen" (MyRecordingsView
      * line 305-309). The server handles idempotency so repeated taps are
      * safe — refresh() afterwards picks up any status change Dispatcharr
      * surfaces via custom_properties.
@@ -971,7 +971,7 @@ class DvrViewModel @Inject constructor(
             return Result.failure(IllegalStateException("Active source is not Dispatcharr-backed."))
         }
         val intId = recording.id.removePrefix("server-").toIntOrNull()
-            ?: return Result.failure(IllegalStateException("Invalid recording id."))
+            ?: return Result.failure(IllegalStateException("Ungültige Aufnahme-ID."))
         val base = playlistRepository.effectiveBaseUrl(playlist)
         // Comskip is a server-side write (IsAdminOrDVRManager), so a 403 must
         // reach the capability self-correction path like every other one.
@@ -986,7 +986,7 @@ class DvrViewModel @Inject constructor(
     /**
      * Stop an in-progress server recording early. The partial file stays on
      * disk — caller pairs with deleteRecording when the partial isn't wanted.
-     * Mirrors iOS contextMenu "Stop Recording" (MyRecordingsView line 332-336).
+     * Mirrors iOS contextMenu "Aufnahme stoppen" (MyRecordingsView line 332-336).
      */
     suspend fun stopRecording(recording: Recording): Result<Unit> {
         if (recording.source != Source.Server) {
@@ -998,7 +998,7 @@ class DvrViewModel @Inject constructor(
             return Result.failure(IllegalStateException("Active source is not Dispatcharr-backed."))
         }
         val intId = recording.id.removePrefix("server-").toIntOrNull()
-            ?: return Result.failure(IllegalStateException("Invalid recording id."))
+            ?: return Result.failure(IllegalStateException("Ungültige Aufnahme-ID."))
         val base = playlistRepository.effectiveBaseUrl(playlist)
         return withCapability(Capability.CanManageDvr) {
             dispatcharrAuth.withApiKeyRetry(playlist.id) { key ->
@@ -1290,7 +1290,7 @@ private fun DispatcharrRecording.toRecording(
     return DvrViewModel.Recording(
         id = "server-$id",
         source = DvrViewModel.Source.Server,
-        title = title.ifBlank { "Recording $id" },
+        title = title.ifBlank { "Aufnahme $id" },
         description = description,
         startMillis = start,
         endMillis = end,

@@ -124,7 +124,7 @@ fun vodMeasuredDescriptors(
 
 /**
  * One selectable provider copy of a deduped VOD item (movie or series), for
- * the Version picker. Built from a /providers/ relation row; "Auto" (server
+ * the Version picker. Built from a /providers/ relation row; "Automatisch" (server
  * priority + failover) is represented by the ABSENCE of a selection, never by
  * an option instance. [streamId] pins movie playback (episodes pin by
  * [accountId] only).

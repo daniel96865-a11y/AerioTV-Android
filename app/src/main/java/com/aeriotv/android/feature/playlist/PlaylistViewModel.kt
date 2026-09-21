@@ -86,7 +86,7 @@ class PlaylistViewModel @Inject constructor(
         val username: String = "",
         val password: String = "",
         /** Per-playlist On Demand opt-in (iOS ServerConnection.vodEnabled).
-         *  Bound to the "Fetch On Demand from this playlist" toggle in
+         *  Bound to the "Mediathek aus dieser Wiedergabeliste laden" toggle in
          *  ConfigureSourceScreen / EditPlaylistScreen. Default true, threaded
          *  through SaveRequest into PlaylistEntity.vodEnabled. */
         val vodEnabled: Boolean = true,
@@ -157,7 +157,7 @@ class PlaylistViewModel @Inject constructor(
     }
 
     /**
-     * "Skip for now" on the Welcome screen: the user chose to enter the app
+     * "Vorerst überspringen" on the Welcome screen: the user chose to enter the app
      * with no playlist. The MAIN route's NeedsUrl bounce-back guard respects
      * this for the rest of the session; without it, Skip navigated to MAIN
      * and was bounced straight back to Welcome within a frame, so the button
@@ -169,7 +169,7 @@ class PlaylistViewModel @Inject constructor(
     data class ActiveRoute(val isLan: Boolean, val url: String)
 
     companion object {
-        const val ALL_GROUPS = "All"
+        const val ALL_GROUPS = "Alle"
         /** Pinned Favorites group inside Live TV (Apple parity: Favorites is a
          *  channel group, not a tab). Never a provider group name. */
         const val FAVORITES_GROUP = "__favorites__"
@@ -541,7 +541,7 @@ class PlaylistViewModel @Inject constructor(
     fun onPasswordChange(value: String) {
         _state.update { it.copy(password = value) }
     }
-    /** Bound to "Fetch On Demand from this playlist" in ConfigureSourceScreen /
+    /** Bound to "Mediathek aus dieser Wiedergabeliste laden" in ConfigureSourceScreen /
      *  EditPlaylistScreen. Threaded into SaveRequest.vodEnabled on submit. */
     fun onVodEnabledChange(value: Boolean) {
         _state.update { it.copy(vodEnabled = value) }
@@ -551,7 +551,7 @@ class PlaylistViewModel @Inject constructor(
     fun onDvrDestinationChange(server: Boolean) {
         _state.update { it.copy(dvrDestinationServer = server) }
     }
-    /** Bound to the "Guide Days" picker in ConfigureSourceScreen (task
+    /** Bound to the "EPG-Tage" picker in ConfigureSourceScreen (task
      *  #135). Threaded into SaveRequest.epgRetentionDays on submit. */
     fun onEpgRetentionDaysChange(value: Int) {
         _state.update { it.copy(epgRetentionDays = sanitizeGuideDays(value)) }
@@ -840,7 +840,7 @@ class PlaylistViewModel @Inject constructor(
         guideForwardJob = viewModelScope.launch {
             // Logan 2026-09-11: the playlist's Guide Days setting governs the
             // default forward edge (both directions), not the old Settings >
-            // Network "Guide Window" preference.
+            // Network "EPG-Zeitraum" preference.
             val windowHours = ((resolveGuideDays(playlist.epgRetentionDays)
                 ?: GUIDE_DAYS_ALL_MAX_AHEAD) * 24).coerceAtLeast(24)
             val defaultEnd = System.currentTimeMillis() + windowHours * 3_600_000L
@@ -1334,7 +1334,7 @@ class PlaylistViewModel @Inject constructor(
 
     /**
      * Re-fetch the active playlist (channels) and follow with EPG. Used by
-     * Playlist Detail's "Refresh Playlist" action.
+     * Playlist Detail's "Wiedergabeliste aktualisieren" action.
      */
     fun refreshPlaylist() {
         viewModelScope.launch {
@@ -1456,7 +1456,7 @@ class PlaylistViewModel @Inject constructor(
             val outcome = doLoadEpg(active, forceRefresh = true)
             // The purge above dropped retained history too; re-merge whatever
             // survives (nothing on a true clean slate, task #135 semantics:
-            // "Refresh EPG Data" is the user's reset-everything hammer).
+            // "EPG-Daten aktualisieren" is the user's reset-everything hammer).
             if (_state.value.epgByChannel !is com.aeriotv.android.core.guide.GuideCatalog) {
                 rebuildGuideCatalog(active, "history")
             }
@@ -1482,7 +1482,7 @@ class PlaylistViewModel @Inject constructor(
     }
 
     /**
-     * "Refresh Everything" nuclear reset (iOS a039ba71a parity). Strictly
+     * "Alles aktualisieren" nuclear reset (iOS a039ba71a parity). Strictly
      * more thorough than Refresh Playlist + Refresh EPG Data: it purges the
      * per-playlist EPG cache AND drops the in-memory guide map AND re-fetches
      * channels (so newly-added server channels appear; refresh() also rewrites
@@ -1599,7 +1599,7 @@ class PlaylistViewModel @Inject constructor(
      * Load the Dispatcharr channel profiles for the active playlist so the
      * Edit Playlist screen can render the Channel Profile picker. No-op (and
      * clears any stale list) for non-Dispatcharr sources. Failures leave the
-     * list empty so the picker just shows "All Channels".
+     * list empty so the picker just shows "Alle Sender".
      */
     fun loadDispatcharrProfiles() {
         viewModelScope.launch {
@@ -1753,7 +1753,7 @@ class PlaylistViewModel @Inject constructor(
         }
     }
 
-    /** Manual "Refresh LAN Detection" action on Playlist Detail: re-probe
+    /** Manual "LAN-Erkennung aktualisieren" action on Playlist Detail: re-probe
      *  which URL answers and report the outcome inline. The same probe
      *  already runs automatically on entry and ON_RESUME; this row exists
      *  for parity with iOS and for users who just changed networks. */
@@ -1948,7 +1948,7 @@ class PlaylistViewModel @Inject constructor(
     }
 
     /**
-     * Player "Switch Stream" (Dispatcharr Direct Connect): the active channel's
+     * Player "Stream wechseln" (Dispatcharr Direct Connect): the active channel's
      * member streams with quality stats. [channelIntPk] is
      * M3UChannel.dispatcharrChannelId. Returns empty on any failure or a
      * non-Dispatcharr source so the sheet simply shows the empty state.
@@ -1965,7 +1965,7 @@ class PlaylistViewModel @Inject constructor(
         runCatching { repository.dispatcharrM3uAccountNames() }.getOrDefault(emptyMap())
 
     /**
-     * Player "Switch Stream": ask Dispatcharr to switch the channel's active
+     * Player "Stream wechseln": ask Dispatcharr to switch the channel's active
      * upstream to [streamId] (a Stream pk). [channelUuid] is M3UChannel.id minus
      * the "disp:" prefix. Result so the caller can Toast success/failure.
      */
@@ -1981,7 +1981,7 @@ class PlaylistViewModel @Inject constructor(
     suspend fun loadCurrentStreamUrl(channelUuid: String): String? =
         runCatching { repository.currentDispatcharrStreamUrl(channelUuid) }.getOrNull()
 
-    /** Clean-end session check for the player's "Stream ended" card. */
+    /** Clean-end session check for the player's "Stream beendet" card. */
     suspend fun verifyStreamEndedByLimit(
         channelUuid: String?,
         ourConnectedAtEpochSec: Double,

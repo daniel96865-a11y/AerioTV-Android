@@ -241,7 +241,7 @@ fun PlayerChromeOverlay(
     // panel up as long as it is open.
     LaunchedEffect(moreOpen, sleepOpen) { onInteractingChange(moreOpen || sleepOpen) }
 
-    // Initial focus target when chrome appears -- the leftmost "Options"
+    // Initial focus target when chrome appears -- the leftmost "Optionen"
     // pill on the bottom row. Without this, focus stays on PlayerScreen's
     // tap-target Box (which has clickable from gesture handling), so D-pad
     // presses don't traverse to the pills. Fired by the LaunchedEffect
@@ -292,7 +292,7 @@ fun PlayerChromeOverlay(
                 val now = System.currentTimeMillis()
                 ProgramInfoTarget(
                     channelName = it.name,
-                    title = "${it.name} live recording",
+                    title = "${it.name} Live-Aufnahme",
                     startMillis = now,
                     endMillis = now + 3_600_000L,
                     description = "",
@@ -406,11 +406,11 @@ fun PlayerChromeOverlay(
             // Without one they stay in the row, greyed and inert, and say why
             // when focused, rather than vanishing and reflowing the row.
             val seekEnabled = tvTransport
-            val seekDisabledCaption = "Enable Live Rewind in Settings"
+            val seekDisabledCaption = "Aktiviere Live-Zurückspulen in den Einstellungen"
             val centerPill: @Composable () -> Unit = {
                 PlayerControlCircle(
                     icon = if (isPlayerPaused) Icons.Filled.PlayArrow else Icons.Filled.Pause,
-                    title = if (isPlayerPaused) "Play" else "Pause",
+                    title = if (isPlayerPaused) "Abspielen" else "Pause",
                     onClick = onRewindTogglePause,
                     modifier = Modifier.focusRequester(pauseFocus),
                     onInteraction = onInteraction,
@@ -419,11 +419,11 @@ fun PlayerChromeOverlay(
             val leftPills: @Composable () -> Unit = {
                 // Connection-issue Retry leads the row and auto-focuses (see
                 // the focus LaunchedEffect) so the remote has a reachable
-                // re-tune while "Channel Unavailable" is showing.
+                // re-tune while "Sender nicht verfügbar" is showing.
                 if (connectionIssue) {
                     PlayerControlCircle(
                         icon = Icons.Filled.Refresh,
-                        title = "Retry",
+                        title = "Erneut versuchen",
                         onClick = onRetry,
                             modifier = Modifier.focusRequester(retryFocus),
                         onInteraction = onInteraction,
@@ -434,7 +434,7 @@ fun PlayerChromeOverlay(
                 if (canRecord && !catchupMode) {
                     PlayerControlCircle(
                         icon = Icons.Filled.FiberManualRecord,
-                        title = "Record",
+                        title = "Aufnehmen",
                         iconTint = Color(0xFFFF4757),
                         onClick = { recordCurrent() },
                         onInteraction = onInteraction,
@@ -472,7 +472,7 @@ fun PlayerChromeOverlay(
                 if (tvTransport && !catchupMode && timeshiftState?.timeshifting == true) {
                     PlayerControlCircle(
                         icon = Icons.Filled.PlayArrow,
-                        title = "Go Live",
+                        title = "Zu Live",
                         onClick = onGoLive,
                             onInteraction = onInteraction,
                         )
@@ -480,8 +480,8 @@ fun PlayerChromeOverlay(
                 if (!catchupMode) {
                     PlayerControlCircle(
                         icon = Icons.Outlined.GridView,
-                        title = "Multiview",
-                        contentDescription = "Add a multiview tile",
+                        title = "Mehrfachansicht",
+                        contentDescription = "Kachel zur Mehrfachansicht hinzufügen",
                         onClick = onAddToMultiview,
                             onInteraction = onInteraction,
                         )
@@ -489,7 +489,7 @@ fun PlayerChromeOverlay(
                 Box {
                     PlayerControlCircle(
                         icon = Icons.Filled.Tune,
-                        title = "Options",
+                        title = "Optionen",
                         onClick = { moreOpen = true },
                             modifier = Modifier.focusRequester(optionsFocus),
                         onInteraction = onInteraction,
@@ -596,7 +596,7 @@ fun PlayerChromeOverlay(
             ) {
                 CircleIconButton(
                     icon = Icons.Filled.Close,
-                    contentDescription = "Close",
+                    contentDescription = "Schließen",
                     onClick = onClose,
                     modifier = Modifier.focusRequester(closeFocus),
                 )
@@ -621,7 +621,7 @@ fun PlayerChromeOverlay(
                 Spacer(Modifier.weight(1f))
                 CircleIconButton(
                     icon = if (forcedLandscape) Icons.Filled.FullscreenExit else Icons.Filled.Fullscreen,
-                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Fullscreen",
+                    contentDescription = if (forcedLandscape) "Exit fullscreen" else "Vollbild",
                     onClick = {
                         forcedLandscape = !forcedLandscape
                         context.findActivity()?.requestedOrientation = if (forcedLandscape) {
@@ -697,7 +697,7 @@ fun PlayerChromeOverlay(
                 Spacer(Modifier.width(8.dp))
                 CircleIconButton(
                     icon = Icons.Filled.Add,
-                    contentDescription = "Add to Multiview",
+                    contentDescription = "Zur Mehrfachansicht hinzufügen",
                     onClick = onAddToMultiview,
                 )
             }
@@ -762,7 +762,7 @@ fun PlayerChromeOverlay(
                 if (showLiveRewindHint) {
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        text = "Turn on Live Rewind in Settings to pause & rewind live TV",
+                        text = "Aktiviere Live-Zurückspulen in den Einstellungen, um Live-TV zu pausieren und zurückzuspulen",
                         style = MaterialTheme.typography.labelMedium,
                         color = Color.White.copy(alpha = 0.65f),
                         textAlign = androidx.compose.ui.text.style.TextAlign.Center,
@@ -1009,7 +1009,7 @@ private fun PlayerControlCircle(
     }
     // The cell IS the 30 dp circle. Its caption is drawn below it as an
     // OVERLAY (Logan 2026-09-11): centered on this circle, measured with an
-    // unbounded width so a long caption ("Enable Live Rewind in Settings")
+    // unbounded width so a long caption ("Aktiviere Live-Zurückspulen in den Einstellungen")
     // stays one line and simply extends over its neighbors' empty caption
     // space, and never affecting this cell's width or the row's layout. Only
     // the focused control draws one, and tvFocusScale's zIndex bump means the
@@ -1107,7 +1107,7 @@ private fun PlayerMoreMenu(
             // Non-interactive header (D-pad focus skips it and lands on the first
             // row); Back closes the dropdown, which the "‹" chevron represents.
             Text(
-                text = "Press ‹ to close",
+                text = "Zum Schließen ‹ drücken",
                 fontSize = 12.sp.subtext(),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.55f).forText(),
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 4.dp),
@@ -1121,7 +1121,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Subtitles") },
+            text = { Text("Untertitel") },
             onClick = onSubtitles,
         )
         DropdownMenuItem(
@@ -1132,7 +1132,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Audio Track") },
+            text = { Text("Audiospur") },
             onClick = onAudioTracks,
         )
         DropdownMenuItem(
@@ -1143,7 +1143,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Playback Speed") },
+            text = { Text("Wiedergabegeschwindigkeit") },
             onClick = onPlaybackSpeed,
         )
         // Video Scale: cycle Fit <-> Fill. Stays open so repeated presses
@@ -1156,7 +1156,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Video Scale: $scaleLabel") },
+            text = { Text("Videogröße: $scaleLabel") },
             onClick = onCycleScale,
         )
         if (canRecord) {
@@ -1168,7 +1168,7 @@ private fun PlayerMoreMenu(
                         tint = Color(0xFFFF4757),
                     )
                 },
-                text = { Text("Record Current Program") },
+                text = { Text("Aktuelle Sendung aufnehmen") },
                 onClick = onRecord,
             )
         }
@@ -1187,7 +1187,7 @@ private fun PlayerMoreMenu(
                 )
             },
             text = {
-                Text(if (sleepActive) "Sleep Timer (active)" else "Sleep Timer")
+                Text(if (sleepActive) "Sleep Timer (active)" else "Sleep-Timer")
             },
             onClick = onSleepTimer,
         )
@@ -1199,7 +1199,7 @@ private fun PlayerMoreMenu(
                     tint = MaterialTheme.colorScheme.onSurface,
                 )
             },
-            text = { Text("Stream Info") },
+            text = { Text("Stream-Info") },
             onClick = onStreamInfo,
         )
         if (canSwitchStream) {
@@ -1211,7 +1211,7 @@ private fun PlayerMoreMenu(
                         tint = MaterialTheme.colorScheme.onSurface,
                     )
                 },
-                text = { Text("Switch Stream") },
+                text = { Text("Stream wechseln") },
                 onClick = onSwitchStream,
             )
         }
@@ -1231,10 +1231,10 @@ private fun PlayerMoreMenu(
                 )
             },
             text = {
-                // iOS toggles the label to "Show Video" when in Audio
+                // iOS toggles the label to "Video anzeigen" when in Audio
                 // Only mode so the action describes what tapping does,
                 // not what state it shows. Port that.
-                Text(if (audioOnly) "Show Video" else "Audio Only")
+                Text(if (audioOnly) "Video anzeigen" else "Nur Audio")
             },
             onClick = onAudioOnly,
         )
@@ -1523,7 +1523,7 @@ private fun RewindTransportBar(
                 )
                 CircleIconButton(
                     icon = if (paused) Icons.Filled.PlayArrow else Icons.Filled.Pause,
-                    contentDescription = if (paused) "Play" else "Pause",
+                    contentDescription = if (paused) "Abspielen" else "Pause",
                     onClick = onTogglePause,
                 )
                 CircleIconButton(
@@ -1552,7 +1552,7 @@ private fun RewindTransportBar(
                         .onFocusChanged { goLiveFocused = it.isFocused },
                 ) {
                     Text(
-                        text = "Go Live",
+                        text = "Zu Live",
                         style = MaterialTheme.typography.labelMedium,
                         fontWeight = FontWeight.Bold,
                         color = Color.Black,
@@ -1851,14 +1851,14 @@ private fun SleepTimerSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Sleep Timer",
+                text = "Sleep-Timer",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
             )
             Spacer(Modifier.height(12.dp))
             SLEEP_OPTIONS.forEach { mins ->
-                val label = if (mins == 0) "Off" else "$mins minutes"
+                val label = if (mins == 0) "Aus" else "$mins Minuten"
                 val isActive = (mins == 0 && current == null) ||
                         (mins != 0 && current != null && ((current / 60_000L).toInt() in (mins - 1)..mins))
                 Row(
@@ -1900,7 +1900,7 @@ fun StreamInfoSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Stream Info",
+                text = "Stream-Info",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
@@ -1954,16 +1954,16 @@ fun SubtitlesSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Subtitles",
+                text = "Untertitel",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
             )
             Spacer(Modifier.height(12.dp))
-            SubtitleRow(label = "Off", selected = currentTrackId == null, onClick = { onSelect(null) })
+            SubtitleRow(label = "Aus", selected = currentTrackId == null, onClick = { onSelect(null) })
             if (tracks.isEmpty()) {
                 Text(
-                    text = "No subtitle tracks reported by the stream.",
+                    text = "Der Stream meldet keine Untertitelspuren.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 6.dp),
@@ -1988,7 +1988,7 @@ fun SubtitlesSheet(
 
 /**
  * Sister sheet to [SubtitlesSheet] for picking the active audio track. Same
- * RadioButton-row layout so it reads identically; difference is no "Off" row
+ * RadioButton-row layout so it reads identically; difference is no "Aus" row
  * (every live stream needs an audio track to play sound; mute lives in the
  * Audio Only / system volume affordance, not here).
  */
@@ -2003,7 +2003,7 @@ fun AudioTracksSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Audio Track",
+                text = "Audiospur",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
@@ -2011,7 +2011,7 @@ fun AudioTracksSheet(
             Spacer(Modifier.height(12.dp))
             if (tracks.isEmpty()) {
                 Text(
-                    text = "No audio tracks reported by the stream.",
+                    text = "Der Stream meldet keine Audiospuren.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 6.dp),
@@ -2055,7 +2055,7 @@ fun AudioTracksSheet(
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    text = "Audio Sync",
+                    text = "Audio-Synchronisierung",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                     fontWeight = FontWeight.SemiBold,
@@ -2078,11 +2078,11 @@ fun AudioTracksSheet(
                 TextButton(onClick = { applySync(syncMs + 100L) }) { Text("+100 ms") }
                 Spacer(Modifier.weight(1f))
                 if (syncMs != 0L) {
-                    TextButton(onClick = { applySync(0L) }) { Text("Reset") }
+                    TextButton(onClick = { applySync(0L) }) { Text("Zurücksetzen") }
                 }
             }
             Text(
-                text = "Positive plays audio later; negative plays it earlier.",
+                text = "Positive Werte geben Audio später wieder, negative früher.",
                 style = MaterialTheme.typography.bodySmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -2092,7 +2092,7 @@ fun AudioTracksSheet(
 }
 
 /**
- * Player "Switch Stream" picker (Dispatcharr Direct Connect). Lists the
+ * Player "Stream wechseln" picker (Dispatcharr Direct Connect). Lists the
  * channel's member streams with their probed quality (resolution / fps /
  * bitrate / codec); selecting one POSTs change_stream + re-primes playback.
  * Clones [AudioTracksSheet]'s RadioButton-row layout. Streams Dispatcharr has
@@ -2117,7 +2117,7 @@ fun SwitchStreamSheet(
                 .verticalScroll(rememberScrollState()),
         ) {
             Text(
-                text = "Switch Stream",
+                text = "Stream wechseln",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
@@ -2125,7 +2125,7 @@ fun SwitchStreamSheet(
             Spacer(Modifier.height(12.dp))
             if (streams.isEmpty()) {
                 Text(
-                    text = "No alternate streams available for this channel.",
+                    text = "Für diesen Sender sind keine alternativen Streams verfügbar.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 6.dp),
@@ -2161,7 +2161,7 @@ fun PlaybackSpeedSheet(
     com.aeriotv.android.ui.FormFactorModal(onDismiss = onDismiss) {
         Column(modifier = Modifier.padding(horizontal = 20.dp, vertical = 4.dp)) {
             Text(
-                text = "Playback Speed",
+                text = "Wiedergabegeschwindigkeit",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,

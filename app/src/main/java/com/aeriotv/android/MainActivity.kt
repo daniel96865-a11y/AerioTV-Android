@@ -77,7 +77,7 @@ class MainActivity : ComponentActivity() {
 
     /**
      * Flipped true by [onKeyLongPress] when BACK is HELD on Android TV, to
-     * surface the "Would you like to close AerioTV?" confirm (issue #16: the
+     * surface the "Möchtest du AerioTV Deutsch schließen?" confirm (issue #16: the
      * 0.3.0 short-Back rework removed the old exit popup). Read by the Compose
      * tree in [onCreate]; Cancel/dismiss sets it back to false, Close calls finish().
      */
@@ -1128,13 +1128,13 @@ class MainActivity : ComponentActivity() {
                             if (showExitConfirm.value) {
                                 val exitGuard = rememberTvMenuGuard()
                                 TvActionMenuDialog(
-                                    title = "Would you like to close AerioTV?",
+                                    title = "Möchtest du AerioTV Deutsch schließen?",
                                     guard = exitGuard,
                                     onDismiss = { showExitConfirm.value = false },
                                     // TvActionMenuDialog appends its own Cancel row.
                                     actions = listOf(
                                         TvMenuAction(
-                                            label = "Close AerioTV",
+                                            label = "AerioTV Deutsch schließen",
                                             icon = Icons.Outlined.Close,
                                             destructive = true,
                                             onClick = { finish() },

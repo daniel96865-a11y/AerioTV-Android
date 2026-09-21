@@ -90,7 +90,7 @@ internal fun TvMediaTab(
     onRemoveWatchlist: (String) -> Unit,
     onRemoveProgress: (String) -> Unit,
     onPlay: (videoId: String, title: String) -> Unit,
-    /** "Play from Beginning": start at 0 and KEEP the Continue Watching row. */
+    /** "Von Anfang abspielen": start at 0 and KEEP the Continue Watching row. */
     onPlayFromStart: (videoId: String, title: String) -> Unit,
     onOpen: (MediaItem) -> Unit,
     /** Hero label for a SERIES whose target episode is known ("Play S1 E1" /
@@ -141,26 +141,26 @@ internal fun TvMediaTab(
         val buttons = buildList {
             // A series hero always carries the season / episode of the
             // target ("Resume S1 E1"), on the Continue Watching hero as well
-            // as the watchlist one; bare "Resume" hid which episode would
+            // as the watchlist one; bare "Fortsetzen" hid which episode would
             // play (Logan 2026-09-11). Movies keep Play / Resume.
             val primaryLabel = when {
                 seriesLabel != null -> seriesLabel
-                page.hasProgress -> "Resume"
-                else -> "Play"
+                page.hasProgress -> "Fortsetzen"
+                else -> "Abspielen"
             }
             add(TvHeroButton(primaryLabel, Icons.Filled.PlayArrow, primary = true, id = "Primary", onClick = play))
             // tvOS plays at 0 and LEAVES WatchProgress intact
             // (MoviesView.swift:1507-1511): the row must survive.
             if (page.hasProgress) {
-                add(TvHeroButton("Play from Beginning", Icons.Filled.Replay, id = "FromStart") { armHero(); onPlayFromStart(videoId, page.title) })
+                add(TvHeroButton("Von Anfang abspielen", Icons.Filled.Replay, id = "FromStart") { armHero(); onPlayFromStart(videoId, page.title) })
             }
             add(TvHeroButton("Details", Icons.Outlined.Info, id = "Details", onClick = details))
         }
         val longPress = buildList {
-            if (item != null) add(TvMenuAction(if (item.key in watchlistKeys) "Remove from Watchlist" else "Add to Watchlist") { onToggleWatchlist(item) })
-            if (item != null) add(TvMenuAction(if (item.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(item) })
-            if (!watchlist) add(TvMenuAction("Remove from Continue Watching", destructive = true) { onRemoveProgress(videoId) })
-            else if (item != null) add(TvMenuAction("Remove from Watchlist", destructive = true) { onRemoveWatchlist(item.key) })
+            if (item != null) add(TvMenuAction(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") { onToggleWatchlist(item) })
+            if (item != null) add(TvMenuAction(if (item.key in hiddenKeys) "Einblenden" else "Ausblenden") { onToggleHidden(item) })
+            if (!watchlist) add(TvMenuAction("Aus „Weiterschauen“ entfernen", destructive = true) { onRemoveProgress(videoId) })
+            else if (item != null) add(TvMenuAction("Von Merkliste entfernen", destructive = true) { onRemoveWatchlist(item.key) })
         }
         return TvHeroPage(
             key = page.key, title = page.title, artUrl = backdrops[page.key] ?: page.artUrl,
@@ -200,8 +200,8 @@ internal fun TvMediaTab(
             onClick = { item?.let(open) }, modifier = modifier,
             longPressActions = listOfNotNull(
                 item?.let { TvMenuAction("Details") { open(it) } },
-                item?.let { TvMenuAction(if (it.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(it) } },
-                item?.let { TvMenuAction("Remove from Watchlist", destructive = true) { onRemoveWatchlist(it.key) } },
+                item?.let { TvMenuAction(if (it.key in hiddenKeys) "Einblenden" else "Ausblenden") { onToggleHidden(it) } },
+                item?.let { TvMenuAction("Von Merkliste entfernen", destructive = true) { onRemoveWatchlist(it.key) } },
             ),
         )
     }
@@ -230,9 +230,9 @@ internal fun TvMediaTab(
         gridState = gridState,
         heroPages = tvHero,
         // The hero is always the Continue Watching carousel.
-        heroSectionTitle = if (tvHero.isNotEmpty()) "Continue Watching" else null,
+        heroSectionTitle = if (tvHero.isNotEmpty()) "Weiterschauen" else null,
         shelves = listOf(watchlistShelf),
-        headerTitle = if (isSearching) "Results" else kind.libraryTitle,
+        headerTitle = if (isSearching) "Ergebnisse" else kind.libraryTitle,
         headerCount = gridItems.size,
         columns = 7,
         gridRowSpacing = 24.dp,
@@ -246,7 +246,7 @@ internal fun TvMediaTab(
         onQueryChange = onQueryChange,
         onSearchToggle = onSearchToggle,
         onClearSearch = onClearSearch,
-        searchPlaceholder = if (kind == MediaKind.Movies) "Search movies" else "Search TV shows",
+        searchPlaceholder = if (kind == MediaKind.Movies) "Filme suchen" else "Search TV shows",
         isSearching = isSearching,
         searchExtras = extras,
         pills = genrePills,
@@ -261,14 +261,14 @@ internal fun TvMediaTab(
                 onClick = { open(item) }, modifier = scope.modifier,
                 longPressActions = listOf(
                     TvMenuAction("Details") { open(item) },
-                    TvMenuAction(if (item.key in watchlistKeys) "Remove from Watchlist" else "Add to Watchlist") { onToggleWatchlist(item) },
-                    TvMenuAction(if (item.key in hiddenKeys) "Unhide" else "Hide") { onToggleHidden(item) },
+                    TvMenuAction(if (item.key in watchlistKeys) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") { onToggleWatchlist(item) },
+                    TvMenuAction(if (item.key in hiddenKeys) "Einblenden" else "Ausblenden") { onToggleHidden(item) },
                 ),
             )
         },
         emptyContent = {
             if (isLoading || (!isSearching && libraryPending) || (isSearching && isSearchBusy)) CircularProgressIndicator()
-            else Text(if (isSearching) "No results" else kind.emptyTitle, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            else Text(if (isSearching) "Keine Ergebnisse" else kind.emptyTitle, color = MaterialTheme.colorScheme.onSurfaceVariant)
         },
         isLoading = isLoading,
         railLetters = available,

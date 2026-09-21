@@ -48,7 +48,7 @@ import com.aeriotv.android.core.sync.SyncCategory
  * hydrates. iOS sibling: ServerSyncView's staged "Setting Up" card
  * (Features/Onboarding/ServerSyncView.swift) -- same one-row-per-category
  * progression, with the Android twist that the categories are the Drive sync
- * snapshots (DriveSyncManager pull order) plus a final "Channels & Guide"
+ * snapshots (DriveSyncManager pull order) plus a final "Sender & EPG"
  * line driven by PlaylistViewModel reaching Phase.ChannelsReady.
  *
  * Form-factor neutral: the 520dp-capped centered column reads correctly on a
@@ -97,14 +97,14 @@ fun OnboardingSyncProgressScreen(
                 .padding(horizontal = 24.dp),
         ) {
             Text(
-                text = "Restoring Your Data",
+                text = "Deine Daten werden wiederhergestellt",
                 style = MaterialTheme.typography.headlineMedium,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Bold,
             )
             Spacer(Modifier.height(6.dp))
             Text(
-                text = "Pulling your synced setup from Google Drive",
+                text = "Synchronisierte Einrichtung wird aus Google Drive geladen",
                 style = MaterialTheme.typography.bodySmall.subtext(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -130,7 +130,7 @@ fun OnboardingSyncProgressScreen(
                 // no separate channels-vs-EPG signal to split on).
                 RestoreRow(
                     icon = Icons.Filled.LiveTv,
-                    label = "Channels & Guide",
+                    label = "Sender & EPG",
                     state = channelsState,
                     detail = if (channelsState == DriveSyncManager.RestoreStepState.Running) {
                         "Loading channels and guide"
@@ -147,10 +147,10 @@ fun OnboardingSyncProgressScreen(
  * the Settings toggles, e.g. "Playlists & Servers"). */
 private val SyncCategory.lineLabel: String
     get() = when (this) {
-        SyncCategory.Playlists -> "Playlists"
+        SyncCategory.Playlists -> "Wiedergabelisten"
         SyncCategory.WatchProgress -> "Watch progress"
         SyncCategory.Reminders -> "Reminders"
-        SyncCategory.Favorites -> "Favorites"
+        SyncCategory.Favorites -> "Favoriten"
         SyncCategory.Watchlist -> "Watchlist"
         SyncCategory.Preferences -> "Preferences"
         SyncCategory.Credentials -> "Credentials"

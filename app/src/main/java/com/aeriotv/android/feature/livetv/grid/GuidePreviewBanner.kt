@@ -65,7 +65,7 @@ import kotlinx.coroutines.withContext
 import java.util.Date
 
 /**
- * Live TV layout "Channel Preview" (tvOS GuidePreviewBanner, Logan
+ * Live TV layout "Sendervorschau" (tvOS GuidePreviewBanner, Logan
  * 2026-09-05), halved from the 1080 pt canvas: a 106 dp banner above the
  * guide for the FOCUSED program. Text comes straight from the cell's
  * program; only the art arrives later. Art order: the Dispatcharr program
@@ -216,7 +216,7 @@ fun GuidePreviewBanner(
     val clockMode = rememberClockMode()
     val fmt = remember(clockMode) { ClockFormat.guideShort(clockMode) }
     val showBadges = LocalShowEpgBadges.current
-    // Appearance > "Rounded corners in Guide view" (default OFF).
+    // Appearance > "Abgerundete Ecken in der EPG-Ansicht" (default OFF).
     val guideRounded = com.aeriotv.android.core.ui.LocalRoundedArtwork.current.guide
 
     Row(
@@ -240,7 +240,7 @@ fun GuidePreviewBanner(
         ProgramArtSlot(
             model = art,
             // GUIDE surface: the program art here follows Appearance >
-            // "Rounded corners in Guide view", at the SAME radius as the guide
+            // "Abgerundete Ecken in der EPG-Ansicht", at the SAME radius as the guide
             // rail logos, so logos and program art match (Logan 2026-09-16).
             // Off means both are square.
             containerCorner = GUIDE_ART_CORNER,
@@ -272,7 +272,7 @@ fun GuidePreviewBanner(
             },
         )
         if (program == null) {
-            Text("Select a program", fontSize = 13.sp.subtext(), fontWeight = FontWeight.Medium, color = colors.tertiary)
+            Text("Sendung auswählen", fontSize = 13.sp.subtext(), fontWeight = FontWeight.Medium, color = colors.tertiary)
         } else {
             // The mini (205 dp wide, 20 dp from the end) floats over the
             // banner's right end; the copy stops short of it rather than the

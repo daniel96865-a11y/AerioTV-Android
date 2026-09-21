@@ -447,7 +447,7 @@ fun BoxScope.PhoneMiniControls(
     ) {
         Icon(
             imageVector = Icons.Filled.Close,
-            contentDescription = "Close",
+            contentDescription = "Schließen",
             tint = Color.White,
             modifier = Modifier.size(18.dp),
         )

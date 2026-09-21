@@ -164,12 +164,12 @@ private val PlayerRemoteAction.displayName: String
         PlayerRemoteAction.JUMP_TO_LIVE -> "Jump to live"
         PlayerRemoteAction.MINIMIZE_TO_GUIDE -> "Return to TV Guide"
         PlayerRemoteAction.CHANNEL_LIST -> "Channel list"
-        PlayerRemoteAction.SUBTITLES -> "Subtitles"
+        PlayerRemoteAction.SUBTITLES -> "Untertitel"
         PlayerRemoteAction.AUDIO_TRACKS -> "Audio tracks"
         PlayerRemoteAction.ASPECT_RATIO -> "Aspect ratio"
-        PlayerRemoteAction.RECORD -> "Record"
+        PlayerRemoteAction.RECORD -> "Aufnehmen"
         PlayerRemoteAction.SLEEP_TIMER -> "Sleep timer"
-        PlayerRemoteAction.OPEN_SEARCH -> "Search"
+        PlayerRemoteAction.OPEN_SEARCH -> "Suche"
         PlayerRemoteAction.NONE -> "Do nothing"
     }
 
@@ -189,14 +189,14 @@ private val GuideRemoteAction.displayName: String
         GuideRemoteAction.JUMP_TO_DAY -> "Jump to a day and time"
         GuideRemoteAction.JUMP_TO_TOP -> "Jump to top channel"
         GuideRemoteAction.FOCUS_GROUP_PILLS -> "Go to group pills"
-        GuideRemoteAction.RESUME_PLAYER -> "Return to player"
+        GuideRemoteAction.RESUME_PLAYER -> "Zurück zum Player"
         GuideRemoteAction.CLOSE_MINI_PLAYER -> "Close mini player"
         GuideRemoteAction.PROGRAM_INFO -> "Program info"
         GuideRemoteAction.PROGRAM_MENU -> "Program menu"
-        GuideRemoteAction.RECORD -> "Record"
-        GuideRemoteAction.PLAY -> "Play"
+        GuideRemoteAction.RECORD -> "Aufnehmen"
+        GuideRemoteAction.PLAY -> "Abspielen"
         GuideRemoteAction.NAVIGATE -> "Move focus"
-        GuideRemoteAction.OPEN_SEARCH -> "Search"
+        GuideRemoteAction.OPEN_SEARCH -> "Suche"
         GuideRemoteAction.NONE -> "Do nothing"
     }
 
@@ -228,7 +228,7 @@ fun RemoteControlSettingsScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Remote Control", onBack = onBack)
+        SettingsDetailTopBar(title = "Fernbedienung", onBack = onBack)
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter) {
             Column(
                 modifier = Modifier
@@ -243,8 +243,8 @@ fun RemoteControlSettingsScreen(
                     footer = "The one-line key reminder under the tab bar on Live TV and at the bottom of the player controls. Turn it off once the buttons are second nature.",
                 ) {
                     SettingsToggleRow(
-                        title = "Show remote hints",
-                        subtitle = "Key reminders on Live TV and in the player",
+                        title = "Fernbedienungshinweise anzeigen",
+                        subtitle = "Tastenhinweise in Live-TV und im Player",
                         checked = showRemoteHints,
                         onCheckedChange = { viewModel.setShowRemoteHints(it) },
                     )
@@ -264,8 +264,8 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "In the TV Guide",
-                    footer = "What each button does while browsing the guide. A Left or Right set to anything other than Move focus still moves between programs, and runs its action once focus reaches the edge of the timeline (Play, Record, Program info and Program menu run on every press). Up, Down and Back always navigate.",
+                    header = "Im TV-EPG",
+                    footer = "Legt fest, was jede Taste beim Navigieren im EPG macht. Links und Rechts bewegen weiterhin zwischen Sendungen; zugewiesene Aktionen werden am Rand der Zeitleiste ausgeführt. Wiedergabe, Aufnahme, Sendungsinfo und Sendungsmenü werden bei jedem Tastendruck ausgeführt. Hoch, Runter und Zurück dienen immer der Navigation.",
                 ) {
                     GUIDE_SLOTS.forEach { slot ->
                         SlotRow(
@@ -277,19 +277,19 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "Additional Buttons",
-                    footer = "Applies when your remote has these buttons (many Bluetooth and Shield remotes do; the stock Google TV remote does not).",
+                    header = "Zusätzliche Tasten",
+                    footer = "Gilt, wenn deine Fernbedienung diese Tasten besitzt. Viele Bluetooth- und Shield-Fernbedienungen haben sie; die Standard-Google-TV-Fernbedienung nicht.",
                 ) {
                     PLAYER_EXTENDED_SLOTS.forEach { slot ->
                         SlotRow(
-                            slotName = "${slot.displayName} (watching)",
+                            slotName = "${slot.displayName} (Wiedergabe)",
                             valueName = map.playerAction(slot).displayName,
                             onClick = { editingPlayerSlot = slot },
                         )
                     }
                     GUIDE_EXTENDED_SLOTS.forEach { slot ->
                         SlotRow(
-                            slotName = "${slot.displayName} (guide)",
+                            slotName = "${slot.displayName} (EPG)",
                             valueName = map.guideAction(slot).displayName(groupSelector == "sidebar"),
                             onClick = { editingGuideSlot = slot },
                         )
@@ -297,22 +297,22 @@ fun RemoteControlSettingsScreen(
                 }
 
                 SettingsSection(
-                    header = "Tuning",
-                    footer = "Where a channel starts playing when you press OK on it in Live TV. Mini player keeps you browsing with the channel in the corner; press OK on it again (or hold Right) to go fullscreen.",
+                    header = "Senderstart",
+                    footer = "Legt fest, wo ein Sender startet, wenn du in Live-TV OK drückst. Der Mini-Player lässt dich weiter navigieren, während der Sender in der Ecke läuft. Drücke erneut OK oder halte Rechts gedrückt, um ins Vollbild zu wechseln.",
                 ) {
                     SlotRow(
-                        slotName = "Play Channels In",
-                        valueName = if (tuneInMini) "Mini player" else "Full screen",
+                        slotName = "Sender abspielen in",
+                        valueName = if (tuneInMini) "Mini-Player" else "Vollbild",
                         onClick = { editingTuneTarget = true },
                     )
                 }
 
                 SettingsSection(
-                    header = "Reset",
-                    footer = "Restore every button to the standard AerioTV scheme.",
+                    header = "Zurücksetzen",
+                    footer = "Setzt alle Tasten auf die Standardbelegung von AerioTV Deutsch zurück.",
                 ) {
                     SlotRow(
-                        slotName = "Reset to Defaults",
+                        slotName = "Auf Standard zurücksetzen",
                         valueName = "",
                         onClick = { showResetConfirm = true },
                     )
@@ -323,16 +323,16 @@ fun RemoteControlSettingsScreen(
 
     if (editingTuneTarget) {
         TvActionMenuDialog(
-            title = "Play Channels In",
+            title = "Sender abspielen in",
             actions = listOf(
                 TvMenuAction(
-                    label = if (!tuneInMini) "Full screen  (current)" else "Full screen",
+                    label = if (!tuneInMini) "Full screen  (current)" else "Vollbild",
                 ) {
                     viewModel.setGuideTuneInMini(false)
                     editingTuneTarget = false
                 },
                 TvMenuAction(
-                    label = if (tuneInMini) "Mini player  (current)" else "Mini player",
+                    label = if (tuneInMini) "Mini-Player  (aktuell)" else "Mini-Player",
                 ) {
                     viewModel.setGuideTuneInMini(true)
                     editingTuneTarget = false
@@ -367,7 +367,7 @@ fun RemoteControlSettingsScreen(
                 val current = map.guideAction(slot, groupSelector == "sidebar") == action
                 val name = action.displayName(groupSelector == "sidebar")
                 TvMenuAction(
-                    label = if (current) "$name  (current)" else name,
+                    label = if (current) "$name  (aktuell)" else name,
                 ) {
                     saveEdited(map.copy(guide = map.guide + (slot to action)))
                     editingGuideSlot = null
@@ -380,13 +380,13 @@ fun RemoteControlSettingsScreen(
 
     if (showResetConfirm) {
         TvActionMenuDialog(
-            title = "Lose your remote control customizations?",
+            title = "Anpassungen der Fernbedienung zurücksetzen?",
             actions = listOf(
-                TvMenuAction(label = "Reset to Defaults", destructive = true) {
+                TvMenuAction(label = "Auf Standard zurücksetzen", destructive = true) {
                     viewModel.setRemoteControlMap(RemoteControlMap.DEFAULT)
                     showResetConfirm = false
                 },
-                TvMenuAction(label = "Cancel") { showResetConfirm = false },
+                TvMenuAction(label = "Abbrechen") { showResetConfirm = false },
             ),
             onDismiss = { showResetConfirm = false },
             guard = menuGuard,

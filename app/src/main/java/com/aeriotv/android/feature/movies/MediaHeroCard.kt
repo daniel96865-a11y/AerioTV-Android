@@ -93,7 +93,7 @@ fun MediaHeroCard(
     /** Long-press menu: Add to / Remove from Watchlist (Apple parity). */
     isOnWatchlist: Boolean = false,
     onToggleWatchlist: (() -> Unit)? = null,
-    removeLabel: String = "Remove from Continue Watching",
+    removeLabel: String = "Aus „Weiterschauen“ entfernen",
     /** Hide / Unhide the title (Logan 2026-09-14); null leaves the row out. */
     isHidden: Boolean = false,
     onToggleHidden: (() -> Unit)? = null,
@@ -184,25 +184,25 @@ fun MediaHeroCard(
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
                     Icon(Icons.Filled.PlayArrow, contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(18.dp))
-                    Text(if (page.hasProgress) "Resume" else "Play", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onPrimary)
+                    Text(if (page.hasProgress) "Fortsetzen" else "Abspielen", fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = MaterialTheme.colorScheme.onPrimary)
                 }
-                if (page.hasProgress) HeroIconButton(Icons.Filled.Replay, "Play from Beginning", onPlayFromStart)
+                if (page.hasProgress) HeroIconButton(Icons.Filled.Replay, "Von Anfang abspielen", onPlayFromStart)
                 HeroIconButton(Icons.Outlined.Info, "Details", onDetails)
                 // The hero menu is the right-most options circle, not a long
                 // press on Resume (Logan 2026-09-10, all platforms).
                 if (onRemove != null || onToggleWatchlist != null || onToggleHidden != null) Box {
-                    HeroIconButton(Icons.Filled.MoreHoriz, "Options") { menu = true }
+                    HeroIconButton(Icons.Filled.MoreHoriz, "Optionen") { menu = true }
                     run {
                         DropdownMenu(expanded = menu, onDismissRequest = { menu = false }) {
                             if (onToggleWatchlist != null) {
                                 DropdownMenuItem(
-                                    text = { Text(if (isOnWatchlist) "Remove from Watchlist" else "Add to Watchlist") },
+                                    text = { Text(if (isOnWatchlist) "Von Merkliste entfernen" else "Zur Merkliste hinzufügen") },
                                     onClick = { menu = false; onToggleWatchlist() },
                                 )
                             }
                             if (onToggleHidden != null) {
                                 DropdownMenuItem(
-                                    text = { Text(if (isHidden) "Unhide" else "Hide") },
+                                    text = { Text(if (isHidden) "Einblenden" else "Ausblenden") },
                                     onClick = { menu = false; onToggleHidden() },
                                 )
                             }

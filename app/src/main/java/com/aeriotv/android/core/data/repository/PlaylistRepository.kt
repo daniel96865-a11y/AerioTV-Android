@@ -283,7 +283,7 @@ class PlaylistRepository @Inject constructor(
         val username: String? = null,
         val password: String? = null,
         /** Dispatcharr channel-profile id to scope this playlist to, or null
-         * for "All Channels". Ignored for non-Dispatcharr sources. */
+         * for "Alle Sender". Ignored for non-Dispatcharr sources. */
         val dispatcharrProfileId: Int? = null,
         /** Per-playlist On Demand opt-in (iOS ServerConnection.vodEnabled).
          *  Default true. UI exposes this for Dispatcharr / Xtream sources; M3U
@@ -360,7 +360,7 @@ class PlaylistRepository @Inject constructor(
                 // switched to API Key mode in Edit Playlist; its stored
                 // sourceType stays DispatcharrUserPass while the credential it
                 // now carries is a key. Demanding a username here made that
-                // save throw "Username is required", so the entered key was
+                // save throw "Benutzername ist erforderlich", so the entered key was
                 // silently discarded and the STALE key kept 401ing every VOD
                 // call. Reported 2026-08-08 (Logan, Z Fold + Streamer): "I
                 // keep entering a new API Key and it isn't taking it", while
@@ -377,8 +377,8 @@ class PlaylistRepository @Inject constructor(
                     )
                     suppliedKey
                 } else {
-                    val user = u ?: throw IllegalArgumentException("Username is required")
-                    val pass = p ?: throw IllegalArgumentException("Password is required")
+                    val user = u ?: throw IllegalArgumentException("Benutzername ist erforderlich")
+                    val pass = p ?: throw IllegalArgumentException("Passwort ist erforderlich")
                     val jwt = dispatcharrClient.login(normalisedBase, user, pass)
                     // Stash the JWT pair so the warmup coordinator picks up the
                     // refresh token on the next app foreground and the
@@ -1562,7 +1562,7 @@ class PlaylistRepository @Inject constructor(
                 val dayMs = 86_400_000L
                 // Logan 2026-09-11: the playlist's Guide Days setting
                 // (epgRetentionDays) governs the grid in BOTH directions. The
-                // Settings > Network "Guide Window" preference no longer has
+                // Settings > Network "EPG-Zeitraum" preference no longer has
                 // any say here. Huge panels still clamp HISTORY to 6h only.
                 val guideDays = resolveGuideDays(playlist.epgRetentionDays)
                 val hugePanel = playlist.channelCount > 5_000
@@ -2197,7 +2197,7 @@ class PlaylistRepository @Inject constructor(
 
     /**
      * Per-playlist EPG cache purge (iOS GuideStore audit P2 #11). Called by
-     * the user-initiated "Refresh EPG Data" action on the playlist detail
+     * the user-initiated "EPG-Daten aktualisieren" action on the playlist detail
      * so the next fetch starts from a clean slate instead of reusing
      * possibly-corrupt cached rows. Idempotent; safe to call when no rows
      * exist.
@@ -2205,7 +2205,7 @@ class PlaylistRepository @Inject constructor(
     /**
      * Drop ONLY the grid coverage map, keeping the cached programmes.
      *
-     * This is what a forced full reload needs (the "Refresh" button on Edit
+     * This is what a forced full reload needs (the "Aktualisieren" button on Edit
      * Playlist, or any forceRefresh EPG load): every one-day chunk must be
      * fetched again, because the user is asking for fresh guide data, but the
      * accumulated catch-up history must NOT be thrown away to get it. The
@@ -2221,7 +2221,7 @@ class PlaylistRepository @Inject constructor(
         // cache-identity rule): a surviving coverage row would tell the next
         // incremental walk a chunk is already cached while the programmes it
         // stood for are gone, and the guide would stay permanently holed.
-        // Covers the user's "Refresh" from Edit Playlist, Refresh EPG Data,
+        // Covers the user's "Aktualisieren" from Edit Playlist, Refresh EPG Data,
         // Refresh Everything, and the identity-change purge in the ViewModel.
         runCatching { epgChunkCoverageDao.deleteForPlaylist(playlistId) }
             .onFailure { Log.w("PlaylistRepo", "purgeEpgCache: coverage purge failed", it) }
@@ -2389,7 +2389,7 @@ class PlaylistRepository @Inject constructor(
 
     /**
      * The ordered member streams of a Dispatcharr channel (highest-priority
-     * first) with their probed quality stats, for the player's "Switch Stream"
+     * first) with their probed quality stats, for the player's "Stream wechseln"
      * sheet. [channelIntPk] is M3UChannel.dispatcharrChannelId. Empty for
      * non-Dispatcharr sources or when there is no active playlist. AuthBroker-
      * wrapped so a rotated api_key silently rebootstraps instead of surfacing 401.
@@ -2912,7 +2912,7 @@ class PlaylistRepository @Inject constructor(
             val local = java.io.File(java.net.URI(url))
             if (!local.isFile) {
                 throw java.io.FileNotFoundException(
-                    "Imported file is missing: ${local.name}. Re-import it from Edit Playlist.",
+                    "Die importierte Datei fehlt: ${local.name}. Importiere sie unter „Wiedergabeliste bearbeiten“ erneut.",
                 )
             }
             return@withContext parse(local)
@@ -3103,7 +3103,7 @@ class PlaylistRepository @Inject constructor(
         // of which auth mode originally produced it.
         SourceType.DispatcharrApiKey, SourceType.DispatcharrUserPass -> {
             val key = apiKey?.takeIf { it.isNotBlank() }
-                ?: throw IllegalArgumentException("Dispatcharr API key is required")
+                ?: throw IllegalArgumentException("Dispatcharr-API-Schlüssel ist erforderlich")
             val groups = dispatcharrClient.listGroups(base, key)
                 .associate { it.id to it.name }
             // Layer A: child-safety account filter (FAIL-CLOSED). When the
@@ -3206,7 +3206,7 @@ class PlaylistRepository @Inject constructor(
         }
         SourceType.XtreamCodes -> {
             val user = username?.takeIf { it.isNotBlank() }
-                ?: throw IllegalArgumentException("Xtream Codes username is required")
+                ?: throw IllegalArgumentException("Xtream-Codes-Benutzername ist erforderlich")
             try {
                 xtreamLiveChannels(base.trimEnd('/'), user, password.orEmpty())
             } catch (e: Exception) {

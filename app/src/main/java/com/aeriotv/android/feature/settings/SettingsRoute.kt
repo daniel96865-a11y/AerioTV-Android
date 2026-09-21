@@ -115,7 +115,7 @@ fun visibleSettingsSections(
     ),
     SettingsSectionGroupSpec(
         key = "device",
-        header = "Device",
+        header = "Gerät",
         sections = buildList {
             add(SettingsSection.Appearance)
             add(SettingsSection.General)

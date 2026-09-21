@@ -89,7 +89,7 @@ fun AddMoreCategoriesScreen(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "Add More Categories",
+                    text = "Weitere Kategorien hinzufügen",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -100,7 +100,7 @@ fun AddMoreCategoriesScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -137,7 +137,7 @@ fun AddMoreCategoriesScreen(
                     fontWeight = FontWeight.SemiBold,
                 )
                 Text(
-                    text = "Toggle a bucket on to colour matching programmes. Select the swatch to override its hex.",
+                    text = "Aktiviere eine Kategorie, um passende Sendungen farblich zu markieren. Wähle das Farbfeld, um den Hex-Wert anzupassen.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -163,7 +163,7 @@ fun AddMoreCategoriesScreen(
                             fontWeight = FontWeight.SemiBold,
                         )
                         Text(
-                            text = "Match an XMLTV category substring and pick its colour. Useful for genres outside the built-in buckets (e.g. Horror, Anime).",
+                            text = "Ordne einen XMLTV-Kategorietext zu und wähle dessen Farbe. Nützlich für weitere Genres wie Horror oder Anime.",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -177,7 +177,7 @@ fun AddMoreCategoriesScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Add,
-                            contentDescription = "Add custom category",
+                            contentDescription = "Eigene Kategorie hinzufügen",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -186,7 +186,7 @@ fun AddMoreCategoriesScreen(
             if (palette.custom.isEmpty()) {
                 item {
                     Text(
-                        text = "No custom categories yet. Select + above to add one.",
+                        text = "Noch keine eigenen Kategorien. Wähle oben +, um eine hinzuzufügen.",
                         style = MaterialTheme.typography.bodySmall.subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(vertical = 8.dp),
@@ -351,7 +351,7 @@ private fun CustomEntryRow(
         ) {
             Icon(
                 imageVector = Icons.Filled.Delete,
-                contentDescription = "Delete",
+                contentDescription = "Löschen",
                 tint = MaterialTheme.colorScheme.error,
             )
         }
@@ -373,7 +373,7 @@ private fun CustomEntryDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (initial == null) "Add Custom Category" else "Edit Custom Category") },
+        title = { Text(if (initial == null) "Eigene Kategorie hinzufügen" else "Eigene Kategorie bearbeiten") },
         text = {
             Column {
                 OutlinedTextField(
@@ -405,7 +405,7 @@ private fun CustomEntryDialog(
                         onValueChange = {
                             hex = it.removePrefix("#").uppercase().filter { c -> c in HEX_CHARS_FOR_CUSTOM }.take(6)
                         },
-                        label = { Text("Hex color") },
+                        label = { Text("Hex-Farbe") },
                         singleLine = true,
                         modifier = Modifier.weight(1f),
                         keyboardOptions = aerioTextFieldKeyboardOptions(
@@ -418,13 +418,13 @@ private fun CustomEntryDialog(
         },
         confirmButton = {
             SettingsDialogTextButton(
-                label = "Save",
+                label = "Speichern",
                 onClick = { if (canSave) onSave(match.trim(), sanitizedHex) },
                 enabled = canSave,
             )
         },
         dismissButton = {
-            SettingsDialogTextButton(label = "Cancel", onClick = onDismiss)
+            SettingsDialogTextButton(label = "Abbrechen", onClick = onDismiss)
         },
         containerColor = MaterialTheme.colorScheme.surface,
         titleContentColor = MaterialTheme.colorScheme.onBackground,

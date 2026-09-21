@@ -63,7 +63,7 @@ fun SettingsNavRow(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     /**
-     * Optional trailing value ("1.2.3 (45)", "On"), drawn before the chevron in
+     * Optional trailing value ("1.2.3 (45)", "Ein"), drawn before the chevron in
      * the same muted style the About info rows use. Plain text only: no new
      * border, ring or highlight is introduced by this slot.
      */

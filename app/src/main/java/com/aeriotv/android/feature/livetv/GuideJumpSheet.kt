@@ -40,7 +40,7 @@ import java.util.Calendar
 import java.util.Locale
 
 /**
- * Guide "Jump To" (Roman via Discord 2026-09-06; Apple parity with
+ * Guide "Springen zu" (Roman via Discord 2026-09-06; Apple parity with
  * GuideJumpSheet.swift): pick a day (Yesterday, Today, Tomorrow, then
  * weekday names up to [daysAhead]) and a time of day. Picking a day alone
  * keeps the current clock time on that day. Go returns the target instant;
@@ -75,8 +75,8 @@ fun GuideJumpSheet(
         val c = (today.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR, offset) }
         val name = when (offset) {
             -1 -> "Yesterday"
-            0 -> "Today"
-            1 -> "Tomorrow"
+            0 -> "Heute"
+            1 -> "Morgen"
             else -> java.text.SimpleDateFormat("EEE", Locale.getDefault()).format(c.time)
         }
         return name + ", " + java.text.SimpleDateFormat("MMM d", Locale.getDefault()).format(c.time)
@@ -104,9 +104,9 @@ fun GuideJumpSheet(
     }
     FormFactorModal(onDismiss = onDismiss, tvWidthFraction = 0.6f, sheetMaxWidth = 560.dp) {
         Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 12.dp)) {
-            Text("Jump To", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+            Text("Springen zu", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
             Spacer(Modifier.height(14.dp))
-            Text("Day", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.textAccent)
+            Text("Tag", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.textAccent)
             Spacer(Modifier.height(6.dp))
             androidx.compose.foundation.layout.FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 dayOffsets.forEach { offset ->
@@ -144,7 +144,7 @@ fun GuideJumpSheet(
             }
             Spacer(Modifier.height(18.dp))
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-                OutlinedButton(onClick = { onBackToNow(); onDismiss() }) { Text("Back to Now") }
+                OutlinedButton(onClick = { onBackToNow(); onDismiss() }) { Text("Zurück zu Jetzt") }
                 Spacer(Modifier.width(10.dp))
                 Button(onClick = { onJump(target()); onDismiss() }) { Text("Go") }
             }
@@ -181,7 +181,7 @@ internal fun GuideJumpTvContent(
     fun dayLabel(offset: Int): String {
         val c = (today.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR, offset) }
         val name = when (offset) {
-            -1 -> "Yesterday"; 0 -> "Today"; 1 -> "Tomorrow"
+            -1 -> "Yesterday"; 0 -> "Heute"; 1 -> "Morgen"
             else -> java.text.SimpleDateFormat("EEE", Locale.getDefault()).format(c.time)
         }
         return name + ", " + java.text.SimpleDateFormat("MMM d", Locale.getDefault()).format(c.time)
@@ -228,8 +228,8 @@ internal fun GuideJumpTvContent(
         modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 14.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        Text("Jump To", fontSize = 19.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
-        dayGroup("Today", listOf(0))
+        Text("Springen zu", fontSize = 19.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onBackground)
+        dayGroup("Heute", listOf(0))
         dayGroup("Upcoming", dayOffsets.filter { it > 0 })
         dayGroup("Previous", dayOffsets.filter { it < 0 }.reversed())
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
@@ -247,7 +247,7 @@ internal fun GuideJumpTvContent(
         )
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(bottom = 4.dp)) {
             com.aeriotv.android.ui.tv.TvPill("Go", selected = true, onClick = { onJump(target()); onDismiss() })
-            com.aeriotv.android.ui.tv.TvPill("Back to Now", selected = false, onClick = { onBackToNow(); onDismiss() })
+            com.aeriotv.android.ui.tv.TvPill("Zurück zu Jetzt", selected = false, onClick = { onBackToNow(); onDismiss() })
         }
     }
 }

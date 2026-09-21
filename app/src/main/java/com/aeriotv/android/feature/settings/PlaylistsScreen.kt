@@ -72,7 +72,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
  * the new playlist persists the user pops back here instead of being thrown
  * into the player.
  *
- * Mirrors iOS Playlists screen (project_aeriotv_ios_canon.md "Settings" >
+ * Mirrors iOS Playlists screen (project_aeriotv_ios_canon.md "Einstellungen" >
  * "Playlists section" implicit in canon since the iOS test-server screenshots
  * show only a single playlist; multi-playlist UX is taken from iOS source).
  */
@@ -104,7 +104,7 @@ fun PlaylistsScreen(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = "Playlists",
+                    text = "Wiedergabelisten",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -115,7 +115,7 @@ fun PlaylistsScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -125,12 +125,12 @@ fun PlaylistsScreen(
                 if (isTv) {
                     // Focusable pill inset to the overscan margin; a bare
                     // IconButton has no visible D-pad focus state.
-                    SettingsHeaderTextButton(label = "Add", onClick = onAddPlaylist)
+                    SettingsHeaderTextButton(label = "Hinzufügen", onClick = onAddPlaylist)
                 } else {
                     IconButton(onClick = onAddPlaylist) {
                         Icon(
                             imageVector = Icons.Filled.Add,
-                            contentDescription = "Add playlist",
+                            contentDescription = "Wiedergabeliste hinzufügen",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -223,7 +223,7 @@ fun PlaylistsScreen(
                             {
                                 Icon(
                                     imageVector = Icons.Filled.Menu,
-                                    contentDescription = "Drag to reorder",
+                                    contentDescription = "Zum Sortieren ziehen",
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     modifier = Modifier
                                         .draggableHandle(
@@ -258,8 +258,8 @@ fun PlaylistsScreen(
                     if (index in 0 until workingOrder.lastIndex) {
                         add(TvMenuAction("Move Down", Icons.Filled.KeyboardArrowDown) { moveTo(index + 1) })
                     }
-                    add(TvMenuAction("Delete", Icons.Filled.Delete, destructive = true) { pendingDelete = pl })
-                    add(TvMenuAction("Cancel", Icons.Filled.Close) {})
+                    add(TvMenuAction("Löschen", Icons.Filled.Delete, destructive = true) { pendingDelete = pl })
+                    add(TvMenuAction("Abbrechen", Icons.Filled.Close) {})
                 },
                 guard = tvGuard,
                 onDismiss = { menuFor = null },
@@ -271,7 +271,7 @@ fun PlaylistsScreen(
     pendingDelete?.let { pl ->
         AlertDialog(
             onDismissRequest = { pendingDelete = null },
-            title = { Text("Delete playlist?") },
+            title = { Text("Wiedergabeliste löschen?") },
             text = {
                 Text(
                     "This removes \"${pl.name}\" and its credentials from this device. " +
@@ -280,7 +280,7 @@ fun PlaylistsScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Delete",
+                    label = "Löschen",
                     destructive = true,
                     onClick = {
                         val id = pl.id
@@ -290,7 +290,7 @@ fun PlaylistsScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { pendingDelete = null })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { pendingDelete = null })
             },
         )
     }
@@ -348,7 +348,7 @@ private fun PlaylistRow(
         if (isActive) {
             Icon(
                 imageVector = Icons.Filled.CheckCircle,
-                contentDescription = "Active",
+                contentDescription = "Aktiv",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(20.dp),
             )
@@ -412,7 +412,7 @@ private fun SwipeablePlaylistRow(
                 ) Alignment.CenterStart else Alignment.CenterEnd,
             ) {
                 Text(
-                    text = "Delete",
+                    text = "Löschen",
                     style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onError,
                     fontWeight = FontWeight.Bold,

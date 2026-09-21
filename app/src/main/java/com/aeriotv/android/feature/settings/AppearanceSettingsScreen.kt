@@ -74,7 +74,7 @@ import com.aeriotv.android.ui.adaptive.LocalTabBarBottomInset
 
 /**
  * Appearance sub-screen. Mirrors iOS Settings -> Appearance
- * (project_aeriotv_ios_canon.md "Appearance" section).
+ * (project_aeriotv_ios_canon.md "Darstellung" section).
  *
  * Theme card -> 6 brand presets + Custom Accent override + a live Preview
  * tile so the user can see how their accent reads on a card without leaving
@@ -135,7 +135,7 @@ fun AppearanceSettingsScreen(
     var accentPickerOpen by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "Appearance", onBack = onBack)
+        SettingsDetailTopBar(title = "Darstellung", onBack = onBack)
 
         val vp = rememberViewport()
         Box(
@@ -164,8 +164,8 @@ fun AppearanceSettingsScreen(
             ) {
                 // THEME card — six brand presets + Custom Accent override row.
                 settingsCard(
-                    header = "Theme",
-                    footer = "Choose the palette and the light or dark appearance. Theme sets the color; Appearance sets light vs dark. They are independent, so any theme works in either appearance. Changes apply live; the preset accent kicks in unless Custom Accent is on.",
+                    header = "Design",
+                    footer = "Wähle Farbpalette sowie helle oder dunkle Darstellung. Das Design bestimmt die Farben, die Darstellung Hell oder Dunkel. Beides ist unabhängig voneinander. Änderungen werden sofort übernommen; die voreingestellte Akzentfarbe gilt, solange keine eigene Akzentfarbe aktiviert ist.",
                 ) {
                     // Plan B5: "theme swatch grid at doubled density" on
                     // tablet. A theme row is a 36dp swatch plus two short
@@ -245,11 +245,11 @@ fun AppearanceSettingsScreen(
                 // at the composition root). The Display Scale sliders below
                 // still multiply on top for their own surfaces.
                 settingsCard(
-                    header = "Text Size",
-                    footer = "Scales all text in AerioTV, on top of your device's font size. Changes apply live.",
+                    header = "Textgröße",
+                    footer = "Skaliert den gesamten Text in AerioTV Deutsch zusätzlich zur Schriftgröße deines Geräts. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
-                        label = "Text Size",
+                        label = "Textgröße",
                         stops = TEXT_SCALE_STOPS,
                         value = textScale,
                         onValueChange = viewModel::setTextScale,
@@ -259,11 +259,11 @@ fun AppearanceSettingsScreen(
                 // SUBTEXT SIZE card: extra multiplier for secondary copy only
                 // (descriptions, subtitles, metadata), stacking on Text Size.
                 settingsCard(
-                    header = "Subtext Size",
-                    footer = "Scales only secondary text such as descriptions, program details, and captions, on top of Text Size. Titles and buttons stay the same. Changes apply live.",
+                    header = "Größe von Zusatztexten",
+                    footer = "Skaliert nur Zusatztexte wie Beschreibungen, Sendungsdetails und Hinweise zusätzlich zur Textgröße. Titel und Schaltflächen bleiben unverändert. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
-                        label = "Subtext Size",
+                        label = "Größe von Zusatztexten",
                         stops = TEXT_SCALE_STOPS,
                         value = subtextScale,
                         onValueChange = viewModel::setSubtextScale,
@@ -273,11 +273,11 @@ fun AppearanceSettingsScreen(
                 // TEXT CONTRAST card: blends dimmed and accent-tinted text
                 // toward plain white (dark) / black (light).
                 settingsCard(
-                    header = "Text Contrast",
-                    footer = "Makes dimmed and accent-colored text brighter in dark mode and darker in light mode. 0% keeps the theme's look, 100% uses plain white or black text. Changes apply live.",
+                    header = "Textkontrast",
+                    footer = "Macht gedämpften und akzentfarbenen Text im Dunkelmodus heller und im Hellmodus dunkler. 0 % behält das Design bei, 100 % verwendet reines Weiß bzw. Schwarz. Änderungen werden sofort übernommen.",
                 ) {
                     TextSizeSliderRow(
-                        label = "Text Contrast",
+                        label = "Textkontrast",
                         stops = TEXT_CONTRAST_STOPS,
                         value = textContrast,
                         onValueChange = viewModel::setTextContrast,
@@ -287,8 +287,8 @@ fun AppearanceSettingsScreen(
                 // TIME FORMAT card: every clock in the app (guide header,
                 // cell ranges, program info, DVR) follows this.
                 settingsCard(
-                    header = "Time Format",
-                    footer = "System follows your device's clock setting. Applies to the Guide, program info, and recordings.",
+                    header = "Zeitformat",
+                    footer = "„System“ übernimmt die Uhrzeiteinstellung deines Geräts. Gilt für EPG, Sendungsinformationen und Aufnahmen.",
                 ) {
                     TIME_FORMAT_OPTIONS.forEachIndexed { i, (value, label) ->
                         if (i > 0) DividerRow()
@@ -434,7 +434,7 @@ internal fun ThemeRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
@@ -466,8 +466,8 @@ private fun AppearanceModeHeaderRow() {
 }
 
 private fun appearanceModeLabel(mode: AppearanceMode): String = when (mode) {
-    AppearanceMode.Dark -> "Dark"
-    AppearanceMode.Light -> "Light"
+    AppearanceMode.Dark -> "Dunkel"
+    AppearanceMode.Light -> "Hell"
     AppearanceMode.System -> "System"
 }
 
@@ -512,7 +512,7 @@ private fun AppearanceModeRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
@@ -690,7 +690,7 @@ internal fun CheckRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(22.dp),
             )
@@ -958,7 +958,7 @@ internal fun AddMoreCategoriesRow(
     ) {
         Column(modifier = Modifier.weight(1f)) {
             Text(
-                text = "Add More Categories",
+                text = "Weitere Kategorien hinzufügen",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Medium,
@@ -994,15 +994,15 @@ private fun AccentPickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             SettingsDialogTextButton(
-                label = "Save",
+                label = "Speichern",
                 onClick = { if (isValid) onSave(sanitized) },
                 enabled = isValid,
             )
         },
         dismissButton = {
             Row {
-                SettingsDialogTextButton(label = "Reset", onClick = onReset)
-                SettingsDialogTextButton(label = "Cancel", onClick = onDismiss)
+                SettingsDialogTextButton(label = "Zurücksetzen", onClick = onReset)
+                SettingsDialogTextButton(label = "Abbrechen", onClick = onDismiss)
             }
         },
         title = { Text("Custom Accent") },

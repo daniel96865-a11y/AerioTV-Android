@@ -78,7 +78,7 @@ fun LiveRewindPromptGate(currentRoute: String?) {
     val enableFocus = remember { FocusRequester() }
     AlertDialog(
         onDismissRequest = { /* explicit choice required; both write the seen flag */ },
-        title = { Text("New: Live Rewind") },
+        title = { Text("Neu: Live-Zurückspulen") },
         text = {
             Column {
                 Text(
@@ -91,7 +91,7 @@ fun LiveRewindPromptGate(currentRoute: String?) {
                 Spacer(Modifier.height(8.dp))
                 Text(
                     "Buffered video is deleted automatically. You can change " +
-                        "this anytime in Settings > App Behaviors > Live Rewind.",
+                        "dies jederzeit unter Einstellungen > Live-Zurückspulen ändern.",
                     style = MaterialTheme.typography.bodySmall.subtext(),
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -107,7 +107,7 @@ fun LiveRewindPromptGate(currentRoute: String?) {
                     }
                 },
                 modifier = Modifier.focusRequester(enableFocus),
-            ) { Text("Enable") }
+            ) { Text("Aktivieren") }
         },
         dismissButton = {
             TextButton(
@@ -115,7 +115,7 @@ fun LiveRewindPromptGate(currentRoute: String?) {
                     visible = false
                     scope.launch { prefs.setLiveRewindPromptSeen(true) }
                 },
-            ) { Text("Not Now") }
+            ) { Text("Nicht jetzt") }
         },
     )
     // TV: land D-pad focus on Enable (WhatsNewSheet retry pattern; the

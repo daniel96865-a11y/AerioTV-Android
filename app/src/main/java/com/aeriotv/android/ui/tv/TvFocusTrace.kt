@@ -102,7 +102,7 @@ object TvFocusTrace {
         Key.DirectionDown -> "Down"
         Key.DirectionLeft -> "Left"
         Key.DirectionRight -> "Right"
-        Key.Back, Key.Escape -> "Back"
+        Key.Back, Key.Escape -> "Zurück"
         else -> null
     }
 }

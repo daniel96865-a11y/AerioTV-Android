@@ -9,7 +9,7 @@ import com.aeriotv.android.feature.watchprogress.WatchProgressViewModel
  * The episode a series' primary Play button launches, plus the label that
  * button carries. Apple's `tvSeriesTarget` (VODDetailView.swift:731-751) is
  * the reference; the same rule drives the series detail hero AND the library
- * / watchlist hero on Android TV so "Play" never just opens Details.
+ * / watchlist hero on Android TV so "Abspielen" never just opens Details.
  */
 data class SeriesTarget(
     val episode: DispatcharrVODEpisode,
@@ -41,16 +41,16 @@ fun seriesTarget(
     val index = newest?.let { row -> ordered.indexOfFirst { it.uuid == row.videoId } } ?: -1
     if (newest != null && index >= 0) {
         if (!newest.isFinished) {
-            return SeriesTarget(ordered[index], resuming = true, label = playLabel(ordered[index], "Resume"))
+            return SeriesTarget(ordered[index], resuming = true, label = playLabel(ordered[index], "Fortsetzen"))
                 .also { logTarget(newest.seriesId, it, "resume row pos=${newest.positionMs}") }
         }
         ordered.getOrNull(index + 1)?.let { next ->
-            return SeriesTarget(next, resuming = false, label = playLabel(next, "Play"))
+            return SeriesTarget(next, resuming = false, label = playLabel(next, "Abspielen"))
                 .also { logTarget(newest.seriesId, it, "next after finished") }
         }
     }
     val first = ordered.first()
-    return SeriesTarget(first, resuming = false, label = playLabel(first, "Play"))
+    return SeriesTarget(first, resuming = false, label = playLabel(first, "Abspielen"))
         .also {
             logTarget(
                 newest?.seriesId,

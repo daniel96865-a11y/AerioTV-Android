@@ -104,7 +104,7 @@ fun SecretRevealIconButton(
     ) {
         Icon(
             imageVector = if (state.visible) Icons.Filled.VisibilityOff else Icons.Filled.Visibility,
-            contentDescription = if (state.visible) "Hide $contentLabel" else "Show $contentLabel",
+            contentDescription = if (state.visible) "$contentLabel ausblenden" else "$contentLabel anzeigen",
             tint = tint,
             modifier = Modifier.size(iconSize),
         )

@@ -117,9 +117,9 @@ import java.util.Date
  * behavior are literally the phone's.
  */
 enum class SettingsRootContent(val title: String) {
-    Full("Settings"),
-    PlaylistsOnly("Playlists"),
-    AboutOnly("About"),
+    Full("Einstellungen"),
+    PlaylistsOnly("Wiedergabelisten"),
+    AboutOnly("Über"),
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -193,7 +193,7 @@ fun SettingsScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -236,7 +236,7 @@ fun SettingsScreen(
                 PlaylistsSection(
                     playlists = playlists,
                     activeId = activeId,
-                    // In a pane the top bar already reads "Playlists".
+                    // In a pane the top bar already reads "Wiedergabelisten".
                     showHeader = fullRoot,
                     paneHost = content == SettingsRootContent.PlaylistsOnly || isTv,
                     onTap = { pl ->
@@ -316,7 +316,7 @@ fun SettingsScreen(
                         val url = "https://github.com/jonzey231/AerioTV-Android"
                         if (isTv) {
                             qrLink = TvQrLink(
-                                title = "Developer Website",
+                                title = "Entwickler-Webseite",
                                 caption = "Scan with your phone to open this page.",
                                 url = url,
                             )
@@ -329,7 +329,7 @@ fun SettingsScreen(
                         val url = "https://github.com/jonzey231/AerioTV-Android/issues/new"
                         if (isTv) {
                             qrLink = TvQrLink(
-                                title = "Report an Issue",
+                                title = "Problem melden",
                                 caption = "Scan with your phone to open this page.",
                                 url = url,
                             )
@@ -371,7 +371,7 @@ private fun PlaylistsSection(
 ) {
     Column {
         if (showHeader) {
-            SectionHeader("Playlists")
+            SectionHeader("Wiedergabelisten")
             Spacer(Modifier.height(6.dp))
         }
         Column(
@@ -388,7 +388,7 @@ private fun PlaylistsSection(
                     contentAlignment = Alignment.Center,
                 ) {
                     Text(
-                        text = "No playlists added",
+                        text = "Keine Wiedergabelisten hinzugefügt",
                         style = settingsRowValueStyle().subtext(),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -424,7 +424,7 @@ private fun PlaylistsSection(
                 )
                 Spacer(Modifier.size(10.dp))
                 Text(
-                    text = "Add Playlist",
+                    text = "Wiedergabeliste hinzufügen",
                     style = settingsRowValueStyle(),
                     color = MaterialTheme.colorScheme.textAccent,
                     fontWeight = FontWeight.Medium,
@@ -443,7 +443,7 @@ private fun PlaylistsSection(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Manage Playlists",
+                        text = "Wiedergabelisten verwalten",
                         style = settingsRowValueStyle(),
                         color = MaterialTheme.colorScheme.textAccent,
                         modifier = Modifier.weight(1f),
@@ -463,14 +463,14 @@ private fun PlaylistsSection(
                 // Rail/sidebar form factors enter the detail on select, so the
                 // activate verb moved there. The phone strings below are
                 // untouched (frozen canon).
-                SectionFooter("Select a playlist to open it · Set Active lives in its Actions section")
+                SectionFooter("Wähle eine Wiedergabeliste zum Öffnen · „Als aktiv festlegen“ befindet sich im Bereich Aktionen")
                 if (playlists.size > 1) {
-                    SectionFooter("Select Manage Playlists to reorder")
+                    SectionFooter("Wähle „Wiedergabelisten verwalten“, um die Reihenfolge zu ändern")
                 }
             } else {
-                SectionFooter("Tap ○ to set the active playlist · Tap the active playlist to edit or delete it")
+                SectionFooter("Tippe auf ○, um die aktive Wiedergabeliste festzulegen · Tippe auf die aktive Wiedergabeliste, um sie zu bearbeiten oder zu löschen")
                 if (playlists.size > 1) {
-                    SectionFooter("Tap Manage Playlists to reorder")
+                    SectionFooter("Tippe auf „Wiedergabelisten verwalten“, um die Reihenfolge zu ändern")
                 }
             }
         }
@@ -502,7 +502,7 @@ private fun PlaylistRow(
             // SettingsView footer hint "Tap ○ to set the active playlist".
             Icon(
                 imageVector = if (isActive) Icons.Filled.RadioButtonChecked else Icons.Outlined.RadioButtonUnchecked,
-                contentDescription = if (isActive) "Active" else "Set active",
+                contentDescription = if (isActive) "Aktiv" else "Als aktiv festlegen",
                 tint = if (isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(20.dp),
             )
@@ -515,7 +515,7 @@ private fun PlaylistRow(
                     fontWeight = if (isActive) FontWeight.SemiBold else FontWeight.Normal,
                 )
                 val subtitle = buildString {
-                    append("${playlist.channelCount} channels")
+                    append("${playlist.channelCount} Sender")
                     // Shared pretty-printer (PlaylistEntity.sourceTypeDisplayLabel)
                     // keeps this subtitle in lockstep with the Playlist Detail
                     // Type row.
@@ -625,7 +625,7 @@ private fun AboutSection(
 ) {
     Column {
         if (showHeader) {
-            SectionHeader("About")
+            SectionHeader("Über")
             Spacer(Modifier.height(6.dp))
         }
         Column(
@@ -634,7 +634,7 @@ private fun AboutSection(
                 .clip(RoundedCornerShape(14.dp))
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.45f)),
         ) {
-            AboutInfoRow("Device", deviceDisplayName())
+            AboutInfoRow("Gerät", deviceDisplayName())
             RowDivider()
             AboutInfoRow("System", "Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
             RowDivider()
@@ -643,31 +643,31 @@ private fun AboutSection(
                 onClick = onShowWhatsNew,
             )
             RowDivider()
-            AboutInfoRow("First Installed", formatInstallTime(installedAt))
+            AboutInfoRow("Erstmals installiert", formatInstallTime(installedAt))
             RowDivider()
             AboutInfoRow(
-                "Last Updated",
-                if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Never",
+                "Zuletzt aktualisiert",
+                if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Nie",
             )
             RowDivider()
-            AboutActionRow("Copy to Clipboard", Icons.Filled.ContentCopy, onClick = onCopy)
+            AboutActionRow("In Zwischenablage kopieren", Icons.Filled.ContentCopy, onClick = onCopy)
             RowDivider()
             AboutActionRow(
-                "Developer Website",
+                "Entwickler-Webseite",
                 Icons.Outlined.OpenInNew,
                 onClick = onOpenWebsite,
                 external = true,
             )
             RowDivider()
             AboutActionRow(
-                "Report an Issue",
+                "Problem melden",
                 Icons.Outlined.BugReport,
                 onClick = onReportIssue,
                 external = true,
             )
             RowDivider()
             AboutActionRow(
-                "Open Source Licenses",
+                "Open-Source-Lizenzen",
                 Icons.Outlined.Description,
                 onClick = onOpenLicenses,
             )
@@ -712,7 +712,7 @@ private fun AboutInfoRow(label: String, value: String) {
  * App Version row. Reads as an info row (label + value) but is clickable and,
  * on TV, focusable with the same card highlight as the action rows below it,
  * so the D-pad can reach it and DPAD_CENTER opens the What's New notes for
- * the installed build. The trailing "What's New" hint is the only affordance;
+ * the installed build. The trailing "Was ist neu?" hint is the only affordance;
  * nothing about the launch-time gate changes.
  */
 @Composable
@@ -728,7 +728,7 @@ private fun AboutVersionRow(value: String, onClick: () -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "App Version",
+            text = "App-Version",
             style = settingsRowValueStyle().subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.weight(1f),
@@ -740,7 +740,7 @@ private fun AboutVersionRow(value: String, onClick: () -> Unit) {
         )
         Spacer(Modifier.size(10.dp))
         Text(
-            text = "What's New",
+            text = "Was ist neu?",
             style = settingsFootnoteStyle(),
             color = MaterialTheme.colorScheme.textAccent,
             fontWeight = FontWeight.Medium,
@@ -849,7 +849,7 @@ private fun deviceDisplayName(): String {
 }
 
 private fun formatInstallTime(ms: Long): String {
-    if (ms <= 0L) return "Unknown"
+    if (ms <= 0L) return "Unbekannt"
     return DateFormat.getDateInstance(DateFormat.MEDIUM).format(Date(ms))
 }
 
@@ -864,7 +864,7 @@ private fun buildAboutClipboard(
     appendLine("System: Android ${android.os.Build.VERSION.RELEASE} (API ${android.os.Build.VERSION.SDK_INT})")
     appendLine("App Version: $versionName ($versionCode)")
     appendLine("First Installed: ${formatInstallTime(installedAt)}")
-    appendLine("Last Updated: ${if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Never"}")
+    appendLine("Last Updated: ${if (updatedAt > 0 && updatedAt != installedAt) formatInstallTime(updatedAt) else "Nie"}")
 }
 
 private fun openUrl(context: android.content.Context, url: String) {
@@ -874,7 +874,7 @@ private fun openUrl(context: android.content.Context, url: String) {
         .onFailure {
             android.widget.Toast.makeText(
                 context,
-                "No browser available to open $url",
+                "Kein Browser zum Öffnen von $url verfügbar",
                 android.widget.Toast.LENGTH_SHORT,
             ).show()
         }
@@ -890,38 +890,38 @@ enum class SettingsSection(
     val icon: ImageVector,
 ) {
     LiveTV(
-        title = "Live TV",
-        subtitle = "Guide, groups, badges, colors",
+        title = "Live-TV",
+        subtitle = "EPG, Gruppen, Markierungen, Farben",
         icon = Icons.Filled.LiveTv,
     ),
     Player(
-        title = "Player",
-        subtitle = "Info card, rewind, gestures, multiview",
+        title = "Wiedergabe",
+        subtitle = "Infokarte, Zurückspulen, Gesten, Mehrfachansicht",
         icon = Icons.Outlined.PlayCircle,
     ),
     MoviesAndTvShows(
-        title = "Movies & TV Shows",
-        subtitle = "Library refresh, posters",
+        title = "Filme & Serien",
+        subtitle = "Bibliothek aktualisieren, Poster",
         icon = Icons.Filled.Movie,
     ),
     DvrSettings(
         title = "DVR",
-        subtitle = "Recordings, buffers, storage",
+        subtitle = "Aufnahmen, Puffer, Speicher",
         icon = Icons.Filled.FiberManualRecord,
     ),
     Appearance(
-        title = "Appearance",
-        subtitle = "Theme, text size, time format",
+        title = "Darstellung",
+        subtitle = "Design, Textgröße, Zeitformat",
         icon = Icons.Filled.Palette,
     ),
     General(
-        title = "General",
-        subtitle = "Startup, refresh, network",
+        title = "Allgemein",
+        subtitle = "Start, Aktualisierung, Netzwerk",
         icon = Icons.Filled.Tune,
     ),
     RemoteControl(
-        title = "Remote Control",
-        subtitle = "Customize remote buttons",
+        title = "Fernbedienung",
+        subtitle = "Fernbedienungstasten anpassen",
         icon = Icons.Filled.SettingsRemote,
     ),
     Sync(
@@ -929,22 +929,22 @@ enum class SettingsSection(
         // On / Off state instead of a description. Apple does the same, and the
         // long string truncated on the Android TV rail. The description lives on
         // the Sync page's own Drive Sync footer.
-        title = "Sync",
+        title = "Synchronisierung",
         subtitle = null,
         icon = Icons.Filled.Cloud,
     ),
     AppUpdates(
         title = "Updates",
-        subtitle = "Check for new releases",
+        subtitle = "Nach neuen Versionen suchen",
         icon = Icons.Filled.SystemUpdate,
     ),
     Developer(
-        title = "Developer",
-        subtitle = "Debug logging & diagnostics",
+        title = "Entwickler",
+        subtitle = "Debug-Protokollierung & Diagnose",
         icon = Icons.Outlined.BugReport,
     ),
     About(
-        title = "About",
+        title = "Über",
         subtitle = null,
         icon = Icons.Outlined.Info,
     ),
@@ -957,7 +957,7 @@ enum class SettingsSection(
  */
 fun settingsSectionSubtitle(section: SettingsSection, syncEnabled: Boolean): String? =
     if (section == SettingsSection.Sync) {
-        if (syncEnabled) "On" else "Off"
+        if (syncEnabled) "Ein" else "Aus"
     } else {
         section.subtitle
     }

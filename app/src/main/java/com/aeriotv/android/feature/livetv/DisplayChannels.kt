@@ -16,9 +16,9 @@ import com.aeriotv.android.feature.playlist.SortMode
  *   hidden groups; a dangling sentinel (deleted collection) shows everything;
  *   a real provider group literally named "collection:x" still filters as a
  *   group (GH #45).
- * - A specific group matches ignoring case. In "All", hidden groups are
+ * - A specific group matches ignoring case. In "Alle", hidden groups are
  *   excluded UNLESS searching, where hidden channels stay findable.
- * - With a non-default group order active, "All" clusters by the ordered
+ * - With a non-default group order active, "Alle" clusters by the ordered
  *   group list (rank primary), then the chosen sort applies within.
  * - Sort keys are precomputed per channel (E-1 stage 1): the comparators
  *   read cached fields only.

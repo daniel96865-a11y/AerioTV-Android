@@ -247,7 +247,7 @@ private fun SettingsSidebar(
 ) {
     LazyColumn(
         modifier = modifier.fillMaxHeight(),
-        // Status bar inset: on the unfolded Fold the "Settings" title sat under
+        // Status bar inset: on the unfolded Fold the "Einstellungen" title sat under
         // the clock (Logan's emulator 2026-09-09).
         contentPadding = PaddingValues(
             start = 12.dp, end = 12.dp,
@@ -263,7 +263,7 @@ private fun SettingsSidebar(
     ) {
         item("title") {
             Text(
-                text = "Settings",
+                text = "Einstellungen",
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground,
@@ -274,7 +274,7 @@ private fun SettingsSidebar(
         // last row of the closing group).
         item("playlists") {
             SettingsNavRow(
-                title = "Playlists",
+                title = "Wiedergabelisten",
                 subtitle = activePlaylistName,
                 icon = Icons.AutoMirrored.Filled.List,
                 onClick = { onSelect(SettingsRoute.Playlists) },
@@ -529,7 +529,7 @@ private fun SettingsTvRail(
     // the closing section group like any other row.
     val rows = remember(sections, activePlaylistName, syncEnabled) {
         buildList {
-            add(Triple(SettingsRoute.Playlists as SettingsRoute, "Playlists", activePlaylistName))
+            add(Triple(SettingsRoute.Playlists as SettingsRoute, "Wiedergabelisten", activePlaylistName))
             sections.forEach { group ->
                 group.sections.forEach { section ->
                     add(
@@ -610,7 +610,7 @@ private fun settingsRouteIcon(route: SettingsRoute) = when (route) {
 private fun SettingsPanePlaceholder() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = androidx.compose.ui.Alignment.Center) {
         androidx.compose.material3.Text(
-            text = "Select a setting",
+            text = "Einstellung auswählen",
             style = androidx.compose.material3.MaterialTheme.typography.titleMedium,
             color = androidx.compose.material3.MaterialTheme.colorScheme.onSurfaceVariant,
         )

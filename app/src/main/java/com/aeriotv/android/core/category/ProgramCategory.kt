@@ -34,7 +34,7 @@ enum class ProgramCategory(
 ) {
     Sports(
         storageSuffix = "sports",
-        displayName = "Sports",
+        displayName = "Sport",
         defaultHex = "3949AB",
         icon = Icons.Filled.SportsBasketball,
         aliases = listOf(
@@ -46,7 +46,7 @@ enum class ProgramCategory(
     ),
     Movies(
         storageSuffix = "movie",
-        displayName = "Movies",
+        displayName = "Filme",
         defaultHex = "5E35B1",
         icon = Icons.Filled.Theaters,
         aliases = listOf(
@@ -55,7 +55,7 @@ enum class ProgramCategory(
     ),
     Kids(
         storageSuffix = "kids",
-        displayName = "Kids",
+        displayName = "Kinder",
         defaultHex = "039BE5",
         icon = Icons.Filled.Diversity1,
         aliases = listOf(
@@ -66,7 +66,7 @@ enum class ProgramCategory(
     ),
     News(
         storageSuffix = "news",
-        displayName = "News",
+        displayName = "Nachrichten",
         defaultHex = "43A047",
         icon = Icons.Filled.Newspaper,
         aliases = listOf(
@@ -77,7 +77,7 @@ enum class ProgramCategory(
     ),
     Documentary(
         storageSuffix = "documentary",
-        displayName = "Documentary",
+        displayName = "Dokumentation",
         defaultHex = "6D4C41",
         icon = Icons.Filled.Article,
         aliases = listOf(
@@ -97,7 +97,7 @@ enum class ProgramCategory(
     ),
     Comedy(
         storageSuffix = "comedy",
-        displayName = "Comedy",
+        displayName = "Komödie",
         defaultHex = "F9A825",
         icon = Icons.Outlined.Mood,
         aliases = listOf("comedy", "sitcom", "stand-up", "stand up"),
@@ -114,7 +114,7 @@ enum class ProgramCategory(
     ),
     Educational(
         storageSuffix = "educational",
-        displayName = "Educational",
+        displayName = "Bildung",
         defaultHex = "00897B",
         icon = Icons.Filled.School,
         aliases = listOf(
@@ -133,7 +133,7 @@ enum class ProgramCategory(
     ),
     Music(
         storageSuffix = "music",
-        displayName = "Music",
+        displayName = "Musik",
         defaultHex = "D81B60",
         icon = Icons.Filled.MusicNote,
         aliases = listOf("music", "concert", "musical", "música"),

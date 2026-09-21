@@ -351,7 +351,7 @@ fun GuideScreen(
 
     // Grid window: the playlist's Guide Days setting (epgRetentionDays) in
     // BOTH directions (Logan 2026-09-11); the retired Settings > Network
-    // "Guide Window" preference no longer shapes the timeline.
+    // "EPG-Zeitraum" preference no longer shapes the timeline.
     // Loaded EPG span in whole days either side of now, for the Jump To sheet
     // and (on All Available) for the timeline extent itself.
     val (epgDaysBack, epgDaysAhead) = remember(state.epgByChannel) {
@@ -848,10 +848,10 @@ fun GuideScreen(
                     onValueChange = viewModel::onSearchQueryChange,
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 4.dp),
                     singleLine = true,
-                    placeholder = { Text("Search channels") },
+                    placeholder = { Text("Sender suchen") },
                     leadingIcon = { Icon(Icons.Outlined.Search, contentDescription = null) },
                     trailingIcon = if (state.searchQuery.isNotEmpty()) {
-                        { IconButton(onClick = { viewModel.onSearchQueryChange("") }) { Icon(Icons.Filled.Close, contentDescription = "Clear search") } }
+                        { IconButton(onClick = { viewModel.onSearchQueryChange("") }) { Icon(Icons.Filled.Close, contentDescription = "Suche leeren") } }
                     } else null,
                     shape = RoundedCornerShape(14.dp),
                     keyboardOptions = com.aeriotv.android.ui.textfield.aerioTextFieldKeyboardOptions(imeAction = ImeAction.Search),
@@ -1219,15 +1219,15 @@ fun GuideScreen(
             // long-press action surface; Logan 2026-09-09), items in the iPhone
             // context-menu order. Jump To lives on the clock cell here.
             val sheetActions = buildList {
-                if (isLive && channel.url.isNotBlank()) add(TvMenuAction("Watch", Icons.Filled.PlayArrow) { onChannelClick(channel) })
-                else if (replayable) add(TvMenuAction("Watch from Start", Icons.Outlined.History, onClick = watchFromStart))
-                add(TvMenuAction(if (isFavorite) "Remove from Favorites" else "Add to Favorites", if (isFavorite) Icons.Outlined.StarOutline else Icons.Filled.Star) { favoritesVm.toggle(channel) })
-                add(TvMenuAction(if (inMultiview) "Remove from Multiview" else "Add to Multiview", Icons.Outlined.GridView, enabled = canAddToMultiview) { multiviewStore.toggle(channel) })
-                add(TvMenuAction("Add Channel to Collection", Icons.Outlined.CreateNewFolder) { collectionPickerFor = channel.id to channel.name })
+                if (isLive && channel.url.isNotBlank()) add(TvMenuAction("Ansehen", Icons.Filled.PlayArrow) { onChannelClick(channel) })
+                else if (replayable) add(TvMenuAction("Von Anfang ansehen", Icons.Outlined.History, onClick = watchFromStart))
+                add(TvMenuAction(if (isFavorite) "Aus Favoriten entfernen" else "Zu Favoriten hinzufügen", if (isFavorite) Icons.Outlined.StarOutline else Icons.Filled.Star) { favoritesVm.toggle(channel) })
+                add(TvMenuAction(if (inMultiview) "Aus Mehrfachansicht entfernen" else "Zur Mehrfachansicht hinzufügen", Icons.Outlined.GridView, enabled = canAddToMultiview) { multiviewStore.toggle(channel) })
+                add(TvMenuAction("Sender zu Sammlung hinzufügen", Icons.Outlined.CreateNewFolder) { collectionPickerFor = channel.id to channel.name })
                 if (!cell.isPlaceholder) {
-                    add(TvMenuAction("Program Info", Icons.Outlined.Info) { programInfoTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
-                    if (canRecord) add(TvMenuAction(if (isLive) "Record from Now" else "Record", Icons.Outlined.FiberManualRecord) { recordTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
-                    if (cell.startMillis > nowMs) add(TvMenuAction(if (reminderSet) "Cancel Reminder" else "Set Reminder", Icons.Outlined.Notifications, onClick = toggleReminder))
+                    add(TvMenuAction("Sendungsinfo", Icons.Outlined.Info) { programInfoTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
+                    if (canRecord) add(TvMenuAction(if (isLive) "Ab jetzt aufnehmen" else "Aufnehmen", Icons.Outlined.FiberManualRecord) { recordTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
+                    if (cell.startMillis > nowMs) add(TvMenuAction(if (reminderSet) "Erinnerung abbrechen" else "Erinnerung setzen", Icons.Outlined.Notifications, onClick = toggleReminder))
                 }
             }
             com.aeriotv.android.feature.livetv.LiveTvActionSheet(
@@ -1238,16 +1238,16 @@ fun GuideScreen(
             )
         } else {
         val actions = buildList {
-            add(TvMenuAction(if (isFavorite) "Remove from Favorites" else "Add to Favorites") { favoritesVm.toggle(channel) })
-            add(TvMenuAction(if (inMultiview) "Remove from Multiview" else "Add to Multiview", enabled = canAddToMultiview) { multiviewStore.toggle(channel) })
-            add(TvMenuAction("Add Channel to Collection") { collectionPickerFor = channel.id to channel.name })
+            add(TvMenuAction(if (isFavorite) "Aus Favoriten entfernen" else "Zu Favoriten hinzufügen") { favoritesVm.toggle(channel) })
+            add(TvMenuAction(if (inMultiview) "Aus Mehrfachansicht entfernen" else "Zur Mehrfachansicht hinzufügen", enabled = canAddToMultiview) { multiviewStore.toggle(channel) })
+            add(TvMenuAction("Sender zu Sammlung hinzufügen") { collectionPickerFor = channel.id to channel.name })
             // Jump To and Back to Now live on the clock cell now (tvOS parity).
             if (!cell.isPlaceholder) {
-                add(TvMenuAction("Program Info") { programInfoTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
-                if (canRecord) add(TvMenuAction(if (isLive) "Record from Now" else "Record") { recordTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
-                if (replayable) add(TvMenuAction("Watch from Start", onClick = watchFromStart))
+                add(TvMenuAction("Sendungsinfo") { programInfoTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
+                if (canRecord) add(TvMenuAction(if (isLive) "Ab jetzt aufnehmen" else "Aufnehmen") { recordTarget = cell.toInfoTarget(channel.name, channel.dispatcharrChannelId) })
+                if (replayable) add(TvMenuAction("Von Anfang ansehen", onClick = watchFromStart))
                 if (cell.startMillis > nowMs) {
-                    add(TvMenuAction(if (reminderSet) "Cancel Reminder" else "Set Reminder", onClick = toggleReminder))
+                    add(TvMenuAction(if (reminderSet) "Erinnerung abbrechen" else "Erinnerung setzen", onClick = toggleReminder))
                 }
             }
         }

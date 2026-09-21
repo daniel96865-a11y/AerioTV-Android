@@ -16,7 +16,7 @@ import kotlin.math.sqrt
  */
 enum class MultiviewLayoutMode(val key: String, val displayName: String) {
     /** The built-in default layout for the current count (layout1..layout9). */
-    Auto("auto", "Default"),
+    Auto("auto", "Standard"),
 
     /** Balanced equal-size grid, landscape-preferred, last partial row centered. */
     EvenGrid("evenGrid", "Even Grid"),
@@ -45,7 +45,7 @@ enum class MultiviewLayoutMode(val key: String, val displayName: String) {
         /**
          * The grid-SHAPE modes worth offering at a given tile count. Spotlight is
          * deliberately NOT a grid-shape option: it is exposed only as the per-tile
-         * "Spotlight This Tile" action (which picks a specific hero), because a
+         * "Diese Kachel hervorheben" action (which picks a specific hero), because a
          * grid-wide Spotlight was just "Spotlight on the first tile" and duplicated
          * that action. So the picker only appears where a real alternative shape
          * exists: 3/5 (Even Grid) and 6 (Hero + Corner).

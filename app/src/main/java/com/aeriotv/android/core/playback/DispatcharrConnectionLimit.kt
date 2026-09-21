@@ -50,8 +50,8 @@ object DispatcharrConnectionLimit {
      *  what the user can do about it is press Retry. */
     val STREAM_ENDED = Notice(
         kind = Kind.STREAM_ENDED,
-        title = "Stream ended",
-        message = "This stream was stopped by the server. Press Retry to start it again.",
+        title = "Stream beendet",
+        message = "Der Stream wurde vom Server beendet. Wähle „Erneut versuchen“, um ihn neu zu starten.",
     )
 
     private const val USER_LIMIT_PREFIX = "Stream limit exceeded"
@@ -72,13 +72,13 @@ object DispatcharrConnectionLimit {
         return when {
             code == 429 && reason.startsWith(USER_LIMIT_PREFIX, ignoreCase = true) -> Notice(
                 kind = Kind.USER_STREAM_LIMIT,
-                title = "Too many sessions playing",
+                title = "Zu viele gleichzeitige Wiedergaben",
                 message = userLimitMessage(reason),
             )
             code == 503 && reason.startsWith(PROVIDER_LIMIT_PREFIX, ignoreCase = true) -> Notice(
                 kind = Kind.PROVIDER_LIMIT,
-                title = "Server is busy",
-                message = "All connections for this channel are in use right now. " +
+                title = "Server ist ausgelastet",
+                message = "Alle Verbindungen für diesen Sender sind derzeit belegt. " +
                     "Try again in a few minutes, or contact your server administrator.",
             )
             else -> null

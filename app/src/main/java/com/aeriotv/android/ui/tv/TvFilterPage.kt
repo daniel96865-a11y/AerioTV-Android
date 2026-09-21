@@ -117,7 +117,7 @@ fun TvFilterPage(
                         if (showAll) {
                             item(key = "__show_all__") {
                                 FilterRow(
-                                    title = "Show All Groups",
+                                    title = "Alle Gruppen anzeigen",
                                     on = false,
                                     accent = true,
                                     modifier = Modifier.focusRequester(firstRow),

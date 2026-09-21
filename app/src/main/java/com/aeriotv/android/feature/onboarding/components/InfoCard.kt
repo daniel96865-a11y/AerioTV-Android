@@ -73,7 +73,7 @@ fun SourceTypeCard(
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
             )
-            // Row-style cards (e.g. onboarding "Connect a Server") pass no
+            // Row-style cards (e.g. onboarding "Server verbinden") pass no
             // subtitle and render as a single title line + trailing affordance.
             if (subtitle != null) {
                 Spacer(Modifier.size(2.dp))

@@ -133,7 +133,7 @@ fun ReminderBannerHost(
                     IconButton(onClick = { vm.dismiss() }) {
                         Icon(
                             imageVector = Icons.Filled.Close,
-                            contentDescription = "Dismiss",
+                            contentDescription = "Schließen",
                             tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     }

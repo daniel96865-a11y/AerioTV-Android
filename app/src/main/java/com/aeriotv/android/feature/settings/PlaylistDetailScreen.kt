@@ -95,7 +95,7 @@ fun PlaylistDetailScreen(
     // would act on the wrong source and leave the store disagreeing with the
     // page. Set Active is the call to action instead; refresh once it is live.
     // LIVE from the DAO, not the UiState snapshot (Logan 2026-09-16): "Set
-    // Active" has to become "Active Playlist" the moment the switch commits.
+    // Active" has to become "Aktive Wiedergabeliste" the moment the switch commits.
     val activeIdLive by viewModel.activeIdLive
         .collectAsStateWithLifecycle(initialValue = state.playlist?.id)
     val isActivePlaylist = playlist != null && playlist.id == activeIdLive
@@ -122,7 +122,7 @@ fun PlaylistDetailScreen(
         CenterAlignedTopAppBar(
             title = {
                 Text(
-                    text = playlist?.name ?: "Playlist",
+                    text = playlist?.name ?: "Wiedergabeliste",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold,
                 )
@@ -134,7 +134,7 @@ fun PlaylistDetailScreen(
                     IconButton(onClick = onBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back",
+                            contentDescription = "Zurück",
                             tint = MaterialTheme.colorScheme.primary,
                         )
                     }
@@ -145,7 +145,7 @@ fun PlaylistDetailScreen(
                 // a corner action sits off the natural D-pad path.
                 if (!rememberIsTvDevice()) {
                     SettingsHeaderTextButton(
-                        label = "Edit",
+                        label = "Bearbeiten",
                         // Active-only, same rule as the refresh actions below:
                         // saveEdits writes through repository.activePlaylist(),
                         // so editing a NON-active playlist would silently
@@ -168,7 +168,7 @@ fun PlaylistDetailScreen(
                 verticalArrangement = Arrangement.Center,
             ) {
                 Text(
-                    text = "No playlist loaded",
+                    text = "Keine Wiedergabeliste geladen",
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -236,7 +236,7 @@ fun PlaylistDetailScreen(
                         // per PlaylistRepository.effectiveBaseUrl's decision.
                         val activeRoute = state.activeRoute
                         DetailRow(
-                            label = "Remote URL",
+                            label = "Externe URL",
                             value = playlist.urlString,
                             icon = Icons.Filled.CheckCircle.takeIf { activeRoute?.isLan == false },
                             iconTint = MaterialTheme.colorScheme.primary,
@@ -250,7 +250,7 @@ fun PlaylistDetailScreen(
                             )
                         }
                         playlist.username?.takeIf { it.isNotBlank() }?.let { user ->
-                            DetailRow("Username", user)
+                            DetailRow("Benutzername", user)
                         }
                         // Reflect a real signal -- whether the source has ever
                         // loaded channels -- instead of asserting "Verified"
@@ -275,7 +275,7 @@ fun PlaylistDetailScreen(
                                     .format(Date(ts)),
                             )
                         }
-                        DetailRow("Channels", playlist.channelCount.toString())
+                        DetailRow("Sender", playlist.channelCount.toString())
                         if (!playlist.epgUrl.isNullOrBlank()) {
                             DetailRow("EPG", playlist.epgUrl!!)
                         }
@@ -284,7 +284,7 @@ fun PlaylistDetailScreen(
             }
 
             item {
-                Section(header = "Actions", footer = null) {
+                Section(header = "Aktionen", footer = null) {
                     // Rev 2 canon amendment 1: activation lives here on every
                     // form factor. The rail and sidebar make selection show the
                     // detail, so OK-to-activate cannot survive on those roots;
@@ -293,7 +293,7 @@ fun PlaylistDetailScreen(
                     ActionRow(
                         icon = if (isActivePlaylist) Icons.Filled.CheckCircle
                         else Icons.Outlined.PowerSettingsNew,
-                        label = if (isActivePlaylist) "Active Playlist" else "Set Active",
+                        label = if (isActivePlaylist) "Aktive Wiedergabeliste" else "Als aktiv festlegen",
                         onClick = { playlist?.id?.let { viewModel.switchToPlaylist(it) } },
                         enabled = !isActivePlaylist,
                     )
@@ -301,7 +301,7 @@ fun PlaylistDetailScreen(
                     if (isTv && isActivePlaylist) {
                         ActionRow(
                             icon = Icons.Outlined.Edit,
-                            label = "Edit Playlist",
+                            label = "Wiedergabeliste bearbeiten",
                             onClick = onEdit,
                         )
                         HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
@@ -309,7 +309,7 @@ fun PlaylistDetailScreen(
                     if (isActivePlaylist) {
                     ActionRow(
                         icon = Icons.Outlined.Public,
-                        label = "Test Connection",
+                        label = "Verbindung testen",
                         onClick = { viewModel.testConnection() },
                         running = state.testStatus is PlaylistViewModel.ActionStatus.Running,
                         status = state.testStatus,
@@ -317,7 +317,7 @@ fun PlaylistDetailScreen(
                     HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
                     ActionRow(
                         icon = Icons.Filled.Refresh,
-                        label = "Refresh Playlist",
+                        label = "Wiedergabeliste aktualisieren",
                         onClick = { viewModel.refreshPlaylist() },
                         running = state.playlistRefreshStatus is PlaylistViewModel.ActionStatus.Running,
                         status = state.playlistRefreshStatus,
@@ -327,7 +327,7 @@ fun PlaylistDetailScreen(
                         HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
                         ActionRow(
                             icon = Icons.Outlined.Wifi,
-                            label = "Refresh LAN Detection",
+                            label = "LAN-Erkennung aktualisieren",
                             onClick = { viewModel.refreshLanDetection() },
                             running = state.lanRefreshStatus is PlaylistViewModel.ActionStatus.Running,
                             status = state.lanRefreshStatus,
@@ -338,19 +338,19 @@ fun PlaylistDetailScreen(
 
             if (isActivePlaylist) item {
                 Section(
-                    header = "EPG Cache",
-                    footer = "Clears this playlist's cached guide data and downloads it fresh from the server. Use this if program cells look wrong or are missing. Takes a few minutes on large playlists.",
+                    header = "EPG-Zwischenspeicher",
+                    footer = "Löscht die zwischengespeicherten EPG-Daten dieser Wiedergabeliste und lädt sie neu vom Server. Verwende dies, wenn Sendungen falsch angezeigt werden oder fehlen. Bei großen Wiedergabelisten kann dies einige Minuten dauern.",
                 ) {
                     ActionRow(
                         icon = Icons.Filled.Refresh,
-                        label = "Refresh EPG Data",
+                        label = "EPG-Daten aktualisieren",
                         onClick = { viewModel.refreshEpg() },
                         running = state.epgRefreshStatus is PlaylistViewModel.ActionStatus.Running,
                         status = state.epgRefreshStatus,
                     )
                     playlist.lastEpgRefreshedAt?.let { ts ->
                         Text(
-                            text = "Last refreshed: ${DateFormat.getDateTimeInstance().format(Date(ts))}",
+                            text = "Zuletzt aktualisiert: ${DateFormat.getDateTimeInstance().format(Date(ts))}",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp),
@@ -361,12 +361,12 @@ fun PlaylistDetailScreen(
 
             if (isActivePlaylist) item {
                 Section(
-                    header = "Full Refresh",
-                    footer = "Clears every cache (channels, guide data, and On Demand) and reloads this playlist from scratch. Use this if newly-added channels, guide data, or movies and shows are missing or stale after changes on the server.",
+                    header = "Komplett aktualisieren",
+                    footer = "Löscht alle Zwischenspeicher (Sender, EPG und Mediathek) und lädt diese Wiedergabeliste vollständig neu. Verwende dies, wenn neu hinzugefügte Sender, EPG-Daten, Filme oder Serien nach Änderungen am Server fehlen oder veraltet sind.",
                 ) {
                     ActionRow(
                         icon = Icons.Filled.Refresh,
-                        label = "Refresh Everything",
+                        label = "Alles aktualisieren",
                         destructive = true,
                         onClick = { confirmRefreshAll = true },
                         running = state.refreshAllStatus is PlaylistViewModel.ActionStatus.Running,
@@ -377,12 +377,12 @@ fun PlaylistDetailScreen(
 
             item {
                 Section(
-                    header = "Danger Zone",
-                    footer = "Removes this playlist and its credentials from this device. Your server data will not be affected.",
+                    header = "Gefahrenbereich",
+                    footer = "Entfernt diese Wiedergabeliste und ihre Zugangsdaten von diesem Gerät. Daten auf deinem Server bleiben unverändert.",
                 ) {
                     ActionRow(
                         icon = Icons.Outlined.Delete,
-                        label = "Delete Playlist",
+                        label = "Wiedergabeliste löschen",
                         destructive = true,
                         onClick = { confirmDelete = true },
                     )
@@ -395,7 +395,7 @@ fun PlaylistDetailScreen(
     if (confirmDelete && playlist != null) {
         AlertDialog(
             onDismissRequest = { confirmDelete = false },
-            title = { Text("Delete playlist?") },
+            title = { Text("Wiedergabeliste löschen?") },
             text = {
                 Text(
                     "This removes \"${playlist.name}\" and its credentials from this " +
@@ -404,7 +404,7 @@ fun PlaylistDetailScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Delete",
+                    label = "Löschen",
                     destructive = true,
                     onClick = {
                         confirmDelete = false
@@ -414,7 +414,7 @@ fun PlaylistDetailScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { confirmDelete = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { confirmDelete = false })
             },
         )
     }
@@ -422,7 +422,7 @@ fun PlaylistDetailScreen(
     if (confirmRefreshAll && playlist != null) {
         AlertDialog(
             onDismissRequest = { confirmRefreshAll = false },
-            title = { Text("Refresh Everything?") },
+            title = { Text("Alles aktualisieren?") },
             text = {
                 Text(
                     "Clears all cached channels, guide data, and On Demand, then " +
@@ -433,7 +433,7 @@ fun PlaylistDetailScreen(
             },
             confirmButton = {
                 SettingsDialogTextButton(
-                    label = "Refresh",
+                    label = "Aktualisieren",
                     destructive = true,
                     onClick = {
                         confirmRefreshAll = false
@@ -442,7 +442,7 @@ fun PlaylistDetailScreen(
                 )
             },
             dismissButton = {
-                SettingsDialogTextButton(label = "Cancel", onClick = { confirmRefreshAll = false })
+                SettingsDialogTextButton(label = "Abbrechen", onClick = { confirmRefreshAll = false })
             },
         )
     }
@@ -540,7 +540,7 @@ private fun ActionRow(
     else MaterialTheme.colorScheme.primary
     // Same rule as the shared SettingsActionRow: a disabled row stays FOCUSABLE
     // so it does not drop out of D-pad traversal and strand focus; it dims and
-    // swallows the click instead. "Active Playlist" is exactly this state.
+    // swallows the click instead. "Aktive Wiedergabeliste" is exactly this state.
     val accent = if (enabled) baseAccent else baseAccent.copy(alpha = 0.38f)
     Row(
         modifier = Modifier

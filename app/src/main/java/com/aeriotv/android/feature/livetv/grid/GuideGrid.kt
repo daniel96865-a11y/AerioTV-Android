@@ -665,7 +665,7 @@ private fun GridRow(
     val hiddenBadges = com.aeriotv.android.core.ui.LocalHiddenEpgBadges.current
     val clockMode = rememberClockMode()
     val rail = com.aeriotv.android.core.ui.LocalGuideRailPrefs.current
-    // Appearance > "Rounded corners in Guide view" (default OFF). The rail is
+    // Appearance > "Abgerundete Ecken in der EPG-Ansicht" (default OFF). The rail is
     // the ONLY surface this flag covers; every card surface reads the List
     // flag instead. Read here in composition and handed to the shared rounding
     // rule inside the Canvas.

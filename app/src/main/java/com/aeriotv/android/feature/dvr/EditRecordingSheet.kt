@@ -78,7 +78,7 @@ fun EditRecordingSheet(
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
-                text = "Edit Recording",
+                text = "Aufnahme bearbeiten",
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.SemiBold,
@@ -87,7 +87,7 @@ fun EditRecordingSheet(
             OutlinedTextField(
                 value = title,
                 onValueChange = { title = it },
-                label = { Text("Title") },
+                label = { Text("Titel") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = com.aeriotv.android.ui.textfield.aerioTextFieldKeyboardOptions(
@@ -98,7 +98,7 @@ fun EditRecordingSheet(
             OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
-                label = { Text("Description") },
+                label = { Text("Beschreibung") },
                 modifier = Modifier.fillMaxWidth(),
                 keyboardOptions = com.aeriotv.android.ui.textfield.aerioTextFieldKeyboardOptions(),
             )
@@ -138,14 +138,14 @@ fun EditRecordingSheet(
                 horizontalArrangement = Arrangement.End,
             ) {
                 TextButton(onClick = onDismiss) {
-                    Text("Cancel", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text("Abbrechen", color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 TextButton(
                     onClick = { if (canSave) onSave(newStart, newEnd, title.trim(), description.trim()) },
                     enabled = canSave,
                 ) {
                     Text(
-                        text = "Save",
+                        text = "Speichern",
                         color = if (canSave) MaterialTheme.colorScheme.textAccent
                         else MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -171,7 +171,7 @@ private fun SectionHeader(label: String) {
 private fun DeltaRollRow(selected: Int, onSelect: (Int) -> Unit) {
     Column {
         DELTA_OPTIONS.forEachIndexed { idx, mins ->
-            val label = if (mins == 0) "No change" else "+$mins min"
+            val label = if (mins == 0) "Keine Änderung" else "+$mins min"
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

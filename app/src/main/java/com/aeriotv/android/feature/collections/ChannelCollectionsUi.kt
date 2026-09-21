@@ -99,7 +99,7 @@ class CollectionsViewModel @Inject constructor(
         }
     }
 
-    /** Add-or-remove the channel (the "Add to Collection" picker rows). */
+    /** Add-or-remove the channel (the "Zur Sammlung hinzufügen" picker rows). */
     fun toggleMember(collectionId: String, channelId: String) {
         viewModelScope.launch {
             prefs.updateChannelCollections { list ->
@@ -127,7 +127,7 @@ class CollectionsViewModel @Inject constructor(
         }
     }
 
-    /** Remove the channel from every collection ("Remove from All Collections"). */
+    /** Remove the channel from every collection ("Aus allen Sammlungen entfernen"). */
     fun removeFromAll(channelId: String) {
         viewModelScope.launch {
             prefs.updateChannelCollections { list ->
@@ -146,7 +146,7 @@ class CollectionsViewModel @Inject constructor(
  *
  * iOS's contextual-remove rule, as coded there: viewing collection X and the
  * channel is in X -> "Remove from <name>"; viewing NO collection and the
- * channel is in at least one -> "Remove from All Collections"; viewing X but
+ * channel is in at least one -> "Aus allen Sammlungen entfernen"; viewing X but
  * the channel is not in X -> no remove row at all.
  */
 @androidx.compose.runtime.Immutable
@@ -277,14 +277,14 @@ fun CollectionPill(
                     title = collection.name,
                     actions = listOf(
                         TvMenuAction(
-                            if (atEnd) "Move to Front" else "Move to Back",
+                            if (atEnd) "Nach vorne verschieben" else "Nach hinten verschieben",
                         ) {
                             onSetPlacement(
                                 if (atEnd) ChannelCollection.PLACEMENT_BEGINNING
                                 else ChannelCollection.PLACEMENT_END,
                             )
                         },
-                        TvMenuAction("Delete Collection", destructive = true) { onDelete() },
+                        TvMenuAction("Sammlung löschen", destructive = true) { onDelete() },
                     ),
                     guard = manageGuard,
                     onDismiss = { manageOpen = false },
@@ -297,7 +297,7 @@ fun CollectionPill(
                 containerColor = MaterialTheme.colorScheme.surface,
             ) {
                 DropdownMenuItem(
-                    text = { Text(if (atEnd) "Move to Front" else "Move to Back") },
+                    text = { Text(if (atEnd) "Nach vorne verschieben" else "Nach hinten verschieben") },
                     onClick = {
                         manageOpen = false
                         onSetPlacement(
@@ -307,7 +307,7 @@ fun CollectionPill(
                     },
                 )
                 DropdownMenuItem(
-                    text = { Text("Delete Collection", color = MaterialTheme.colorScheme.error) },
+                    text = { Text("Sammlung löschen", color = MaterialTheme.colorScheme.error) },
                     onClick = {
                         manageOpen = false
                         onDelete()
@@ -319,7 +319,7 @@ fun CollectionPill(
 }
 
 /**
- * The "Add to Collection" picker + the chained "New Collection" name dialog
+ * The "Zur Sammlung hinzufügen" picker + the chained "New Collection" name dialog
  * (iOS confirmationDialog + .alert-with-TextField). Compose dialogs stack
  * cleanly, so no 0.4s asyncAfter deferral is needed here. Picking an
  * existing collection TOGGLES membership and closes (each tap dismisses,
@@ -356,7 +356,7 @@ fun AddToCollectionFlow(
     if (!naming) {
         if (isTv) {
             TvActionMenuDialog(
-                title = "Add to Collection",
+                title = "Zur Sammlung hinzufügen",
                 actions = buildList {
                     collections.forEach { c ->
                         val member = channelId in c.memberIds
@@ -375,7 +375,7 @@ fun AddToCollectionFlow(
         } else {
             AlertDialog(
                 onDismissRequest = onClose,
-                title = { Text("Add to Collection") },
+                title = { Text("Zur Sammlung hinzufügen") },
                 text = {
                     Column {
                         collections.forEach { c ->
@@ -408,7 +408,7 @@ fun AddToCollectionFlow(
                 },
                 confirmButton = {},
                 dismissButton = {
-                    TextButton(onClick = onClose) { Text("Cancel") }
+                    TextButton(onClick = onClose) { Text("Abbrechen") }
                 },
             )
         }
@@ -440,16 +440,16 @@ fun AddToCollectionFlow(
                         onCreate(newName, channelId, ChannelCollection.PLACEMENT_BEGINNING)
                         onClose()
                     },
-                ) { Text("Add at Beginning") }
+                ) { Text("Am Anfang hinzufügen") }
                 TextButton(
                     onClick = {
                         onCreate(newName, channelId, ChannelCollection.PLACEMENT_END)
                         onClose()
                     },
-                ) { Text("Add at End") }
+                ) { Text("Am Ende hinzufügen") }
             },
             dismissButton = {
-                TextButton(onClick = onClose) { Text("Cancel") }
+                TextButton(onClick = onClose) { Text("Abbrechen") }
             },
         )
     }

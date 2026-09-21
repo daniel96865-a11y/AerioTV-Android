@@ -187,7 +187,7 @@ fun SettingsSelectionRow(
             Spacer(Modifier.width(12.dp))
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(22.dp),
             )
@@ -261,7 +261,7 @@ fun OnOffIndicator(on: Boolean) {
         )
         Spacer(Modifier.width(8.dp))
         Text(
-            text = if (on) "On" else "Off",
+            text = if (on) "Ein" else "Aus",
             style = settingsRowTitleStyle(),
             color = if (on) onColor else offColor,
             fontWeight = FontWeight.SemiBold,
@@ -441,7 +441,7 @@ fun SettingsDetailTopBar(title: String, onBack: () -> Unit) {
                 IconButton(onClick = onBack) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = "Zurück",
                         tint = MaterialTheme.colorScheme.primary,
                     )
                 }

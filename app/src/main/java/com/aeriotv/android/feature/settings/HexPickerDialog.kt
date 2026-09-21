@@ -58,15 +58,15 @@ fun HexPickerDialog(
         onDismissRequest = onDismiss,
         confirmButton = {
             SettingsDialogTextButton(
-                label = "Save",
+                label = "Speichern",
                 onClick = { if (isValid) onSave(sanitized) },
                 enabled = isValid && sanitized != currentHex.uppercase(),
             )
         },
         dismissButton = {
             Row {
-                SettingsDialogTextButton(label = "Reset", onClick = onReset)
-                SettingsDialogTextButton(label = "Cancel", onClick = onDismiss)
+                SettingsDialogTextButton(label = "Zurücksetzen", onClick = onReset)
+                SettingsDialogTextButton(label = "Abbrechen", onClick = onDismiss)
             }
         },
         title = { Text("${bucket.displayName} Color") },

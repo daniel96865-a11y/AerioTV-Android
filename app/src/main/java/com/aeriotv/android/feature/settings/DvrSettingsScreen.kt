@@ -104,7 +104,7 @@ fun DvrSettingsScreen(
     val usedFraction = if (capMB > 0) (usedMB.toFloat() / capMB.toFloat()).coerceIn(0f, 1f) else 0f
 
     Column(modifier = Modifier.fillMaxSize()) {
-        SettingsDetailTopBar(title = "DVR Settings", onBack = onBack)
+        SettingsDetailTopBar(title = "DVR-Einstellungen", onBack = onBack)
 
         androidx.compose.foundation.layout.Box(
             modifier = Modifier.fillMaxSize(),
@@ -129,8 +129,8 @@ fun DvrSettingsScreen(
                 val defaultDestination by settingsVm.dvrDefaultDestination
                     .collectAsStateWithLifecycle(initialValue = "server")
                 Card(
-                    header = "Default Destination",
-                    footer = "Where new recordings are saved unless you change it in the record sheet. Accounts without server recording always record to this device.",
+                    header = "Standard-Speicherort",
+                    footer = "Legt fest, wo neue Aufnahmen gespeichert werden, sofern du es beim Aufnehmen nicht änderst. Konten ohne Serveraufnahme speichern immer auf diesem Gerät.",
                 ) {
                     Column {
                         DestinationRow(
@@ -140,7 +140,7 @@ fun DvrSettingsScreen(
                         )
                         HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
                         DestinationRow(
-                            label = "This device",
+                            label = "Dieses Gerät",
                             selected = defaultDestination == "local",
                             onSelect = { settingsVm.setDvrDefaultDestination("local") },
                         )
@@ -150,19 +150,19 @@ fun DvrSettingsScreen(
 
             item {
                 Card(
-                    header = "Default Recording Buffers",
-                    footer = "Buffers extend new recordings beyond the scheduled window. Existing recordings aren't touched. Useful for sports and live events that run over.",
+                    header = "Standard-Aufnahmepuffer",
+                    footer = "Puffer verlängern neue Aufnahmen über den geplanten Zeitraum hinaus. Bestehende Aufnahmen bleiben unverändert. Nützlich bei Sport und Live-Ereignissen mit Überlänge.",
                 ) {
                     Column {
                         BufferRow(
-                            label = "Start Early",
+                            label = "Früher starten",
                             options = ROLL_OPTIONS,
                             selected = preRoll,
                             onSelect = settingsVm::setDvrDefaultPreRollMins,
                         )
                         HorizontalDivider(color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.6f))
                         BufferRow(
-                            label = "End Late",
+                            label = "Später beenden",
                             options = ROLL_OPTIONS,
                             selected = postRoll,
                             onSelect = settingsVm::setDvrDefaultPostRollMins,
@@ -173,8 +173,8 @@ fun DvrSettingsScreen(
 
             item {
                 Card(
-                    header = "Local Storage",
-                    footer = "Cap applies to local recordings on this device only. Server recordings live on Dispatcharr and are tracked there.",
+                    header = "Lokaler Speicher",
+                    footer = "Das Limit gilt nur für lokale Aufnahmen auf diesem Gerät. Serveraufnahmen liegen auf Dispatcharr und werden dort verwaltet.",
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -245,12 +245,12 @@ fun DvrSettingsScreen(
 
             item {
                 Card(
-                    header = "Storage Location",
-                    footer = "Local recordings save to your Downloads folder (in an AerioTV subfolder) by default, so you can find them in any file manager. Choose Folder picks a custom location via the Storage Access Framework, retained across reboots.",
+                    header = "Speicherort",
+                    footer = "Lokale Aufnahmen werden standardmäßig im Download-Ordner in einem AerioTV-Unterordner gespeichert und sind so in jedem Dateimanager auffindbar. Mit „Ordner auswählen“ kannst du einen eigenen Speicherort festlegen, der auch nach einem Neustart erhalten bleibt.",
                 ) {
                     Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 12.dp)) {
                         Text(
-                            text = "Currently saving to:",
+                            text = "Aktueller Speicherort:",
                             style = MaterialTheme.typography.bodySmall.subtext(),
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
@@ -268,7 +268,7 @@ fun DvrSettingsScreen(
                                 modifier = Modifier.dpadFocusRing(RoundedCornerShape(50)),
                             ) {
                                 Text(
-                                    text = "Choose Folder",
+                                    text = "Ordner auswählen",
                                     color = MaterialTheme.colorScheme.textAccent,
                                 )
                             }
@@ -292,7 +292,7 @@ fun DvrSettingsScreen(
                                     ),
                                 ) {
                                     Text(
-                                        text = "Reset to Default",
+                                        text = "Auf Standard zurücksetzen",
                                         color = MaterialTheme.colorScheme.error,
                                     )
                                 }
@@ -304,12 +304,12 @@ fun DvrSettingsScreen(
 
             item {
                 SettingsSection(
-                    header = "Behavior",
-                    footer = "Holds a CPU wake lock while a local recording is downloading so Doze can't stall it. Server-side recordings are unaffected (they run on Dispatcharr). Leave on unless you're debugging battery drain.",
+                    header = "Verhalten",
+                    footer = "Hält das Gerät während einer lokalen Aufnahme aktiv, damit der Energiesparmodus sie nicht anhält. Serveraufnahmen auf Dispatcharr sind davon nicht betroffen. Nur zur Fehlersuche bei hohem Akkuverbrauch ausschalten.",
                 ) {
                     SettingsToggleRow(
-                        title = "Keep device awake during recording",
-                        subtitle = "Recommended for long local recordings.",
+                        title = "Gerät während der Aufnahme wach halten",
+                        subtitle = "Für lange lokale Aufnahmen empfohlen.",
                         checked = keepAwake,
                         onCheckedChange = settingsVm::setDvrKeepAwakeDuringRecording,
                     )
@@ -368,7 +368,7 @@ private fun DestinationRow(
         if (selected) {
             Icon(
                 imageVector = Icons.Filled.Check,
-                contentDescription = "Selected",
+                contentDescription = "Ausgewählt",
                 tint = MaterialTheme.colorScheme.primary,
             )
         }
@@ -439,7 +439,7 @@ private fun BufferRow(
     }
 }
 
-private fun formatRoll(mins: Int): String = if (mins == 0) "None" else "$mins min"
+private fun formatRoll(mins: Int): String = if (mins == 0) "Keine" else "$mins min"
 
 private fun formatStorage(mb: Int): String {
     if (mb >= 1024) {

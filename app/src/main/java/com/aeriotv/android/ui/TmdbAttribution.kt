@@ -34,12 +34,12 @@ fun TmdbAttribution(modifier: Modifier = Modifier, long: Boolean = true, isTv: B
         val style = if (isTv) MaterialTheme.typography.bodyMedium else MaterialTheme.typography.bodySmall
         // Their required line first, ours second.
         Text(
-            text = "This product uses the TMDB API but is not endorsed or certified by TMDB.",
+            text = "Dieses Produkt verwendet die TMDB-API, wird aber nicht von TMDB unterstützt oder zertifiziert.",
             style = style.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
         Text(
-            text = "TMDB data is used only after configuring a TMDB API key in Settings > App Behaviors.",
+            text = "TMDB-Daten werden erst verwendet, nachdem unter Einstellungen ein TMDB-API-Schlüssel eingerichtet wurde.",
             style = style.subtext(),
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
