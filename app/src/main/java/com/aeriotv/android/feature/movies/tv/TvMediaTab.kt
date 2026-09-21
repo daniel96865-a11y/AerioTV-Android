@@ -187,7 +187,7 @@ internal fun TvMediaTab(
         heldHero.value
     }
     val watchlistShelf = TvShelf(
-        title = "Watchlist",
+        title = "Merkliste",
         items = watchlistPages,
         key = { it.key },
         cardWidth = TV_POSTER_WIDTH,
@@ -211,7 +211,7 @@ internal fun TvMediaTab(
     val extras = buildList<@Composable () -> Unit> {
         if (personMatchName != null) add {
             Text(
-                "Includes titles with $personMatchName", fontSize = 10.sp.subtext(),
+                "Enthält Titel mit $personMatchName", fontSize = 10.sp.subtext(),
                 color = MaterialTheme.colorScheme.tertiary, maxLines = 1, overflow = TextOverflow.Ellipsis,
             )
         }
