@@ -1128,13 +1128,13 @@ class MainActivity : ComponentActivity() {
                             if (showExitConfirm.value) {
                                 val exitGuard = rememberTvMenuGuard()
                                 TvActionMenuDialog(
-                                    title = "Möchtest du AerioTV Deutsch schließen?",
+                                    title = "Möchtest du Streamy 3.0 schließen?",
                                     guard = exitGuard,
                                     onDismiss = { showExitConfirm.value = false },
                                     // TvActionMenuDialog appends its own Cancel row.
                                     actions = listOf(
                                         TvMenuAction(
-                                            label = "AerioTV Deutsch schließen",
+                                            label = "Streamy 3.0 schließen",
                                             icon = Icons.Outlined.Close,
                                             destructive = true,
                                             onClick = { finish() },
