@@ -184,7 +184,7 @@ private fun UpdatePromptBody(
     val bodyText: String
     var notes = ""
     var primaryLabel: String? = null
-    var laterLabel: String? = "Later"
+    var laterLabel: String? = "Später"
     var progressPercent: Int? = null
     var indeterminate = false
 
@@ -192,42 +192,42 @@ private fun UpdatePromptBody(
         is UpdateState.Available -> {
             titleText = "Update verfügbar"
             val mb = state.info.apkSizeBytes / (1024 * 1024)
-            bodyText = "AerioTV ${state.info.versionName} is ready to download (${mb} MB)."
+            bodyText = "Streamy ${state.info.versionName} steht zum Download bereit (${mb} MB)."
             notes = state.info.notes
             primaryLabel = "Herunterladen"
         }
         is UpdateState.Downloading -> {
-            titleText = "Downloading update"
-            bodyText = "AerioTV ${state.info.versionName}"
+            titleText = "Update wird heruntergeladen"
+            bodyText = "Streamy ${state.info.versionName}"
             progressPercent = state.progressPercent
             laterLabel = null
         }
         is UpdateState.Verifying -> {
-            titleText = "Verifying download"
-            bodyText = "Checking the update's signature and version."
+            titleText = "Download wird überprüft"
+            bodyText = "Signatur und Version des Updates werden überprüft."
             indeterminate = true
             laterLabel = null
         }
         is UpdateState.ReadyToInstall -> {
             titleText = "Bereit zur Installation"
-            bodyText = "AerioTV ${state.info.versionName} is verified and ready. Your " +
-                "channels, settings, and recordings are kept. AerioTV will close to " +
-                "install; reopen it from your home screen."
+            bodyText = "Streamy ${state.info.versionName} wurde überprüft und ist bereit. Deine " +
+                "Sender, Einstellungen und Aufnahmen bleiben erhalten. Streamy wird für die " +
+                "Installation geschlossen. Öffne die App danach wieder über den Startbildschirm."
             primaryLabel = "Installieren"
         }
         is UpdateState.AwaitingInstallPermission -> {
             titleText = "Einmalige Berechtigung erforderlich"
-            bodyText = "Android needs you to allow AerioTV to install updates. Turn on " +
-                "„Aus dieser Quelle zulassen“ in den Android-Einstellungen, kehre zurück und tippe auf " +
-                "Install. If you've already allowed it, Install continues right away."
+            bodyText = "Android benötigt einmalig die Erlaubnis, dass Streamy Updates installieren darf. " +
+                "Aktiviere in den Android-Einstellungen „Aus dieser Quelle zulassen“, kehre zurück " +
+                "und tippe auf „Installieren“. Wenn die Erlaubnis bereits erteilt ist, geht es sofort weiter."
             // Routes through install(): proceeds if the grant is in place,
             // reopens the Settings toggle otherwise.
             primaryLabel = "Installieren"
         }
         is UpdateState.Installing -> {
-            titleText = "Installing"
-            bodyText = "Bestätige das Update im Android-Dialog. AerioTV Deutsch wird für die " +
-                "install; reopen it from your home screen. Your data is kept."
+            titleText = "Update wird installiert"
+            bodyText = "Bestätige das Update im Android-Dialog. Streamy wird für die Installation geschlossen. " +
+                "Öffne die App danach wieder über den Startbildschirm. Deine Daten bleiben erhalten."
             indeterminate = true
             laterLabel = null
         }
