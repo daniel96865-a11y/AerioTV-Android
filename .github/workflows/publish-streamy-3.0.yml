@@ -1,5 +1,5 @@
-name: Publish Streamy 3.0.4 German UI fixes
-# Streamy 3.0.4 German UI cleanup
+name: Publish Streamy 3.0.5 code pairing
+# Streamy 3.0.5: remove Google Drive sync and add secure local code pairing
 
 on:
   push:
@@ -40,17 +40,17 @@ jobs:
           test -f "$RUNNER_TEMP/streamy3-signing/fingerprint.txt"
           test "$(cat "$RUNNER_TEMP/streamy3-signing/fingerprint.txt")" = "1719ef5261a5520899a8fcbed1898a52f4775abfc87a62d6df4ace93baa1ef05"
 
-      - name: Build Streamy 3.0.4
+      - name: Build Streamy 3.0.5
         run: |
           chmod +x gradlew
           ./gradlew --no-daemon :app:assembleGithubRelease
 
-      - name: Sign and verify Streamy 3.0.4
+      - name: Sign and verify Streamy 3.0.5
         run: |
           set -euo pipefail
           UNSIGNED="$(find app/build/outputs/apk/github/release -name '*-unsigned.apk' -type f | head -1)"
           PASS="$(cat "$RUNNER_TEMP/streamy3-signing/password.txt")"
-          OUT="$RUNNER_TEMP/Streamy-3.0.4.apk"
+          OUT="$RUNNER_TEMP/Streamy-3.0.5.apk"
           APKSIGNER="$(find "$ANDROID_HOME/build-tools" -mindepth 2 -maxdepth 2 -type f -name apksigner | sort -V | tail -1)"
           "$APKSIGNER" sign \
             --ks "$RUNNER_TEMP/streamy3-signing/Streamy3-release.jks" \
@@ -63,20 +63,20 @@ jobs:
           sha256sum "$OUT"
           echo "APK=$OUT" >> "$GITHUB_ENV"
 
-      - name: Create v3.0.4 release
+      - name: Create v3.0.5 release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if ! gh release view v3.0.4 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            gh release create v3.0.4 \
+          if ! gh release view v3.0.5 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release create v3.0.5 \
               --repo "$GITHUB_REPOSITORY" \
-              --title "Streamy 3.0.4" \
-              --notes "Streamy 3.0.4: vollständige deutsche Übersetzungen für den Neuigkeiten-Bildschirm, die Drive-Synchronisierung und Update-Meldungen. GitHub-Verweise wurden auf das neue Streamy-3.0-Repository umgestellt."
+              --title "Streamy 3.0.5" \
+              --notes "Streamy 3.0.5: Google-Drive-Anmeldung entfernt. Neue sichere Geräte-Kopplung per 6-stelligem Code im gleichen WLAN; Wiedergabelisten werden nach Code-Prüfung verschlüsselt direkt zwischen Handy und TV übertragen."
           fi
 
-      - name: Upload Streamy 3.0.4 APK
+      - name: Upload Streamy 3.0.5 APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release upload v3.0.4 "$APK#Streamy-3.0.4.apk" \
+          gh release upload v3.0.5 "$APK#Streamy-3.0.5.apk" \
             --repo "$GITHUB_REPOSITORY" --clobber
